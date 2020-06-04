@@ -3,6 +3,31 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SelfMonitoringApp.App">
     <Application.Resources>
+        <ResourceDictionary>
+        
+            <!--Application colors-->
+            <!-- https://material.io/resources/color/#!/?view.left=1&view.right=0&primary.color=F44336&secondary.color=4DD0E -->
+            <Color x:Key="Primary">#f44336</Color>
+            <Color x:Key="PrimaryLight">#ff7961</Color>
+            <Color x:Key="PrimaryDark">#ba000d</Color>
+            <Color x:Key="Secondary">#4dd0e1</Color>
+            <Color x:Key="SecondaryLight">#88ffff</Color>
+            <Color x:Key="SecondaryDark">#009faf</Color>
 
+            <Style x:Key="ButtonStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource Secondary}"/>
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="Margin" Value="10,5,10,10"/>
+            </Style>
+
+            <Style x:Key="HeaderLabelStyle" TargetType="Label">
+                <Setter Property="BackgroundColor" Value="{StaticResource Primary}"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="TextColor" Value="White"/>
+            </Style>
+            
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
