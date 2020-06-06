@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace SelfMonitoringApp.Models
 {
-    public class MoodModel : ModelBase, IModel
+    public class MoodModel : LogModelBase, IModel
     {
         /// <summary>
         /// What was happening at the time of the logs creation
@@ -10,9 +11,9 @@ namespace SelfMonitoringApp.Models
         public string Description { get; set; }
         
         /// <summary>
-        /// Specific emotion experienced
+        /// Emotions that the user experienced
         /// </summary>
-        public string Emotion { get; set; }
+        public List<string> Emotions { get; private set; }
         
         /// <summary>
         /// A numerical rating (out of 10) of how the user felt
@@ -20,5 +21,6 @@ namespace SelfMonitoringApp.Models
         public double OverallMood { get; set; }
 
         public MoodModel(): base(LogType.Mood) { }
+
     }
 }

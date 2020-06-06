@@ -4,7 +4,12 @@ using System.Text;
 
 namespace SelfMonitoringApp.ViewModels
 {
-    class MainViewModel
+    public class MainViewModel
     {
+
+
+
+
+
     }
 }

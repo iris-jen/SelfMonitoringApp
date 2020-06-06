@@ -1,6 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\SelfMonitoringApp",
+    "\\SelfMonitoringApp\\SelfMonitoringApp"
   ],
   "SelectedNode": "\\SelfMonitoringApp.sln",
   "PreviewInSolutionExplorer": false

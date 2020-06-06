@@ -2,7 +2,7 @@
 
 namespace SelfMonitoringApp.Models
 {
-    public class SleepModel: ModelBase , IModel
+    public class SleepModel: LogModelBase , IModel
     {
         /// <summary>
         /// When the user indicated they fell asleep

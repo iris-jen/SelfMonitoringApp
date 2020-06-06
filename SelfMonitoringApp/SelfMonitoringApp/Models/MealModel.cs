@@ -2,7 +2,7 @@
 
 namespace SelfMonitoringApp.Models
 {
-    public class MealModel : ModelBase, IModel
+    public class MealModel : LogModelBase, IModel
     {
         /// <summary>
         /// User description of their meals size

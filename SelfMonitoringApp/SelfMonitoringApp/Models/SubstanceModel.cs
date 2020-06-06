@@ -2,13 +2,8 @@
 
 namespace SelfMonitoringApp.Models
 {
-    public class SubstanceModel
+    public class SubstanceModel : LogModelBase, IModel
     {
-        /// <summary>
-        /// Time of log creation
-        /// </summary>
-        public DateTime RegisteredTime { get; set; }
-        
         /// <summary>
         /// How the user consumed the substance, smoked, drank etc
         /// </summary>
@@ -33,5 +28,10 @@ namespace SelfMonitoringApp.Models
         /// The unit of measurement for the substance used
         /// </summary>
         public string Unit { get; set; }
+
+        public SubstanceModel(): base(LogType.Sleep)
+        {
+              
+        }
     }
 }

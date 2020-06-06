@@ -9,7 +9,7 @@ namespace SelfMonitoringApp.ViewModels.Base
 {
     public abstract class ExtendedBindableObject: BindableObject
     {
-        public void RaisePropertyChanged([CallerMemberName]string caller = "")
+        public void NotifyPropertyChanged([CallerMemberName]string caller = "")
         {
             OnPropertyChanged(caller);
         }

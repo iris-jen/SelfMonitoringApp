@@ -2,7 +2,7 @@
 
 namespace SelfMonitoringApp.Models
 {
-    public abstract class ModelBase
+    public abstract class LogModelBase
     {
         /// <summary>
         /// The time the model was registered by the user
@@ -14,7 +14,7 @@ namespace SelfMonitoringApp.Models
         /// </summary>
         public LogType LogType { get; }
 
-        protected ModelBase(LogType type)
+        protected LogModelBase(LogType type)
         {
             LogType = type;
         }
