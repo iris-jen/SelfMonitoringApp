@@ -1,4 +1,5 @@
-﻿using SelfMonitoringApp.Views;
+﻿using SelfMonitoringApp.Navigation;
+using SelfMonitoringApp.ViewModels;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -7,13 +8,15 @@ using Xamarin.Forms.Xaml;
 
 namespace SelfMonitoringApp
 {
-    public partial class App : Application
+    public partial class App : Application, IHaveMainPage
     {
         public App()
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            var navigator = new NavigationService(this, new ViewLocator());
+            var rootViewModel = new MainViewModel(navigator);
+            navigator.PresentAsNavigatableMainPage(rootViewModel);
         }
 
         protected override void OnStart()

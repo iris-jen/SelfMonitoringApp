@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:templates="clr-namespace:SelfMonitoringApp.Templates"
+             x:Class="SelfMonitoringApp.Pages.MainPage"
+             Visual="Material"
+             NavigationPage.HasNavigationBar="False">
+    <ScrollView>
+        <Grid BackgroundColor="{StaticResource PrimaryLight}" Margin="5" MinimumHeightRequest="400">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Label Text="Self Monitoring Home" Style="{StaticResource HeaderLabelStyle}"/>
+            <Button Grid.Row="1" Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}" 
+                    CommandParameter="mood" Text="Log Mood"/>
+            <Button Grid.Row="2" Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}" 
+                   CommandParameter="meal"  Text="Log Meal"/>
+            <Button Grid.Row="3" Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}"
+                    CommandParameter="sleep" Text="Log Sleep"/>
+            <Button Grid.Row="4" Style="{StaticResource ButtonStyle}"
+                    CommandParameter="substance"  Text="Log Substance Use"/>
+            <Button Grid.Row="5" Text="View Logs" Style="{StaticResource ButtonStyle}"/>
+            <Button Text="Settings" Grid.Row="6" Style="{StaticResource ButtonStyle}"/>
+        </Grid>
+    </ScrollView>
+</ContentPage>

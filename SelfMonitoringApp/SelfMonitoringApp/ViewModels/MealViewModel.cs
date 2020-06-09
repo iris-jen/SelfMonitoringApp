@@ -1,4 +1,5 @@
 ﻿using SelfMonitoringApp.Models;
+using SelfMonitoringApp.Navigation;
 using SelfMonitoringApp.ViewModels.Base;
 using System;
 using System.Collections.Generic;
@@ -6,9 +7,10 @@ using System.Text;
 
 namespace SelfMonitoringApp.ViewModels
 {
-    public class MealDetailViewModel: ExtendedBindableObject, ILogViewModel
+    public class MealViewModel: NavigatableViewModelBase, INavigationViewModel
     {
         private readonly MealModel _mealModel;
+        public const string NavigationNodeName = "meal";
 
         public string MealSize
         {
@@ -49,14 +51,13 @@ namespace SelfMonitoringApp.ViewModels
             }
         }
 
-        public MealDetailViewModel()
+        public MealViewModel(INavigationService navService, IModel existingMeal = null)
+            :base(navService)
         {
-            _mealModel = new MealModel();
-        }
-
-        public MealDetailViewModel(IModel existingMeal)
-        {
-            _mealModel = existingMeal as MealModel;
+            if (existingMeal is null)
+                _mealModel= new MealModel();
+            else
+                _mealModel = existingMeal as MealModel;
         }
 
         public IModel RegisterAndGetModel()

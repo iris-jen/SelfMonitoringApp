@@ -1,4 +1,5 @@
 ﻿using SelfMonitoringApp.Models;
+using SelfMonitoringApp.Navigation;
 using SelfMonitoringApp.ViewModels.Base;
 using System;
 using System.Collections.Generic;
@@ -6,9 +7,10 @@ using System.Text;
 
 namespace SelfMonitoringApp.ViewModels
 {
-    public class SubstanceDetailViewModel: ExtendedBindableObject, ILogViewModel
+    public class SubstanceDetailViewModel: NavigatableViewModelBase, INavigationViewModel
     {
         private readonly SubstanceModel _substanceModel;
+        public const string NavigationNodeName = "substance";
 
         public string ConsumptionMethod
         {
@@ -62,14 +64,12 @@ namespace SelfMonitoringApp.ViewModels
             }
         }
 
-        public SubstanceDetailViewModel()
+        public SubstanceDetailViewModel(INavigationService navService, IModel existingModel = null) : base(navService)
         {
-            _substanceModel = new SubstanceModel();
-        }
-
-        public SubstanceDetailViewModel(IModel existingModel)
-        {
-            _substanceModel = existingModel as SubstanceModel;
+            if (existingModel is null)
+                _substanceModel = new SubstanceModel();
+            else
+                _substanceModel = existingModel as SubstanceModel;
         }
 
         public IModel RegisterAndGetModel()

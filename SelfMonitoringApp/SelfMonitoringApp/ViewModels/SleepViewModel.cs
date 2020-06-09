@@ -1,4 +1,5 @@
 ﻿using SelfMonitoringApp.Models;
+using SelfMonitoringApp.Navigation;
 using SelfMonitoringApp.ViewModels.Base;
 using System;
 using System.Collections.Generic;
@@ -6,9 +7,10 @@ using System.Text;
 
 namespace SelfMonitoringApp.ViewModels
 {
-    public class SleepDetailViewModel : ExtendedBindableObject, ILogViewModel
+    public class SleepViewModel : NavigatableViewModelBase, INavigationViewModel
     {
         private readonly SleepModel _sleepModel;
+        public const string NavigationNodeName = "sleep";
 
         public TimeSpan SleepStart
         {
@@ -55,7 +57,6 @@ namespace SelfMonitoringApp.ViewModels
             set
             {
                 if (_sleepModel.VividDream == value)
-               
                     return;
 
                 _sleepModel.VividDream = value;
@@ -102,14 +103,13 @@ namespace SelfMonitoringApp.ViewModels
             }
         }
 
-        public SleepDetailViewModel()
+        public SleepViewModel(INavigationService navService, IModel existingModel = null) : 
+            base(navService)
         {
-            _sleepModel = new SleepModel();
-        }
-
-        public SleepDetailViewModel(IModel existingModel)
-        {
-            _sleepModel = existingModel as SleepModel;
+            if (existingModel is null)
+                _sleepModel = new SleepModel();
+            else
+                _sleepModel = existingModel as SleepModel;
         }
 
         public IModel RegisterAndGetModel()

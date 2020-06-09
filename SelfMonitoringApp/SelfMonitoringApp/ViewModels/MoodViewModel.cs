@@ -1,4 +1,5 @@
 ﻿using SelfMonitoringApp.Models;
+using SelfMonitoringApp.Navigation;
 using SelfMonitoringApp.ViewModels.Base;
 using System;
 using System.Collections.Generic;
@@ -6,10 +7,11 @@ using System.Collections.ObjectModel;
 
 namespace SelfMonitoringApp.ViewModels
 {
-    public class MoodDetailViewModel : ExtendedBindableObject , ILogViewModel
+    public class MoodViewModel : NavigatableViewModelBase, INavigationViewModel
     {
         private readonly MoodModel _mood;
-        
+        public const string NavigationNodeName = "mood";
+
         public ObservableCollection<string> Emotions { get; private set; }
 
         public string Description
@@ -39,22 +41,21 @@ namespace SelfMonitoringApp.ViewModels
         }
 
         /// <summary>
-        /// Constructor for creating a new mood log
-        /// </summary>
-        public MoodDetailViewModel()
-        {
-            _mood = new MoodModel();
-            Emotions = new ObservableCollection<string>();
-        }
-
-        /// <summary>
         /// Constructor for loading an existing mood log;
         /// </summary>
         /// <param name="existingModel">a log created in the past</param>
-        public MoodDetailViewModel(IModel existingModel)
+        public MoodViewModel(INavigationService navService, IModel existingModel = null) : base(navService)
         {
-            _mood = existingModel as MoodModel;
-            Emotions = new ObservableCollection<string>(_mood.Emotions);
+            if (existingModel is null)
+            {
+                _mood = new MoodModel();
+                Emotions = new ObservableCollection<string>();
+            }
+            else
+            {
+                _mood = existingModel as MoodModel;
+                Emotions = new ObservableCollection<string>(_mood.Emotions);
+            }
         }
 
         /// <summary>

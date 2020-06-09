@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="SelfMonitoringApp.Controls.RatingSlider" >
+    <ContentView.Content>
+        <Grid>
+            <!--Rest Slider-->
+            <Grid.RowDefinitions>
+                <!--Might put slider header back in, ill keep this empty row for now-->
+                <RowDefinition Height="0"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <!--Slider-->
+            <Slider Grid.Row = "1" Grid.Column = "0" Grid.ColumnSpan = "3" Margin = "10" Minimum ="0" Maximum = "10" 
+                    BackgroundColor="#03a9f4" ThumbColor="#ff5722" MinimumTrackColor="#ff5252" MaximumTrackColor="#4caf50" x:Name = "Slider"
+                    Value ="{Binding SliderValue}"/>
+
+            <!--Min Value Label-->
+            <Label  Grid.Row = "2" Grid.Column = "0" TextColor = "#757575" FontSize = "Caption"  
+                        Margin = "15,-12,0,0" Text = "0"/>
+
+            <!--Max Value Label-->
+            <Label  Grid.Row="2" Grid.Column ="2" TextColor = "#757575"  FontSize = "Caption" 
+                        HorizontalTextAlignment ="End" Margin = "0,-12,15,0" Text = "{Binding MaxValue}"/>
+
+            <!--Bind text label to slider value-->
+            <Label Grid.Row ="2" Grid.Column = "1" HorizontalTextAlignment ="Center" FontSize ="Medium" TextColor ="#212121"
+                                   TextDecorations ="Underline" Text = "{Binding Source = {x:Reference Slider}, Path = Value,
+                                                                         StringFormat ='Value: {0:0.0}'}"/>
+        </Grid>
+    </ContentView.Content>
+</ContentView>
+ 

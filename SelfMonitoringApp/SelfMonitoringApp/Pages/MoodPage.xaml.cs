@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace SelfMonitoringApp.Views
+namespace SelfMonitoringApp.Pages
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class MoodDetailPage : ContentPage
+	public partial class MoodPage : ContentPage
 	{
-		public MoodDetailPage ()
+		public MoodPage ()
 		{
-			InitializeComponent ();
+			InitializeComponent();
 		}
 	}
 }

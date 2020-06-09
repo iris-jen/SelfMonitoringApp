@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
+             mc:Ignorable="d"
+             Visual="Material"
+             NavigationPage.HasNavigationBar="False"
+             x:Class="SelfMonitoringApp.Pages.MoodPage">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <controls:HeaderBlock HeaderText="Rate how you feel">
+                
+            </controls:HeaderBlock>
+            
+            <controls:HeaderBlock Grid.Row="1" HeaderText="Emotions">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3.5*"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Entry Text="{Binding EmotionEntry}" BackgroundColor="White" Opacity="0.8" />
+                        <Button Grid.Column="1" Text="+" FontSize="30" Margin="0" Style="{StaticResource ButtonStyle}"/>
+                    </Grid>
+                    <ListView ItemsSource="{Binding Emotions}" BackgroundColor="White" Grid.Row="1" Opacity="0.8">
+                        
+                    </ListView>
+                    
+                </Grid>
+            </controls:HeaderBlock>
+
+            <controls:HeaderBlock Grid.Row="2" HeaderText="Describe how you feel">
+                <Grid>
+                <Editor BackgroundColor="White" Opacity=".8" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="100"/>
+                </Grid>
+            </controls:HeaderBlock>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
