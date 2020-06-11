@@ -11,33 +11,47 @@
         <controls:PageBackgroundWithHeader HeaderText="Sleep Log">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="140"/>
                     <RowDefinition Height="110"/>
-                    <RowDefinition Height="300"/>
-                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="110"/>
+                    <RowDefinition Height="260"/>
+                    <RowDefinition Height="60"/>
                 </Grid.RowDefinitions>
 
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
+                        <ColumnDefinition Width=".8*"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
                     <!--Time of sleep box-->
                     <controls:HeaderBlock HeaderText="Sleep">
-                        <TimePicker HorizontalOptions="CenterAndExpand" TextColor="White" FontAttributes="Bold" 
-                                Time="{Binding SleepStart}"/>
+                        <Frame Padding="0" Opacity="0.9">
+                            <TimePicker HorizontalOptions="CenterAndExpand"  FontAttributes="Bold" 
+                                    Time="{Binding SleepStart}"/>
+                        </Frame>
+                    </controls:HeaderBlock>
+
+                    <!--Total sleep box-->
+                    <controls:HeaderBlock HeaderText="Total" Grid.Column="1">
+                        <Frame Padding="5" Opacity="0.9">
+                            <Label Text="{Binding TotalSleep , StringFormat ='{0:0.0}'}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                        </Frame>
                     </controls:HeaderBlock>
 
                     <!--Wake up time box-->
-                    <controls:HeaderBlock HeaderText="Wake" Grid.Column="1">
-                        <TimePicker HorizontalOptions="Center" TextColor="White" FontAttributes="Bold"/>
+                    <controls:HeaderBlock HeaderText="Wake" Grid.Column="2">
+                        <Frame Padding="0" Opacity="0.9">
+                            <TimePicker HorizontalOptions="Center" FontAttributes="Bold" Time ="{Binding SleepEnd}"/>
+                        </Frame>
                     </controls:HeaderBlock>
                 </Grid>
 
-                <!--Total sleep box-->
-                <controls:HeaderBlock HeaderText="Total Sleep" Grid.Row="1">
-                    <Label Text="8.2 hours" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="White"/>
+                <!--Wake up time box-->
+                <controls:HeaderBlock HeaderText="How rested do you feel?" Grid.Row="1">
+                    <Frame Padding="5" Opacity="0.9">
+                        <controls:RatingSlider/>
+                    </Frame>
                 </controls:HeaderBlock>
 
                 <controls:HeaderBlock Grid.Row="2" HeaderText="Dream Log">

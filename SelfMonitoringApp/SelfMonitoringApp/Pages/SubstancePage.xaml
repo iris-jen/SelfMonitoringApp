@@ -3,13 +3,77 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
              mc:Ignorable="d"
+             NavigationPage.HasNavigationBar="False"
              x:Class="SelfMonitoringApp.Pages.SubstancePage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <controls:PageBackgroundWithHeader HeaderText="Substance Log">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{StaticResource RowHeightSingle}"/>
+                    <RowDefinition Height="{StaticResource RowHeightSingle}"/>
+                    <RowDefinition Height="{StaticResource RowHeightSlider}"/>
+                    <RowDefinition Height="150"/>
+                </Grid.RowDefinitions>
+                <controls:HeaderBlock HeaderText="Substance Name">
+                    <Frame Padding="5">
+                        <Entry Text="{Binding SubstanceName}" Placeholder="Beer" HorizontalTextAlignment="Center"/>
+                    </Frame>
+                </controls:HeaderBlock>
+                
+                <!--Use method / quantity / unit grid-->
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width=".9*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <!--Use Method-->
+                    <controls:HeaderBlock  HeaderText="Method">
+                        <Frame Padding="5">
+                            <Entry Text="{Binding ConsumptionMethod}" Placeholder="Drank" HorizontalTextAlignment="Center"/>
+                        </Frame>
+                    </controls:HeaderBlock>
+                    
+                    <!--Ammount of substance-->
+                    <controls:HeaderBlock Grid.Column="1" HeaderText="Ammount">
+                        <Frame Padding="5">
+                            <Entry Text="{Binding Ammount}" HorizontalTextAlignment="Center" Placeholder="1"/>
+                        </Frame>
+                    </controls:HeaderBlock>
+
+                    <controls:HeaderBlock Grid.Column="2" HeaderText="Unit">
+                        <Frame Padding="5">
+                            <Entry Text="{Binding Unit}" HorizontalTextAlignment="Center" Placeholder="Drink"/>
+                        </Frame>
+                    </controls:HeaderBlock>
+                </Grid>
+
+                <controls:HeaderBlock HeaderText="Rate how you feel" Grid.Row="2">
+                    <Frame Padding="10">
+                        <controls:RatingSlider Padding="10"/>
+                    </Frame>
+                </controls:HeaderBlock>
+
+                <controls:HeaderBlock HeaderText="Comment" Grid.Row="3">
+                    <Frame>
+                        <Entry Text="{Binding Comment}" Placeholder="Any thoughts?"/>
+                    </Frame>
+                </controls:HeaderBlock>
+
+                <!--Cancel / savey save grid-->
+                <Grid Grid.Row="4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Style="{StaticResource ButtonStyle}" Command="{Binding CancelCommand}" Margin="2" Text="Cancel"/>
+                    <Button Style="{StaticResource ButtonStyle}" Command="{Binding SaveCommand}" Margin="2" Text="Save" Grid.Column="1"/>
+                </Grid>
+
+            </Grid>
+        </controls:PageBackgroundWithHeader>
     </ContentPage.Content>
 </ContentPage>

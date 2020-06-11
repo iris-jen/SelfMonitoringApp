@@ -62,8 +62,8 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Button Style="{StaticResource ButtonStyle}" Margin="2" Text="Cancel"/>
-                    <Button Style="{StaticResource ButtonStyle}" Margin="2" Text="Save" Grid.Column="1"/>
+                    <Button Style="{StaticResource ButtonStyle}" Command="{Binding CancelCommand}" Margin="2" Text="Cancel"/>
+                    <Button Style="{StaticResource ButtonStyle}" Command="{Binding SaveCommand}" Margin="2" Text="Save" Grid.Column="1"/>
                 </Grid>
                 
             </Grid>

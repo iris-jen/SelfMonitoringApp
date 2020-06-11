@@ -31,11 +31,17 @@ namespace SelfMonitoringApp.ViewModels
                 case SleepViewModel.NavigationNodeName:
                     await _navigator.NavigateTo(new SleepViewModel(_navigator));
                     break;
-                case SubstanceDetailViewModel.NavigationNodeName:
-                    await _navigator.NavigateTo(new SubstanceDetailViewModel(_navigator));
+                case SubstanceViewModel.NavigationNodeName:
+                    await _navigator.NavigateTo(new SubstanceViewModel(_navigator));
                     break;
                 case MealViewModel.NavigationNodeName:
                     await _navigator.NavigateTo(new MealViewModel(_navigator));
+                    break;
+                case SettingsViewModel.NavigationNodeName:
+                    await _navigator.NavigateTo(new SettingsViewModel(_navigator));
+                    break;
+                case DataExplorerViewModel.NavigationNodeName:
+                    await _navigator.NavigateTo(new DataExplorerViewModel(_navigator));
                     break;
             }
         }

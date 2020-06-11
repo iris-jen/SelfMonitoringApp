@@ -7,7 +7,7 @@ using System.Text;
 
 namespace SelfMonitoringApp.ViewModels
 {
-    public class SubstanceDetailViewModel: NavigatableViewModelBase, INavigationViewModel
+    public class SubstanceViewModel: NavigatableViewModelBase, INavigationViewModel
     {
         private readonly SubstanceModel _substanceModel;
         public const string NavigationNodeName = "substance";
@@ -64,7 +64,20 @@ namespace SelfMonitoringApp.ViewModels
             }
         }
 
-        public SubstanceDetailViewModel(INavigationService navService, IModel existingModel = null) : base(navService)
+        public string Unit
+        {
+            get => _substanceModel.Unit;
+            set
+            {
+                if (_substanceModel.Unit == value)
+                    return;
+
+                _substanceModel.Unit = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public SubstanceViewModel(INavigationService navService, IModel existingModel = null) : base(navService)
         {
             if (existingModel is null)
                 _substanceModel = new SubstanceModel();

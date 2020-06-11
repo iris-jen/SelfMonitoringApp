@@ -20,10 +20,13 @@
                    CommandParameter="meal"  Text="Log Meal"/>
                 <Button Grid.Row="2" Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}"
                     CommandParameter="sleep" Text="Log Sleep"/>
-                <Button Grid.Row="3" Style="{StaticResource ButtonStyle}"
+                <Button Grid.Row="3" Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}"
                     CommandParameter="substance"  Text="Log Substance Use"/>
-                <Button Grid.Row="4" Text="View Logs" Style="{StaticResource ButtonStyle}"/>
-                <Button Text="Settings" Grid.Row="5" Style="{StaticResource ButtonStyle}"/>
+
+            <Button Grid.Row="4"  Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}"
+                    CommandParameter="data" Text="View Logs"/>
+            <Button Grid.Row="5" Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}"
+                    CommandParameter="settings" Text="Settings" />
             </Grid>
 
         </controls:PageBackgroundWithHeader>

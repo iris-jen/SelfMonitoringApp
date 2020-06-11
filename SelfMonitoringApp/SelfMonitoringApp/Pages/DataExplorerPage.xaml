@@ -4,18 +4,14 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-        
              NavigationPage.HasNavigationBar="False"
              xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
-             x:Class="SelfMonitoringApp.Pages.SettingsPage">
+             x:Class="SelfMonitoringApp.Pages.DataExplorerPage">
     <ContentPage.Content>
-        <controls:PageBackgroundWithHeader HeaderText="Settings">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-            </Grid>
+        <controls:PageBackgroundWithHeader HeaderText="Log Viewer">
+            <Label Text="Welcome to Xamarin.Forms!"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
         </controls:PageBackgroundWithHeader>
     </ContentPage.Content>
 </ContentPage>

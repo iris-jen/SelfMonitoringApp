@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
 
 namespace SelfMonitoringApp.ViewModels.Base
 {
-    // from
-    // https://github.com/RockSolidKnowledge/blog-viewmodel-first-navigation
     public abstract class PropertyChangedBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
@@ -24,9 +19,8 @@ namespace SelfMonitoringApp.ViewModels.Base
 
         private void OnPropertyChanged(string propertyName)
         {
-          
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
 
     }
 }
