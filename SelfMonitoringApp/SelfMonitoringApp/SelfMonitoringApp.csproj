@@ -16,7 +16,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="ProjectData\ScreenShots\" />
       <Folder Include="Properties" />
     </ItemGroup>
 
