@@ -18,6 +18,5 @@ Backend
 - Interaction logic for view data page
 
 UI
-- Maybe add
 - Finish layout of pages, make them purttyyy
 - Page for viewing save data, loading logs, charting values etc.
