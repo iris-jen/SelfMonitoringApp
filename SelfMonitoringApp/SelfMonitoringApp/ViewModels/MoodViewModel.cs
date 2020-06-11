@@ -1,9 +1,15 @@
 ﻿using SelfMonitoringApp.Models;
 using SelfMonitoringApp.Navigation;
 using SelfMonitoringApp.ViewModels.Base;
+
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
+using Xamarin.Forms;
+using Xamarin.Forms.Internals;
+using Xamarin.Forms.PlatformConfiguration;
 
 namespace SelfMonitoringApp.ViewModels
 {
@@ -27,6 +33,34 @@ namespace SelfMonitoringApp.ViewModels
             }
         }
 
+        private string _newEmotion;
+        public string NewEmotion
+        {
+            get => _newEmotion;
+            set
+            {
+                if (_newEmotion == value)
+                    return;
+
+                _newEmotion = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private string _selectedEmotion;
+        public string SelectedEmotion
+        {
+            get => _selectedEmotion;
+            set
+            {
+                if (_selectedEmotion == value)
+                    return;
+
+                _selectedEmotion = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public double OveralMood
         {
             get => _mood.OverallMood;
@@ -39,6 +73,10 @@ namespace SelfMonitoringApp.ViewModels
                 NotifyPropertyChanged();
             }
         }
+
+        public Command AddNewEmotion { get; private set; }
+        public Command RemoveSelectedCommand { get; private set; }
+
 
         /// <summary>
         /// Constructor for loading an existing mood log;
@@ -55,6 +93,29 @@ namespace SelfMonitoringApp.ViewModels
             {
                 _mood = existingModel as MoodModel;
                 Emotions = new ObservableCollection<string>(_mood.Emotions);
+            }
+
+            AddNewEmotion = new Command(OnAddNewEmotion);
+            RemoveSelectedCommand = new Command(OnRemoveEmotion);
+        }
+
+        private void OnAddNewEmotion()
+        {
+            if (NewEmotion != string.Empty)
+            {
+                Emotions.Add(NewEmotion);
+            }
+        }
+
+        private void OnRemoveEmotion()
+        {
+            if (!string.IsNullOrEmpty(SelectedEmotion))
+            {
+                var emotion = Emotions.FirstOrDefault(x => x.Equals(SelectedEmotion));
+                if(emotion != null)
+                {
+                    Emotions.Remove(emotion);
+                }
             }
         }
 

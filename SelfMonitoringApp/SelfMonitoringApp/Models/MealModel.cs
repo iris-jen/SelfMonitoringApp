@@ -19,6 +19,8 @@ namespace SelfMonitoringApp.Models
         /// </summary>
         public string Description { get; set; }
 
+        public double Satisfaction { get; set; }
+
         public MealModel():base (LogType.Meal) { }
     }
 }

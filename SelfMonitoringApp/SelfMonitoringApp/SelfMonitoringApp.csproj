@@ -16,6 +16,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="ProjectData\ScreenShots\" />
       <Folder Include="Properties" />
     </ItemGroup>
 
@@ -35,7 +36,13 @@
     </ItemGroup>
 
     <ItemGroup>
+      <EmbeddedResource Update="Controls\EntryTemplate.xaml">
+        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      </EmbeddedResource>
       <EmbeddedResource Update="Controls\HeaderBlock.xaml">
+        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Controls\PageBackgroundWithHeader.xaml">
         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       </EmbeddedResource>
       <EmbeddedResource Update="Pages\MealPage.xaml">

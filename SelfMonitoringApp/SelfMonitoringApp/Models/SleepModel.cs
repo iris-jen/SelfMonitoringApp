@@ -13,11 +13,17 @@ namespace SelfMonitoringApp.Models
         /// When the user indicated they awoke
         /// </summary>
         public TimeSpan SleepEnd { get; set; }
+
+        /// <summary>
+        /// Total amount of sleep in hours
+        /// </summary>
+        public double TotalSleep { get; set; }
         
         /// <summary>
         /// True if the user remembered their dream
         /// </summary>
         public bool RememberedDream  { get; set; }
+
         
         /// <summary>
         /// True if the user experienced a vivid dream

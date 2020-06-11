@@ -25,6 +25,20 @@ namespace SelfMonitoringApp.ViewModels
             }
         }
 
+        public double TotalSleep
+        {
+            get => _sleepModel.TotalSleep;
+            set
+            {
+                if (_sleepModel.TotalSleep == value)
+                    return;
+
+                _sleepModel.TotalSleep = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
         public TimeSpan SleepEnd
         {
             get => _sleepModel.SleepEnd;

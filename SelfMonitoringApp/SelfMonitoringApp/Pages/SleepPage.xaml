@@ -3,13 +3,79 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
              mc:Ignorable="d"
+             NavigationPage.HasNavigationBar="False"
              x:Class="SelfMonitoringApp.Pages.SleepPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <controls:PageBackgroundWithHeader HeaderText="Sleep Log">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="140"/>
+                    <RowDefinition Height="110"/>
+                    <RowDefinition Height="300"/>
+                    <RowDefinition Height="70"/>
+                </Grid.RowDefinitions>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <!--Time of sleep box-->
+                    <controls:HeaderBlock HeaderText="Sleep">
+                        <TimePicker HorizontalOptions="CenterAndExpand" TextColor="White" FontAttributes="Bold" 
+                                Time="{Binding SleepStart}"/>
+                    </controls:HeaderBlock>
+
+                    <!--Wake up time box-->
+                    <controls:HeaderBlock HeaderText="Wake" Grid.Column="1">
+                        <TimePicker HorizontalOptions="Center" TextColor="White" FontAttributes="Bold"/>
+                    </controls:HeaderBlock>
+                </Grid>
+
+                <!--Total sleep box-->
+                <controls:HeaderBlock HeaderText="Total Sleep" Grid.Row="1">
+                    <Label Text="8.2 hours" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="White"/>
+                </controls:HeaderBlock>
+
+                <controls:HeaderBlock Grid.Row="2" HeaderText="Dream Log">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/> 
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Switch Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" ThumbColor="{StaticResource Secondary}"/>
+                        <Label Text="Did you dream?" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White" FontSize="18"/>
+                        
+                        <Label Text="Was it a nightmare?" HorizontalOptions="Center" Grid.Row="1" VerticalOptions="Center" TextColor="White" FontSize="18"/>
+                        <Switch Grid.Column="1" Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center" ThumbColor="{StaticResource Secondary}" IsToggled="{Binding Nightmare}"/>
+
+                        <Frame Grid.Row="2" Grid.ColumnSpan="2" CornerRadius="5" Opacity="0.8">
+                            <Editor Grid.Row="2" AutoSize="Disabled" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                                    Grid.ColumnSpan="2" BackgroundColor="White"/>
+                        </Frame>
+                    </Grid>
+                </controls:HeaderBlock>
+
+                <!--Cancel / savey save grid-->
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Style="{StaticResource ButtonStyle}" Margin="2" Text="Cancel"/>
+                    <Button Style="{StaticResource ButtonStyle}" Margin="2" Text="Save" Grid.Column="1"/>
+                </Grid>
+
+            </Grid>
+        </controls:PageBackgroundWithHeader>
     </ContentPage.Content>
 </ContentPage>

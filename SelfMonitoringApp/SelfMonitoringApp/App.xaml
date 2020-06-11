@@ -7,12 +7,13 @@
         
             <!--Application colors-->
             <!-- https://material.io/resources/color/#!/?view.left=1&view.right=0&primary.color=F44336&secondary.color=4DD0E -->
-            <Color x:Key="Primary">#f44336</Color>
-            <Color x:Key="PrimaryLight">#ff7961</Color>
-            <Color x:Key="PrimaryDark">#ba000d</Color>
-            <Color x:Key="Secondary">#4dd0e1</Color>
-            <Color x:Key="SecondaryLight">#88ffff</Color>
-            <Color x:Key="SecondaryDark">#009faf</Color>
+            <Color x:Key="Primary">#9c27b0</Color>
+            <Color x:Key="PrimaryLight">#d05ce3</Color>
+            <Color x:Key="PrimaryDark">#6a0080</Color>
+
+            <Color x:Key="Secondary">#ffeb3b</Color>
+            <Color x:Key="SecondaryLight">#ffff72</Color>
+            <Color x:Key="SecondaryDark">#c8b900</Color>
 
             <Style x:Key="ButtonStyle" TargetType="Button">
                 <Setter Property="BackgroundColor" Value="{StaticResource Secondary}"/>
@@ -23,9 +24,13 @@
             <Style x:Key="HeaderLabelStyle" TargetType="Label">
                 <Setter Property="BackgroundColor" Value="{StaticResource Primary}"/>
                 <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="VerticalOptions" Value="FillAndExpand"/>
                 <Setter Property="VerticalTextAlignment" Value="Center"/>
-                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="FontSize" Value="25"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
                 <Setter Property="TextColor" Value="White"/>
+                <Setter Property="Margin" Value="0,-10,0,0"/>
             </Style>
 
         </ResourceDictionary>

@@ -51,6 +51,19 @@ namespace SelfMonitoringApp.ViewModels
             }
         }
 
+        public double Satisfaction
+        {
+            get => _mealModel.Satisfaction;
+            set
+            {
+                if (_mealModel.Satisfaction == value)
+                    return;
+
+                _mealModel.Satisfaction = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public MealViewModel(INavigationService navService, IModel existingMeal = null)
             :base(navService)
         {

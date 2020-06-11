@@ -2,21 +2,72 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:templates="clr-namespace:SelfMonitoringApp.Templates"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
              mc:Ignorable="d"
+             NavigationPage.HasNavigationBar="False"
              x:Class="SelfMonitoringApp.Pages.MealPage">
     <ContentPage.Content>
+        <controls:PageBackgroundWithHeader HeaderText="Meal Log">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="110"/>
+                    <RowDefinition Height="110"/>
+                    <RowDefinition Height="110"/>
+                    <RowDefinition Height="140"/>
+                    <RowDefinition Height="60"/>
+                </Grid.RowDefinitions>
 
+                <controls:HeaderBlock HeaderText="What did you eat?" Grid.Row="0">
+                    <Frame Padding="5" CornerRadius="5" Margin="2">
+                        <Entry HorizontalTextAlignment="Center" Text="{Binding Description}"/>
+                    </Frame>
+                </controls:HeaderBlock>
 
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
+                <controls:HeaderBlock HeaderText="What kind of meal?" Grid.Row="1">
+                    <Frame Padding="5" CornerRadius="5" Margin="2">
+                        <Picker SelectedItem="{Binding MealType}">
+                            <Picker.Items>
+                                <x:String>Breakfast</x:String>
+                                <x:String>Lunch</x:String>
+                                <x:String>Dinner</x:String>
+                                <x:String>Snack</x:String>
+                                <x:String>?¿?</x:String>
+                            </Picker.Items>
+                        </Picker>
+                    </Frame>
+                </controls:HeaderBlock>
 
+                <controls:HeaderBlock HeaderText="How big was it?" Grid.Row="2">
+                    <Frame Padding="5" CornerRadius="5" Margin="2">
+                        <Picker BackgroundColor="White" Opacity="0.8" SelectedItem="{Binding MealSize}">
+                            <Picker.Items>
+                                <x:String>Small</x:String>
+                                <x:String>Regular</x:String>
+                                <x:String>Large</x:String>
+                                <x:String>HECKK'N CHONKKKKKeee</x:String>
+                            </Picker.Items>
+                        </Picker>
+                    </Frame>
+                </controls:HeaderBlock>
 
-        </Grid>
+                <!--Rating slider-->
+                <controls:HeaderBlock HeaderText="How satisfied are you?" Grid.Row="3">
+                    <Frame BackgroundColor="White">
+                        <controls:RatingSlider SliderValue="{Binding Satisfaction}"></controls:RatingSlider>
+                    </Frame>
+                </controls:HeaderBlock>
 
-        
+                <!--Cancel / savey save grid-->
+                <Grid Grid.Row="4" Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Style="{StaticResource ButtonStyle}" Margin="2" Text="Cancel"/>
+                    <Button Style="{StaticResource ButtonStyle}" Margin="2" Text="Save" Grid.Column="1"/>
+                </Grid>
+            </Grid>
+        </controls:PageBackgroundWithHeader>
     </ContentPage.Content>
 </ContentPage>

@@ -9,43 +9,64 @@
              NavigationPage.HasNavigationBar="False"
              x:Class="SelfMonitoringApp.Pages.MoodPage">
     <ContentPage.Content>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <controls:HeaderBlock HeaderText="Rate how you feel">
-                
-            </controls:HeaderBlock>
+        <controls:PageBackgroundWithHeader HeaderText="Mood Log">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="140"/>
+                    <RowDefinition Height="250"/>
+                    <RowDefinition Height="200"/>
+                     <RowDefinition Height="60"/>
+                </Grid.RowDefinitions>
             
-            <controls:HeaderBlock Grid.Row="1" HeaderText="Emotions">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
+                <!--Rating slider-->
+                <controls:HeaderBlock HeaderText="Rate how you feel">
+                    <Frame Opacity="0.8">
+                        <controls:RatingSlider SliderValue="{Binding OverallMood}"/>
+                    </Frame>
+                </controls:HeaderBlock>
+            
+                <!--Emotions entry box-->
+                <controls:HeaderBlock Grid.Row="1" HeaderText="Emotions">
                     <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="3.5*"/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <Entry Text="{Binding EmotionEntry}" BackgroundColor="White" Opacity="0.8" />
-                        <Button Grid.Column="1" Text="+" FontSize="30" Margin="0" Style="{StaticResource ButtonStyle}"/>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="60"/>
+                            <RowDefinition/>
+                            <RowDefinition Height="35"/>
+                        </Grid.RowDefinitions>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3.5*"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Entry Text="{Binding NewEmotion}" BackgroundColor="White" Opacity="0.8" Placeholder="Enter an emotion..." />
+                            <Button Grid.Column="1" Command="{Binding AddNewEmotion}" Text="+" FontSize="20" Margin="1" Style="{StaticResource ButtonStyle}"/>
+                        </Grid>
+                        <ListView ItemsSource="{Binding Emotions}" BackgroundColor="White" Grid.Row="1" Opacity="0.8" SelectedItem="{Binding SelectedEmotion}">
+                        </ListView>
+                        <Button Grid.Row="2" Style="{StaticResource ButtonStyle}" Command="{Binding RemoveSelectedCommand}" Margin="0" Text="Remove Selected"></Button>
                     </Grid>
-                    <ListView ItemsSource="{Binding Emotions}" BackgroundColor="White" Grid.Row="1" Opacity="0.8">
-                        
-                    </ListView>
-                    
-                </Grid>
-            </controls:HeaderBlock>
+                </controls:HeaderBlock>
 
-            <controls:HeaderBlock Grid.Row="2" HeaderText="Describe how you feel">
-                <Grid>
-                <Editor BackgroundColor="White" Opacity=".8" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="100"/>
-                </Grid>
-            </controls:HeaderBlock>
+                <!--Descripition Box-->
+                <controls:HeaderBlock Grid.Row="2" HeaderText="Description" >
+                    <Frame Opacity="0.8">
+                        <Editor BackgroundColor="White" Opacity=".8" IsSpellCheckEnabled="True" 
+                                AutoSize="Disabled" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                                  HeightRequest="400" Placeholder="Describe how you feel etc..."/>
+                    </Frame>
+                </controls:HeaderBlock>
 
-        </Grid>
+                <!--Cancel / savey save grid-->
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Style="{StaticResource ButtonStyle}" Margin="2" Text="Cancel"/>
+                    <Button Style="{StaticResource ButtonStyle}" Margin="2" Text="Save" Grid.Column="1"/>
+                </Grid>
+                
+            </Grid>
+        </controls:PageBackgroundWithHeader>
     </ContentPage.Content>
 </ContentPage>
