@@ -12,9 +12,9 @@ namespace SelfMonitoringApp.Models
         /// <summary>
         /// Type of log
         /// </summary>
-        public LogType LogType { get; }
+        public ModelType LogType { get; }
 
-        protected LogModelBase(LogType type)
+        protected LogModelBase(ModelType type)
         {
             LogType = type;
         }

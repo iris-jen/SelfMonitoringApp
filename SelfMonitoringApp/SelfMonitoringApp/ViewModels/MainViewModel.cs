@@ -4,6 +4,7 @@ using SelfMonitoringApp.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -43,6 +44,8 @@ namespace SelfMonitoringApp.ViewModels
                 case DataExplorerViewModel.NavigationNodeName:
                     await _navigator.NavigateTo(new DataExplorerViewModel(_navigator));
                     break;
+                default:
+                    throw new DirectoryNotFoundException($"Cant find nav directory {page}");
             }
         }
     }

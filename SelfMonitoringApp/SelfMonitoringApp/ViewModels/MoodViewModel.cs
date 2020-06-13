@@ -5,11 +5,9 @@ using SelfMonitoringApp.ViewModels.Base;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
+
 using Xamarin.Forms;
-using Xamarin.Forms.Internals;
-using Xamarin.Forms.PlatformConfiguration;
+
 
 namespace SelfMonitoringApp.ViewModels
 {
@@ -76,7 +74,7 @@ namespace SelfMonitoringApp.ViewModels
 
         public Command AddNewEmotion { get; private set; }
         public Command RemoveSelectedCommand { get; private set; }
-
+        public Command SaveLogCommand { get; private set; }
 
         /// <summary>
         /// Constructor for loading an existing mood log;
@@ -95,11 +93,12 @@ namespace SelfMonitoringApp.ViewModels
                 Emotions = new ObservableCollection<string>(_mood.Emotions);
             }
 
+            SaveLogCommand = new Command(SaveAndPop);
             AddNewEmotion = new Command(OnAddNewEmotion);
             RemoveSelectedCommand = new Command(OnRemoveEmotion);
         }
 
-        private void OnAddNewEmotion()
+        public void OnAddNewEmotion()
         {
             if (NewEmotion != string.Empty)
             {
@@ -107,7 +106,7 @@ namespace SelfMonitoringApp.ViewModels
             }
         }
 
-        private void OnRemoveEmotion()
+        public void OnRemoveEmotion()
         {
             if (!string.IsNullOrEmpty(SelectedEmotion))
             {
@@ -126,7 +125,14 @@ namespace SelfMonitoringApp.ViewModels
         public IModel RegisterAndGetModel()
         {
             _mood.RegisteredTime = DateTime.Now;
+            _mood.Emotions = new System.Collections.Generic.List<string>(Emotions);
             return _mood;
+        }
+
+        public void SaveAndPop()
+        {
+            DataStore.AddModel(RegisterAndGetModel());
+            _navigator.NavigateBack();
         }
     }
 }

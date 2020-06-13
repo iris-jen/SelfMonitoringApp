@@ -24,7 +24,6 @@ namespace SelfMonitoringApp.Models
         /// </summary>
         public bool RememberedDream  { get; set; }
 
-        
         /// <summary>
         /// True if the user experienced a vivid dream
         /// </summary>
@@ -45,7 +44,7 @@ namespace SelfMonitoringApp.Models
         /// </summary>
         public double RestRating { get; set; }
 
-        public SleepModel() : base(LogType.Sleep)
+        public SleepModel() : base(ModelType.Sleep)
         {
             
         }

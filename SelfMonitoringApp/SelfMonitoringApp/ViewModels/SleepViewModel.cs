@@ -39,12 +39,6 @@ namespace SelfMonitoringApp.ViewModels
             }
         }
 
-        public double GetSleep()
-        {
-            var sleep = SleepEnd.Subtract(SleepStart);
-            return sleep.TotalHours-1;
-        }
-
         public TimeSpan SleepEnd
         {
             get => _sleepModel.SleepEnd;
@@ -58,8 +52,6 @@ namespace SelfMonitoringApp.ViewModels
                 NotifyPropertyChanged();
             }
         }
-
-
 
         public bool RememberedDream
         {
@@ -139,6 +131,12 @@ namespace SelfMonitoringApp.ViewModels
         {
             _sleepModel.RegisteredTime = DateTime.Now;
             return _sleepModel;
+        }
+
+        public double GetSleep()
+        {
+            var sleep = SleepEnd.Subtract(SleepStart);
+            return sleep.TotalHours - 1;
         }
     }
 }

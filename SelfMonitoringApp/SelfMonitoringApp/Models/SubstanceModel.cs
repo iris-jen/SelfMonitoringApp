@@ -23,13 +23,16 @@ namespace SelfMonitoringApp.Models
         /// Amount of substance used
         /// </summary>
         public double Amount { get; set; }
-        
+
+
+        public double Satisfaction { get; set; }
+
         /// <summary>
         /// The unit of measurement for the substance used
         /// </summary>
         public string Unit { get; set; }
 
-        public SubstanceModel(): base(LogType.Sleep)
+        public SubstanceModel(): base(ModelType.Sleep)
         {
               
         }

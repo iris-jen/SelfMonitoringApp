@@ -21,7 +21,7 @@
                 <!--Rating slider-->
                 <controls:HeaderBlock HeaderText="Rate how you feel">
                     <Frame Opacity="0.8">
-                        <controls:RatingSlider SliderValue="{Binding OverallMood}"/>
+                        <controls:RatingSlider SliderValue="{Binding OveralMood}"/>
                     </Frame>
                 </controls:HeaderBlock>
             
@@ -49,10 +49,9 @@
 
                 <!--Descripition Box-->
                 <controls:HeaderBlock Grid.Row="2" HeaderText="Description" >
-                    <Frame Opacity="0.8">
-                        <Editor BackgroundColor="White" Opacity=".8" IsSpellCheckEnabled="True" 
-                                AutoSize="Disabled" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
-                                  HeightRequest="400" Placeholder="Describe how you feel etc..."/>
+                    <Frame Opacity="0.8" Padding="4">
+                        <Editor BackgroundColor="White" Opacity=".8" IsSpellCheckEnabled="True" Text="{Binding Description}"
+                                  HeightRequest="400" Placeholder="Describe how you feel etc..." VerticalOptions="FillAndExpand" HorizontalOptions="CenterAndExpand"/>
                     </Frame>
                 </controls:HeaderBlock>
 
@@ -62,8 +61,8 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Button Style="{StaticResource ButtonStyle}" Command="{Binding CancelCommand}" Margin="2" Text="Cancel"/>
-                    <Button Style="{StaticResource ButtonStyle}" Command="{Binding SaveCommand}" Margin="2" Text="Save" Grid.Column="1"/>
+                    <Button Style="{StaticResource ButtonStyle}" Command="{Binding BackCommand}" Margin="2" Text="Cancel"/>
+                    <Button Style="{StaticResource ButtonStyle}" Command="{Binding SaveLogCommand}" Margin="2" Text="Save" Grid.Column="1"/>
                 </Grid>
                 
             </Grid>

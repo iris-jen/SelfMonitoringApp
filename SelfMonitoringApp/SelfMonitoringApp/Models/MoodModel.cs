@@ -13,14 +13,14 @@ namespace SelfMonitoringApp.Models
         /// <summary>
         /// Emotions that the user experienced
         /// </summary>
-        public List<string> Emotions { get; private set; }
+        public List<string> Emotions { get; set; }
         
         /// <summary>
         /// A numerical rating (out of 10) of how the user felt
         /// </summary>
         public double OverallMood { get; set; }
 
-        public MoodModel(): base(LogType.Mood) { }
+        public MoodModel(): base(ModelType.Mood) { }
 
     }
 }

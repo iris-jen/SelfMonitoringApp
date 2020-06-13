@@ -21,6 +21,6 @@ namespace SelfMonitoringApp.Models
 
         public double Satisfaction { get; set; }
 
-        public MealModel():base (LogType.Meal) { }
+        public MealModel():base (ModelType.Meal) { }
     }
 }

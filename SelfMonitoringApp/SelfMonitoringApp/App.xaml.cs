@@ -14,6 +14,9 @@ namespace SelfMonitoringApp
         {
             InitializeComponent();
 
+            //Load existing user data
+            DataStore.Initalize();
+
             var navigator = new NavigationService(this, new ViewLocator());
             var rootViewModel = new MainViewModel(navigator);
             navigator.PresentAsNavigatableMainPage(rootViewModel);

@@ -12,6 +12,6 @@ namespace SelfMonitoringApp.Models
         /// <summary>
         /// Type of log
         /// </summary>
-        LogType LogType { get; }
+        ModelType LogType { get; }
     }
 }

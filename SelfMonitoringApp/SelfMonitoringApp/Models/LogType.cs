@@ -1,11 +1,12 @@
 ﻿namespace SelfMonitoringApp.Models
 {
-    public enum LogType
+    public enum ModelType
     {
         None,
         Mood,
         Meal,
         Sleep,
-        Substance
+        Substance,
+        Settings
     }
 }

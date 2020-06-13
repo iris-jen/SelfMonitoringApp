@@ -6,7 +6,7 @@ using System.Text;
 
 namespace SelfMonitoringApp.ViewModels
 {
-    class DataExplorerViewModel : NavigatableViewModelBase, INavigationViewModel
+    public class DataExplorerViewModel : NavigatableViewModelBase, INavigationViewModel
     {
         public const string NavigationNodeName = "data";
 
