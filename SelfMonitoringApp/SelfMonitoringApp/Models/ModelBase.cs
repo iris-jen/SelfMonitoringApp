@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System;
 
 namespace SelfMonitoringApp.Models
 {
@@ -12,7 +14,7 @@ namespace SelfMonitoringApp.Models
         /// <summary>
         /// Type of log
         /// </summary>
-        public ModelType LogType { get; }
+        [JsonConverter(typeof(StringEnumConverter))]public ModelType LogType { get; }
 
         protected LogModelBase(ModelType type)
         {

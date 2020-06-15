@@ -18,9 +18,9 @@ namespace SelfMonitoringApp
         private static List<SleepModel> _sleeps = new List<SleepModel>();
 
         public static SettingsModel UserSettings { get; set; }
- 
+
         private static readonly string _storeDirectory = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-        
+
         //todo.. this is pooop, need to serialize through IModel Interface eventually
         private static readonly string _mealFileName = "meal.json";
         private static readonly string _moodFileName = "mood.json";
@@ -28,35 +28,66 @@ namespace SelfMonitoringApp
         private static readonly string _settingsFileName = "settings.json";
         private static readonly string _sleepFileName = "sleep.json";
 
-        private static readonly string _mealFilePath = Path.Combine(_storeDirectory, _mealFileName);
-        private static readonly string _moodFilePath = Path.Combine(_storeDirectory, _moodFileName);
-        private static readonly string _substanceFilePath = Path.Combine(_storeDirectory, _substanceFileName);
-        private static readonly string _sleepFilePath = Path.Combine(_storeDirectory, _sleepFileName);
+        public static string MealFilePath
+        {
+            get => Path.Combine(_storeDirectory, _mealFileName);
+        }
+
+        public static string MoodFilePath
+        {
+            get => Path.Combine(_storeDirectory, _moodFileName);
+        }
+
+        public static string SubstanceFilePath
+        {
+            get => Path.Combine(_storeDirectory, _substanceFileName);
+        }
+
+        public static string SleepFilePath
+        {
+            get => Path.Combine(_storeDirectory, _sleepFileName);
+        }
+
         private static readonly string _settingsFilPath = Path.Combine(_storeDirectory, _settingsFileName);
+
+        public static string MoodJson { get; set; }
+        public static string SleepJson { get; set; }
+        public static string SubstanceJson { get; set; }
+        public static string MealJson { get; set; }
+
+
+        public static int TotalMoods => _moods.Count;
+        public static int TotalSleeps => _sleeps.Count;
+        public static int TotalSubstances => _substances.Count;
+        public static int TotalMeals => _meals.Count;
 
         public static void Initalize()
         {
-            if (File.Exists(_mealFilePath))
+            if (File.Exists(MealFilePath))
             {
-                var contents = File.ReadAllText(_mealFilePath);
+                var contents = File.ReadAllText(MealFilePath);
+                MealJson = contents;
                 _meals = JsonConvert.DeserializeObject<List<MealModel>>(contents);
             }
 
-            if (File.Exists(_moodFilePath))
+            if (File.Exists(MoodFilePath))
             {
-                var contents = File.ReadAllText(_moodFilePath);
+                var contents = File.ReadAllText(MoodFilePath);
+                MoodJson = contents;
                 _moods = JsonConvert.DeserializeObject<List<MoodModel>>(contents);
             }
 
-            if (File.Exists(_substanceFilePath))
+            if (File.Exists(SubstanceFilePath))
             {
-                var contents = File.ReadAllText(_substanceFilePath);
+                var contents = File.ReadAllText(SubstanceFilePath);
+                SubstanceJson = contents;
                 _substances = JsonConvert.DeserializeObject<List<SubstanceModel>>(contents);
             }
 
-            if (File.Exists(_sleepFilePath))
+            if (File.Exists(SleepFilePath))
             {
-                var contents = File.ReadAllText(_sleepFilePath);
+                var contents = File.ReadAllText(SleepFilePath);
+                SleepJson = contents;
                 _sleeps = JsonConvert.DeserializeObject<List<SleepModel>>(contents);
             }
 
@@ -70,13 +101,6 @@ namespace SelfMonitoringApp
    
         public static void AddModel(IModel NewModel)
         {
-#if DEBUG
-            Debug.WriteLine($"Adding new model to list... LogType = {NewModel.LogType}");
-
-            Debug.WriteLine("Model JSON... " +
-               $"{JsonConvert.SerializeObject(NewModel)}");
-#endif
-
             switch (NewModel.LogType)
             {
                 case ModelType.Meal:
@@ -95,7 +119,6 @@ namespace SelfMonitoringApp
                     _substances.Add(NewModel as SubstanceModel);
                     break;
             }
-
             SaveStore(NewModel.LogType);
         }
 
@@ -108,11 +131,13 @@ namespace SelfMonitoringApp
             {
                 case ModelType.Meal:
                     listJson = JsonConvert.SerializeObject(_meals, Formatting.Indented);
-                    path = _mealFilePath;
+                    MealJson = listJson;
+                    path = MealFilePath;
                     break;
                 case ModelType.Mood:
                     listJson = JsonConvert.SerializeObject(_moods, Formatting.Indented);
-                    path = _moodFilePath;
+                    MoodJson = listJson;
+                    path = MoodFilePath;
                     break;
                 case ModelType.Settings:
                     listJson = JsonConvert.SerializeObject(_settingsFileName);
@@ -120,17 +145,59 @@ namespace SelfMonitoringApp
                     break;
                 case ModelType.Sleep:
                     listJson = JsonConvert.SerializeObject(_sleeps, Formatting.Indented);
-                    path = _sleepFilePath;
+                    SleepJson = listJson;
+                    path = SleepFilePath;
                     break;
                 case ModelType.Substance:
                     listJson = JsonConvert.SerializeObject(_sleeps, Formatting.Indented);
-                    path = _substanceFilePath;
+                    SubstanceJson = listJson;
+                    path = SubstanceFilePath;
                     break;
             }
-#if DEBUG
-            Debug.WriteLine($"Writing {modelType} data to : {path} - {listJson}");
-#endif
             File.WriteAllText(path, listJson); 
+        }
+
+        public static void DeleteStore(ModelType modelType)
+        {
+            switch (modelType)
+            {
+                case ModelType.Meal:
+                    if (File.Exists(MealFilePath))
+                        File.Delete(MealFilePath);
+
+                    MealJson = string.Empty;
+                    _meals.Clear();
+                    break;
+                case ModelType.Mood:
+                    if (File.Exists(MoodFilePath))
+                        File.Delete(MoodFilePath);
+
+                    MoodJson = string.Empty;
+                    _moods.Clear();
+                    break;
+                case ModelType.Sleep:
+                    if (File.Exists(SleepFilePath))
+                        File.Delete(SleepFilePath);
+
+                    SleepJson = string.Empty;
+                    _sleeps.Clear();
+                    break;
+                case ModelType.Substance:
+                    if (File.Exists(SubstanceFilePath))
+                        File.Delete(SubstanceFilePath);
+
+                    SubstanceJson = string.Empty;
+                    _substances.Clear();
+                    break;
+            }
+        }
+
+        public static void DeleteAll()
+        {
+            DeleteStore(ModelType.Meal);
+            DeleteStore(ModelType.Mood);
+            DeleteStore(ModelType.Sleep);
+            DeleteStore(ModelType.Substance);
         }
 
         public static List<IModel> GetModels()

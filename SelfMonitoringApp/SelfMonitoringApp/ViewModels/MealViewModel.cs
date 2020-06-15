@@ -4,6 +4,7 @@ using SelfMonitoringApp.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Forms;
 
 namespace SelfMonitoringApp.ViewModels
 {
@@ -11,6 +12,7 @@ namespace SelfMonitoringApp.ViewModels
     {
         private readonly MealModel _mealModel;
         public const string NavigationNodeName = "meal";
+        public Command SaveLogCommand { get; private set; }
 
         public string MealSize
         {
@@ -71,12 +73,20 @@ namespace SelfMonitoringApp.ViewModels
                 _mealModel= new MealModel();
             else
                 _mealModel = existingMeal as MealModel;
+
+            SaveLogCommand = new Command(SaveAndPop);
         }
 
         public IModel RegisterAndGetModel()
         {
             _mealModel.RegisteredTime = DateTime.Now;
             return _mealModel;
+        }
+
+        public void SaveAndPop()
+        {
+            DataStore.AddModel(RegisterAndGetModel());
+            _navigator.NavigateBack();
         }
     }
 }

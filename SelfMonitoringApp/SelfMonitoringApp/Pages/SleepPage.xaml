@@ -5,16 +5,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
              mc:Ignorable="d"
-             NavigationPage.HasNavigationBar="False"
+             Title="Log Sleep"
              x:Class="SelfMonitoringApp.Pages.SleepPage">
     <ContentPage.Content>
-        <controls:PageBackgroundWithHeader HeaderText="Sleep Log">
-            <Grid>
+        <controls:SaveCancelPage CancelCommand="{Binding BackCommand}" SaveCommand="{Binding SaveLogCommand}">
+            <Grid Margin="0,8,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="110"/>
-                    <RowDefinition Height="110"/>
-                    <RowDefinition Height="260"/>
-                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="140"/>
+                    <RowDefinition Height="400"/>
                 </Grid.RowDefinitions>
 
                 <Grid>
@@ -25,23 +24,23 @@
                     </Grid.ColumnDefinitions>
 
                     <!--Time of sleep box-->
-                    <controls:HeaderBlock HeaderText="Sleep">
-                        <Frame Padding="0" Opacity="0.9">
+                    <controls:HeaderBlock HeaderText="Sleep" Margin="0,0,-5,0">
+                        <Frame Padding="0">
                             <TimePicker HorizontalOptions="CenterAndExpand"  FontAttributes="Bold" 
                                     Time="{Binding SleepStart}"/>
                         </Frame>
                     </controls:HeaderBlock>
 
                     <!--Total sleep box-->
-                    <controls:HeaderBlock HeaderText="Total" Grid.Column="1">
-                        <Frame Padding="5" Opacity="0.9">
+                    <controls:HeaderBlock HeaderText="Total" Grid.Column="1" Margin="-6,0,-6,0">
+                        <Frame Padding="5" >
                             <Label Text="{Binding TotalSleep , StringFormat ='{0:0.0}'}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
                         </Frame>
                     </controls:HeaderBlock>
 
                     <!--Wake up time box-->
-                    <controls:HeaderBlock HeaderText="Wake" Grid.Column="2">
-                        <Frame Padding="0" Opacity="0.9">
+                    <controls:HeaderBlock HeaderText="Wake" Grid.Column="2" Margin="-5,0,0,0">
+                        <Frame Padding="0">
                             <TimePicker HorizontalOptions="Center" FontAttributes="Bold" Time ="{Binding SleepEnd}"/>
                         </Frame>
                     </controls:HeaderBlock>
@@ -49,20 +48,18 @@
 
                 <!--Wake up time box-->
                 <controls:HeaderBlock HeaderText="How rested do you feel?" Grid.Row="1">
-                    <Frame Padding="5" Opacity="0.9">
-                        <controls:RatingSlider/>
-                    </Frame>
+                    <controls:RatingSlider />
                 </controls:HeaderBlock>
 
-                <controls:HeaderBlock Grid.Row="2" HeaderText="Dream Log">
+                <controls:HeaderBlock Grid.Row="2" HeaderText="Dream Log" Margin="0,0,0,5">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="40"/>
-                            <RowDefinition Height="40"/> 
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="30"/> 
                             <RowDefinition/>
                         </Grid.RowDefinitions>
 
@@ -72,24 +69,15 @@
                         <Label Text="Was it a nightmare?" HorizontalOptions="Center" Grid.Row="1" VerticalOptions="Center" TextColor="White" FontSize="18"/>
                         <Switch Grid.Column="1" Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center" ThumbColor="{StaticResource Secondary}" IsToggled="{Binding Nightmare}"/>
 
-                        <Frame Grid.Row="2" Grid.ColumnSpan="2" CornerRadius="5" Opacity="0.8">
+                        <Frame Grid.Row="2" Grid.ColumnSpan="2" CornerRadius="5" >
                             <Editor Grid.Row="2" AutoSize="Disabled" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
                                     Grid.ColumnSpan="2" BackgroundColor="White"/>
                         </Frame>
                     </Grid>
                 </controls:HeaderBlock>
 
-                <!--Cancel / savey save grid-->
-                <Grid Grid.Row="3">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Button Style="{StaticResource ButtonStyle}" Margin="2" Text="Cancel"/>
-                    <Button Style="{StaticResource ButtonStyle}" Margin="2" Text="Save" Grid.Column="1"/>
-                </Grid>
 
             </Grid>
-        </controls:PageBackgroundWithHeader>
+        </controls:SaveCancelPage>
     </ContentPage.Content>
 </ContentPage>

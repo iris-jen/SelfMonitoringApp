@@ -103,6 +103,7 @@ namespace SelfMonitoringApp.ViewModels
             if (NewEmotion != string.Empty)
             {
                 Emotions.Add(NewEmotion);
+                NewEmotion = string.Empty;
             }
         }
 

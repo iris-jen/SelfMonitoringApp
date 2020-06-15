@@ -4,18 +4,166 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-        
-             NavigationPage.HasNavigationBar="False"
+             Title="Settings"
+             NavigationPage.HasNavigationBar="True"
              xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
              x:Class="SelfMonitoringApp.Pages.SettingsPage">
     <ContentPage.Content>
-        <controls:PageBackgroundWithHeader HeaderText="Settings">
-            <Grid>
+        <ScrollView>
+            <Grid Margin="0,8,0,0">
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition Height="400"/>
+                    <RowDefinition Height="650"/>
                 </Grid.RowDefinitions>
+                <controls:HeaderBlock HeaderText="Delete Data">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Button Command="{Binding DeleteLogCommand}"  Style="{StaticResource ButtonStyle}" 
+                                Text="Delete all mood logs" CommandParameter="mood"/>
+
+                        <Button Grid.Row="1" Command="{Binding DeleteLogCommand}" Style="{StaticResource ButtonStyle}"
+                                Text="Delete all sleep logs" CommandParameter="sleep"/>
+
+                        <Button Grid.Row="2" Command="{Binding DeleteLogCommand}" Style="{StaticResource ButtonStyle}" 
+                                Text="Delete all meal logs" CommandParameter="meal" />
+
+                        <Button Grid.Row="3" Command="{Binding DeleteLogCommand}" Style="{StaticResource ButtonStyle}"
+                                Text="Delete all substance logs" CommandParameter="substance" />
+
+                        <Button Grid.Row="4" Command="{Binding DeleteLogCommand}" Style="{StaticResource ButtonStyle}"
+                                Text="Delete all logs" CommandParameter="all"/>
+
+                    </Grid>
+                </controls:HeaderBlock>
+
+                <controls:HeaderBlock HeaderText="JSON data" Grid.Row="1">
+                    <Frame BackgroundColor="{d:StaticResource PrimaryLight}" Padding="5">
+                        <ScrollView>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="400"/>
+                                    <RowDefinition Height="400"/>
+                                    <RowDefinition Height="400"/>
+                                    <RowDefinition Height="400"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                           
+                                <!--Mood JSON block-->
+                                <Frame BackgroundColor="{StaticResource Primary}">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="40"/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="40"/>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <Label Text="Mood" TextColor="{StaticResource Secondary}"/>
+                                            <Label Grid.Column="1" Text="Total Objects" TextColor="White"/>
+                                            <Label Grid.Column="2" Text="{Binding TotalMoods}" TextColor="White"/>
+                                        </Grid>
+                                        <Frame Grid.Row="1" Padding="5">
+                                            <ScrollView Grid.Row="1">
+                                                <Label Text="{Binding MoodJson}"/>
+                                            </ScrollView>
+                                        </Frame>
+                                    </Grid>
+                                </Frame>
+
+                                <!--Meal JSON block-->
+                                <Frame Grid.Row="1" BackgroundColor="{StaticResource Primary}">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="40"/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="40"/>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <Label Text="Meal" TextColor="{StaticResource Secondary}"/>
+                                            <Label Grid.Column="1" Text="Total Objects" TextColor="White"/>
+                                            <Label Grid.Column="2" Text="{Binding TotalMeals}" TextColor="White"/>
+                                        </Grid>
+                                        <Frame Grid.Row="1" Padding="5">
+                                            <ScrollView Grid.Row="1">
+                                                <Label Text="{Binding MealJson}"/>
+                                            </ScrollView>
+                                        </Frame>
+                                    </Grid>
+                                </Frame>
+
+                                <!--Sleep JSON block-->
+                                <Frame Grid.Row="2" BackgroundColor="{StaticResource Primary}">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="40"/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="40"/>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <Label Text="Sleep" TextColor="{StaticResource Secondary}"/>
+                                            <Label Grid.Column="1" Text="Total Objects" TextColor="White"/>
+                                            <Label Grid.Column="2" Text="{Binding TotalSleeps}" TextColor="White"/>
+                                        </Grid>
+                                        <Frame Grid.Row="1" Padding="5">
+                                            <ScrollView Grid.Row="1">
+                                                <Label Text="{Binding SleepJson}"/>
+                                            </ScrollView>
+                                        </Frame>
+                                    </Grid>
+                                </Frame>
+
+                                <!--Substance JSON block-->
+                                <Frame Grid.Row="3" BackgroundColor="{StaticResource Primary}">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="40"/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="70"/>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <Label Text="Substance" TextColor="{StaticResource Secondary}"/>
+                                            <Label Grid.Column="1" Text="Total Objects" TextColor="White"/>
+                                            <Label Grid.Column="2" Text="{Binding TotalSubstances}" TextColor="White"/>
+                                        </Grid>
+                                        <Frame Grid.Row="1" Padding="5">
+                                            <ScrollView Grid.Row="1">
+                                                <Label Text="{Binding SubstanceJson}"/>
+                                            </ScrollView>
+                                        </Frame>
+                                    </Grid>
+                                </Frame>
+                         
+                          
+
+                            </Grid>
+                        </ScrollView>
+                    </Frame>
+                </controls:HeaderBlock>
+
             </Grid>
-        </controls:PageBackgroundWithHeader>
+        </ScrollView>
+
     </ContentPage.Content>
 </ContentPage>

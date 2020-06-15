@@ -2,6 +2,7 @@
 using SelfMonitoringApp.ViewModels.Base;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 
 namespace SelfMonitoringApp.ViewModels
@@ -15,5 +16,7 @@ namespace SelfMonitoringApp.ViewModels
         {
                 
         }
+
+        public ObservableCollection<DaySummaryViewModel> DaySummaries { get; private set; }
     }
 }

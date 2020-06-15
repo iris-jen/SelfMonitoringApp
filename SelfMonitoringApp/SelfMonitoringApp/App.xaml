@@ -15,11 +15,12 @@
             <Color x:Key="SecondaryLight">#ffff72</Color>
             <Color x:Key="SecondaryDark">#c8b900</Color>
 
-            <GridLength x:Key="RowHeightSingle" >110</GridLength>
+            <GridLength x:Key="RowHeightSingle">110</GridLength>
             <GridLength x:Key="RowHeightSlider">140</GridLength>
 
             <Style x:Key="ButtonStyle" TargetType="Button">
                 <Setter Property="BackgroundColor" Value="{StaticResource Secondary}"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
                 <Setter Property="TextColor" Value="Black"/>
                 <Setter Property="Margin" Value="10,5,10,10"/>
             </Style>

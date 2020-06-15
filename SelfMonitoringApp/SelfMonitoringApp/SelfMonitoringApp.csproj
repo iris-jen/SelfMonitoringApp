@@ -12,15 +12,20 @@
     <ItemGroup>
         <PackageReference Include="Meziantou.Framework" Version="2.15.0" />
         <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+        <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
         <PackageReference Include="Xamarin.Forms" Version="4.6.0.800" />
         <PackageReference Include="Xamarin.Forms.Visual.Material" Version="4.6.0.800" />
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Services\" />
       <Folder Include="Properties" />
     </ItemGroup>
 
     <ItemGroup>
+      <Compile Update="Controls\SaveCancelPage.xaml.cs">
+        <DependentUpon>SaveCancelPage.xaml</DependentUpon>
+      </Compile>
       <Compile Update="Pages\MealPage.xaml.cs">
         <DependentUpon>MealPage.xaml</DependentUpon>
       </Compile>
@@ -42,7 +47,10 @@
       <EmbeddedResource Update="Controls\HeaderBlock.xaml">
         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       </EmbeddedResource>
-      <EmbeddedResource Update="Controls\PageBackgroundWithHeader.xaml">
+      <EmbeddedResource Update="Controls\SaveCancelPage.xaml">
+        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Pages\ActivityPage.xaml">
         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       </EmbeddedResource>
       <EmbeddedResource Update="Pages\DataExplorerPage.xaml">
@@ -52,6 +60,9 @@
         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       </EmbeddedResource>
       <EmbeddedResource Update="Pages\MoodPage.xaml">
+        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Pages\NotificationsPage.xaml">
         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       </EmbeddedResource>
       <EmbeddedResource Update="Pages\SettingsPage.xaml">

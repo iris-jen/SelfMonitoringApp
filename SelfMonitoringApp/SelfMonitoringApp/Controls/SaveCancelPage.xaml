@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="SelfMonitoringApp.Controls.SaveCancelPage">
+    <ContentView.ControlTemplate>
+        <ControlTemplate>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+
+                <ScrollView Grid.Row="0">
+                    <ContentPresenter  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                </ScrollView>
+
+                <!--Cancel / savey save grid-->
+                <Frame Grid.Row="1" Padding="0" Margin="2,-3,2,2" BackgroundColor="{StaticResource Primary}" VerticalOptions="CenterAndExpand">
+                    <Grid  Margin="5" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button Style="{StaticResource ButtonStyle}" Command="{TemplateBinding CancelCommand}" Margin="2" Text="Cancel"/>
+                        <Button Style="{StaticResource ButtonStyle}" Command="{TemplateBinding SaveCommand}" Margin="2" Text="Save" Grid.Column="1"/>
+                    
+                    </Grid>
+                </Frame>
+            </Grid>
+        </ControlTemplate>
+    </ContentView.ControlTemplate>
+</ContentView>

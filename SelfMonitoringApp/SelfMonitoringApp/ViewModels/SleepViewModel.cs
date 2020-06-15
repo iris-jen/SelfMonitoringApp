@@ -4,6 +4,7 @@ using SelfMonitoringApp.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Forms;
 
 namespace SelfMonitoringApp.ViewModels
 {
@@ -11,6 +12,7 @@ namespace SelfMonitoringApp.ViewModels
     {
         private readonly SleepModel _sleepModel;
         public const string NavigationNodeName = "sleep";
+        public Command SaveLogCommand { get; private set; }
 
         public TimeSpan SleepStart
         {
@@ -125,6 +127,8 @@ namespace SelfMonitoringApp.ViewModels
                 _sleepModel = new SleepModel();
             else
                 _sleepModel = existingModel as SleepModel;
+            SaveLogCommand = new Command(SaveAndPop);
+
         }
 
         public IModel RegisterAndGetModel()
@@ -137,6 +141,12 @@ namespace SelfMonitoringApp.ViewModels
         {
             var sleep = SleepEnd.Subtract(SleepStart);
             return sleep.TotalHours - 1;
+        }
+
+        public void SaveAndPop()
+        {
+            DataStore.AddModel(RegisterAndGetModel());
+            _navigator.NavigateBack();
         }
     }
 }

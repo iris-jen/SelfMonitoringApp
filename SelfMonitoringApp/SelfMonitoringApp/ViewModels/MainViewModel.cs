@@ -19,30 +19,30 @@ namespace SelfMonitoringApp.ViewModels
 
         public MainViewModel(INavigationService navService) : base(navService)
         {
-            NavigateCommand = new Command<string>(async (param) => await Navigate(param));
+            NavigateCommand = new Command<string>( (param) => Navigate(param));
         }
 
-        public async Task Navigate(string page)
+        public void Navigate(string page)
         {
             switch(page.ToLower(CultureInfo.CurrentCulture))
             {
                 case MoodViewModel.NavigationNodeName:
-                    await _navigator.NavigateTo(new MoodViewModel(_navigator));
+                    _navigator.NavigateTo(new MoodViewModel(_navigator)).Forget();
                     break;
                 case SleepViewModel.NavigationNodeName:
-                    await _navigator.NavigateTo(new SleepViewModel(_navigator));
+                    _navigator.NavigateTo(new SleepViewModel(_navigator)).Forget();
                     break;
                 case SubstanceViewModel.NavigationNodeName:
-                    await _navigator.NavigateTo(new SubstanceViewModel(_navigator));
+                    _navigator.NavigateTo(new SubstanceViewModel(_navigator)).Forget();
                     break;
                 case MealViewModel.NavigationNodeName:
-                    await _navigator.NavigateTo(new MealViewModel(_navigator));
+                    _navigator.NavigateTo(new MealViewModel(_navigator)).Forget();
                     break;
                 case SettingsViewModel.NavigationNodeName:
-                    await _navigator.NavigateTo(new SettingsViewModel(_navigator));
+                    _navigator.NavigateTo(new SettingsViewModel(_navigator)).Forget();
                     break;
                 case DataExplorerViewModel.NavigationNodeName:
-                    await _navigator.NavigateTo(new DataExplorerViewModel(_navigator));
+                    _navigator.NavigateTo(new DataExplorerViewModel(_navigator)).Forget();
                     break;
                 default:
                     throw new DirectoryNotFoundException($"Cant find nav directory {page}");

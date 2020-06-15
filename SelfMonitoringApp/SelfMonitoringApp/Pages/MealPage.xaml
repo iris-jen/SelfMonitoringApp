@@ -5,17 +5,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
              mc:Ignorable="d"
-             NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasNavigationBar="True"
+             Title="Log Meal"
              x:Class="SelfMonitoringApp.Pages.MealPage">
     <ContentPage.Content>
-        <controls:PageBackgroundWithHeader HeaderText="Meal Log">
-            <Grid>
+        <controls:SaveCancelPage CancelCommand="{Binding BackCommand}" SaveCommand="{Binding SaveLogCommand}">
+            <Grid Margin="0,8,0,0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="110"/>
-                    <RowDefinition Height="110"/>
-                    <RowDefinition Height="110"/>
+                    <RowDefinition Height="120"/>
+                    <RowDefinition Height="120"/>
+                    <RowDefinition Height="120"/>
                     <RowDefinition Height="140"/>
-                    <RowDefinition Height="60"/>
                 </Grid.RowDefinitions>
 
                 <controls:HeaderBlock HeaderText="What did you eat?" Grid.Row="0">
@@ -53,21 +53,11 @@
 
                 <!--Rating slider-->
                 <controls:HeaderBlock HeaderText="How satisfied are you?" Grid.Row="3">
-                    <Frame BackgroundColor="White">
-                        <controls:RatingSlider SliderValue="{Binding Satisfaction}"></controls:RatingSlider>
-                    </Frame>
+                    <controls:RatingSlider SliderValue="{Binding Satisfaction}"></controls:RatingSlider>
                 </controls:HeaderBlock>
 
-                <!--Cancel / savey save grid-->
-                <Grid Grid.Row="4" Margin="10">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Button Style="{StaticResource ButtonStyle}" Margin="2" Text="Cancel"/>
-                    <Button Style="{StaticResource ButtonStyle}" Margin="2" Text="Save" Grid.Column="1"/>
-                </Grid>
+
             </Grid>
-        </controls:PageBackgroundWithHeader>
+        </controls:SaveCancelPage>
     </ContentPage.Content>
 </ContentPage>

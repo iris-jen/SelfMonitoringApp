@@ -5,16 +5,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
              mc:Ignorable="d"
-             NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasNavigationBar="True" Title="Log Substance Use"
+
              x:Class="SelfMonitoringApp.Pages.SubstancePage">
     <ContentPage.Content>
-        <controls:PageBackgroundWithHeader HeaderText="Substance Log">
-            <Grid>
+        <controls:SaveCancelPage CancelCommand="{Binding BackCommand}" SaveCommand="{Binding SaveLogCommand}">
+            <Grid Margin="0,8,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="{StaticResource RowHeightSingle}"/>
                     <RowDefinition Height="{StaticResource RowHeightSingle}"/>
                     <RowDefinition Height="{StaticResource RowHeightSlider}"/>
-                    <RowDefinition Height="150"/>
                 </Grid.RowDefinitions>
                 <controls:HeaderBlock HeaderText="Substance Name">
                     <Frame Padding="5">
@@ -31,20 +31,20 @@
                     </Grid.ColumnDefinitions>
                     
                     <!--Use Method-->
-                    <controls:HeaderBlock  HeaderText="Method">
+                    <controls:HeaderBlock  HeaderText="Method" Margin="0,0,-5,0">
                         <Frame Padding="5">
                             <Entry Text="{Binding ConsumptionMethod}" Placeholder="Drank" HorizontalTextAlignment="Center"/>
                         </Frame>
                     </controls:HeaderBlock>
                     
                     <!--Ammount of substance-->
-                    <controls:HeaderBlock Grid.Column="1" HeaderText="Ammount">
+                    <controls:HeaderBlock Grid.Column="1" HeaderText="Ammount" Margin="-7,0,-7,0">
                         <Frame Padding="5">
                             <Entry Text="{Binding Ammount}" HorizontalTextAlignment="Center" Placeholder="1"/>
                         </Frame>
                     </controls:HeaderBlock>
 
-                    <controls:HeaderBlock Grid.Column="2" HeaderText="Unit">
+                    <controls:HeaderBlock Grid.Column="2" HeaderText="Unit" Margin="-5,0,0,0">
                         <Frame Padding="5">
                             <Entry Text="{Binding Unit}" HorizontalTextAlignment="Center" Placeholder="Drink"/>
                         </Frame>
@@ -52,28 +52,15 @@
                 </Grid>
 
                 <controls:HeaderBlock HeaderText="Rate how you feel" Grid.Row="2">
-                    <Frame Padding="10">
-                        <controls:RatingSlider Padding="10"/>
-                    </Frame>
+                    <controls:RatingSlider />
                 </controls:HeaderBlock>
 
-                <controls:HeaderBlock HeaderText="Comment" Grid.Row="3">
+                <controls:HeaderBlock HeaderText="Comment" Grid.Row="3" Margin="0,0,0,5">
                     <Frame>
                         <Entry Text="{Binding Comment}" Placeholder="Any thoughts?"/>
                     </Frame>
                 </controls:HeaderBlock>
-
-                <!--Cancel / savey save grid-->
-                <Grid Grid.Row="4">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Button Style="{StaticResource ButtonStyle}" Command="{Binding CancelCommand}" Margin="2" Text="Cancel"/>
-                    <Button Style="{StaticResource ButtonStyle}" Command="{Binding SaveCommand}" Margin="2" Text="Save" Grid.Column="1"/>
-                </Grid>
-
             </Grid>
-        </controls:PageBackgroundWithHeader>
+        </controls:SaveCancelPage>
     </ContentPage.Content>
 </ContentPage>

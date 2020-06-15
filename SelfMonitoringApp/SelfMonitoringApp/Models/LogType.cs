@@ -3,6 +3,7 @@
     public enum ModelType
     {
         None,
+        Activity,
         Mood,
         Meal,
         Sleep,

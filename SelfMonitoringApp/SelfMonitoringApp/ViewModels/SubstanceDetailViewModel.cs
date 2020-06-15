@@ -4,6 +4,7 @@ using SelfMonitoringApp.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Forms;
 
 namespace SelfMonitoringApp.ViewModels
 {
@@ -11,6 +12,8 @@ namespace SelfMonitoringApp.ViewModels
     {
         private readonly SubstanceModel _substanceModel;
         public const string NavigationNodeName = "substance";
+
+        public Command SaveLogCommand { get; private set; }
 
         public string ConsumptionMethod
         {
@@ -83,12 +86,20 @@ namespace SelfMonitoringApp.ViewModels
                 _substanceModel = new SubstanceModel();
             else
                 _substanceModel = existingModel as SubstanceModel;
+
+            SaveLogCommand = new Command(SaveAndPop);
         }
 
         public IModel RegisterAndGetModel()
         {
             _substanceModel.RegisteredTime = DateTime.Now;
             return _substanceModel;
+        }
+
+        public void SaveAndPop()
+        {
+            DataStore.AddModel(RegisterAndGetModel());
+            _navigator.NavigateBack();
         }
     }
 }

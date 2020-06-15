@@ -33,11 +33,11 @@ namespace SelfMonitoringApp.Models
         /// True if the user had a nightmare
         /// </summary>
         public bool Nightmare { get; set; }
-        
+
         /// <summary>
         /// What the user remembers about their dream
         /// </summary>
-        public string DreamLog { get; set; }
+        public string DreamLog { get; set; } = string.Empty;
         
         /// <summary>
         /// How rested the user felt after their sleep out of 10

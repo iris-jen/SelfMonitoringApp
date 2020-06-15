@@ -4,8 +4,8 @@ using System.Text;
 
 namespace SelfMonitoringApp.Models
 {
-    public class SettingsModel
+    class NotificationModel
     {
-        public bool LogSubstances { get; set; }
+
     }
 }

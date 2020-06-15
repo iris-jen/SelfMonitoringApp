@@ -3,31 +3,59 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
              x:Class="SelfMonitoringApp.Pages.MainPage"
              Visual="Material"
-             NavigationPage.HasNavigationBar="False">
-    <controls:PageBackgroundWithHeader HeaderText="Home">
-            <Grid BackgroundColor="{StaticResource PrimaryLight}" Margin="5" MinimumHeightRequest="400">
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
+             Title="Home"
+             NavigationPage.HasNavigationBar="True" >
+    <ScrollView>
+        <Grid MinimumHeightRequest="400" Margin="0,7,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.2*"/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
-                <Button Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}" 
-                    CommandParameter="mood" Text="Log Mood"/>
-                <Button Grid.Row="1" Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}" 
-                   CommandParameter="meal"  Text="Log Meal"/>
-                <Button Grid.Row="2" Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}"
-                    CommandParameter="sleep" Text="Log Sleep"/>
-                <Button Grid.Row="3" Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}"
-                    CommandParameter="substance"  Text="Log Substance Use"/>
+            
+            <!--Log creation block-->
+            <controls:HeaderBlock HeaderText="Create a log">
+                <StackLayout Padding="0">
+                    
+                    <!--Mood Log Button-->
+                    <Button Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}"  CommandParameter="mood"
+                            Text="Mood" VerticalOptions="CenterAndExpand" Margin="1"/>
 
-            <Button Grid.Row="4"  Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}"
-                    CommandParameter="data" Text="View Logs"/>
-            <Button Grid.Row="5" Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}"
-                    CommandParameter="settings" Text="Settings" />
-            </Grid>
+                    <!--Meal Log Button-->
+                    <Button Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="meal"
+                            Text="Meal" VerticalOptions="CenterAndExpand" Margin="1"/>
 
-        </controls:PageBackgroundWithHeader>
+                    <!--Sleep Log Button-->
+                    <Button Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="sleep"
+                            Text="Sleep" VerticalOptions="CenterAndExpand" Margin="1"/>
+
+                    <!--Activity Log Button-->
+                    <Button Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="substance"  
+                            Text="Activity" VerticalOptions="CenterAndExpand" Margin="1"/>
+                    
+                    <!--Substance Log Button-->
+                    <Button  Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}" Margin="1"
+                                                    CommandParameter="substance"  Text="Substance Use" VerticalOptions="CenterAndExpand"/>
+                    
+                </StackLayout>
+            </controls:HeaderBlock>
+
+            <!--App features block-->
+            <controls:HeaderBlock Grid.Row="1" HeaderText="Features" Margin="0,0,0,7">
+                <StackLayout>
+                    <Button Grid.Row="0"  Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}"
+                            CommandParameter="data" Text="View Logs"/>
+
+                    <Button Grid.Row="1"  Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}"
+                            CommandParameter="notifications" Text="Set Reminders"/>
+
+                    <Button Grid.Row="2"  Style="{StaticResource ButtonStyle}"  Command="{Binding NavigateCommand}"
+                            BackgroundColor="Red" CommandParameter="data"  Text="Get help now"/>
+
+                    <Button Grid.Row="3" Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}"
+                            CommandParameter="settings" Text="Settings"/>
+                </StackLayout>
+            </controls:HeaderBlock>
+       
+        </Grid>
+    </ScrollView>
 </ContentPage>
