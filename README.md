@@ -22,6 +22,10 @@ Substance use logging page
 ------------------
 ![image](https://user-images.githubusercontent.com/7981120/84951050-d5c53480-b0bd-11ea-80bd-9f35a1d725d7.png)
 
+Activity Page
+------------------
+![image](https://user-images.githubusercontent.com/7981120/84951319-44a28d80-b0be-11ea-8082-1acc060afc67.png)
+
 View Data Page
 ------------------
 -wip
