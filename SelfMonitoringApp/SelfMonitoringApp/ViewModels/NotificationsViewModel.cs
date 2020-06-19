@@ -9,6 +9,8 @@ namespace SelfMonitoringApp.ViewModels
 {
     class NotificationsViewModel : NavigatableViewModelBase, INavigationViewModel
     {
+        public const string NavigationNodeName = "notifications";
+
         public NotificationsViewModel(INavigationService navService, IList<NotificationModel> existingNotifications = null)  : 
             base (navService)
         {

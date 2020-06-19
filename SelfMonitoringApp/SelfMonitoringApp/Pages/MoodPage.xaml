@@ -21,7 +21,7 @@
             
                 <!--Rating slider-->
                 <controls:HeaderBlock HeaderText="Rate how you feel">
-                    <controls:RatingSlider SliderValue="{Binding OveralMood}"/>
+                    <controls:RatingSlider Rating="{Binding OverallMood}" />
                 </controls:HeaderBlock>
             
                 <!--Emotions entry box-->
@@ -42,7 +42,15 @@
                         </Grid>
 
                         <Frame Grid.Row="1" Padding="0">
-                            <ListView ItemsSource="{Binding Emotions}" BackgroundColor="White"  SelectedItem="{Binding SelectedEmotion}"/>
+                            <ListView ItemsSource="{Binding Emotions}" BackgroundColor="White"  SelectedItem="{Binding SelectedEmotion}">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <Label Text="{Binding}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="Black" FontAttributes="Bold"/>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
                         </Frame>
 
                         <Button Grid.Row="2" Style="{StaticResource ButtonStyle}" Command="{Binding RemoveSelectedCommand}" Margin="0" Text="Remove Selected"></Button>

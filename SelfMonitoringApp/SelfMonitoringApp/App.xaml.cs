@@ -1,4 +1,5 @@
 ﻿using SelfMonitoringApp.Navigation;
+using SelfMonitoringApp.Services;
 using SelfMonitoringApp.ViewModels;
 using System;
 using Xamarin.Forms;

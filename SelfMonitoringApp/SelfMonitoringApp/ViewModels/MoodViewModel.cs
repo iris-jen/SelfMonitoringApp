@@ -1,5 +1,6 @@
 ﻿using SelfMonitoringApp.Models;
 using SelfMonitoringApp.Navigation;
+using SelfMonitoringApp.Services;
 using SelfMonitoringApp.ViewModels.Base;
 
 using System;
@@ -59,7 +60,7 @@ namespace SelfMonitoringApp.ViewModels
             }
         }
 
-        public double OveralMood
+        public double OverallMood
         {
             get => _mood.OverallMood;
             set

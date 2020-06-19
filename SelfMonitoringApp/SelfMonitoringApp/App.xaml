@@ -7,15 +7,13 @@
         
             <!--Application colors-->
             <!-- https://material.io/resources/color/#!/?view.left=1&view.right=0&primary.color=F44336&secondary.color=4DD0E -->
-            <Color x:Key="Primary">#9c27b0</Color>
-            <Color x:Key="PrimaryLight">#d05ce3</Color>
-            <Color x:Key="PrimaryDark">#6a0080</Color>
+            <Color x:Key="Primary">#6a1b9a</Color>
+            <Color x:Key="PrimaryLight">#9c4dcc</Color>
+            <Color x:Key="PrimaryDark">#38006b</Color>
 
-            <Color x:Key="Secondary">#ffeb3b</Color>
-            <Color x:Key="SecondaryLight">#ffff72</Color>
-            <Color x:Key="SecondaryDark">#c8b900</Color>
-
-            <GridLength x:Key="RowHeightSingle">110</GridLength>
+            <Color x:Key="Secondary">#ffc107</Color>
+            
+            <GridLength x:Key="RowHeightSingle">120</GridLength>
             <GridLength x:Key="RowHeightSlider">140</GridLength>
 
             <Style x:Key="ButtonStyle" TargetType="Button">

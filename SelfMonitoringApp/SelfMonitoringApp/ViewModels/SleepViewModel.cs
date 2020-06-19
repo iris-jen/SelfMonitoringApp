@@ -1,9 +1,9 @@
 ﻿using SelfMonitoringApp.Models;
 using SelfMonitoringApp.Navigation;
+using SelfMonitoringApp.Services;
 using SelfMonitoringApp.ViewModels.Base;
+
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Xamarin.Forms;
 
 namespace SelfMonitoringApp.ViewModels
@@ -55,6 +55,36 @@ namespace SelfMonitoringApp.ViewModels
             }
         }
 
+        private DateTime _sleepEndDate;
+        public DateTime SleepEndDate
+        {
+            get => _sleepEndDate;
+            set
+            {
+                if (_sleepEndDate == value)
+                    return;
+
+                _sleepEndDate = value;
+                TotalSleep = GetSleep();
+                NotifyPropertyChanged();
+            }
+        }
+
+        private DateTime _sleepStartDate;
+        public DateTime SleepStartDate
+        {
+            get => _sleepStartDate;
+            set
+            {
+                if (_sleepStartDate == value)
+                    return;
+
+                _sleepStartDate = value;
+                TotalSleep = GetSleep();
+                NotifyPropertyChanged();
+            }
+        }
+
         public bool RememberedDream
         {
             get => _sleepModel.RememberedDream;
@@ -64,19 +94,6 @@ namespace SelfMonitoringApp.ViewModels
                     return;
 
                 _sleepModel.RememberedDream = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-        public bool VividDream
-        {
-            get => _sleepModel.VividDream;
-            set
-            {
-                if (_sleepModel.VividDream == value)
-                    return;
-
-                _sleepModel.VividDream = value;
                 NotifyPropertyChanged();
             }
         }
@@ -127,8 +144,11 @@ namespace SelfMonitoringApp.ViewModels
                 _sleepModel = new SleepModel();
             else
                 _sleepModel = existingModel as SleepModel;
+
             SaveLogCommand = new Command(SaveAndPop);
 
+            SleepStartDate = _sleepModel.SleepStartDate;
+            SleepEndDate = _sleepModel.SleepEndDate;
         }
 
         public IModel RegisterAndGetModel()
@@ -139,8 +159,28 @@ namespace SelfMonitoringApp.ViewModels
 
         public double GetSleep()
         {
-            var sleep = SleepEnd.Subtract(SleepStart);
-            return sleep.TotalHours - 1;
+            var startDateTime = new DateTime(
+                year: SleepStartDate.Year, 
+                month: SleepStartDate.Month, 
+                day: SleepStartDate.Day,
+                hour: SleepStart.Hours,
+                minute: SleepStart.Minutes,
+                second: SleepStart.Seconds
+                );
+
+            var endDateTime = new DateTime(
+                year: SleepEndDate.Year,
+                month: SleepEndDate.Month,
+                day: SleepEndDate.Day,
+                hour: SleepEnd.Hours,
+                minute: SleepEnd.Minutes,
+                second: SleepEnd.Seconds
+                );
+
+            _sleepModel.SleepEndDate = endDateTime;
+            _sleepModel.SleepStartDate = startDateTime;
+
+            return endDateTime.Subtract(startDateTime).TotalHours;
         }
 
         public void SaveAndPop()

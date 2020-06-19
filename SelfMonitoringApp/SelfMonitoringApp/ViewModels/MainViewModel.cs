@@ -38,11 +38,17 @@ namespace SelfMonitoringApp.ViewModels
                 case MealViewModel.NavigationNodeName:
                     _navigator.NavigateTo(new MealViewModel(_navigator)).Forget();
                     break;
+                case ActivityViewModel.NavigationNodeName:
+                    _navigator.NavigateTo(new ActivityViewModel(_navigator)).Forget();
+                    break;
                 case SettingsViewModel.NavigationNodeName:
                     _navigator.NavigateTo(new SettingsViewModel(_navigator)).Forget();
                     break;
                 case DataExplorerViewModel.NavigationNodeName:
                     _navigator.NavigateTo(new DataExplorerViewModel(_navigator)).Forget();
+                    break;
+                case HelpViewModel.NavigationNodeName:
+                    _navigator.NavigateTo(new HelpViewModel(_navigator)).Forget();
                     break;
                 default:
                     throw new DirectoryNotFoundException($"Cant find nav directory {page}");

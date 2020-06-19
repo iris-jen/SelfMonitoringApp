@@ -13,19 +13,23 @@ namespace SelfMonitoringApp.Controls
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RatingSlider : ContentView
     {
-        public double SliderValue
+        public double Rating
         {
-            get => (double)GetValue(SliderValueProperty);
-            set => SetValue(SliderValueProperty, value);
+            get => (double)GetValue(RatingProperty);
+            set => SetValue(RatingProperty, value);
         }
 
-        public static BindableProperty SliderValueProperty = 
-            BindableProperty.Create("SliderValue", typeof(double),typeof(RatingSlider), default(double));
+        public static BindableProperty RatingProperty = 
+            BindableProperty.Create(nameof(Rating) , typeof(double),typeof(RatingSlider), default(double), BindingMode.TwoWay);
 
         public RatingSlider()
         {
             InitializeComponent();
-            BindingContext = this;
+        }
+
+        private void Slider_ValueChanged(object sender, ValueChangedEventArgs e)
+        {
+            Rating = (sender as Slider).Value;
         }
     }
 }

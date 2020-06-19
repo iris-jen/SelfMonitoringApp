@@ -23,7 +23,7 @@
                     <!--Slider-->
                     <Slider Grid.Row = "0" Grid.Column = "0" Grid.ColumnSpan = "3" Margin = "0" Minimum ="0" Maximum = "10" 
                             x:Name = "Slider" ThumbColor="{StaticResource Secondary}" MinimumTrackColor="GreenYellow" MaximumTrackColor="Red"
-                            Value="{TemplateBinding SliderValue}"/>
+                            Value="{TemplateBinding Rating}"  ValueChanged="Slider_ValueChanged"/>
 
                     <!--Min Value Label-->
                     <Label  Grid.Row = "1" Grid.Column = "0" FontSize = "Caption"  

@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
              x:Class="SelfMonitoringApp.Pages.MainPage"
              Visual="Material"
              Title="Home"
@@ -29,7 +30,7 @@
                             Text="Sleep" VerticalOptions="CenterAndExpand" Margin="1"/>
 
                     <!--Activity Log Button-->
-                    <Button Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="substance"  
+                    <Button Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="activity"  
                             Text="Activity" VerticalOptions="CenterAndExpand" Margin="1"/>
                     
                     <!--Substance Log Button-->
@@ -49,7 +50,7 @@
                             CommandParameter="notifications" Text="Set Reminders"/>
 
                     <Button Grid.Row="2"  Style="{StaticResource ButtonStyle}"  Command="{Binding NavigateCommand}"
-                            BackgroundColor="Red" CommandParameter="data"  Text="Get help now"/>
+                            BackgroundColor="LightCoral" CommandParameter="data"  Text="Get help now"/>
 
                     <Button Grid.Row="3" Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}"
                             CommandParameter="settings" Text="Settings"/>

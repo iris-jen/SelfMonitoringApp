@@ -22,7 +22,7 @@ namespace SelfMonitoringApp.UnitTests
         }
 
         [TestMethod]
-        public async Task NavigateAllTest()
+        public void NavigateAllTest()
         {
             List<string> pageNames = new List<string>()
             {
@@ -35,7 +35,7 @@ namespace SelfMonitoringApp.UnitTests
             };
 
             foreach (string page in pageNames)
-                await _mainViewModel.Navigate(page);
+                 _mainViewModel.Navigate(page);
         }
 
         [TestCleanup]

@@ -11,67 +11,97 @@
         <controls:SaveCancelPage CancelCommand="{Binding BackCommand}" SaveCommand="{Binding SaveLogCommand}">
             <Grid Margin="0,8,0,0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="110"/>
-                    <RowDefinition Height="140"/>
+                    <RowDefinition Height="170"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="140"/> 
                     <RowDefinition Height="400"/>
                 </Grid.RowDefinitions>
 
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
-                        <ColumnDefinition Width=".8*"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
                     <!--Time of sleep box-->
                     <controls:HeaderBlock HeaderText="Sleep" Margin="0,0,-5,0">
                         <Frame Padding="0">
-                            <TimePicker HorizontalOptions="CenterAndExpand"  FontAttributes="Bold" 
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <TimePicker HorizontalOptions="CenterAndExpand"  FontAttributes="Bold" 
                                     Time="{Binding SleepStart}"/>
-                        </Frame>
-                    </controls:HeaderBlock>
-
-                    <!--Total sleep box-->
-                    <controls:HeaderBlock HeaderText="Total" Grid.Column="1" Margin="-6,0,-6,0">
-                        <Frame Padding="5" >
-                            <Label Text="{Binding TotalSleep , StringFormat ='{0:0.0}'}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                                <DatePicker Grid.Row="1" HorizontalOptions="CenterAndExpand" Date="{Binding SleepStartDate}"/>
+                            </Grid>
                         </Frame>
                     </controls:HeaderBlock>
 
                     <!--Wake up time box-->
-                    <controls:HeaderBlock HeaderText="Wake" Grid.Column="2" Margin="-5,0,0,0">
+                    <controls:HeaderBlock HeaderText="Wake" Grid.Column="1" Margin="-5,0,0,0">
                         <Frame Padding="0">
-                            <TimePicker HorizontalOptions="Center" FontAttributes="Bold" Time ="{Binding SleepEnd}"/>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <TimePicker HorizontalOptions="Center" FontAttributes="Bold" Time ="{Binding SleepEnd}"/>
+                                <DatePicker Grid.Row="1" HorizontalOptions="CenterAndExpand" Date="{Binding SleepEndDate}"/>
+                            </Grid>
                         </Frame>
                     </controls:HeaderBlock>
                 </Grid>
 
-                <!--Wake up time box-->
-                <controls:HeaderBlock HeaderText="How rested do you feel?" Grid.Row="1">
-                    <controls:RatingSlider />
+                <!--Total sleep box-->
+                <controls:HeaderBlock HeaderText="Total" Grid.Row="1">
+                    <Frame Padding="5" >
+                        <Label Text="{Binding TotalSleep , StringFormat ='{0:0.0}'}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                    </Frame>
                 </controls:HeaderBlock>
+                
+                <!--Rest rating-->
+                <controls:HeaderBlock HeaderText="How rested do you feel?" Grid.Row="2">
+                    <controls:RatingSlider  Rating="{Binding RestRating}"/>
+                </controls:HeaderBlock>
+                
 
-                <controls:HeaderBlock Grid.Row="2" HeaderText="Dream Log" Margin="0,0,0,5">
+                <controls:HeaderBlock Grid.Row="3" HeaderText="Dream Log" Margin="0,0,0,5">
                     <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/> 
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/> 
                             <RowDefinition/>
                         </Grid.RowDefinitions>
 
-                        <Switch Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" ThumbColor="{StaticResource Secondary}"/>
-                        <Label Text="Did you dream?" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White" FontSize="18"/>
-                        
-                        <Label Text="Was it a nightmare?" HorizontalOptions="Center" Grid.Row="1" VerticalOptions="Center" TextColor="White" FontSize="18"/>
-                        <Switch Grid.Column="1" Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center" ThumbColor="{StaticResource Secondary}" IsToggled="{Binding Nightmare}"/>
+                        <Frame Padding="0" Grid.Row="0">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width=".5*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Text="Did you dream?" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                <Frame Grid.Column="1" BackgroundColor="{StaticResource PrimaryLight}" Padding="0" Margin="3">
+                                    <Switch Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" IsToggled="{Binding RememberedDream}"/>
+                                </Frame>
+                            </Grid>
+                        </Frame>
+                        <Frame Padding="0" Grid.Row="1">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width=".5*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Text="Was it a nightmare?" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                <Frame Grid.Column="1" BackgroundColor="{StaticResource PrimaryLight}" Padding="0" Margin="3">
+                                    <Switch Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                </Frame>
+                            </Grid>
+                        </Frame>
 
-                        <Frame Grid.Row="2" Grid.ColumnSpan="2" CornerRadius="5" >
-                            <Editor Grid.Row="2" AutoSize="Disabled" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
-                                    Grid.ColumnSpan="2" BackgroundColor="White"/>
+                        <Frame Grid.Row="2" CornerRadius="5" Padding="5">
+                            <Editor AutoSize="Disabled" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Text="{Binding DreamLog}"
+                                     BackgroundColor="White"/>
                         </Frame>
                     </Grid>
                 </controls:HeaderBlock>

@@ -40,7 +40,7 @@
 
                 <controls:HeaderBlock HeaderText="How big was it?" Grid.Row="2">
                     <Frame Padding="5" CornerRadius="5" Margin="2">
-                        <Picker BackgroundColor="White" Opacity="0.8" SelectedItem="{Binding MealSize}">
+                        <Picker BackgroundColor="White" Opacity="1" SelectedItem="{Binding MealSize}">
                             <Picker.Items>
                                 <x:String>Small</x:String>
                                 <x:String>Regular</x:String>
@@ -52,10 +52,9 @@
                 </controls:HeaderBlock>
 
                 <!--Rating slider-->
-                <controls:HeaderBlock HeaderText="How satisfied are you?" Grid.Row="3">
-                    <controls:RatingSlider SliderValue="{Binding Satisfaction}"></controls:RatingSlider>
+                <controls:HeaderBlock HeaderText="How satisfied are you?" Grid.Row="3" >
+                    <controls:RatingSlider Rating="{Binding Satisfaction}"/>
                 </controls:HeaderBlock>
-
 
             </Grid>
         </controls:SaveCancelPage>
