@@ -12,7 +12,7 @@ Mood Logging Page
 
 Meal Logging Page
 ---------------------
-![image](https://user-images.githubusercontent.com/7981120/84950731-57689280-b0bd-11ea-81a0-babf81ba1937.png)
+![image](https://user-images.githubusercontent.com/7981120/85097292-19569600-b1c5-11ea-93aa-ef8a8be37273.png)
 
 Sleep Logging Page
 -------------------
@@ -20,7 +20,7 @@ Sleep Logging Page
 
 Substance use logging page
 ------------------
-![image](https://user-images.githubusercontent.com/7981120/84951050-d5c53480-b0bd-11ea-80bd-9f35a1d725d7.png)
+![image](https://user-images.githubusercontent.com/7981120/85097331-2ffced00-b1c5-11ea-8574-7fc7b9e92032.png)
 
 Activity Page
 ------------------
