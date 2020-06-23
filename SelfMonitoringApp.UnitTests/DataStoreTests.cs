@@ -15,7 +15,7 @@ namespace SelfMonitoringApp.UnitTests
         [TestInitialize]
         public void Init()
         {
-            DataStore.Initalize();
+            
         }
 
         [TestMethod]
@@ -24,17 +24,9 @@ namespace SelfMonitoringApp.UnitTests
             var mood = new MoodModel
             {
                 Description = "was v sad",
-                Emotions = new List<string>
-                {
-                    "sadddd",
-                    "angry about the sad",
-                    "sad about the angry",
-                    "sangryyy>??"
-                },
                 OverallMood = 1.21,
                 RegisteredTime = DateTime.Now
             };
-            DataStore.AddModel(mood);
 
             var sleep = new SleepModel
             {
@@ -47,7 +39,6 @@ namespace SelfMonitoringApp.UnitTests
                 RestRating = 7.1,
                 RegisteredTime = DateTime.Now.AddMinutes(1)
             };
-            DataStore.AddModel(sleep);
 
             var substance = new SubstanceModel
             {
@@ -59,7 +50,7 @@ namespace SelfMonitoringApp.UnitTests
                 Satisfaction = 4.20,
                 RegisteredTime = DateTime.Now.AddMinutes(2)
             };
-            DataStore.AddModel(substance);
+
         }
 
 

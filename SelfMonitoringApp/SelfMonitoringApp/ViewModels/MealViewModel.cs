@@ -5,6 +5,7 @@ using SelfMonitoringApp.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace SelfMonitoringApp.ViewModels
@@ -75,7 +76,7 @@ namespace SelfMonitoringApp.ViewModels
             else
                 _mealModel = existingMeal as MealModel;
 
-            SaveLogCommand = new Command(SaveAndPop);
+            SaveLogCommand = new Command(async () => await SaveAndPop());
         }
 
         public IModel RegisterAndGetModel()
@@ -84,10 +85,10 @@ namespace SelfMonitoringApp.ViewModels
             return _mealModel;
         }
 
-        public void SaveAndPop()
+        public async Task SaveAndPop()
         {
-            DataStore.AddModel(RegisterAndGetModel());
-            _navigator.NavigateBack();
+            await App.Database.AddOrModifyMealAsync(_mealModel);
+            await _navigator.NavigateBack();
         }
     }
 }

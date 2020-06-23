@@ -8,23 +8,49 @@
              Title="View Data"
              xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
              x:Class="SelfMonitoringApp.Pages.DataExplorerPage">
+    <ContentPage.Resources>
+        <GridLength x:Key="EditDeleteHeght">40</GridLength>
+        <GridLength x:Key="CollectionHeaderHeight">30</GridLength>
+        <GridLength x:Key="ColumnNameHeight">30</GridLength>
+        <GridLength x:Key="ColumnNameHeightDouble">30</GridLength>
+
+        <Style x:Key="ListBoxLabel" TargetType="Label">
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="TextColor" Value="Black"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+
+        <Style x:Key="HeaderLabel" TargetType="Label">
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="TextColor" Value="Black"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+        </Style>
+
+    </ContentPage.Resources>
+    
     <ContentPage.Content>
+        <StackLayout Margin="0,0,0,0">
 
-        <StackLayout Margin="0,8,0,0">
-
-            <!--Filter frame-->
-            <Frame Padding="3" Margin="3">
+            <Frame BackgroundColor="Silver" Margin="4" Padding="0" BorderColor="Black">
                 <StackLayout>
-                    <Grid IsVisible="True" HeightRequest="40" Padding="0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <Label Text="Toggle Filter visibility" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
-                        <Switch x:Name="ShowFilterSwitch" Grid.Column="1" HorizontalOptions="Center" />
-                    </Grid>
+                    
+                    <Frame HeightRequest="50" Padding="0" Margin="3" BackgroundColor="{StaticResource Secondary}">
+                        <Grid  Padding="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Button Command="{Binding LoadDataCommand}" Grid.Column="1" Text="Load"/>
+                            <Label Text="Filters" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontAttributes="Bold" TextColor="Black"/>
+                            <Switch x:Name="ShowFilterSwitch" IsToggled="True" Grid.Column="2" HorizontalOptions="Center" ThumbColor="{StaticResource PrimaryDark}" OnColor="{StaticResource Primary}" />
+                        </Grid>
+                    </Frame>
 
-                    <Grid Padding="0" VerticalOptions="CenterAndExpand" HeightRequest="180" IsVisible="{Binding Source={x:Reference ShowFilterSwitch}, Path=IsToggled}">
+                    <Grid Padding="0" VerticalOptions="CenterAndExpand" HeightRequest="180" Margin="0,0,0,10" IsVisible="{Binding Source={x:Reference ShowFilterSwitch}, Path=IsToggled}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
@@ -45,34 +71,85 @@
                 </StackLayout>
             </Frame>
 
+
             <!--Item Carousel-->
             <CarouselView BackgroundColor="White" ItemsSource="{Binding DaySummaries}" Margin="3">
                 <CarouselView.ItemTemplate>
                     <DataTemplate>
                         <controls:HeaderBlock HorizontalOptions="CenterAndExpand" HeaderText="{Binding Date}">
-
-                            <ScrollView>
+                            <ScrollView Margin="0,5,0,0">
                                 <StackLayout>
                                     
-                                    <!--Mood Frame-->
-                                    <Frame Padding="2" Margin="8" HeightRequest="300">
+                                    <!--Sleep Box-->
+                                    <controls:LogView Title="Sleep">
                                         <StackLayout>
-                                            <Label Text="Mood Logs" TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" BackgroundColor="{StaticResource Secondary}"/>
+                                            <!--Headers-->
+                                            <Grid HeightRequest="30">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="{StaticResource col1}"/>
+                                                    <ColumnDefinition Width="{StaticResource col2}"/>
+                                                    <ColumnDefinition Width="{StaticResource col3}"/>
+                                                    <ColumnDefinition Width="{StaticResource col4}"/>
+                                                    <ColumnDefinition />
+                                                </Grid.ColumnDefinitions>
+                                                <Label Text="Sleep" Style="{StaticResource HeaderLabel}"/>
+                                                <Label Text="Wake" Style="{StaticResource HeaderLabel}" Grid.Column="1"/>
+                                                <Label Text="Total" Style="{StaticResource HeaderLabel}" Grid.Column="2"/>
+                                                <Label Text="Rating" Style="{StaticResource HeaderLabel}" Grid.Column="3"/>
+                                                <Label Text="Remembered Dream" Style="{StaticResource HeaderLabel}" Grid.Column="4"/>
+                                            </Grid>
+
+                                            <!--Sleep Object List View-->
+                                            <ListView ItemsSource="{Binding Sleeps}" Grid.Row="1" BackgroundColor="LightGray" HeightRequest="100">
+                                                <ListView.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <ViewCell>
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="{StaticResource col1}"/>
+                                                                    <ColumnDefinition Width="{StaticResource col2}"/>
+                                                                    <ColumnDefinition Width="{StaticResource col3}"/>
+                                                                    <ColumnDefinition Width="{StaticResource col4}"/>
+                                                                    <ColumnDefinition />
+                                                                </Grid.ColumnDefinitions>
+
+                                                                <Label Text="{Binding SleepStartDate, StringFormat='{0:hh:mm tt}'}" Style="{StaticResource ListBoxLabel}"/>
+                                                                <Label Text="{Binding SleepEndDate, StringFormat='{0:hh:mm tt}'}" Style="{StaticResource ListBoxLabel}" Grid.Column="1"/>
+                                                                <Label Text="{Binding TotalSleep}" Style="{StaticResource ListBoxLabel}" Grid.Column="2"/>
+                                                                <Label Text="{Binding RestRating}" Style="{StaticResource ListBoxLabel}" Grid.Column="3"/>
+                                                                <CheckBox IsChecked="{Binding RememberedDream}" Color="Black" IsEnabled="False" HorizontalOptions="Center" Grid.Column="4" />
+                                                            </Grid>
+                                                        </ViewCell>
+                                                    </DataTemplate>
+                                                </ListView.ItemTemplate>
+                                            </ListView>
                                             
+                                        </StackLayout>
+                                        <controls:LogView.Resources>
+                                            <GridLength x:Key="col1">65</GridLength>
+                                            <GridLength x:Key="col2">65</GridLength>
+                                            <GridLength x:Key="col3">50</GridLength>
+                                            <GridLength x:Key="col4">50</GridLength>
+                                        </controls:LogView.Resources>
+                                    </controls:LogView>
+
+                                    <!--Mood Box-->
+                                    <controls:LogView Title="Mood" Grid.Row="1">
+                                        <StackLayout>
                                             <!--Column Titles -->
-                                            <Grid HeightRequest="100">
+                                            <Grid HeightRequest="20">
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="80"/>
                                                     <ColumnDefinition/>
                                                     <ColumnDefinition/>
                                                 </Grid.ColumnDefinitions>
-                                                <Label Text="Time" HorizontalOptions="Center"/>
-                                                <Label Grid.Column="1" Text="Rating" HorizontalTextAlignment="Center"/>
-                                                <Label Grid.Column="2" Text="Emotions" HorizontalOptions="Center"/>
+                                                <Label Text="Time" Style="{StaticResource HeaderLabel}"/>
+                                                <Label Grid.Column="1" Text="Rating" Style="{StaticResource HeaderLabel}"/>
+                                                <Label Grid.Column="2" Text="Emotions" Style="{StaticResource HeaderLabel}"/>
                                             </Grid>
-                                            
+
                                             <!--Mood Collection List View-->
-                                            <ListView ItemsSource="{Binding Moods}" SeparatorColor="Black" BackgroundColor="LightGray" Margin="5">
+                                            <ListView ItemsSource="{Binding Moods}" Grid.Row="1" SeparatorColor="Black" BackgroundColor="LightGray" Margin="5" HeightRequest="250">
                                                 <ListView.ItemTemplate>
                                                     <DataTemplate>
                                                         <ViewCell Height="60">
@@ -82,54 +159,45 @@
                                                                     <ColumnDefinition/>
                                                                     <ColumnDefinition/>
                                                                 </Grid.ColumnDefinitions>
-                                                                <Label Text="{Binding RegisteredTime, StringFormat='{0:hh:mm tt}'}" HorizontalTextAlignment="Center" TextColor="Black" VerticalTextAlignment="Center"/>
-                                                                <Label Text="{Binding OverallMood}" Grid.Column="1" HorizontalTextAlignment="Center" FontAttributes="Bold" VerticalTextAlignment="Center" TextColor="Black"/>
+                                                                <Label Text="{Binding RegisteredTime, StringFormat='{0:hh:mm tt}'}" Style="{StaticResource ListBoxLabel}"/>
+                                                                <Label Text="{Binding OverallMood}" Grid.Column="1" Style="{StaticResource ListBoxLabel}"/>
                                                                 <CollectionView ItemsSource="{Binding Emotions}" Grid.Column="2" FlowDirection="LeftToRight" />
                                                             </Grid>
                                                         </ViewCell>
                                                     </DataTemplate>
                                                 </ListView.ItemTemplate>
                                             </ListView>
-                                            
-                                            <!--Edit Delete Buttons-->
-                                            <Grid HeightRequest="160" Padding="0">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition/>
-                                                    <ColumnDefinition/>
-                                                </Grid.ColumnDefinitions>
-                                                <Button Text="Edit" Style="{StaticResource ButtonStyle}" Margin="0"/>
-                                                <Button Grid.Column="1" Text="Delete" Style="{StaticResource ButtonStyle}" Margin="0"/>
-                                            </Grid>
                                         </StackLayout>
-                                    </Frame>
+                                    </controls:LogView>
 
                                     <!--Meal Frame-->
-                                    <Frame Padding="2" Grid.Row="2" Margin="8" HeightRequest="300">
+                                    <controls:LogView Title="Meal" Grid.Row="2">
                                         <StackLayout>
-                                            <Label Text="Meal Logs" TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" BackgroundColor="{StaticResource Secondary}"/>
-
                                             <!--Column Titles -->
-                                            <Grid HeightRequest="100">
+                                            <Grid HeightRequest="30">
                                                 <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="80"/>
-                                                    <ColumnDefinition Width="40"/>
-                                                    <ColumnDefinition/>
+                                                    <ColumnDefinition Width="{StaticResource col1}"/>
+                                                    <ColumnDefinition Width="{StaticResource col2}"/>
+                                                    <ColumnDefinition Width="{StaticResource col3}"/>
+                                                    <ColumnDefinition Width="{StaticResource col4}"/>
                                                 </Grid.ColumnDefinitions>
                                                 <Label Text="Time" HorizontalOptions="Center"/>
                                                 <Label Grid.Column="1" Text="Rating" HorizontalTextAlignment="Center"/>
-                                                <Label Grid.Column="2" Text="Description" HorizontalTextAlignment="Center"/>
+                                                <Label Grid.Column="2" Text="Type" HorizontalTextAlignment="Center"/>
+                                                <Label Grid.Column="3" Text="Description" HorizontalTextAlignment="Center"/>
                                             </Grid>
 
                                             <!--Meal Collection View-->
-                                            <ListView ItemsSource="{Binding Meals}" BackgroundColor="LightGray" Margin="5" SeparatorColor="Black">
+                                            <ListView ItemsSource="{Binding Meals}" BackgroundColor="LightGray" SeparatorColor="Black" HeightRequest="150">
                                                 <ListView.ItemTemplate>
                                                     <DataTemplate>
                                                         <ViewCell>
                                                             <Grid>
                                                                 <Grid.ColumnDefinitions>
-                                                                    <ColumnDefinition Width="80"/>
-                                                                    <ColumnDefinition Width="40"/>
-                                                                    <ColumnDefinition/>
+                                                                    <ColumnDefinition Width="{StaticResource col1}"/>
+                                                                    <ColumnDefinition Width="{StaticResource col2}"/>
+                                                                    <ColumnDefinition Width="{StaticResource col3}"/>
+                                                                    <ColumnDefinition Width="{StaticResource col4}"/>
                                                                 </Grid.ColumnDefinitions>
 
                                                                 <Label Text="{Binding RegisteredTime, StringFormat='{0:hh:mm tt}'}" HorizontalTextAlignment="Center" TextColor="Black" VerticalTextAlignment="Center"/>
@@ -140,83 +208,143 @@
                                                     </DataTemplate>
                                                 </ListView.ItemTemplate>
                                             </ListView>
-                                            
-                                            <!--Edit Delete Buttons-->
-                                            <Grid HeightRequest="160" Padding="0">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition/>
-                                                    <ColumnDefinition/>
-                                                </Grid.ColumnDefinitions>
-                                                <Button Text="Edit" Style="{StaticResource ButtonStyle}" Margin="0"/>
-                                                <Button Grid.Column="1" Text="Delete" Style="{StaticResource ButtonStyle}" Margin="0"/>
-                                            </Grid>
+
                                         </StackLayout>
-                                    </Frame>
 
-                                    <!--Meal Frame-->
-                                    <Frame Padding="2" Grid.Row="2" Margin="8" HeightRequest="160">
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="30"/>
-                                                <RowDefinition Height="30"/>
-                                                <RowDefinition/>
-                                                <RowDefinition Height="40"/>
-                                            </Grid.RowDefinitions>
-                                            <Label Text="Sleep Logs" TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" BackgroundColor="{StaticResource Secondary}"/>
+                                        <controls:LogView.Resources>
+                                            <GridLength x:Key="col1">1*</GridLength>
+                                            <GridLength x:Key="col2">.6*</GridLength>
+                                            <GridLength x:Key="col3">1.5*</GridLength>
+                                            <GridLength x:Key="col4">1.5*</GridLength>
+                                        </controls:LogView.Resources>
+                                    </controls:LogView>
 
+                                    <!--Substance Frame-->
+                                    <controls:LogView Title="Substance" Grid.Row="2">
+                                        <StackLayout>
                                             <!--Column Titles -->
-                                            <Grid Grid.Row="1">
+                                            <Grid HeightRequest="30">
                                                 <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="80"/>
-                                                    <ColumnDefinition Width="80"/>
-                                                    <ColumnDefinition/>
+                                                    <ColumnDefinition Width="{StaticResource col1}"/>
+                                                    <ColumnDefinition Width="{StaticResource col2}"/>
+                                                    <ColumnDefinition Width="{StaticResource col3}"/>
+                                                    <ColumnDefinition Width="{StaticResource col4}"/>
+                                                    <ColumnDefinition Width="{StaticResource col5}"/>
+                                                    <ColumnDefinition Width="{StaticResource col6}"/>
                                                 </Grid.ColumnDefinitions>
-                                                <Label Text="Sleep" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
-                                                <Label Grid.Column="1" Text="Wake" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
-                                                <Label Grid.Column="2" Text="Total" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
-                                                <Label Grid.Column="3" Text="Rating" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                                                <Label Text="Time" Style="{StaticResource HeaderLabel}"/>
+                                                <Label Grid.Column="1" Text="Name" Style="{StaticResource HeaderLabel}"/>
+                                                <Label Grid.Column="2" Text="Amount" Style="{StaticResource HeaderLabel}"/>
+                                                <Label Grid.Column="3" Text="Unit" Style="{StaticResource HeaderLabel}"/>
+                                                <Label Grid.Column="4" Text="Method" Style="{StaticResource HeaderLabel}"/>
+                                                <Label Grid.Column="5" Text="Satisfaction" Style="{StaticResource HeaderLabel}"/>
                                             </Grid>
 
-                                            <!--Sleep Collection View-->
-                                            <ListView ItemsSource="{Binding Sleeps}" Grid.Row="2" BackgroundColor="LightGray">
+                                            <!--Meal Collection View-->
+                                            <ListView ItemsSource="{Binding Substances}" BackgroundColor="LightGray" SeparatorColor="Black" HeightRequest="150">
                                                 <ListView.ItemTemplate>
                                                     <DataTemplate>
                                                         <ViewCell>
                                                             <Grid>
                                                                 <Grid.ColumnDefinitions>
-                                                                    <ColumnDefinition Width="80"/>
-                                                                    <ColumnDefinition Width="80"/>
-                                                                    <ColumnDefinition Width="40"/>
+                                                                    <ColumnDefinition Width="{StaticResource col1}"/>
+                                                                    <ColumnDefinition Width="{StaticResource col2}"/>
+                                                                    <ColumnDefinition Width="{StaticResource col3}"/>
+                                                                    <ColumnDefinition Width="{StaticResource col4}"/>
+                                                                    <ColumnDefinition Width="{StaticResource col5}"/>
+                                                                    <ColumnDefinition Width="{StaticResource col6}"/>
                                                                 </Grid.ColumnDefinitions>
 
-                                                                <Label Text="{Binding SleepStartDate, StringFormat='{0:hh:mm tt}'}" HorizontalTextAlignment="Center" TextColor="Black" VerticalTextAlignment="Center"/>
-                                                                <Label Text="{Binding SleepEndDate, StringFormat='{0:hh:mm tt}'}" HorizontalTextAlignment="Center" TextColor="Black"  VerticalTextAlignment="Center" Grid.Column="1"/>
-                                                                <Label Text="{Binding TotalSleep}" HorizontalTextAlignment="Center" TextColor="Black" Grid.Column="2"  VerticalTextAlignment="Center"/>
-                                                                <Label Text="{Binding RestRating}" HorizontalTextAlignment="Center" TextColor="Black" Grid.Column="3"  VerticalTextAlignment="Center"/>
+                                                                <Label Text="{Binding RegisteredTime, StringFormat='{0:hh:mm tt}'}" Style="{StaticResource ListBoxLabel}"/>
+                                                                <Label Text="{Binding SubstanceName}" HorizontalTextAlignment="Center" Grid.Column="1"  Style="{StaticResource ListBoxLabel}"/>
+                                                                <Label Text="{Binding Amount}" Grid.Column="2"   Style="{StaticResource ListBoxLabel}"/>
+                                                                <Label Text="{Binding Unit}" Grid.Column="3"  Style="{StaticResource ListBoxLabel}"/>
+                                                                <Label Text="{Binding ConsumptionMethod}" Grid.Column="4"   Style="{StaticResource ListBoxLabel}"/>
+                                                                <Label Text="{Binding Satisfaction}" Grid.Column="5"   Style="{StaticResource ListBoxLabel}"/>
                                                             </Grid>
                                                         </ViewCell>
                                                     </DataTemplate>
                                                 </ListView.ItemTemplate>
                                             </ListView>
 
-                                            <!--Edit Delete Buttons-->
-                                            <Grid Padding="0" Grid.Row="3">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition/>
-                                                    <ColumnDefinition/>
-                                                </Grid.ColumnDefinitions>
-                                                <Button Text="Edit" Style="{StaticResource ButtonStyle}" Margin="0"/>
-                                                <Button Grid.Column="1" Text="Delete" Style="{StaticResource ButtonStyle}" Margin="0"/>
-                                            </Grid>
-                                        </Grid>
-                                    </Frame>
+                                        </StackLayout>
 
+                                        <controls:LogView.Resources>
+                                            <GridLength x:Key="col1">1*</GridLength>
+                                            <GridLength x:Key="col2">.6*</GridLength>
+                                            <GridLength x:Key="col3">.8*</GridLength>
+                                            <GridLength x:Key="col4">25</GridLength>
+                                            <GridLength x:Key="col5">1.5*</GridLength>
+                                            <GridLength x:Key="col6">1.5*</GridLength>
+                                        </controls:LogView.Resources>
+                                    </controls:LogView>
+
+                                    <!--Substance Frame-->
+                                    <controls:LogView Title="Activity" Grid.Row="2">
+                                        <StackLayout>
+                                            <!--Column Titles -->
+                                            <Grid HeightRequest="30">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="{StaticResource col1}"/>
+                                                    <ColumnDefinition Width="{StaticResource col2}"/>
+                                                    <ColumnDefinition Width="{StaticResource col3}"/>
+                                                    <ColumnDefinition Width="{StaticResource col4}"/>
+                                                    <ColumnDefinition Width="{StaticResource col5}"/>
+                                                    <ColumnDefinition Width="{StaticResource col6}"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Label Text="Time" Style="{StaticResource HeaderLabel}"/>
+                                                <Label Grid.Column="1" Text="Name" Style="{StaticResource HeaderLabel}"/>
+                                                <Label Grid.Column="2" Text="Amount" Style="{StaticResource HeaderLabel}"/>
+                                                <Label Grid.Column="3" Text="Unit" Style="{StaticResource HeaderLabel}"/>
+                                                <Label Grid.Column="4" Text="Method" Style="{StaticResource HeaderLabel}"/>
+                                                <Label Grid.Column="5" Text="Satisfaction" Style="{StaticResource HeaderLabel}"/>
+                                            </Grid>
+
+                                            <!--Meal Collection View-->
+                                            <ListView ItemsSource="{Binding Substances}" BackgroundColor="LightGray" SeparatorColor="Black" HeightRequest="150">
+                                                <ListView.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <ViewCell>
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="{StaticResource col1}"/>
+                                                                    <ColumnDefinition Width="{StaticResource col2}"/>
+                                                                    <ColumnDefinition Width="{StaticResource col3}"/>
+                                                                    <ColumnDefinition Width="{StaticResource col4}"/>
+                                                                    <ColumnDefinition Width="{StaticResource col5}"/>
+                                                                    <ColumnDefinition Width="{StaticResource col6}"/>
+                                                                </Grid.ColumnDefinitions>
+
+                                                                <Label Text="{Binding RegisteredTime, StringFormat='{0:hh:mm tt}'}" Style="{StaticResource ListBoxLabel}"/>
+                                                                <Label Text="{Binding SubstanceName}" HorizontalTextAlignment="Center" Grid.Column="1"  Style="{StaticResource ListBoxLabel}"/>
+                                                                <Label Text="{Binding Amount}" Grid.Column="2"   Style="{StaticResource ListBoxLabel}"/>
+                                                                <Label Text="{Binding Unit}" Grid.Column="3"  Style="{StaticResource ListBoxLabel}"/>
+                                                                <Label Text="{Binding ConsumptionMethod}" Grid.Column="4"   Style="{StaticResource ListBoxLabel}"/>
+                                                                <Label Text="{Binding Satisfaction}" Grid.Column="5"   Style="{StaticResource ListBoxLabel}"/>
+                                                            </Grid>
+                                                        </ViewCell>
+                                                    </DataTemplate>
+                                                </ListView.ItemTemplate>
+                                            </ListView>
+
+                                        </StackLayout>
+
+                                        <controls:LogView.Resources>
+                                            <GridLength x:Key="col1">1*</GridLength>
+                                            <GridLength x:Key="col2">.6*</GridLength>
+                                            <GridLength x:Key="col3">.8*</GridLength>
+                                            <GridLength x:Key="col4">25</GridLength>
+                                            <GridLength x:Key="col5">1.5*</GridLength>
+                                            <GridLength x:Key="col6">1.5*</GridLength>
+                                        </controls:LogView.Resources>
+                                    </controls:LogView>
                                 </StackLayout>
                             </ScrollView>
                         </controls:HeaderBlock>
                     </DataTemplate>
                 </CarouselView.ItemTemplate>
             </CarouselView>
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

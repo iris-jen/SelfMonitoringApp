@@ -50,6 +50,9 @@ namespace SelfMonitoringApp.ViewModels
                 case HelpViewModel.NavigationNodeName:
                     _navigator.NavigateTo(new HelpViewModel(_navigator)).Forget();
                     break;
+                case NotificationsViewModel.NavigationNodeName:
+                    _navigator.NavigateTo(new NotificationsViewModel(_navigator)).Forget();
+                    break;
                 default:
                     throw new DirectoryNotFoundException($"Cant find nav directory {page}");
             }

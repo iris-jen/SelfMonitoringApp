@@ -23,24 +23,7 @@ namespace SelfMonitoringApp.ViewModels
         {
             switch(modelType)
             {
-                case "sleep":
-                    DataStore.DeleteStore(ModelType.Sleep);
-                    break;
-                case "meal":
-                    DataStore.DeleteStore(ModelType.Meal);
-                    break;
-                case "substance":
-                    DataStore.DeleteStore(ModelType.Substance);
-                    break;
-                case "mood":
-                    DataStore.DeleteStore(ModelType.Mood);
-                    break;
-                case "activity":
-                    DataStore.DeleteStore(ModelType.Activity);
-                    break;
-                case "all":
-                    DataStore.DeleteAll();
-                    break;
+  
             }
         }
     }

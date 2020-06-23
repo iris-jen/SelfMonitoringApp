@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using SQLite;
 using System;
 
 namespace SelfMonitoringApp.Models
@@ -10,11 +11,17 @@ namespace SelfMonitoringApp.Models
         /// The time the model was registered by the user
         /// </summary>
         public DateTime RegisteredTime { get; set; }
+
+        /// <summary>
+        /// SQL key
+        /// </summary>
+        [PrimaryKey, AutoIncrement]
+        public int ID { get; set; }
         
         /// <summary>
         /// Type of log
         /// </summary>
-        [JsonConverter(typeof(StringEnumConverter))]public ModelType LogType { get; }
+        public ModelType LogType { get; }
 
         protected LogModelBase(ModelType type)
         {

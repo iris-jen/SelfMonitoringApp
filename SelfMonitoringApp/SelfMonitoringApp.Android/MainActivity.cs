@@ -23,10 +23,10 @@ namespace SelfMonitoringApp.Android
             global::Xamarin.Forms.FormsMaterial.Init(this, savedInstanceState);
 
             int uiOptions = (int)Window.DecorView.SystemUiVisibility;
-            //uiOptions |= (int)SystemUiFlags.LowProfile;
+            ////uiOptions |= (int)SystemUiFlags.LowProfile;
             //uiOptions |= (int)SystemUiFlags.Fullscreen;
-            uiOptions |= (int)SystemUiFlags.HideNavigation;
-            uiOptions |= (int)SystemUiFlags.ImmersiveSticky;
+            //uiOptions |= (int)SystemUiFlags.HideNavigation;
+            //uiOptions |= (int)SystemUiFlags.ImmersiveSticky;
 
             Window.DecorView.SystemUiVisibility = (StatusBarVisibility)uiOptions;
 

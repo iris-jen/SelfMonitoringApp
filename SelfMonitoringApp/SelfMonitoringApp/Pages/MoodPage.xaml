@@ -15,7 +15,7 @@
             <Grid Margin="0,8,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="{StaticResource RowHeightSlider}"/>
-                    <RowDefinition Height="280"/>
+                    <RowDefinition Height="230"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
             

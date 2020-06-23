@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
+             mc:Ignorable="d"
+             x:Class="SelfMonitoringApp.Controls.LogView">
+    <ContentView.ControlTemplate>
+        <ControlTemplate>
+           
+            <Frame Padding="2" Margin="5">
+                <StackLayout>
+                    <Frame BackgroundColor="{StaticResource Secondary}" HeightRequest="30" Padding="0">
+                        <Grid>
+                            <Label Text="{TemplateBinding Title}" HorizontalTextAlignment="Center"
+                                   VerticalTextAlignment="Center" FontSize="14" FontAttributes="Bold"/>
+                            <Switch x:Name="Switch" OnColor="{StaticResource Primary}" 
+                                    ThumbColor="{StaticResource PrimaryDark}"/>
+                        </Grid>
+                    </Frame>
+                    
+               
+
+                    <Grid IsVisible="{Binding Source={x:Reference Switch}, Path=IsToggled}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="50"/>
+                        </Grid.RowDefinitions>
+
+                        <ContentPresenter/>
+
+                        <!--Edit Delete Buttons-->
+                        <Grid Padding="0" Grid.Row="1" HeightRequest="100">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Button Text="Edit" Style="{StaticResource ButtonStyle}" Margin="0"/>
+                            <Button Grid.Column="1" Text="Delete" Style="{StaticResource ButtonStyle}" Margin="0"/>
+                        </Grid>
+                    </Grid>
+                </StackLayout>
+            </Frame>
+        </ControlTemplate>
+    </ContentView.ControlTemplate>
+</ContentView>

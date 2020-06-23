@@ -6,7 +6,7 @@ using SelfMonitoringApp.ViewModels.Base;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 
@@ -32,34 +32,6 @@ namespace SelfMonitoringApp.ViewModels
             }
         }
 
-        private string _newEmotion;
-        public string NewEmotion
-        {
-            get => _newEmotion;
-            set
-            {
-                if (_newEmotion == value)
-                    return;
-
-                _newEmotion = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-        private string _selectedEmotion;
-        public string SelectedEmotion
-        {
-            get => _selectedEmotion;
-            set
-            {
-                if (_selectedEmotion == value)
-                    return;
-
-                _selectedEmotion = value;
-                NotifyPropertyChanged();
-            }
-        }
-
         public double OverallMood
         {
             get => _mood.OverallMood;
@@ -73,8 +45,6 @@ namespace SelfMonitoringApp.ViewModels
             }
         }
 
-        public Command AddNewEmotion { get; private set; }
-        public Command RemoveSelectedCommand { get; private set; }
         public Command SaveLogCommand { get; private set; }
 
         /// <summary>
@@ -86,39 +56,15 @@ namespace SelfMonitoringApp.ViewModels
             if (existingModel is null)
             {
                 _mood = new MoodModel();
-                Emotions = new ObservableCollection<string>();
             }
             else
             {
                 _mood = existingModel as MoodModel;
-                Emotions = new ObservableCollection<string>(_mood.Emotions);
             }
 
-            SaveLogCommand = new Command(SaveAndPop);
-            AddNewEmotion = new Command(OnAddNewEmotion);
-            RemoveSelectedCommand = new Command(OnRemoveEmotion);
+            SaveLogCommand = new Command(async () => await SaveAndPop());
         }
 
-        public void OnAddNewEmotion()
-        {
-            if (NewEmotion != string.Empty)
-            {
-                Emotions.Add(NewEmotion);
-                NewEmotion = string.Empty;
-            }
-        }
-
-        public void OnRemoveEmotion()
-        {
-            if (!string.IsNullOrEmpty(SelectedEmotion))
-            {
-                var emotion = Emotions.FirstOrDefault(x => x.Equals(SelectedEmotion));
-                if(emotion != null)
-                {
-                    Emotions.Remove(emotion);
-                }
-            }
-        }
 
         /// <summary>
         /// Get the view models model
@@ -127,14 +73,13 @@ namespace SelfMonitoringApp.ViewModels
         public IModel RegisterAndGetModel()
         {
             _mood.RegisteredTime = DateTime.Now;
-            _mood.Emotions = new System.Collections.Generic.List<string>(Emotions);
             return _mood;
         }
 
-        public void SaveAndPop()
+        public async Task SaveAndPop()
         {
-            DataStore.AddModel(RegisterAndGetModel());
-            _navigator.NavigateBack();
+            await App.Database.AddOrModifyMoodAsync(_mood);
+            await _navigator.NavigateBack();
         }
     }
 }

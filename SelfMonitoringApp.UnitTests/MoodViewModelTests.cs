@@ -19,13 +19,6 @@ namespace SelfMonitoringApp.UnitTests
         private MoodModel _existingMood = new MoodModel
         {
             Description = "was v sad",
-            Emotions = new List<string>
-            {
-                "sadddd",
-                "angry about the sad",
-                "sad about the angry",
-                "sangryyy>??"
-            },
             OverallMood = 4.20,
         };
 
@@ -39,30 +32,11 @@ namespace SelfMonitoringApp.UnitTests
             _existingMoodModel = new MoodViewModel(_navService, _existingMood);
         }
 
-        [TestMethod]
-        public void TestEmotionAddRemoveLogic()
-        {
-            string emotionName = "some emotionnnn";
-            _newMoodModel.NewEmotion = _existingMoodModel.NewEmotion = emotionName;
-            _newMoodModel.OnAddNewEmotion();
-            _existingMoodModel.OnAddNewEmotion();
 
-            if (!_newMoodModel.Emotions.Contains(emotionName) || 
-                !_existingMoodModel.Emotions.Contains(emotionName))
-                throw new Exception("Could not find emotion in list after adding");
-
-            _newMoodModel.SelectedEmotion = _existingMoodModel.SelectedEmotion = emotionName;
-            _newMoodModel.OnRemoveEmotion();
-            _existingMoodModel.OnRemoveEmotion();
-
-            if (_newMoodModel.Emotions.Contains(emotionName) || _existingMoodModel.Emotions.Contains(emotionName))
-                throw new Exception("Could not find emotion in list after adding");
-        }
-
+        //todo: make good-er once i settle on how I'm storing data
         [TestMethod]
         public void TestSavingLog()
         {
-            DataStore.Initalize();
             _newMoodModel.SaveAndPop();
             _existingMoodModel.SaveAndPop();
         }

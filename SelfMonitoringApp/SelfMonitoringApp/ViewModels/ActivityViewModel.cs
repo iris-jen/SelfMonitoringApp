@@ -3,7 +3,7 @@ using SelfMonitoringApp.Navigation;
 using SelfMonitoringApp.Services;
 using SelfMonitoringApp.ViewModels.Base;
 using System;
-
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace SelfMonitoringApp.ViewModels
@@ -100,6 +100,8 @@ namespace SelfMonitoringApp.ViewModels
                 _activity = new ActivityModel();
             else
                 _activity = activityModel as ActivityModel;
+
+            SaveLogCommand = new Command(async()=> await SaveAndPop());
         }
 
         public IModel RegisterAndGetModel()
@@ -108,10 +110,10 @@ namespace SelfMonitoringApp.ViewModels
             return _activity;
         }
 
-        public void SaveAndPop()
+        public async Task SaveAndPop()
         {
-            DataStore.AddModel(RegisterAndGetModel());
-            _navigator.NavigateBack();
+            await App.Database.AddOrModifyActivityAsync(_activity);
+            await _navigator.NavigateBack();
         }
     }
 }

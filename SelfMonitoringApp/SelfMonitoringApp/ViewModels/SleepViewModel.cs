@@ -4,6 +4,7 @@ using SelfMonitoringApp.Services;
 using SelfMonitoringApp.ViewModels.Base;
 
 using System;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace SelfMonitoringApp.ViewModels
@@ -55,7 +56,7 @@ namespace SelfMonitoringApp.ViewModels
             }
         }
 
-        private DateTime _sleepEndDate;
+        private DateTime _sleepEndDate = DateTime.Now;
         public DateTime SleepEndDate
         {
             get => _sleepEndDate;
@@ -70,7 +71,7 @@ namespace SelfMonitoringApp.ViewModels
             }
         }
 
-        private DateTime _sleepStartDate;
+        private DateTime _sleepStartDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day-1);
         public DateTime SleepStartDate
         {
             get => _sleepStartDate;
@@ -145,10 +146,7 @@ namespace SelfMonitoringApp.ViewModels
             else
                 _sleepModel = existingModel as SleepModel;
 
-            SaveLogCommand = new Command(SaveAndPop);
-
-            SleepStartDate = _sleepModel.SleepStartDate;
-            SleepEndDate = _sleepModel.SleepEndDate;
+            SaveLogCommand = new Command(async () => await SaveAndPop());
         }
 
         public IModel RegisterAndGetModel()
@@ -183,10 +181,10 @@ namespace SelfMonitoringApp.ViewModels
             return endDateTime.Subtract(startDateTime).TotalHours;
         }
 
-        public void SaveAndPop()
+        public async Task SaveAndPop()
         {
-            DataStore.AddModel(RegisterAndGetModel());
-            _navigator.NavigateBack();
+            await App.Database.AddOrModifySleepAsync(_sleepModel);
+            await _navigator.NavigateBack();
         }
     }
 }

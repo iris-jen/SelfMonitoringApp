@@ -11,10 +11,15 @@ namespace SelfMonitoringApp.Models
         public string Description    { get; set; } = string.Empty;
 
         /// <summary>
-        /// Emotions that the user experienced
+        /// Strongest emotion that the user experienced
         /// </summary>
-        public List<string> Emotions { get; set; } = new List<string>();
-        
+        public string StrongestEmotion { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Location it happened
+        /// </summary>
+        public string Place { get; set; } = string.Empty;
+
         /// <summary>
         /// A numerical rating (out of 10) of how the user felt
         /// </summary>
