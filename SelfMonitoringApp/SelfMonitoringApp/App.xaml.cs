@@ -33,19 +33,19 @@ namespace SelfMonitoringApp
             InitializeComponent();
 
             foreach (MealModel meal in LogSamples.GetMealSamples())
-                Database.AddOrModifyMealAsync(meal).Wait();
+                Database.AddOrModifyModelAsync(meal).Wait();
 
             foreach (SubstanceModel substance in LogSamples.GetSubstanceSamples())
-                Database.AddOrModifySubstanceAsync(substance).Wait();
+                Database.AddOrModifyModelAsync(substance).Wait();
 
             foreach (ActivityModel activity in LogSamples.GetActivitySamples())
-                Database.AddOrModifyActivityAsync(activity).Wait();
+                Database.AddOrModifyModelAsync(activity).Wait();
 
             foreach (MoodModel mood in LogSamples.GetMoodSamples())
-                Database.AddOrModifyMoodAsync(mood).Wait();
+                Database.AddOrModifyModelAsync(mood).Wait();
 
             foreach (SleepModel sleep in LogSamples.GetSleepSamples())
-                Database.AddOrModifySleepAsync(sleep).Wait();
+                Database.AddOrModifyModelAsync(sleep).Wait();
 
             var navigator = new NavigationService(this, new ViewLocator());
             var rootViewModel = new MainViewModel(navigator);

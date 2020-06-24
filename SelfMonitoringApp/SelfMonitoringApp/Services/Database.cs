@@ -86,7 +86,7 @@ namespace SelfMonitoringApp.Services
         #endregion
 
         #region Add Items
-        public Task<int> AddOrModifyMoodAsync(MoodModel model)
+        public Task<int> AddOrModifyModelAsync(IModel model)
         {
             if (model.ID != 0)
                 return _database.UpdateAsync(model);
@@ -94,35 +94,6 @@ namespace SelfMonitoringApp.Services
                 return _database.InsertAsync(model);
         }
 
-        public Task<int> AddOrModifyMealAsync(MealModel model)
-        {
-            if (model.ID != 0)
-                return _database.UpdateAsync(model);
-            else
-                return _database.InsertAsync(model);
-        }
-        public Task<int> AddOrModifySleepAsync(SleepModel model)
-        {
-            if (model.ID != 0)
-                return _database.UpdateAsync(model);
-            else
-                return _database.InsertAsync(model);
-        }
-
-        public Task<int> AddOrModifySubstanceAsync(SubstanceModel model) 
-        {
-            if (model.ID != 0)
-                return _database.UpdateAsync(model);
-            else
-                return _database.InsertAsync(model);
-        }
-        public Task<int> AddOrModifyActivityAsync(ActivityModel model)
-        {
-            if (model.ID != 0)
-                return _database.UpdateAsync(model);
-            else
-                return _database.InsertAsync(model);
-        }
         #endregion
     }
 }

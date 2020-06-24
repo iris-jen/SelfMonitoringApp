@@ -45,7 +45,6 @@ namespace SelfMonitoringApp.ViewModels
             }
         }
 
-
         public Command LoadDataCommand { get; private set; }
 
         public DataExplorerViewModel(INavigationService navService) 

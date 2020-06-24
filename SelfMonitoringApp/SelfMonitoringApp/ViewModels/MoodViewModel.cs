@@ -78,7 +78,7 @@ namespace SelfMonitoringApp.ViewModels
 
         public async Task SaveAndPop()
         {
-            await App.Database.AddOrModifyMoodAsync(_mood);
+            await App.Database.AddOrModifyModelAsync(_mood);
             await _navigator.NavigateBack();
         }
     }
