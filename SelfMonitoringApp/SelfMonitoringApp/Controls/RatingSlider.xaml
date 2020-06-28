@@ -7,8 +7,8 @@
              x:Class="SelfMonitoringApp.Controls.RatingSlider" >
     <ContentView.ControlTemplate>
         <ControlTemplate>
-            <Frame>
-                <Grid>
+            <Frame Padding="5">
+                <Grid >
                     <Grid.RowDefinitions>
                         <!--Might put slider header back in, ill keep this empty row for now-->
                         <RowDefinition Height="20"/>

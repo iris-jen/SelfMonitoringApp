@@ -122,12 +122,14 @@ namespace SelfMonitoringApp.Services
             {
                 Description = "Some sad thing",
                 OverallMood = 3.1,
+                StrongestEmotion = "super s ad sad",
                 RegisteredTime = new DateTime(year,month,day1, hour: 8, minute:20, second:0)
             },
             new MoodModel()
             {
                 Description = "Some mediocre thing",
                 OverallMood = 5.8,
+                StrongestEmotion = "anger",
                 RegisteredTime = new DateTime(year,month,day1, hour: 10, minute:15, second:0)
             },
             new MoodModel()
@@ -143,7 +145,9 @@ namespace SelfMonitoringApp.Services
             },
             new MoodModel()
             {
+                Description = "asda",
                 OverallMood = 1.2,
+                StrongestEmotion = "sadness :)",
                 RegisteredTime = new DateTime(year,month,day1, hour: 17 , minute:13, second:0)
             },
 
@@ -152,6 +156,7 @@ namespace SelfMonitoringApp.Services
             {
                 Description = "Saw 5 cats",
                 OverallMood = 9.9,
+                StrongestEmotion="bleeech",
                 RegisteredTime = new DateTime(year,month,day2, hour: 7, minute:22, second:0)
             },
             new MoodModel()

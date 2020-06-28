@@ -10,7 +10,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Meziantou.Framework" Version="2.15.0" />
         <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
         <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
         <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
@@ -23,6 +22,9 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Compile Update="Controls\HeaderBlockLight.xaml.cs">
+        <DependentUpon>HeaderBlockLight.xaml</DependentUpon>
+      </Compile>
       <Compile Update="Controls\LogView.xaml.cs">
         <DependentUpon>LogView.xaml</DependentUpon>
       </Compile>

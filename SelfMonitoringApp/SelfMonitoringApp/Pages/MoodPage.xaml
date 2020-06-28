@@ -15,7 +15,8 @@
             <Grid Margin="0,8,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="{StaticResource RowHeightSlider}"/>
-                    <RowDefinition Height="230"/>
+                    <RowDefinition Height="{StaticResource RowHeightSingle}"/>
+                    <RowDefinition Height="{StaticResource RowHeightSingle}"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
             
@@ -25,47 +26,23 @@
                 </controls:HeaderBlock>
             
                 <!--Emotions entry box-->
-                <controls:HeaderBlock Grid.Row="1" HeaderText="Emotions">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="60"/>
-                            <RowDefinition/>
-                            <RowDefinition Height="35"/>
-                        </Grid.RowDefinitions>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="3.5*"/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <Entry Text="{Binding NewEmotion}" BackgroundColor="White" Placeholder="Enter an emotion..." />
-                            <Button Grid.Column="1" Command="{Binding AddNewEmotion}" Text="+" FontSize="20" Margin="1" Style="{StaticResource ButtonStyle}"/>
-                        </Grid>
-
-                        <Frame Grid.Row="1" Padding="0">
-                            <ListView ItemsSource="{Binding Emotions}" BackgroundColor="White"  SelectedItem="{Binding SelectedEmotion}">
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <ViewCell>
-                                            <Label Text="{Binding}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="Black" FontAttributes="Bold"/>
-                                        </ViewCell>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                            </ListView>
-                        </Frame>
-
-                        <Button Grid.Row="2" Style="{StaticResource ButtonStyle}" Command="{Binding RemoveSelectedCommand}" Margin="0" Text="Remove Selected"></Button>
-                    </Grid>
+                <controls:HeaderBlock Grid.Row="1" HeaderText="Strongest Emotion">
+                    <Entry Text="{Binding StrongestEmotion}" BackgroundColor="White" Placeholder="What emotion is most intense?" />
                 </controls:HeaderBlock>
 
+                <controls:HeaderBlock Grid.Row="2" HeaderText="Location">
+                    <Entry Text="{Binding Location}" BackgroundColor="White" Placeholder="Where were you?" />
+                </controls:HeaderBlock>
+                
                 <!--Descripition Box-->
-                <controls:HeaderBlock Grid.Row="2" HeaderText="Description" >
+                <controls:HeaderBlock Grid.Row="3" HeaderText="Description">
                     <Frame Padding="4">
                         <Editor BackgroundColor="White" IsSpellCheckEnabled="True" Text="{Binding Description}" VerticalOptions="CenterAndExpand"
-                                Placeholder="Describe how you feel etc..." AutoSize="TextChanges"/>
+                                Placeholder="How do you feel?  What happened?" AutoSize="TextChanges"/>
                     </Frame>
                 </controls:HeaderBlock>
 
             </Grid>
         </controls:SaveCancelPage>
-    </ContentPage.Content>
+        </ContentPage.Content>
 </ContentPage>

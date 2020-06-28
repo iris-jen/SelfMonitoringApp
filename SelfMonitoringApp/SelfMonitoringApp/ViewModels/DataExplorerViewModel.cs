@@ -17,7 +17,7 @@ namespace SelfMonitoringApp.ViewModels
         public const string NavigationNodeName = "data";
         public ObservableCollection<DaySummaryViewModel> DaySummaries { get; private set; }
 
-        private DateTime _startDate = new DateTime(DateTime.Now.Year,DateTime.Now.Month, DateTime.Now.Day-3);
+        private DateTime _startDate = new DateTime(DateTime.Now.Year,DateTime.Now.Month, DateTime.Now.Day);
         public DateTime StartDate
         {
             get => _startDate;
@@ -45,12 +45,45 @@ namespace SelfMonitoringApp.ViewModels
             }
         }
 
+        private bool _loading;
+        public bool Loading
+        {
+            get => _loading;
+            set
+            {
+                if (_loading == value)
+                    return;
+
+                _loading = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _loaded;
+
+        public bool Loaded
+        {
+            get => _loaded;
+            set
+            {
+                if (_loaded == value)
+                    return;
+
+                _loaded = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
+
         public Command LoadDataCommand { get; private set; }
+        
 
         public DataExplorerViewModel(INavigationService navService) 
             : base(navService)
         {
             LoadDataCommand = new Command(async () => await LoadData());
+            LoadData().SafeFireAndForget(false);
         }
 
 
@@ -87,7 +120,12 @@ namespace SelfMonitoringApp.ViewModels
 
         public async Task LoadData()
         {
+            Loading = true;
+        
             var data = await GetDateFilteredData(StartDate, EndDate);
+            Loading = false;
+            await Task.Delay(100);
+
             DaySummaries = data;
             RaiseAllPropertiesChanged();
         }

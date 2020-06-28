@@ -99,7 +99,7 @@ namespace SelfMonitoringApp.ViewModels
 
         public void SaveAndPop()
         {
-             
+            App.Database.AddOrModifyModelAsync(RegisterAndGetModel());
             _navigator.NavigateBack();
         }
     }

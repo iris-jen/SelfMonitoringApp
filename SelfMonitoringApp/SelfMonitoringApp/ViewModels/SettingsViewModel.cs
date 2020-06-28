@@ -2,7 +2,8 @@
 using SelfMonitoringApp.Navigation;
 using SelfMonitoringApp.Services;
 using SelfMonitoringApp.ViewModels.Base;
-
+using System.Globalization;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace SelfMonitoringApp.ViewModels
@@ -16,14 +17,35 @@ namespace SelfMonitoringApp.ViewModels
         public SettingsViewModel(INavigationService navService)
             :base(navService)
         {
-            DeleteLogCommand = new Command<string>(DeleteModelFile);
+            DeleteLogCommand = new Command<string>(async(s)=> await DeleteModelFile(s));
         }
 
-        public void DeleteModelFile(string modelType)
+        public async Task DeleteModelFile(string modelType)
         {
-            switch(modelType)
+            switch(modelType.ToLower(CultureInfo.CurrentCulture))
             {
-  
+                case SleepViewModel.NavigationNodeName:
+                    await App.Database.ClearSpecificDatabase(ModelType.Sleep);
+                    break;
+                case MoodViewModel.NavigationNodeName:
+                    await App.Database.ClearSpecificDatabase(ModelType.Mood);
+                    break;
+                case ActivityViewModel.NavigationNodeName:
+                    await App.Database.ClearSpecificDatabase(ModelType.Activity);
+                    break;
+                case MealViewModel.NavigationNodeName:
+                    await App.Database.ClearSpecificDatabase(ModelType.Meal);
+                    break;
+                case SubstanceViewModel.NavigationNodeName:
+                    await App.Database.ClearSpecificDatabase(ModelType.Substance);
+                    break;
+                case "all":
+                    await App.Database.ClearSpecificDatabase(ModelType.Substance);
+                    await App.Database.ClearSpecificDatabase(ModelType.Meal);
+                    await App.Database.ClearSpecificDatabase(ModelType.Activity);
+                    await App.Database.ClearSpecificDatabase(ModelType.Mood);
+                    await App.Database.ClearSpecificDatabase(ModelType.Sleep);         
+                    break;
             }
         }
     }

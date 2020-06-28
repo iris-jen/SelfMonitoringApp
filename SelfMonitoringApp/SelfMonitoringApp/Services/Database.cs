@@ -58,34 +58,25 @@ namespace SelfMonitoringApp.Services
             }
         }
 
+        public Task ClearSpecificDatabase(ModelType modelType) => 
+            modelType switch
+        {
+            ModelType.Activity => _database.DeleteAllAsync<ActivityModel>(),
+            ModelType.Meal => _database.DeleteAllAsync<MealModel>(),
+            ModelType.Mood => _database.DeleteAllAsync<MoodModel>(),
+            ModelType.Substance => _database.DeleteAllAsync<SubstanceModel>(),
+            ModelType.Sleep => _database.DeleteAllAsync<SleepModel>(),
+            _ => throw new ArgumentException("Model type does not exist in db")
+        };
+
         #region Get Items
-        public Task<List<MoodModel>> GetMoodsAsync()
-        {
-            return _database.Table<MoodModel>().ToListAsync();
-        }
-
-        public Task<List<MealModel>> GetMealsAsync()
-        {
-            return _database.Table<MealModel>().ToListAsync();
-        }
-
-        public Task<List<SleepModel>> GetSleepsAsync()
-        {
-            return _database.Table<SleepModel>().ToListAsync();
-        }
-
-        public Task<List<SubstanceModel>> GetSubstancesAsync()
-        {
-            return _database.Table<SubstanceModel>().ToListAsync();
-        }
-
-        public Task<List<ActivityModel>> GetActivitiesAsync()
-        {
-            return _database.Table<ActivityModel>().ToListAsync();
-        }
+        public Task<List<MoodModel>> GetMoodsAsync() => _database.Table<MoodModel>().ToListAsync();
+        public Task<List<MealModel>> GetMealsAsync() => _database.Table<MealModel>().ToListAsync();
+        public Task<List<SleepModel>> GetSleepsAsync() => _database.Table<SleepModel>().ToListAsync();
+        public Task<List<SubstanceModel>> GetSubstancesAsync() => _database.Table<SubstanceModel>().ToListAsync();
+        public Task<List<ActivityModel>> GetActivitiesAsync() => _database.Table<ActivityModel>().ToListAsync();
         #endregion
 
-        #region Add Items
         public Task<int> AddOrModifyModelAsync(IModel model)
         {
             if (model.ID != 0)
@@ -93,7 +84,5 @@ namespace SelfMonitoringApp.Services
             else
                 return _database.InsertAsync(model);
         }
-
-        #endregion
     }
 }

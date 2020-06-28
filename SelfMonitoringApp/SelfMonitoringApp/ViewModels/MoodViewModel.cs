@@ -45,6 +45,33 @@ namespace SelfMonitoringApp.ViewModels
             }
         }
 
+        public string Location
+        {
+            get => _mood.Location;
+            set
+            {
+                if (_mood.Location == value)
+                    return;
+
+                _mood.Location = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public string StrongestEmotion
+        {
+            get => _mood.StrongestEmotion;
+            set
+            {
+                if (_mood.StrongestEmotion == value)
+                    return;
+
+                _mood.StrongestEmotion = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
         public Command SaveLogCommand { get; private set; }
 
         /// <summary>
@@ -78,7 +105,7 @@ namespace SelfMonitoringApp.ViewModels
 
         public async Task SaveAndPop()
         {
-            await App.Database.AddOrModifyModelAsync(_mood);
+            await App.Database.AddOrModifyModelAsync(RegisterAndGetModel());
             await _navigator.NavigateBack();
         }
     }

@@ -1,4 +1,4 @@
-﻿using Meziantou.Framework;
+﻿
 using SelfMonitoringApp.Navigation;
 using SelfMonitoringApp.ViewModels.Base;
 using System;
@@ -27,31 +27,31 @@ namespace SelfMonitoringApp.ViewModels
             switch(page.ToLower(CultureInfo.CurrentCulture))
             {
                 case MoodViewModel.NavigationNodeName:
-                    _navigator.NavigateTo(new MoodViewModel(_navigator)).Forget();
+                    _navigator.NavigateTo(new MoodViewModel(_navigator)).SafeFireAndForget(false);
                     break;
                 case SleepViewModel.NavigationNodeName:
-                    _navigator.NavigateTo(new SleepViewModel(_navigator)).Forget();
+                    _navigator.NavigateTo(new SleepViewModel(_navigator)).SafeFireAndForget(false);
                     break;
                 case SubstanceViewModel.NavigationNodeName:
-                    _navigator.NavigateTo(new SubstanceViewModel(_navigator)).Forget();
+                    _navigator.NavigateTo(new SubstanceViewModel(_navigator)).SafeFireAndForget(false);
                     break;
                 case MealViewModel.NavigationNodeName:
-                    _navigator.NavigateTo(new MealViewModel(_navigator)).Forget();
+                    _navigator.NavigateTo(new MealViewModel(_navigator)).SafeFireAndForget(false);
                     break;
                 case ActivityViewModel.NavigationNodeName:
-                    _navigator.NavigateTo(new ActivityViewModel(_navigator)).Forget();
+                    _navigator.NavigateTo(new ActivityViewModel(_navigator)).SafeFireAndForget(false);
                     break;
                 case SettingsViewModel.NavigationNodeName:
-                    _navigator.NavigateTo(new SettingsViewModel(_navigator)).Forget();
+                    _navigator.NavigateTo(new SettingsViewModel(_navigator)).SafeFireAndForget(false);
                     break;
                 case DataExplorerViewModel.NavigationNodeName:
-                    _navigator.NavigateTo(new DataExplorerViewModel(_navigator)).Forget();
+                    _navigator.NavigateTo(new DataExplorerViewModel(_navigator)).SafeFireAndForget(false);
                     break;
                 case HelpViewModel.NavigationNodeName:
-                    _navigator.NavigateTo(new HelpViewModel(_navigator)).Forget();
+                    _navigator.NavigateTo(new HelpViewModel(_navigator)).SafeFireAndForget(false);
                     break;
                 case NotificationsViewModel.NavigationNodeName:
-                    _navigator.NavigateTo(new NotificationsViewModel(_navigator)).Forget();
+                    _navigator.NavigateTo(new NotificationsViewModel(_navigator)).SafeFireAndForget(false);
                     break;
                 default:
                     throw new DirectoryNotFoundException($"Cant find nav directory {page}");

@@ -87,7 +87,7 @@ namespace SelfMonitoringApp.ViewModels
 
         public async Task SaveAndPop()
         {
-            await App.Database.AddOrModifyModelAsync(_mealModel);
+            await App.Database.AddOrModifyModelAsync(RegisterAndGetModel());
             await _navigator.NavigateBack();
         }
     }

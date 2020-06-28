@@ -6,6 +6,7 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 
+
 namespace SelfMonitoringApp.Android
 {
     [Activity(Label = "SelfMonitoringApp", Theme = "@style/MainTheme", MainLauncher = true,

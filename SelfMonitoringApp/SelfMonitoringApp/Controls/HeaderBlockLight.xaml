@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="SelfMonitoringApp.Controls.HeaderBlockLight">
+    <ContentView.ControlTemplate>
+        <ControlTemplate>
+            <Frame BackgroundColor="{StaticResource PrimaryLight}" Padding="10,3,10,10" CornerRadius="10" 
+                   Margin="10,2,10,2">
+                <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="15"/>
+                        <RowDefinition Height="2"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label Text="{TemplateBinding HeaderText}" FontSize="14" FontAttributes="Bold" 
+                           FontFamily="Roboto" 
+                           TextColor="White" HorizontalTextAlignment="Center" VerticalTextAlignment="Start"/>
+                    <BoxView Grid.Row="1" BackgroundColor="{StaticResource Secondary}" />
+
+                    <ContentPresenter Grid.Row="2" HorizontalOptions="FillAndExpand"
+                                      VerticalOptions="FillAndExpand" Margin="0,0,0,0" />
+                </Grid>
+            </Frame>
+        </ControlTemplate>
+    </ContentView.ControlTemplate>
+</ContentView>

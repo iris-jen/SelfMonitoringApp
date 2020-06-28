@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using Xamarin.Forms;
 
 namespace SelfMonitoringApp.ViewModels
 {
@@ -17,30 +18,30 @@ namespace SelfMonitoringApp.ViewModels
 
         public string Date { get; private set; }
 
-        private bool _mealVisibility;
-        public bool MealVisibility
+        private bool _mealsVisibility;
+        public bool MealsVisibility
         {
-            get => _mealVisibility;
+            get => _mealsVisibility;
             set
             {
-                if (_mealVisibility == value)
+                if (_mealsVisibility == value)
                     return;
 
-                _mealVisibility = value;
+                _mealsVisibility = value;
                 NotifyPropertyChanged();
             }
         }
 
-        private bool _substanceVisibility;
+        private bool _substancesVisibility;
         public bool SubstanceVisibility
         {
-            get => _substanceVisibility;
+            get => _substancesVisibility;
             set
             {
-                if (_substanceVisibility == value)
+                if (_substancesVisibility == value)
                     return;
 
-                _substanceVisibility = value;
+                _substancesVisibility = value;
                 NotifyPropertyChanged();
             }
         }
@@ -73,6 +74,26 @@ namespace SelfMonitoringApp.ViewModels
             }
         }
 
+        private bool _sleepsVisibility;
+        public bool SleepsVisibility
+        {
+            get => _sleepsVisibility;
+            set
+            {
+                if (_sleepsVisibility == value)
+                    return;
+
+                _sleepsVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public Command ShowSleepComand { get; private set; }
+        public Command ShowMoodCommand { get; private set; }
+        public Command ShowSubstanceCommand { get; private set; }
+        public Command ShowMealCommand { get; private set; }
+        public Command ShowActivityCommand { get; private set; }
+
         public DaySummaryViewModel(List<SleepModel> sleeps, List<ActivityModel> activities,
             List<MealModel> meals, List<MoodModel> moods, List<SubstanceModel> substances, DateTime date)
         {
@@ -82,7 +103,43 @@ namespace SelfMonitoringApp.ViewModels
             Moods = new ObservableCollection<MoodModel>(moods);
             Sleeps = new ObservableCollection<SleepModel>(sleeps);
 
+            ShowSleepComand = new Command(() => SetVisibility(ModelType.Sleep));
+            ShowMoodCommand = new Command(() => SetVisibility(ModelType.Mood));
+            ShowSubstanceCommand = new Command(() => SetVisibility(ModelType.Substance));
+            ShowMealCommand = new Command(() => SetVisibility(ModelType.Meal));
+            ShowActivityCommand = new Command(() => SetVisibility(ModelType.Activity));
+
+            MoodsVisibility = true;
+            
             Date = $"{date.DayOfWeek}: {date.Year}-{date.Month}-{date.Day}";
+        }
+
+        private void SetVisibility(ModelType type)
+        {
+            switch (type)
+            {
+                case ModelType.Activity:
+                    ActivitiesVisibility = true;
+                    MealsVisibility = MoodsVisibility = SleepsVisibility = SubstanceVisibility = false;
+                    break;
+                case ModelType.Meal:
+                    MealsVisibility = true;
+                    ActivitiesVisibility = MoodsVisibility = SleepsVisibility = SubstanceVisibility = false;
+                    break;
+                case ModelType.Mood:
+                    MoodsVisibility = true;
+                    ActivitiesVisibility = MealsVisibility = SleepsVisibility = SubstanceVisibility = false;
+                    break;
+                case ModelType.Sleep:
+                    SleepsVisibility = true;
+                    ActivitiesVisibility = MealsVisibility = MoodsVisibility = SubstanceVisibility = false;
+                    break;
+                case ModelType.Substance:
+                    SubstanceVisibility = true;
+                    ActivitiesVisibility = MealsVisibility = MoodsVisibility = SleepsVisibility = false;
+                    break;
+
+            }
         }
 
     }

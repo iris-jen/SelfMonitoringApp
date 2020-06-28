@@ -24,7 +24,17 @@ namespace SelfMonitoringApp.Controls
         }
 
         public static readonly BindableProperty TitleProperty =
-            BindableProperty.Create(nameof(Title), typeof(string), typeof(SaveCancelPage), default(string));
+            BindableProperty.Create(nameof(Title), typeof(string), typeof(LogView), default(string));
+
+
+        public bool Show
+        {
+            get => (bool)GetValue(ShowProperty);
+            set => SetValue(ShowProperty, value);
+        }
+
+        public static readonly BindableProperty ShowProperty =
+            BindableProperty.Create(nameof(Show), typeof(bool), typeof(LogView), default(bool));
 
         public Command EditCommand
         {
@@ -33,7 +43,7 @@ namespace SelfMonitoringApp.Controls
         }
 
         public static readonly BindableProperty EditCommandProperty =
-            BindableProperty.Create(nameof(EditCommand), typeof(Command), typeof(SaveCancelPage), default(Command));
+            BindableProperty.Create(nameof(EditCommand), typeof(Command), typeof(LogView), default(Command));
 
         public Command DeleteCommand
         {
@@ -42,6 +52,6 @@ namespace SelfMonitoringApp.Controls
         }
 
         public static readonly BindableProperty DeleteCommandProperty =
-            BindableProperty.Create(nameof(DeleteCommand), typeof(Command), typeof(SaveCancelPage), default(Command));
+            BindableProperty.Create(nameof(DeleteCommand), typeof(Command), typeof(LogView), default(Command));
     }
 }

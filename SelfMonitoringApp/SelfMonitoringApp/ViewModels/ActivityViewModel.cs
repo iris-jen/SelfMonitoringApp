@@ -96,6 +96,7 @@ namespace SelfMonitoringApp.ViewModels
 
         public ActivityViewModel(INavigationService navService, IModel activityModel = null) : base(navService)
         {
+       
             if (activityModel is null)
                 _activity = new ActivityModel();
             else
@@ -106,7 +107,11 @@ namespace SelfMonitoringApp.ViewModels
 
         public IModel RegisterAndGetModel()
         {
+            var now = DateTime.Now; 
             _activity.RegisteredTime = DateTime.Now;
+            var startDateTime = new DateTime(now.Year, now.Month, now.Day, StartTime.Hours, StartTime.Minutes, StartTime.Seconds);
+            var endDateTime = new DateTime(now.Year, now.Month, now.Day, EndTime.Hours, EndTime.Minutes, EndTime.Seconds);
+            _activity.Duration = endDateTime.Subtract(startDateTime).TotalHours;
             return _activity;
         }
 

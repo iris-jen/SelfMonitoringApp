@@ -12,19 +12,20 @@
             <Grid Margin="0,8,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="170"/>
-                    <RowDefinition Height="100"/>
-                    <RowDefinition Height="140"/> 
-                    <RowDefinition Height="400"/>
+                    <RowDefinition Height="{StaticResource RowHeightSlider}"/>
+                    <RowDefinition /> 
+         
                 </Grid.RowDefinitions>
 
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
+                        <ColumnDefinition Width="0.75*"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
                     <!--Time of sleep box-->
-                    <controls:HeaderBlock HeaderText="Sleep" Margin="0,0,-5,0">
+                    <controls:HeaderBlock HeaderText="Sleep" Margin="0,0,-15,0">
                         <Frame Padding="0">
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -38,8 +39,15 @@
                         </Frame>
                     </controls:HeaderBlock>
 
+                    <!--Total sleep box-->
+                    <controls:HeaderBlock HeaderText="Total" Grid.Column="1">
+                        <Frame Padding="5" >
+                            <Label Text="{Binding TotalSleep , StringFormat ='{0:0.0}'}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                        </Frame>
+                    </controls:HeaderBlock>
+
                     <!--Wake up time box-->
-                    <controls:HeaderBlock HeaderText="Wake" Grid.Column="1" Margin="-5,0,0,0">
+                    <controls:HeaderBlock HeaderText="Wake" Grid.Column="2" Margin="-15,0,0,0">
                         <Frame Padding="0">
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -53,20 +61,12 @@
                     </controls:HeaderBlock>
                 </Grid>
 
-                <!--Total sleep box-->
-                <controls:HeaderBlock HeaderText="Total" Grid.Row="1">
-                    <Frame Padding="5" >
-                        <Label Text="{Binding TotalSleep , StringFormat ='{0:0.0}'}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                    </Frame>
-                </controls:HeaderBlock>
-                
                 <!--Rest rating-->
-                <controls:HeaderBlock HeaderText="How rested do you feel?" Grid.Row="2">
+                <controls:HeaderBlock HeaderText="How rested do you feel?" Grid.Row="1">
                     <controls:RatingSlider  Rating="{Binding RestRating}"/>
                 </controls:HeaderBlock>
                 
-
-                <controls:HeaderBlock Grid.Row="3" HeaderText="Dream Log" Margin="0,0,0,5">
+                <controls:HeaderBlock Grid.Row="2" HeaderText="Dream Log" Margin="0,0,0,5">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="40"/>
@@ -101,7 +101,7 @@
 
                         <Frame Grid.Row="2" CornerRadius="5" Padding="5">
                             <Editor AutoSize="Disabled" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Text="{Binding DreamLog}"
-                                     BackgroundColor="White"/>
+                                     BackgroundColor="White" Placeholder="Can you decribe the dream?"/>
                         </Frame>
                     </Grid>
                 </controls:HeaderBlock>

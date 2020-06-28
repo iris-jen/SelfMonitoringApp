@@ -18,7 +18,7 @@ namespace SelfMonitoringApp.Models
         /// <summary>
         /// Location it happened
         /// </summary>
-        public string Place { get; set; } = string.Empty;
+        public string Location { get; set; } = string.Empty;
 
         /// <summary>
         /// A numerical rating (out of 10) of how the user felt

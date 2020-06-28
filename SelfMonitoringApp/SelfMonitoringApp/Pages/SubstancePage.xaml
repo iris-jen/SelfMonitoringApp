@@ -15,10 +15,11 @@
                     <RowDefinition Height="{StaticResource RowHeightSingle}"/>
                     <RowDefinition Height="{StaticResource RowHeightSingle}"/>
                     <RowDefinition Height="{StaticResource RowHeightSlider}"/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
                 <controls:HeaderBlock HeaderText="Substance Name">
                     <Frame Padding="5">
-                        <Entry Text="{Binding SubstanceName}" Placeholder="Beer" HorizontalTextAlignment="Center"/>
+                        <Entry Text="{Binding SubstanceName}" Placeholder="Coffee" HorizontalTextAlignment="Center"/>
                     </Frame>
                 </controls:HeaderBlock>
                 
@@ -31,22 +32,22 @@
                     </Grid.ColumnDefinitions>
                     
                     <!--Use Method-->
-                    <controls:HeaderBlock  HeaderText="Method" Margin="0,0,-5,0">
+                    <controls:HeaderBlock  HeaderText="Method" Margin="0,0,-10,0">
                         <Frame Padding="5">
                             <Entry Text="{Binding ConsumptionMethod}" Placeholder="Drank" HorizontalTextAlignment="Center"/>
                         </Frame>
                     </controls:HeaderBlock>
                     
                     <!--Ammount of substance-->
-                    <controls:HeaderBlock Grid.Column="1" HeaderText="Ammount" Margin="-7,0,-7,0">
+                    <controls:HeaderBlock Grid.Column="1" HeaderText="Qty." Margin="0,0,0,0">
                         <Frame Padding="5">
                             <Entry Text="{Binding Ammount}" HorizontalTextAlignment="Center" Placeholder="1"/>
                         </Frame>
                     </controls:HeaderBlock>
 
-                    <controls:HeaderBlock Grid.Column="2" HeaderText="Unit" Margin="-5,0,0,0">
+                    <controls:HeaderBlock Grid.Column="2" HeaderText="Unit" Margin="0,0,0,0">
                         <Frame Padding="5">
-                            <Entry Text="{Binding Unit}" HorizontalTextAlignment="Center" Placeholder="Drink"/>
+                            <Entry Text="{Binding Unit}" HorizontalTextAlignment="Center" Placeholder="Cup"/>
                         </Frame>
                     </controls:HeaderBlock>
                 </Grid>
@@ -56,8 +57,8 @@
                 </controls:HeaderBlock>
 
                 <controls:HeaderBlock HeaderText="Comment" Grid.Row="3" Margin="0,0,0,5">
-                    <Frame>
-                        <Entry Text="{Binding Comment}" Placeholder="Any thoughts?"/>
+                    <Frame Padding="4">
+                        <Editor Text="{Binding Comment}" Placeholder="Any thoughts?" AutoSize="TextChanges"/>
                     </Frame>
                 </controls:HeaderBlock>
             </Grid>

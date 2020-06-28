@@ -13,8 +13,8 @@
 
             <Color x:Key="Secondary">#ffc107</Color>
             
-            <GridLength x:Key="RowHeightSingle">120</GridLength>
-            <GridLength x:Key="RowHeightSlider">140</GridLength>
+            <GridLength x:Key="RowHeightSingle">115</GridLength>
+            <GridLength x:Key="RowHeightSlider">110</GridLength>
 
             <Style x:Key="ButtonStyle" TargetType="Button">
                 <Setter Property="BackgroundColor" Value="{StaticResource Secondary}"/>
