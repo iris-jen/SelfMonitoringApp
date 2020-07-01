@@ -14,10 +14,14 @@ namespace SelfMonitoringApp.ViewModels
 
         public Command<string> DeleteLogCommand { get; private set; }
 
+        public Command AddRandomLogsCommand { get; private set; }
+
+
         public SettingsViewModel(INavigationService navService)
             :base(navService)
         {
             DeleteLogCommand = new Command<string>(async(s)=> await DeleteModelFile(s));
+            AddRandomLogsCommand = new Command(AddExamples);
         }
 
         public async Task DeleteModelFile(string modelType)
@@ -40,13 +44,31 @@ namespace SelfMonitoringApp.ViewModels
                     await App.Database.ClearSpecificDatabase(ModelType.Substance);
                     break;
                 case "all":
-                    await App.Database.ClearSpecificDatabase(ModelType.Substance);
-                    await App.Database.ClearSpecificDatabase(ModelType.Meal);
-                    await App.Database.ClearSpecificDatabase(ModelType.Activity);
-                    await App.Database.ClearSpecificDatabase(ModelType.Mood);
-                    await App.Database.ClearSpecificDatabase(ModelType.Sleep);         
+                    await Task.WhenAll(App.Database.ClearSpecificDatabase(ModelType.Substance),
+                    App.Database.ClearSpecificDatabase(ModelType.Meal),
+                    App.Database.ClearSpecificDatabase(ModelType.Activity),
+                    App.Database.ClearSpecificDatabase(ModelType.Mood),
+                    App.Database.ClearSpecificDatabase(ModelType.Sleep));
                     break;
             }
+        }
+
+        public void AddExamples()
+        {  
+            foreach(ActivityModel model in LogSamples.GetActivitySamples())
+                App.Database.AddOrModifyModelAsync(model).Wait();
+
+            foreach (MealModel model in LogSamples.GetMealSamples())
+                App.Database.AddOrModifyModelAsync(model).Wait();
+
+            foreach (MoodModel model in LogSamples.GetMoodSamples())
+                App.Database.AddOrModifyModelAsync(model).Wait();
+
+            foreach (SleepModel model in LogSamples.GetSleepSamples())
+                App.Database.AddOrModifyModelAsync(model).Wait();
+
+            foreach (SubstanceModel model in LogSamples.GetSubstanceSamples())
+                App.Database.AddOrModifyModelAsync(model).Wait();
         }
     }
 }

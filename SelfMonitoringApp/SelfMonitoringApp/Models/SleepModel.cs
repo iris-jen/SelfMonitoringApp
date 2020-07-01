@@ -17,12 +17,12 @@ namespace SelfMonitoringApp.Models
         /// <summary>
         /// Day the user indicated they awoke
         /// </summary>
-        public DateTime SleepEndDate   { get; set; } = DateTime.Now;
+        public DateTime SleepEndDate   { get; set; }
 
         /// <summary>
         /// Day the user indicated they awoke
         /// </summary>
-        public DateTime SleepStartDate { get; set; } = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day-1);
+        public DateTime SleepStartDate { get; set; }
 
         /// <summary>
         /// Total amount of sleep in hours

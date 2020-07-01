@@ -14,6 +14,8 @@ namespace SelfMonitoringApp.ViewModels
     {
         private readonly MealModel _mealModel;
         public const string NavigationNodeName = "meal";
+        public event EventHandler ModelShed;
+
         public Command SaveLogCommand { get; private set; }
 
         public string MealSize
@@ -87,8 +89,10 @@ namespace SelfMonitoringApp.ViewModels
 
         public async Task SaveAndPop()
         {
-            await App.Database.AddOrModifyModelAsync(RegisterAndGetModel());
+            var model = RegisterAndGetModel();
+            await App.Database.AddOrModifyModelAsync(model);
             await _navigator.NavigateBack();
+            ModelShed?.Invoke(this, new ModelShedEventArgs(model));
         }
     }
 }

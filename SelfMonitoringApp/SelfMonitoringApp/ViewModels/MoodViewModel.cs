@@ -16,6 +16,7 @@ namespace SelfMonitoringApp.ViewModels
     {
         private readonly MoodModel _mood;
         public const string NavigationNodeName = "mood";
+        public event EventHandler ModelShed;
 
         public ObservableCollection<string> Emotions { get; private set; }
 
@@ -103,10 +104,14 @@ namespace SelfMonitoringApp.ViewModels
             return _mood;
         }
 
+    
+
         public async Task SaveAndPop()
         {
-            await App.Database.AddOrModifyModelAsync(RegisterAndGetModel());
+            var model = RegisterAndGetModel();
+            await App.Database.AddOrModifyModelAsync(model);
             await _navigator.NavigateBack();
+            ModelShed?.Invoke(this, new ModelShedEventArgs(model));
         }
     }
 }

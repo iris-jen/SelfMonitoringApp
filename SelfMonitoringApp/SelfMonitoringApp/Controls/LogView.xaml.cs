@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SelfMonitoringApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,22 +37,6 @@ namespace SelfMonitoringApp.Controls
         public static readonly BindableProperty ShowProperty =
             BindableProperty.Create(nameof(Show), typeof(bool), typeof(LogView), default(bool));
 
-        public Command EditCommand
-        {
-            get => (Command)GetValue(EditCommandProperty);
-            set => SetValue(EditCommandProperty, value);
-        }
 
-        public static readonly BindableProperty EditCommandProperty =
-            BindableProperty.Create(nameof(EditCommand), typeof(Command), typeof(LogView), default(Command));
-
-        public Command DeleteCommand
-        {
-            get => (Command)GetValue(DeleteCommandProperty);
-            set => SetValue(DeleteCommandProperty, value);
-        }
-
-        public static readonly BindableProperty DeleteCommandProperty =
-            BindableProperty.Create(nameof(DeleteCommand), typeof(Command), typeof(LogView), default(Command));
     }
 }

@@ -17,7 +17,7 @@ namespace SelfMonitoringApp.ViewModels
         public const string NavigationNodeName = "data";
         public ObservableCollection<DaySummaryViewModel> DaySummaries { get; private set; }
 
-        private DateTime _startDate = new DateTime(DateTime.Now.Year,DateTime.Now.Month, DateTime.Now.Day);
+        private DateTime _startDate = DateTime.Now;
         public DateTime StartDate
         {
             get => _startDate;
@@ -31,7 +31,7 @@ namespace SelfMonitoringApp.ViewModels
             }
         }
 
-        private DateTime _endDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day + 1);
+        private DateTime _endDate = DateTime.Now.AddDays(1);
         public DateTime EndDate
         {
             get => _endDate;
@@ -59,33 +59,21 @@ namespace SelfMonitoringApp.ViewModels
             }
         }
 
-        private bool _loaded;
-
-        public bool Loaded
-        {
-            get => _loaded;
-            set
-            {
-                if (_loaded == value)
-                    return;
-
-                _loaded = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-
-
         public Command LoadDataCommand { get; private set; }
-        
 
         public DataExplorerViewModel(INavigationService navService) 
             : base(navService)
         {
             LoadDataCommand = new Command(async () => await LoadData());
             LoadData().SafeFireAndForget(false);
+
+            navService.PageIsTop += NavService_PageIsTop;
         }
 
+        private void NavService_PageIsTop(object sender, EventArgs e)
+        {
+            
+        }
 
         private bool DateInRange(DateTime startDate, DateTime endDate, DateTime checkDate, DateTime filter) =>
             (checkDate >= startDate && checkDate <= endDate) && checkDate.Day == filter.Day &&
@@ -96,12 +84,21 @@ namespace SelfMonitoringApp.ViewModels
             var filteredData = new ObservableCollection<DaySummaryViewModel>();
             if (startDate <= endDate)
             {
+                List<SleepModel> sleepData = null;
+                List<MoodModel> moodData = null;
+                List<MealModel> mealData = null; 
+                List<SubstanceModel> substanceData = null;
+                List<ActivityModel> activityData = null;
+                List<Task> loadingTasks = new List<Task>()
+                {
+                    Task.Run( async ()=> sleepData = await App.Database.GetSleepsAsync()),
+                    Task.Run( async ()=> moodData = await App.Database.GetMoodsAsync()),
+                    Task.Run( async ()=> mealData = await App.Database.GetMealsAsync()),
+                    Task.Run( async ()=> substanceData = await App.Database.GetSubstancesAsync()),
+                    Task.Run( async ()=> activityData = await App.Database.GetActivitiesAsync())
+                };
 
-                var sleepData = await App.Database.GetSleepsAsync();
-                var moodData = await App.Database.GetMoodsAsync();
-                var mealData = await App.Database.GetMealsAsync();
-                var substanceData = await App.Database.GetSubstancesAsync();
-                var activityData = await App.Database.GetActivitiesAsync();
+                await Task.WhenAll(loadingTasks);
 
                 for (DateTime date = StartDate; date.Date <= EndDate.Date; date = date.AddDays(1))
                 {
@@ -112,7 +109,7 @@ namespace SelfMonitoringApp.ViewModels
                     var substances = (substanceData.Where(substances => DateInRange(startDate, endDate, substances.RegisteredTime, date))).ToList();
 
                     if (sleeps.Count != 0 || activities.Count != 0 || moods.Count != 0 || meals.Count != 0 || substances.Count != 0)
-                        filteredData.Add(new DaySummaryViewModel(sleeps, activities, meals, moods, substances, date));
+                        filteredData.Add(new DaySummaryViewModel(sleeps, activities, meals, moods, substances, date, _navigator));
                 }
             }
             return filteredData;
@@ -121,14 +118,15 @@ namespace SelfMonitoringApp.ViewModels
         public async Task LoadData()
         {
             Loading = true;
-        
+
             var data = await GetDateFilteredData(StartDate, EndDate);
             Loading = false;
-            await Task.Delay(100);
+
+            // Need to give the filter grid a second to collapse so the cards render full
+            await Task.Delay(50);
 
             DaySummaries = data;
-            RaiseAllPropertiesChanged();
+            NotifyPropertyChanged(nameof(DaySummaries));
         }
-
     }
 }

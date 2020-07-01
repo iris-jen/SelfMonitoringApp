@@ -2,6 +2,7 @@
 using SQLite;
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -22,26 +23,20 @@ namespace SelfMonitoringApp.Services
         {
             get
             {
-                var basePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                var basePath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
                 return Path.Combine(basePath, _databaseFilename);
             }
         }
 
-        private static readonly Lazy<SQLiteAsyncConnection> lazyInitializer = new Lazy<SQLiteAsyncConnection>(() =>
-        {
-            return new SQLiteAsyncConnection(_filePath, _openFlags);
-        });
-
-        private SQLiteAsyncConnection _database => lazyInitializer.Value; 
+        private SQLiteAsyncConnection _database;
         private static bool _initialized;
 
-        public Database()
-        {
-            InitializeAsync().SafeFireAndForget(false);
-        }
+        public Database(){}
 
-        private async Task InitializeAsync()
+        public async Task InitializeAsync()
         {
+            _database = new SQLiteAsyncConnection(_filePath, _openFlags);
+
             var tables = new Type[]
             {
                 typeof(MoodModel),
@@ -84,5 +79,6 @@ namespace SelfMonitoringApp.Services
             else
                 return _database.InsertAsync(model);
         }
+
     }
 }

@@ -15,10 +15,47 @@ namespace SelfMonitoringApp.Services
     public static class LogSamples
     {
         private const int year = 2020;
-        private static int month = DateTime.Now.Month;
-        private static int day1 = DateTime.Now.Day-3;
-        private static int day2 = day1 + 1;
-        private static int day3 = day1 + 2;
+        private static readonly int month = DateTime.Now.Month;
+        private static readonly int _day1 = DateTime.Now.Day;
+        private static readonly int _day2 = _day1 + 1;
+        private static readonly int _day3 = _day1 + 2;
+
+        public static ActivityModel TestActivity => new ActivityModel()
+        {
+            Description = "Hopscotch",
+            StartTime = DateTime.Now,
+            Duration = 1,
+            Enjoyment = 8.2,
+            Exersice = true
+        };
+
+        public static SubstanceModel TestSubstance => new SubstanceModel()
+        {
+            ConsumptionMethod = "Snorted",
+            SubstanceName = "Coffeve",
+            Comment = "tooo much coffeee",
+            Amount = 2,
+            Unit = "Pots",
+            Satisfaction = 9.9,
+        };
+
+        public static MealModel TestMeal => new MealModel()
+        {
+            Description = "Cereal",
+            MealType = "Breakfast",
+            RegisteredTime = DateTime.Now,
+            MealSize = "Normal",
+            Satisfaction = 1.7,
+        };
+
+        public static MoodModel TestMood => new MoodModel()
+        {
+            Description = "Saw 5 dogoos in a row",
+            OverallMood = 8.2,
+            StrongestEmotion = "Joy",
+            Location = "Home",
+            RegisteredTime = DateTime.Now
+        };
 
         public static List<MealModel> GetMealSamples() => new List<MealModel>()
         {
@@ -29,7 +66,7 @@ namespace SelfMonitoringApp.Services
                 MealType = "Breakfast",
                 Description = "Cereal",
                 Satisfaction = 5.4,
-                RegisteredTime = new DateTime(year,month,day1, hour: 8, minute:30, second:0)
+                RegisteredTime = new DateTime(year,month,_day1, hour: 8, minute:30, second:0)
             },
             new MealModel
             {
@@ -37,7 +74,7 @@ namespace SelfMonitoringApp.Services
                 MealType = "Lunch",
                 Description = "Sandwich",
                 Satisfaction = 9,
-                RegisteredTime = new DateTime(year,month,day1, hour: 12, minute:45, second:0)
+                RegisteredTime = new DateTime(year,month,_day1, hour: 12, minute:45, second:0)
             },
             new MealModel
             {
@@ -45,7 +82,7 @@ namespace SelfMonitoringApp.Services
                 MealType = "Snack",
                 Description = "Chips",
                 Satisfaction = 2,
-                RegisteredTime = new DateTime(year,month,day1, hour: 14, minute: 3, second:0)
+                RegisteredTime = new DateTime(year,month,_day1, hour: 14, minute: 3, second:0)
             },
             new MealModel
             {
@@ -53,7 +90,7 @@ namespace SelfMonitoringApp.Services
                 MealType = "Dinner",
                 Description = "Cake?",
                 Satisfaction = 10,
-                RegisteredTime = new DateTime(year,month,day1, hour: 20, minute: 48, second:0)
+                RegisteredTime = new DateTime(year,month,_day1, hour: 20, minute: 48, second:0)
             },
 
             // Day 2
@@ -63,7 +100,7 @@ namespace SelfMonitoringApp.Services
                 MealType = "Lunch",
                 Description = "Sandwich",
                 Satisfaction = 7,
-                RegisteredTime = new DateTime(year,month,day2, hour: 12, minute:45, second:0)
+                RegisteredTime = new DateTime(year,month,_day2, hour: 12, minute:45, second:0)
             },
             new MealModel
             {
@@ -71,7 +108,7 @@ namespace SelfMonitoringApp.Services
                 MealType = "Dinner",
                 Description = "Pasta",
                 Satisfaction = 4,
-                RegisteredTime = new DateTime(year,month,day2, hour: 22, minute: 13, second:21)
+                RegisteredTime = new DateTime(year,month,_day2, hour: 22, minute: 13, second:21)
             },
 
             // Day 3
@@ -81,7 +118,7 @@ namespace SelfMonitoringApp.Services
                 MealType = "Breakfast",
                 Description = "Fruit",
                 Satisfaction = 5.3,
-                RegisteredTime = new DateTime(year,month,day3, hour: 8, minute:32, second:0)
+                RegisteredTime = new DateTime(year,month,_day3, hour: 8, minute:32, second:0)
             },
             new MealModel
             {
@@ -89,7 +126,7 @@ namespace SelfMonitoringApp.Services
                 MealType = "Lunch",
                 Description = "Curry",
                 Satisfaction = 9.2,
-                RegisteredTime = new DateTime(year,month,day3, hour: 13, minute: 29, second:39)
+                RegisteredTime = new DateTime(year,month,_day3, hour: 13, minute: 29, second:39)
             },
             new MealModel
             {
@@ -97,12 +134,51 @@ namespace SelfMonitoringApp.Services
                 MealType = "Lunch",
                 Description = "BIG SOOUP",
                 Satisfaction = 9.2,
-                RegisteredTime = new DateTime(year,month,day3, hour: 18, minute: 19, second:39)
+
+                RegisteredTime = new DateTime(year,month,_day3, hour: 18, minute: 19, second:39)
             },
         };
 
         public static List<SubstanceModel> GetSubstanceSamples() => new List<SubstanceModel>()
         {
+            //Day 1
+            new SubstanceModel()
+            {
+                ConsumptionMethod= "Drank",
+                SubstanceName = "Coffee",
+                Amount = 1,
+                Unit = "Cup",
+                Satisfaction = 7.1,
+                RegisteredTime = new DateTime(year,month,_day1, hour: 8, minute:20, second:0)
+            },
+            new SubstanceModel()
+            {
+                ConsumptionMethod= "Drank",
+                SubstanceName = "Coffee",
+                Amount = 1.5,
+                Unit = "Cup",
+                Satisfaction = 4,
+                RegisteredTime = new DateTime(year,month,_day1, hour: 9, minute:23, second:0)
+            },
+            new SubstanceModel()
+            {
+                ConsumptionMethod= "Drank",
+                SubstanceName = "Tea",
+                Amount = 10,
+                Unit = "cup",
+                Satisfaction = 8,
+                RegisteredTime = new DateTime(year,month,_day1, hour: 12, minute:20, second:0)
+            },
+            new SubstanceModel()
+            {
+                ConsumptionMethod= "Drank",
+                SubstanceName = "Coffee",
+                Amount = 1,
+                Unit = "Cup",
+                Satisfaction = 3,
+                RegisteredTime = new DateTime(year,month,_day1, hour: 16, minute:20, second:0)
+            },
+
             //Day 2
             new SubstanceModel()
             {
@@ -111,8 +187,17 @@ namespace SelfMonitoringApp.Services
                 Amount = 0.1,
                 Unit = "g",
                 Satisfaction = 7.1,
-                RegisteredTime = new DateTime(year,month,day2, hour: 16, minute:20, second:0)
-            }
+                RegisteredTime = new DateTime(year,month,_day2, hour: 18, minute:20, second:0)
+            },
+            new SubstanceModel()
+            {
+                ConsumptionMethod= "Drank",
+                SubstanceName = "Beer",
+                Amount = 1,
+                Unit = "Pint",
+                Satisfaction = 7.1,
+                RegisteredTime = new DateTime(year,month,_day1, hour: 16, minute:20, second:0)
+            },
         };
 
         public static List<MoodModel> GetMoodSamples() => new List<MoodModel>()
@@ -120,35 +205,40 @@ namespace SelfMonitoringApp.Services
             //Day 1
             new MoodModel()
             {
-                Description = "Some sad thing",
-                OverallMood = 3.1,
-                StrongestEmotion = "super s ad sad",
-                RegisteredTime = new DateTime(year,month,day1, hour: 8, minute:20, second:0)
+                Description = "Wanted to get pie",
+                OverallMood = 7.1,
+                StrongestEmotion = "Pie Thirst",
+                Location = "Home",
+                RegisteredTime = new DateTime(year,month,_day1, hour: 8, minute:20, second:0)
             },
+
             new MoodModel()
             {
-                Description = "Some mediocre thing",
+                Description = "Pie shop is closed",
                 OverallMood = 5.8,
                 StrongestEmotion = "anger",
-                RegisteredTime = new DateTime(year,month,day1, hour: 10, minute:15, second:0)
+                Location = "Pie Shop",
+                RegisteredTime = new DateTime(year,month,_day1, hour: 10, minute:15, second:0)
             },
             new MoodModel()
             {
                 OverallMood = 2,
-                RegisteredTime = new DateTime(year,month,day1, hour: 11, minute:41, second:0)
+                StrongestEmotion="saddness",
+                RegisteredTime = new DateTime(year,month,_day1, hour: 11, minute:41, second:0)
             },
             new MoodModel()
             {
-                Description = "Some good thing",
+                Description = "Ill never see another pie again",
                 OverallMood = 8,
-                RegisteredTime = new DateTime(year,month,day1, hour: 14 , minute:11, second:0)
+                RegisteredTime = new DateTime(year,month,_day1, hour: 14 , minute:11, second:0)
             },
             new MoodModel()
             {
-                Description = "asda",
+                Description = "D",
                 OverallMood = 1.2,
-                StrongestEmotion = "sadness :)",
-                RegisteredTime = new DateTime(year,month,day1, hour: 17 , minute:13, second:0)
+                Location = "Home",
+                StrongestEmotion = "Devestated",
+                RegisteredTime = new DateTime(year,month,_day1, hour: 17 , minute:13, second:0)
             },
 
             //Day 2
@@ -157,29 +247,29 @@ namespace SelfMonitoringApp.Services
                 Description = "Saw 5 cats",
                 OverallMood = 9.9,
                 StrongestEmotion="bleeech",
-                RegisteredTime = new DateTime(year,month,day2, hour: 7, minute:22, second:0)
+                RegisteredTime = new DateTime(year,month,_day2, hour: 7, minute:22, second:0)
             },
             new MoodModel()
             {
                 OverallMood = 2.1,
-                RegisteredTime = new DateTime(year,month,day2, hour: 13, minute:21, second:01)
+                RegisteredTime = new DateTime(year,month,_day2, hour: 13, minute:21, second:01)
             },
             new MoodModel()
             {
                 OverallMood = 4.8,
-                RegisteredTime = new DateTime(year,month,day1, hour: 15, minute:22, second:0)
+                RegisteredTime = new DateTime(year,month,_day1, hour: 15, minute:22, second:0)
             },
             new MoodModel()
             {
                 Description = "Saw 9 more cats",
                 OverallMood = 10,
-                RegisteredTime = new DateTime(year,month,day1, hour: 17, minute:11, second:0)
+                RegisteredTime = new DateTime(year,month,_day1, hour: 17, minute:11, second:0)
             },
             new MoodModel()
             {
                 OverallMood = 0.08,
                 Description = "Was told ill never see cats again :(",
-                RegisteredTime = new DateTime(year,month,day1, hour: 18 , minute:13, second:0)
+                RegisteredTime = new DateTime(year,month,_day1, hour: 18 , minute:13, second:0)
             }
         };
 
@@ -188,25 +278,25 @@ namespace SelfMonitoringApp.Services
             new SleepModel()
             {
                 SleepStart = new TimeSpan(23,0,0),
-                SleepStartDate = new DateTime(year,month, day1-1,23,0,0),
-                RegisteredTime = new DateTime(year,month,day1),
+                SleepStartDate = new DateTime(year,month, _day1,23,0,0),
+                RegisteredTime = new DateTime(year,month,_day2),
 
                 SleepEnd = new TimeSpan(8,0,0),
-                SleepEndDate = new DateTime(year, month,day1,8,0,0),
+                SleepEndDate = new DateTime(year, month,_day2,8,0,0),
                 TotalSleep = 9,
 
                 Nightmare =true,
                 DreamLog="someone took all my cats away",
                 RestRating = 1.2
-            },
+            },  
             new SleepModel()
             {
                 SleepStart = new TimeSpan(23,59,59),
-                SleepStartDate = new DateTime(year,month, day1,23,59,59),
-                RegisteredTime = new DateTime(year,month,day2),
+                SleepStartDate = new DateTime(year,month, _day2,23,59,59),
+                RegisteredTime = new DateTime(year,month,_day2),
 
                 SleepEnd = new TimeSpan(8,0,0),
-                SleepEndDate = new DateTime(year, month,day2,8,0,0),
+                SleepEndDate = new DateTime(year, month,_day3,8,0,0),
                 TotalSleep = 8,
 
 
@@ -219,12 +309,11 @@ namespace SelfMonitoringApp.Services
         {
             new ActivityModel()
             {
-                Description = "2 many jumping jax",
-                StartTime = new TimeSpan(13,30,0 ),
-                EndTime = new TimeSpan(14,0,0),
-                Duration = 0.5,
-                Enjoyment = 2.0,
-                Exersice = true
+                Description = "Painted a picture of a pie", 
+                StartTime = new DateTime(year,month,_day1,7,30,15,0),
+                WantedToStart = true,
+                Duration = 1.4,
+                Enjoyment = 8.1
             }
         };
     }

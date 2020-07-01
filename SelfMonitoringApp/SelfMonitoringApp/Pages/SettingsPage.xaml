@@ -11,31 +11,29 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Margin="0,8,0,0">
-                
-                <controls:HeaderBlock HeaderText="Delete Data" HeightRequest="400">
+
+                <controls:HeaderBlock HeaderText="Misc" >
                     <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
+                        <Button Style="{StaticResource ButtonStyle}" Text="Add Sample Logs" Command="{Binding AddRandomLogsCommand}"/>
+                    </Grid>
+                </controls:HeaderBlock>
+                <controls:HeaderBlock HeaderText="Delete Data" HeightRequest="350">
+                    <Grid>
 
                         <Button Command="{Binding DeleteLogCommand}"  Style="{StaticResource ButtonStyle}" 
-                                Text="Delete all mood logs" CommandParameter="mood"/>
+                                Text="Delete all mood logs" CommandParameter="mood" Margin="0"/>
 
                         <Button Grid.Row="1" Command="{Binding DeleteLogCommand}" Style="{StaticResource ButtonStyle}"
-                                Text="Delete all sleep logs" CommandParameter="sleep"/>
+                                Text="Delete all sleep logs" CommandParameter="sleep" Margin="0"/>
 
                         <Button Grid.Row="2" Command="{Binding DeleteLogCommand}" Style="{StaticResource ButtonStyle}" 
-                                Text="Delete all meal logs" CommandParameter="meal" />
+                                Text="Delete all meal logs" CommandParameter="meal" Margin="0"/>
 
                         <Button Grid.Row="3" Command="{Binding DeleteLogCommand}" Style="{StaticResource ButtonStyle}"
-                                Text="Delete all substance logs" CommandParameter="substance" />
+                                Text="Delete all substance logs" CommandParameter="substance" Margin="0"/>
 
                         <Button Grid.Row="4" Command="{Binding DeleteLogCommand}" Style="{StaticResource ButtonStyle}"
-                                Text="Delete all logs" CommandParameter="all"/>
+                                Text="Delete all logs" CommandParameter="all" Margin="0"/>
                         
                     </Grid>
                 </controls:HeaderBlock>

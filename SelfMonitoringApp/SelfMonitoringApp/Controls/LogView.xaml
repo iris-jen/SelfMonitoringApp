@@ -19,22 +19,7 @@
                     </Frame>
 
                     <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition Height="40"/>
-                        </Grid.RowDefinitions>
-
                         <ContentPresenter/>
-
-                        <!--Edit Delete Buttons-->
-                        <Grid Padding="0" Grid.Row="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <Button Text="Edit" Style="{StaticResource ButtonStyle}" Margin="0"/>
-                            <Button Grid.Column="1" Text="Delete" Style="{StaticResource ButtonStyle}" Margin="0"/>
-                        </Grid>
                     </Grid>
                 </StackLayout>
             </Frame>

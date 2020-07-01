@@ -71,7 +71,7 @@ namespace SelfMonitoringApp.ViewModels
             }
         }
 
-        private DateTime _sleepStartDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day-1);
+        private DateTime _sleepStartDate = DateTime.Now.AddDays(-1);
         public DateTime SleepStartDate
         {
             get => _sleepStartDate;

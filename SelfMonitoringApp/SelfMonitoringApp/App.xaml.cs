@@ -31,6 +31,7 @@ namespace SelfMonitoringApp
         public App()
         {
             InitializeComponent();
+            Database.InitializeAsync().SafeFireAndForget(true);
             var navigator = new NavigationService(this, new ViewLocator());
             var rootViewModel = new MainViewModel(navigator);
             navigator.PresentAsNavigatableMainPage(rootViewModel);

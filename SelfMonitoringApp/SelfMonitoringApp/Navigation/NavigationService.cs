@@ -1,5 +1,6 @@
-﻿using SelfMonitoringApp.ViewModels.Base;
-
+﻿using SelfMonitoringApp.Models;
+using SelfMonitoringApp.ViewModels.Base;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -29,12 +30,20 @@ namespace SelfMonitoringApp.Navigation
         {
             var page = _viewLocator.CreateAndBindPageFor(viewModel);
             NavigationPage newNavigationPage = new NavigationPage(page);
+            newNavigationPage.Focused += NewNavigationPage_Focused;
             _presentationRoot.MainPage = newNavigationPage;
+        }
+        
+        public event EventHandler PageIsTop;
+        private void NewNavigationPage_Focused(object sender, FocusEventArgs e)
+        {
+            PageIsTop?.Invoke(this, EventArgs.Empty);
         }
 
         public async Task NavigateTo(INavigationViewModel viewModel)
         {
             var page = _viewLocator.CreateAndBindPageFor(viewModel);
+            page.Focused += NewNavigationPage_Focused;
             await Navigator.PushAsync(page);
         }
 
@@ -42,6 +51,7 @@ namespace SelfMonitoringApp.Navigation
         {       
             await Navigator.PopAsync();
         }
+
 
         public async Task NavigateBackToRoot()
         {

@@ -11,7 +11,7 @@
                    Margin="10,2,10,2">
                 <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="15"/>
+                        <RowDefinition Height="18"/>
                         <RowDefinition Height="2"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>

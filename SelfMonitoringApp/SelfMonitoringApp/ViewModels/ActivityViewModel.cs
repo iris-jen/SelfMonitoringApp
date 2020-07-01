@@ -28,29 +28,30 @@ namespace SelfMonitoringApp.ViewModels
             }
         }
 
+        private TimeSpan _startTime;
         public TimeSpan StartTime
         {
-            get => _activity.StartTime;
+            get => _startTime;
             set
             {
-                if (_activity.StartTime == value)
+                if (_startTime == value)
                     return;
 
-                _activity.StartTime = value;
+                _startTime = value;
                 NotifyPropertyChanged();
             }
         }
 
-
+        private TimeSpan _endTime;
         public TimeSpan EndTime
         {
-            get => _activity.EndTime;
+            get =>  _endTime;
             set
             {
-                if (_activity.EndTime == value)
+                if (_endTime == value)
                     return;
 
-                _activity.EndTime = value;
+                _endTime = value;
                 NotifyPropertyChanged();
             }
         }
@@ -109,15 +110,15 @@ namespace SelfMonitoringApp.ViewModels
         {
             var now = DateTime.Now; 
             _activity.RegisteredTime = DateTime.Now;
-            var startDateTime = new DateTime(now.Year, now.Month, now.Day, StartTime.Hours, StartTime.Minutes, StartTime.Seconds);
+            _activity.StartTime = new DateTime(now.Year, now.Month, now.Day, StartTime.Hours, StartTime.Minutes, StartTime.Seconds);
             var endDateTime = new DateTime(now.Year, now.Month, now.Day, EndTime.Hours, EndTime.Minutes, EndTime.Seconds);
-            _activity.Duration = endDateTime.Subtract(startDateTime).TotalHours;
+            _activity.Duration = endDateTime.Subtract(_activity.StartTime).TotalHours;
             return _activity;
         }
 
         public async Task SaveAndPop()
         {
-            await App.Database.AddOrModifyModelAsync(_activity);
+            await App.Database.AddOrModifyModelAsync(RegisterAndGetModel());
             await _navigator.NavigateBack();
         }
     }

@@ -1,55 +1,48 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting.Logging;
 using Moq;
 using SelfMonitoringApp.Models;
 using SelfMonitoringApp.Services;
 using System;
 using System.Collections.Generic;
-
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 
 namespace SelfMonitoringApp.UnitTests
 {
     [TestClass]
     public class DataStoreTests
     {
-
         [TestInitialize]
-        public void Init()
+        public async Task Init()
         {
-            
+            Logger.LogMessage("Adding samples to get the lazy initializer to go");
+            await AddAllSampleLogs();
+        }
+
+        private async Task AddAllSampleLogs()
+        {
+            foreach (ActivityModel model in LogSamples.GetActivitySamples())
+                await App.Database.AddOrModifyModelAsync(model);
+
+            foreach (MealModel model in LogSamples.GetMealSamples())
+                await App.Database.AddOrModifyModelAsync(model);
+
+            foreach (MoodModel model in LogSamples.GetMoodSamples())
+                await App.Database.AddOrModifyModelAsync(model);
+
+            foreach (SleepModel model in LogSamples.GetSleepSamples())
+                await App.Database.AddOrModifyModelAsync(model);
+
+            foreach (SubstanceModel model in LogSamples.GetSubstanceSamples())
+                await App.Database.AddOrModifyModelAsync(model);
         }
 
         [TestMethod]
-        public void TestLogSaving()
+        public async Task TestDatabase()
         {
-            var mood = new MoodModel
-            {
-                Description = "was v sad",
-                OverallMood = 1.21,
-                RegisteredTime = DateTime.Now
-            };
-
-            var sleep = new SleepModel
-            {
-                SleepStart = new TimeSpan(1, 30, 0),
-                SleepEnd = new TimeSpan(6, 46, 1),
-                TotalSleep = 1.2,
-                RememberedDream = true,
-                DreamLog = "was attacked by logs all night, log after log after log. 5/5 would do again",
-
-                RestRating = 7.1,
-                RegisteredTime = DateTime.Now.AddMinutes(1)
-            };
-
-            var substance = new SubstanceModel
-            {
-                ConsumptionMethod = "Smoked",
-                SubstanceName = "Weed",
-                Amount = 0.1,
-                Unit = "g",
-                Comment = "blaze it",
-                Satisfaction = 4.20,
-                RegisteredTime = DateTime.Now.AddMinutes(2)
-            };
+        
 
         }
 
@@ -57,7 +50,7 @@ namespace SelfMonitoringApp.UnitTests
         [TestCleanup]
         public void Cleanup()
         {
-
+            
         }
     }
 }
