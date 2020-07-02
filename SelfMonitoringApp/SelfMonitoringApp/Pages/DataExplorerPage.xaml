@@ -185,11 +185,11 @@
                                                     <controls:HeaderBlockLight Margin="0" Padding="0" HeaderText="{Binding Description}">
                                                         <Frame Margin="2" Padding="0">
                                                             <StackLayout Padding="0">
-                                                                <Grid HeightRequest="40">
+                                                                <Grid HeightRequest="100">
                                                                     <Grid.ColumnDefinitions>
-                                                                        <ColumnDefinition Width="50"/>
-                                                                        <ColumnDefinition Width="50"/>
-                                                                        <ColumnDefinition/>
+                                                                        <ColumnDefinition />
+                                                                        <ColumnDefinition />
+                                                                        <ColumnDefinition Width=".9*"/>
                                                                     </Grid.ColumnDefinitions>
                                                                     <Label Text="Duration" Style="{StaticResource HeaderLabel}"/>
                                                                     <Label Text="{Binding Duration, StringFormat='{0:N2}h'}" Style="{StaticResource ListBoxLabel}" Grid.Row="1"/>
@@ -198,13 +198,13 @@
                                                                     <Label Text="{Binding StartTime, StringFormat='{0:hh:mm tt}'}" Style="{StaticResource ListBoxLabel}" Grid.Row="1" Grid.Column="1"/>
 
                                                                     <Label Text="Enjoyment" Style="{StaticResource HeaderLabel}" Grid.Column="2"/>
-                                                                    <Label Text="{Binding Enjoyment }" Style="{StaticResource ListBoxLabel}" Grid.Row="1" Grid.Column="2"/>
+                                                                    <Label Text="{Binding Enjoyment}" Style="{StaticResource ListBoxLabel}" Grid.Row="1" Grid.Column="2"/>
 
-                                                                    <Label Text="Exercise" Style="{StaticResource HeaderLabel}" Grid.Column="3"/>
-                                                                    <CheckBox IsChecked="{Binding Exersice}" HorizontalOptions="Center" Grid.Row="1" Grid.Column="3" IsEnabled="False"/>
+                                                                    <Label Text="Exercise" Style="{StaticResource HeaderLabel}" Grid.Row="2"/>
+                                                                    <CheckBox IsChecked="{Binding Exersice}" HorizontalOptions="Center" Grid.Row="3" IsEnabled="False" Color="Black"/>
 
-                                                                    <Label Text="Interest" Style="{StaticResource HeaderLabel}" Grid.Column="4"/>
-                                                                    <CheckBox IsChecked="{Binding Exersice}" HorizontalOptions="Center" Grid.Row="1" Grid.Column="4" IsEnabled="False"/>
+                                                                    <Label Text="Interest" Style="{StaticResource HeaderLabel}" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2"/>
+                                                                    <CheckBox IsChecked="{Binding WantedToStart}" Color="Black" HorizontalOptions="Center" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" IsEnabled="False"/>
                                                                 </Grid>
                                                             </StackLayout>
                                                         </Frame>
@@ -252,6 +252,7 @@
                                                                     <Label Text="Enj." Style="{StaticResource HeaderLabel}" Grid.Column="4"/>
                                                                     <Label Text="{Binding Satisfaction, StringFormat='{0:N1}/10'}" Style="{StaticResource ListBoxLabel}" Grid.Row="1" Grid.Column="4"/>
                                                                 </Grid>
+                                                                <Label Text="{Binding Comment}" Grid.Row="1" Style="{StaticResource ListBoxLabel}" />
                                                             </StackLayout>
                                                         </Frame>
                                                     </controls:HeaderBlockLight>

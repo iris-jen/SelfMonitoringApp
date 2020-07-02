@@ -49,7 +49,7 @@
                 </Grid>
 
                 <controls:HeaderBlock HeaderText="How much did you enjoy it?" Grid.Row="2">
-                    <controls:RatingSlider/>
+                    <controls:RatingSlider Rating="{Binding Enjoyment}"/>
                 </controls:HeaderBlock>
                 
                 <controls:HeaderBlock Grid.Row="3" HeaderText="Details">
@@ -72,8 +72,6 @@
                             </Grid>
                         </Frame>
 
-                        <!--todo Should make this thingey a template-->
-                        <!--DId-->
                         <Frame Padding="0" Grid.Row="1">
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -86,7 +84,6 @@
                                 </Frame>
                             </Grid>
                         </Frame>
-
                     </Grid>
                 </controls:HeaderBlock>
 

@@ -12,74 +12,87 @@ namespace SelfMonitoringApp.ViewModels
 {
     public class SubstanceViewModel: NavigatableViewModelBase, INavigationViewModel
     {
-        private readonly SubstanceModel _substanceModel;
-        private bool _editing;
-        public const string NavigationNodeName = "substance";
+        private readonly SubstanceModel _substance;
+        private readonly bool _editing;
 
+        public const string NavigationNodeName = "substance";
         public event EventHandler ModelShed;
         public Command SaveLogCommand { get; private set; }
 
         public string ConsumptionMethod
         {
-            get => _substanceModel.ConsumptionMethod;
+            get => _substance.ConsumptionMethod;
             set
             {
-                if (_substanceModel.ConsumptionMethod == value)
+                if (_substance.ConsumptionMethod == value)
                     return;
 
-                _substanceModel.ConsumptionMethod = value;
+                _substance.ConsumptionMethod = value;
                 NotifyPropertyChanged();
             }
         }
 
         public string SubstanceName
         {
-            get => _substanceModel.SubstanceName;
+            get => _substance.SubstanceName;
             set
             {
-                if (_substanceModel.SubstanceName == value)
+                if (_substance.SubstanceName == value)
                     return;
 
-                _substanceModel.SubstanceName = value;
+                _substance.SubstanceName = value;
                 NotifyPropertyChanged();
             }
         }
 
         public string Comment
         {
-            get => _substanceModel.Comment;
+            get => _substance.Comment;
             set
             {
-                if (_substanceModel.Comment == value)
+                if (_substance.Comment == value)
                     return;
 
-                _substanceModel.Comment = value;
+                _substance.Comment = value;
                 NotifyPropertyChanged();
             }
         }
 
         public double Ammount
         {
-            get => _substanceModel.Amount;
+            get => _substance.Amount;
             set
             {
-                if (_substanceModel.Amount == value)
+                if (_substance.Amount == value)
                     return;
 
-                _substanceModel.Amount = value;
+                _substance.Amount = value;
                 NotifyPropertyChanged();
             }
         }
 
         public string Unit
         {
-            get => _substanceModel.Unit;
+            get => _substance.Unit;
             set
             {
-                if (_substanceModel.Unit == value)
+                if (_substance.Unit == value)
                     return;
 
-                _substanceModel.Unit = value;
+                _substance.Unit = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public double Satisfaction
+        {
+            get => _substance.Satisfaction;
+            set
+            {
+                if (_substance.Satisfaction == value)
+                    return;
+
+                _substance.Satisfaction = value;
                 NotifyPropertyChanged();
             }
         }
@@ -87,11 +100,11 @@ namespace SelfMonitoringApp.ViewModels
         public SubstanceViewModel(INavigationService navService, IModel existingModel = null) : base(navService)
         {
             if (existingModel is null)
-                _substanceModel = new SubstanceModel();
+                _substance = new SubstanceModel();
             else
             {
+                _substance = existingModel as SubstanceModel;
                 _editing = true;
-                _substanceModel = existingModel as SubstanceModel;
             }
 
             SaveLogCommand = new Command(async ()=> await SaveAndPop());
@@ -100,9 +113,9 @@ namespace SelfMonitoringApp.ViewModels
         public IModel RegisterAndGetModel()
         {
             if(!_editing)
-                _substanceModel.RegisteredTime = DateTime.Now;
+                _substance.RegisteredTime = DateTime.Now;
 
-            return _substanceModel;
+            return _substance;
         }
 
         public async Task SaveAndPop()

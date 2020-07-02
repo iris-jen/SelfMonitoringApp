@@ -26,6 +26,5 @@ namespace SelfMonitoringApp.Models
         public double OverallMood    { get; set; }
 
         public MoodModel(): base(ModelType.Mood) { }
-
     }
 }

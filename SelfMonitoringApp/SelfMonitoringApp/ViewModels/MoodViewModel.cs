@@ -18,8 +18,8 @@ namespace SelfMonitoringApp.ViewModels
         private readonly bool _editing;
 
         public const string NavigationNodeName = "mood";
+        public Command SaveLogCommand { get; private set; }
         public event EventHandler ModelShed;        
-        public ObservableCollection<string> Emotions { get; private set; }
 
         public string Description
         {
@@ -72,8 +72,6 @@ namespace SelfMonitoringApp.ViewModels
                 NotifyPropertyChanged();
             }
         }
-
-        public Command SaveLogCommand { get; private set; }
 
         /// <summary>
         /// Constructor for loading an existing mood log;

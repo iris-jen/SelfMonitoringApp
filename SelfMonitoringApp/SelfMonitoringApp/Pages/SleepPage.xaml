@@ -94,7 +94,7 @@
                                 </Grid.ColumnDefinitions>
                                 <Label Text="Was it a nightmare?" HorizontalOptions="Center" VerticalOptions="Center"/>
                                 <Frame Grid.Column="1" BackgroundColor="{StaticResource PrimaryLight}" Padding="0" Margin="3">
-                                    <Switch Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                    <Switch Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" IsToggled="{Binding Nightmare}"/>
                                 </Frame>
                             </Grid>
                         </Frame>

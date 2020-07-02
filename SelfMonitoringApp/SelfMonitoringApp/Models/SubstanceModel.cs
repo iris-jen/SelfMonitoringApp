@@ -32,7 +32,7 @@ namespace SelfMonitoringApp.Models
         /// </summary>
         public string Unit              { get; set; } = string.Empty;
 
-        public SubstanceModel(): base(ModelType.Sleep)
+        public SubstanceModel(): base(ModelType.Substance)
         {
               
         }

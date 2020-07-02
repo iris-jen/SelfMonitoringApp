@@ -4,6 +4,7 @@ using SelfMonitoringApp.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -259,26 +260,41 @@ namespace SelfMonitoringApp.ViewModels
             switch (type)
             {
                 case ModelType.Activity:
+                    if (SelectedActivity is null)
+                        return;
+
                     _activityEditor = new ActivityViewModel(_navigator, SelectedActivity);
                     _activityEditor.ModelShed += Vm_ModelShed;
                     await _navigator.NavigateTo(_activityEditor);
                     break;
                 case ModelType.Meal:
+                    if (SelectedMeal is null)
+                        return;
+
                     _mealEditor = new MealViewModel(_navigator, SelectedMeal);
                     _mealEditor.ModelShed += Vm_ModelShed;
                     await _navigator.NavigateTo(_mealEditor);
                     break;
                 case ModelType.Mood:
+                    if (SelectedMood is null)
+                        return;
+
                     _moodEditor = new MoodViewModel(_navigator, SelectedMood);
                     _moodEditor.ModelShed += Vm_ModelShed;
                     await _navigator.NavigateTo(_moodEditor);
                     break;
                 case ModelType.Sleep:
+                    if (SelectedSleep is null)
+                        return;
+
                     _sleepEditor = new SleepViewModel(_navigator, SelectedSleep);
                     _sleepEditor.ModelShed += Vm_ModelShed;
                     await _navigator.NavigateTo(_sleepEditor);
                     break;
                 case ModelType.Substance:
+                    if (SelectedSubstance is null)
+                        return;
+
                     _substanceEditor = new SubstanceViewModel(_navigator, SelectedSubstance);
                     _substanceEditor.ModelShed += Vm_ModelShed;
                     await _navigator.NavigateTo(_substanceEditor);

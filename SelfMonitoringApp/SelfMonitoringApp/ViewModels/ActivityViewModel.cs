@@ -98,6 +98,21 @@ namespace SelfMonitoringApp.ViewModels
             }
         }
 
+
+        public bool WantedToStart
+        {
+            get => _activity.WantedToStart;
+            set
+            {
+                if (_activity.WantedToStart == value)
+                    return;
+
+                _activity.WantedToStart = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
         public ActivityViewModel(INavigationService navService, IModel activityModel = null) : base(navService)
         {
             if (activityModel is null)
