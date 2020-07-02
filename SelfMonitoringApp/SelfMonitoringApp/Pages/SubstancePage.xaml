@@ -53,7 +53,7 @@
                 </Grid>
 
                 <controls:HeaderBlock HeaderText="Rate how you feel" Grid.Row="2">
-                    <controls:RatingSlider />
+                    <controls:RatingSlider Rating="{Binding Satisfaction}"/>
                 </controls:HeaderBlock>
 
                 <controls:HeaderBlock HeaderText="Comment" Grid.Row="3" Margin="0,0,0,5">

@@ -10,7 +10,7 @@ using System.Data;
 using System.Threading.Tasks;
 using Xamarin.Forms.Internals;
 
-namespace SelfMonitoringApp.Services
+namespace SelfMonitoringApp.Models
 {
     public static class LogSamples
     {

@@ -32,7 +32,5 @@ namespace SelfMonitoringApp.Navigation
         /// Navigate back to the element at the root of the navigation stack
         /// </summary>
         Task NavigateBackToRoot();
-
-        event EventHandler PageIsTop;
     }
 }

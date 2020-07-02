@@ -5,6 +5,7 @@ using SelfMonitoringApp.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace SelfMonitoringApp.ViewModels
@@ -12,8 +13,10 @@ namespace SelfMonitoringApp.ViewModels
     public class SubstanceViewModel: NavigatableViewModelBase, INavigationViewModel
     {
         private readonly SubstanceModel _substanceModel;
+        private bool _editing;
         public const string NavigationNodeName = "substance";
 
+        public event EventHandler ModelShed;
         public Command SaveLogCommand { get; private set; }
 
         public string ConsumptionMethod
@@ -86,21 +89,29 @@ namespace SelfMonitoringApp.ViewModels
             if (existingModel is null)
                 _substanceModel = new SubstanceModel();
             else
+            {
+                _editing = true;
                 _substanceModel = existingModel as SubstanceModel;
+            }
 
-            SaveLogCommand = new Command(SaveAndPop);
+            SaveLogCommand = new Command(async ()=> await SaveAndPop());
         }
 
         public IModel RegisterAndGetModel()
         {
-            _substanceModel.RegisteredTime = DateTime.Now;
+            if(!_editing)
+                _substanceModel.RegisteredTime = DateTime.Now;
+
             return _substanceModel;
         }
 
-        public void SaveAndPop()
+        public async Task SaveAndPop()
         {
-            App.Database.AddOrModifyModelAsync(RegisterAndGetModel());
-            _navigator.NavigateBack();
+            var model = RegisterAndGetModel();
+            await App.Database.AddOrModifyModelAsync(model);
+            await _navigator.NavigateBack();
+            ModelShed?.Invoke(this, new ModelShedEventArgs(model));
         }
+        
     }
 }

@@ -74,11 +74,21 @@ namespace SelfMonitoringApp.Services
 
         public Task<int> AddOrModifyModelAsync(IModel model)
         {
-            if (model.ID != 0)
-                return _database.UpdateAsync(model);
-            else
-                return _database.InsertAsync(model);
+            try
+            {
+                if (model.ID != 0)
+                    return _database.UpdateAsync(model);
+                else
+                    return _database.InsertAsync(model);
+            }
+            catch(Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+                throw;
+            }
         }
+
+        public Task DeleteLog(IModel model) => _database.DeleteAsync(model);
 
     }
 }

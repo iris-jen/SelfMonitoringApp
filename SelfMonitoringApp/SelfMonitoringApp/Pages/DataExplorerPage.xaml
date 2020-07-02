@@ -44,42 +44,48 @@
                                 
                                 <!--Sleep Box-->
                                 <controls:LogView Title="Sleep" IsVisible="{Binding SleepsVisibility}" Margin="5,0,5,5">
-                                    <!--Sleep Collection View-->
-                                    <CollectionView ItemsSource="{Binding Sleeps}" Grid.Row="1" SelectionMode="Single">
-                                        <CollectionView.ItemTemplate>
-                                            <DataTemplate>
-                                                <!--Block-->
-                                                <controls:HeaderBlockLight Margin="0" Padding="0" HeaderText="{Binding TotalSleep, StringFormat='{0:F1} hours'}">
-                                                    <Frame Margin="2" Padding="0">
-                                                        <StackLayout Padding="0">
-  
-                                                            <Grid HeightRequest="80">
+                                    <StackLayout>
+                                        <!--Sleep Collection View-->
+                                        <CollectionView ItemsSource="{Binding Sleeps}" Grid.Row="1" SelectionMode="Single" SelectedItem="{Binding SelectedSleep}">
+                                            <CollectionView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <!--Block-->
+                                                    <controls:HeaderBlockLight Margin="0" Padding="0" HeaderText="{Binding TotalSleep, StringFormat='{0:F1} hours'}">
+                                                        <Frame Margin="2" Padding="0">
+                                                            <StackLayout Padding="0">
 
-                                                                <Label Text="Start" Style="{StaticResource HeaderLabel}"/>
-                                                                <Label Text="{Binding SleepStartDate, StringFormat='{0:hh:mm tt}'}" Style="{StaticResource ListBoxLabel}" Grid.Row="1"/>
+                                                                <Grid HeightRequest="80">
 
-                                                                <Label Text="End" Style="{StaticResource HeaderLabel}" Grid.Column="1"/>
-                                                                <Label Text="{Binding SleepEndDate, StringFormat='{0:hh:mm tt}'}" Style="{StaticResource ListBoxLabel}" Grid.Column="1" Grid.Row="1"/>
+                                                                    <Label Text="Start" Style="{StaticResource HeaderLabel}"/>
+                                                                    <Label Text="{Binding SleepStartDate, StringFormat='{0:hh:mm tt}'}" Style="{StaticResource ListBoxLabel}" Grid.Row="1"/>
 
-                                                                <Label Text="Rest Rating" Style="{StaticResource HeaderLabel}" Grid.Column="2" Grid.ColumnSpan="2"/>
-                                                                <Label Text="{Binding RestRating, StringFormat='{0:F1} / 10'}" Style="{StaticResource ListBoxLabel}" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2"/>
+                                                                    <Label Text="End" Style="{StaticResource HeaderLabel}" Grid.Column="1"/>
+                                                                    <Label Text="{Binding SleepEndDate, StringFormat='{0:hh:mm tt}'}" Style="{StaticResource ListBoxLabel}" Grid.Column="1" Grid.Row="1"/>
 
-                                                                <Label Text="Had Dream" Style="{StaticResource HeaderLabel}" Grid.Row="2" Grid.ColumnSpan="2"/>
-                                                                <CheckBox IsChecked="{Binding RememberedDream}" Color="Black" IsEnabled="False" HorizontalOptions="Center"  
+                                                                    <Label Text="Rest Rating" Style="{StaticResource HeaderLabel}" Grid.Column="2" Grid.ColumnSpan="2"/>
+                                                                    <Label Text="{Binding RestRating, StringFormat='{0:F1} / 10'}" Style="{StaticResource ListBoxLabel}" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2"/>
+
+                                                                    <Label Text="Had Dream" Style="{StaticResource HeaderLabel}" Grid.Row="2" Grid.ColumnSpan="2"/>
+                                                                    <CheckBox IsChecked="{Binding RememberedDream}" Color="Black" IsEnabled="False" HorizontalOptions="Center"  
                                                                             Grid.Row="3" Grid.ColumnSpan="2"/>
 
-                                                                <Label Text="Was Nightmare" Style="{StaticResource HeaderLabel}" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="2"/>
-                                                                <CheckBox IsChecked="{Binding RememberedDream}" Grid.Column="2" Color="Black" IsEnabled="False" HorizontalOptions="Center"  
+                                                                    <Label Text="Was Nightmare" Style="{StaticResource HeaderLabel}" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="2"/>
+                                                                    <CheckBox IsChecked="{Binding Nightmare}" Grid.Column="2" Color="Black" IsEnabled="False" HorizontalOptions="Center"  
                                                                                 Grid.Row="3" Grid.ColumnSpan="2"/>
 
-                                                            </Grid>
-                                                            <Label Text="{Binding DreamLog}" Grid.Row="1" Style="{StaticResource ListBoxLabel}" />
-                                                        </StackLayout>
-                                                    </Frame>
-                                                </controls:HeaderBlockLight>
-                                            </DataTemplate>
-                                        </CollectionView.ItemTemplate>
-                                    </CollectionView>
+                                                                </Grid>
+                                                                <Label Text="{Binding DreamLog}" Grid.Row="1" Style="{StaticResource ListBoxLabel}" />
+                                                            </StackLayout>
+                                                        </Frame>
+                                                    </controls:HeaderBlockLight>
+                                                </DataTemplate>
+                                            </CollectionView.ItemTemplate>
+                                        </CollectionView>
+                                        <Grid HeightRequest="80" Margin="0" Padding="0" BackgroundColor="DarkGray">
+                                            <Button Text="Edit" Padding="0" Command="{Binding EditSelectedCommand}" CommandParameter="{x:Static models:ModelType.Sleep}"/>
+                                            <Button Text="Delete" Grid.Column="1" Padding="0" Command="{Binding DeleteSelectedCommand}" CommandParameter="{x:Static models:ModelType.Sleep}"/>
+                                        </Grid>
+                                    </StackLayout>
                                 </controls:LogView > 
 
                                 <!--Mood Box-->
@@ -124,104 +130,159 @@
 
                                 <!--Meal Box-->
                                 <controls:LogView Title="Meal" IsVisible="{Binding MealsVisibility}" Margin="5,0,5,5">
-                                    <!--Mood Collection View-->
-                                    <CollectionView ItemsSource="{Binding Meals}" Grid.Row="1">
-                                        <CollectionView.ItemTemplate>
-                                            <DataTemplate>
+                                    <StackLayout>
+                                        <!--Mood Collection View-->
+                                        <CollectionView ItemsSource="{Binding Meals}" Grid.Row="1" SelectionMode="Single" SelectedItem="{Binding SelectedMeal}">
+                                            <CollectionView.ItemTemplate>
+                                                <DataTemplate>
 
-                                                <!--Block-->
-                                                <controls:HeaderBlockLight Margin="0" Padding="0" HeaderText="{Binding Description}">
-                                                    <Frame Margin="2" Padding="0">
-                                                        <StackLayout Padding="0">
-                                                            <Grid HeightRequest="40">
-                                                                <Grid.ColumnDefinitions>
-                                                                    <ColumnDefinition Width=".4*"/>
-                                                                    <ColumnDefinition/>
-                                                                    <ColumnDefinition/>
-                                                                </Grid.ColumnDefinitions>
-                                                                <Label Text="Time" Style="{StaticResource HeaderLabel}"/>
-                                                                <Label Text="{Binding RegisteredTime, StringFormat='{0:hh:mm tt}'}" Style="{StaticResource ListBoxLabel}" Grid.Row="1"/>
+                                                    <!--Block-->
+                                                    <controls:HeaderBlockLight Margin="0" Padding="0" HeaderText="{Binding Description}">
+                                                        <Frame Margin="2" Padding="0">
+                                                            <StackLayout Padding="0">
+                                                                <Grid HeightRequest="40">
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width=".4*"/>
+                                                                        <ColumnDefinition/>
+                                                                        <ColumnDefinition/>
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <Label Text="Time" Style="{StaticResource HeaderLabel}"/>
+                                                                    <Label Text="{Binding RegisteredTime, StringFormat='{0:hh:mm tt}'}" Style="{StaticResource ListBoxLabel}" Grid.Row="1"/>
 
+                                                                    <Label Text="Satisfaction" Style="{StaticResource HeaderLabel}" Grid.Column="1"/>
+                                                                    <Label Text="{Binding Satisfaction, StringFormat='{0:F1} / 10'}" Style="{StaticResource ListBoxLabel}" Grid.Row="1" Grid.Column="1"/>
 
-                                                                <Label Text="Satisfaction" Style="{StaticResource HeaderLabel}" Grid.Column="1"/>
-                                                                <Label Text="{Binding Satisfaction, StringFormat='{0:F1} / 10'}" Style="{StaticResource ListBoxLabel}" Grid.Row="1" Grid.Column="1"/>
+                                                                    <Label Text="Size" Style="{StaticResource HeaderLabel}" Grid.Column="2"/>
+                                                                    <Label Text="{Binding MealSize}" Style="{StaticResource ListBoxLabel}" Grid.Row="1" Grid.Column="2"/>
 
-                                                                <Label Text="Size" Style="{StaticResource HeaderLabel}" Grid.Column="2"/>
-                                                                <Label Text="{Binding MealSize}" Style="{StaticResource ListBoxLabel}" Grid.Row="1" Grid.Column="2"/>
+                                                                    <Label Text="Type" Style="{StaticResource HeaderLabel}" Grid.Column="3"/>
+                                                                    <Label Text="{Binding MealType}" Style="{StaticResource ListBoxLabel}" Grid.Row="1" Grid.Column="3"/>
 
-                                                                <Label Text="Type" Style="{StaticResource HeaderLabel}" Grid.Column="3"/>
-                                                                <Label Text="{Binding MealType}" Style="{StaticResource ListBoxLabel}" Grid.Row="1" Grid.Column="3"/>
-                                                                
-                                                            </Grid>
-                                                        </StackLayout>
-                                                    </Frame>
-                                                </controls:HeaderBlockLight>
-                                            </DataTemplate>
-                                        </CollectionView.ItemTemplate>
-                                    </CollectionView>
+                                                                </Grid>
+                                                            </StackLayout>
+                                                        </Frame>
+                                                    </controls:HeaderBlockLight>
+                                                </DataTemplate>
+                                            </CollectionView.ItemTemplate>
+                                        </CollectionView>
+                                        <Grid HeightRequest="80" Margin="0" Padding="0" BackgroundColor="DarkGray">
+                                            <Button Text="Edit" Padding="0" Command="{Binding EditSelectedCommand}" CommandParameter="{x:Static models:ModelType.Meal}"/>
+                                            <Button Text="Delete" Grid.Column="1" Padding="0" Command="{Binding DeleteSelectedCommand}" CommandParameter="{x:Static models:ModelType.Meal}"/>
+                                        </Grid>
+                                    </StackLayout>
 
                                 </controls:LogView >
 
                                 <!--Activities Box-->
                                 <controls:LogView Title="Activity" IsVisible="{Binding ActivitiesVisibility}" Margin="5,0,5,5">
-                                    <!--Mood Collection View-->
-                                    <CollectionView ItemsSource="{Binding Activities}" Grid.Row="1">
-                                        <CollectionView.ItemTemplate>
-                                            <DataTemplate>
+                                    <StackLayout>
+                                        <!--Activity Collection View-->
+                                        <CollectionView ItemsSource="{Binding Activities}" Grid.Row="1" SelectionMode="Single" SelectedItem="{Binding SelectedActivity}">
+                                            <CollectionView.ItemTemplate>
+                                                <DataTemplate>
 
-                                                <!--Block-->
-                                                <controls:HeaderBlockLight Margin="0" Padding="0" HeaderText="{Binding Description}">
-                                                    <Frame Margin="2" Padding="0">
-                                                        <StackLayout Padding="0">
-                                                            <Grid HeightRequest="40">
-                                                                <Grid.ColumnDefinitions>
-                                                                    <ColumnDefinition Width="50"/>
-                                                                    <ColumnDefinition Width="50"/>
-                                                                    <ColumnDefinition/>
-                                                                </Grid.ColumnDefinitions>
-                                                                <Label Text="Duration" Style="{StaticResource HeaderLabel}"/>
-                                                                <Label Text="{Binding Duration, StringFormat='{0:N2}h'}" Style="{StaticResource ListBoxLabel}" Grid.Row="1"/>
+                                                    <!--Block-->
+                                                    <controls:HeaderBlockLight Margin="0" Padding="0" HeaderText="{Binding Description}">
+                                                        <Frame Margin="2" Padding="0">
+                                                            <StackLayout Padding="0">
+                                                                <Grid HeightRequest="40">
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="50"/>
+                                                                        <ColumnDefinition Width="50"/>
+                                                                        <ColumnDefinition/>
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <Label Text="Duration" Style="{StaticResource HeaderLabel}"/>
+                                                                    <Label Text="{Binding Duration, StringFormat='{0:N2}h'}" Style="{StaticResource ListBoxLabel}" Grid.Row="1"/>
 
-                                                                <Label Text="Start" Style="{StaticResource HeaderLabel}" Grid.Column="1"/>
-                                                                <Label Text="{Binding StartTime, StringFormat='{0:hh:mm tt}'}" Style="{StaticResource ListBoxLabel}" Grid.Row="1" Grid.Column="1"/>
+                                                                    <Label Text="Start" Style="{StaticResource HeaderLabel}" Grid.Column="1"/>
+                                                                    <Label Text="{Binding StartTime, StringFormat='{0:hh:mm tt}'}" Style="{StaticResource ListBoxLabel}" Grid.Row="1" Grid.Column="1"/>
 
-                                                                <Label Text="Enjoyment" Style="{StaticResource HeaderLabel}" Grid.Column="2"/>
-                                                                <Label Text="{Binding Enjoyment }" Style="{StaticResource ListBoxLabel}" Grid.Row="1" Grid.Column="2"/>
+                                                                    <Label Text="Enjoyment" Style="{StaticResource HeaderLabel}" Grid.Column="2"/>
+                                                                    <Label Text="{Binding Enjoyment }" Style="{StaticResource ListBoxLabel}" Grid.Row="1" Grid.Column="2"/>
 
-                                                                <Label Text="Exercise" Style="{StaticResource HeaderLabel}" Grid.Column="3"/>
-                                                                <CheckBox IsChecked="{Binding Exersice}" HorizontalOptions="Center" Grid.Row="1" Grid.Column="3"/>
+                                                                    <Label Text="Exercise" Style="{StaticResource HeaderLabel}" Grid.Column="3"/>
+                                                                    <CheckBox IsChecked="{Binding Exersice}" HorizontalOptions="Center" Grid.Row="1" Grid.Column="3" IsEnabled="False"/>
 
-                                                                <Label Text="Interest" Style="{StaticResource HeaderLabel}" Grid.Column="4"/>
-                                                                <CheckBox IsChecked="{Binding Exersice}" HorizontalOptions="Center" Grid.Row="1" Grid.Column="4"/>
-                                                            </Grid>
-                                                        </StackLayout>
-                                                    </Frame>
-                                                </controls:HeaderBlockLight>
-                                            </DataTemplate>
-                                        </CollectionView.ItemTemplate>
-                                    </CollectionView>
-
+                                                                    <Label Text="Interest" Style="{StaticResource HeaderLabel}" Grid.Column="4"/>
+                                                                    <CheckBox IsChecked="{Binding Exersice}" HorizontalOptions="Center" Grid.Row="1" Grid.Column="4" IsEnabled="False"/>
+                                                                </Grid>
+                                                            </StackLayout>
+                                                        </Frame>
+                                                    </controls:HeaderBlockLight>
+                                                </DataTemplate>
+                                            </CollectionView.ItemTemplate>
+                                        </CollectionView>
+                                        <Grid HeightRequest="80" Margin="0" Padding="0" BackgroundColor="DarkGray">
+                                            <Button Text="Edit" Padding="0" Command="{Binding EditSelectedCommand}" CommandParameter="{x:Static models:ModelType.Activity}"/>
+                                            <Button Text="Delete" Grid.Column="1" Padding="0" Command="{Binding DeleteSelectedCommand}" CommandParameter="{x:Static models:ModelType.Activity}"/>
+                                        </Grid>
+                                    </StackLayout>
                                 </controls:LogView >
-                                
-                                
-                                
+
+                                <!--Substances Box-->
+                                <controls:LogView Title="Substance" IsVisible="{Binding SubstanceVisibility}" Margin="5,0,5,5">
+                                    <StackLayout>
+                                        <!--Substance Collection View-->
+                                        <CollectionView ItemsSource="{Binding Substances}" SelectionMode="Single" Grid.Row="1" SelectedItem="{Binding SelectedSubstance}">
+                                            <CollectionView.ItemTemplate>
+                                                <DataTemplate>
+
+                                                    <!--Block-->
+                                                    <controls:HeaderBlockLight Margin="0" Padding="0" HeaderText="{Binding RegisteredTime, StringFormat='{0:hh:mm tt}'}">
+                                                        <Frame Margin="2" Padding="0">
+                                                            <StackLayout Padding="0">
+                                                                <Grid HeightRequest="40">
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="50"/>
+                                                                        <ColumnDefinition Width="40"/>
+                                                                        <ColumnDefinition Width="40"/>
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <Label Text="Method" Style="{StaticResource HeaderLabel}"/>
+                                                                    <Label Text="{Binding ConsumptionMethod}" Style="{StaticResource ListBoxLabel}" Grid.Row="1"/>
+
+                                                                    <Label Text="Qty." Style="{StaticResource HeaderLabel}" Grid.Column="1"/>
+                                                                    <Label Text="{Binding Amount}" Style="{StaticResource ListBoxLabel}" Grid.Row="1" Grid.Column="1"/>
+
+                                                                    <Label Text="Unit" Style="{StaticResource HeaderLabel}" Grid.Column="2"/>
+                                                                    <Label Text="{Binding Unit}" Style="{StaticResource ListBoxLabel}" Grid.Row="1" Grid.Column="2"/>
+
+                                                                    <Label Text="Name" Style="{StaticResource HeaderLabel}" Grid.Column="3"/>
+                                                                    <Label Text="{Binding SubstanceName}" Style="{StaticResource ListBoxLabel}" Grid.Row="1" Grid.Column="3"/>
+
+                                                                    <Label Text="Enj." Style="{StaticResource HeaderLabel}" Grid.Column="4"/>
+                                                                    <Label Text="{Binding Satisfaction, StringFormat='{0:N1}/10'}" Style="{StaticResource ListBoxLabel}" Grid.Row="1" Grid.Column="4"/>
+                                                                </Grid>
+                                                            </StackLayout>
+                                                        </Frame>
+                                                    </controls:HeaderBlockLight>
+                                                </DataTemplate>
+                                            </CollectionView.ItemTemplate>
+                                        </CollectionView>
+                                        <Grid HeightRequest="80" Margin="0" Padding="0" BackgroundColor="DarkGray">
+                                            <Button Text="Edit" Padding="0" Command="{Binding EditSelectedCommand}" CommandParameter="{x:Static models:ModelType.Substance}"/>
+                                            <Button Text="Delete" Grid.Column="1" Padding="0" Command="{Binding DeleteSelectedCommand}" CommandParameter="{x:Static models:ModelType.Substance}"/>
+                                        </Grid>
+                                    </StackLayout>
+                                </controls:LogView >
+
 
                                 <Grid Padding="0" HeightRequest="100">
-                    
-                                    <Button Padding="0" Text="Mood" Style="{StaticResource ButtonStyle}" FontSize="8" Margin="0"
-                                            Command="{Binding ShowCategoryComand}" CommandParameter="{x:Static models:ModelType.Mood}"/>
+                                    <StackLayout Orientation="Horizontal" Padding="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Spacing="0">
+                                        <Button Padding="0" Text="Mood"  FontSize="8" Margin="2" MinimumWidthRequest="60" Style="{StaticResource ButtonStyle}" 
+                                            Command="{Binding ShowCategoryComand}" CommandParameter="{x:Static models:ModelType.Mood}" IsVisible="{Binding MoodsLogged}"/>
 
-                                    <Button Padding="0" Text="Sleep" Grid.Column="1" Style="{StaticResource ButtonStyle}"  FontSize="9" Margin="0"
-                                            Command="{Binding ShowCategoryComand}" CommandParameter="{x:Static models:ModelType.Sleep}"/>
-                                    
-                                    <Button Padding="0" Text="Meals" Grid.Column="2" Style="{StaticResource ButtonStyle}" FontSize="9" Margin="0" 
-                                            Command="{Binding ShowCategoryComand}" CommandParameter="{x:Static models:ModelType.Meal}"/>
+                                        <Button Padding="0" Text="Sleep" Grid.Column="1" Style="{StaticResource ButtonStyle}"  FontSize="9" Margin="2" MinimumWidthRequest="60"
+                                            Command="{Binding ShowCategoryComand}" CommandParameter="{x:Static models:ModelType.Sleep}" IsVisible="{Binding SleepsLogged}"/>
 
-                                    <Button Padding="0" Text="Activity" Grid.Column="3" Style="{StaticResource ButtonStyle}" FontSize="9" Margin="0" 
-                                            Command="{Binding ShowCategoryComand}" CommandParameter="{x:Static models:ModelType.Activity}"/>
+                                        <Button Padding="0" Text="Meals" Grid.Column="2" FontSize="9" Margin="2" MinimumWidthRequest="60" Style="{StaticResource ButtonStyle}" 
+                                            Command="{Binding ShowCategoryComand}" CommandParameter="{x:Static models:ModelType.Meal}" IsVisible="{Binding MealsLogged}"/>
 
-                                    <Button Padding="0" Text="Substance" Grid.Column="4" Style="{StaticResource ButtonStyle}" FontSize="9" Margin="0" 
-                                            Command="{Binding ShowCategoryComand}" CommandParameter="{x:Static models:ModelType.Substance}"/>
+                                        <Button Padding="0" Text="Activity" FontSize="9" Margin="2" MinimumWidthRequest="60" Style="{StaticResource ButtonStyle}" 
+                                            Command="{Binding ShowCategoryComand}" CommandParameter="{x:Static models:ModelType.Activity}" IsVisible="{Binding ActivitiesLogged}"/>
+
+                                        <Button Padding="0" Text="Substance" Style="{StaticResource ButtonStyle}" MinimumWidthRequest="60" FontSize="9" Margin="2" 
+                                            Command="{Binding ShowCategoryComand}" CommandParameter="{x:Static models:ModelType.Substance}" IsVisible="{Binding SubstancesLogged}"/>
+                                    </StackLayout>
                                 </Grid>
 
                             </StackLayout>
@@ -240,14 +301,22 @@
             <!--Filter Panel-->
             <Frame Padding="0" Margin="6" BackgroundColor="LightGray" BorderColor="Black">
                 <StackLayout>
-                    <Grid HeightRequest="40" BackgroundColor="DarkGray">
-                        <Switch VerticalOptions="Center" x:Name="filterSwitch" IsToggled="{Binding FilterPaneShown}"/>
+                    <Grid HeightRequest="50" BackgroundColor="DarkGray">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="70"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Switch VerticalOptions="Center" Grid.Column="2" x:Name="filterSwitch" IsToggled="{Binding FilterBarVisible}"/>
+                        <ActivityIndicator Grid.Column="1" IsRunning="True" IsVisible="{Binding Loading}"/>
+                        <Button Grid.Column="0" Padding="0" Command="{Binding LoadDataCommand}" Text="Load" Style="{StaticResource ButtonStyle}" 
+                                BackgroundColor="{StaticResource PrimaryDark}" TextColor="White"  Margin="3" CornerRadius="10" BorderColor="Black"/>
                     </Grid>
                     
                     <Grid Padding="0" VerticalOptions="CenterAndExpand" HeightRequest="150" Margin="3" IsVisible="{Binding Source={x:Reference filterSwitch}, Path=IsToggled}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
-                            <ColumnDefinition Width="0.6*"/>
+  
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
 
@@ -257,10 +326,7 @@
                             </Frame>
                         </controls:HeaderBlock>
 
-                        <Button Grid.Column="1" Command="{Binding LoadDataCommand}" Text="Load" Style="{StaticResource ButtonStyle}" 
-                                BackgroundColor="{StaticResource PrimaryDark}" TextColor="White"  Margin="3" CornerRadius="10" BorderColor="Black"/>
-
-                        <controls:HeaderBlock Padding="0" Grid.Column="2" HeaderText="End Date">
+                        <controls:HeaderBlock Padding="0" Grid.Column="1" HeaderText="End Date">
                             <Frame BackgroundColor="White" Padding="0" Margin="0">
                                 <DatePicker HorizontalOptions="Center" Date="{Binding EndDate}" FontSize="11"  TextColor="Black"/>
                             </Frame>

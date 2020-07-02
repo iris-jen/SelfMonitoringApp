@@ -12,7 +12,9 @@ namespace SelfMonitoringApp.ViewModels
     public class SleepViewModel : NavigatableViewModelBase, INavigationViewModel
     {
         private readonly SleepModel _sleepModel;
+        private bool _editing;
         public const string NavigationNodeName = "sleep";
+        public event EventHandler ModelShed;
         public Command SaveLogCommand { get; private set; }
 
         public TimeSpan SleepStart
@@ -183,8 +185,10 @@ namespace SelfMonitoringApp.ViewModels
 
         public async Task SaveAndPop()
         {
+            var model = RegisterAndGetModel();
             await App.Database.AddOrModifyModelAsync(RegisterAndGetModel());
             await _navigator.NavigateBack();
+            ModelShed?.Invoke(this, new ModelShedEventArgs(model));
         }
     }
 }

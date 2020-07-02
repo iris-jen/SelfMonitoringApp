@@ -17,7 +17,7 @@ namespace SelfMonitoringApp.ViewModels
         public const string NavigationNodeName = "data";
         public ObservableCollection<DaySummaryViewModel> DaySummaries { get; private set; }
 
-        private DateTime _startDate = DateTime.Now;
+        private DateTime _startDate = DateTime.Now.AddDays(-1);
         public DateTime StartDate
         {
             get => _startDate;
@@ -59,6 +59,20 @@ namespace SelfMonitoringApp.ViewModels
             }
         }
 
+        private bool _filterBarVisibile;
+        public bool FilterBarVisible
+        {
+            get => _filterBarVisibile;
+            set
+            {
+                if (_filterBarVisibile == value)
+                    return;
+
+                _filterBarVisibile = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public Command LoadDataCommand { get; private set; }
 
         public DataExplorerViewModel(INavigationService navService) 
@@ -66,15 +80,8 @@ namespace SelfMonitoringApp.ViewModels
         {
             LoadDataCommand = new Command(async () => await LoadData());
             LoadData().SafeFireAndForget(false);
-
-            navService.PageIsTop += NavService_PageIsTop;
         }
-
-        private void NavService_PageIsTop(object sender, EventArgs e)
-        {
-            
-        }
-
+         
         private bool DateInRange(DateTime startDate, DateTime endDate, DateTime checkDate, DateTime filter) =>
             (checkDate >= startDate && checkDate <= endDate) && checkDate.Day == filter.Day &&
             checkDate.Month == filter.Month && checkDate.Year == filter.Year;
@@ -100,33 +107,49 @@ namespace SelfMonitoringApp.ViewModels
 
                 await Task.WhenAll(loadingTasks);
 
-                for (DateTime date = StartDate; date.Date <= EndDate.Date; date = date.AddDays(1))
+                await Task.Factory.StartNew(() =>
                 {
-                    var sleeps = (sleepData.Where(sleep => DateInRange(startDate, endDate, sleep.RegisteredTime, date))).ToList();
-                    var moods = (moodData.Where(mood => DateInRange(startDate, endDate, mood.RegisteredTime, date))).ToList();
-                    var meals = (mealData.Where(meal => DateInRange(startDate, endDate, meal.RegisteredTime, date))).ToList();
-                    var activities = (activityData.Where(activities => DateInRange(startDate, endDate, activities.RegisteredTime, date))).ToList();
-                    var substances = (substanceData.Where(substances => DateInRange(startDate, endDate, substances.RegisteredTime, date))).ToList();
+                    for (DateTime date = StartDate; date.Date <= EndDate.Date; date = date.AddDays(1))
+                    {
+                        var sleeps     = (sleepData.Where(sleep => DateInRange(startDate, endDate, sleep.RegisteredTime, date))).ToList();
+                        var moods      = (moodData.Where(mood => DateInRange(startDate, endDate, mood.RegisteredTime, date))).ToList();
+                        var meals      = (mealData.Where(meal => DateInRange(startDate, endDate, meal.RegisteredTime, date))).ToList();
+                        var activities = (activityData.Where(activities => DateInRange(startDate, endDate, activities.RegisteredTime, date))).ToList();
+                        var substances = (substanceData.Where(substances => DateInRange(startDate, endDate, substances.RegisteredTime, date))).ToList();
 
-                    if (sleeps.Count != 0 || activities.Count != 0 || moods.Count != 0 || meals.Count != 0 || substances.Count != 0)
-                        filteredData.Add(new DaySummaryViewModel(sleeps, activities, meals, moods, substances, date, _navigator));
-                }
+                        if (sleeps.Count > 0)
+                            sleeps.Sort((t1, t2) => DateTime.Compare(t1.RegisteredTime, t2.RegisteredTime));
+
+                        moods.Sort     ((t1, t2) => DateTime.Compare(t1.RegisteredTime, t2.RegisteredTime));
+                        meals.Sort     ((t1, t2) => DateTime.Compare(t1.RegisteredTime, t2.RegisteredTime));
+                        activities.Sort((t1, t2) => DateTime.Compare(t1.RegisteredTime, t2.RegisteredTime));
+                        substances.Sort((t1, t2) => DateTime.Compare(t1.RegisteredTime, t2.RegisteredTime));
+
+                        if (sleeps.Count != 0 || activities.Count != 0 || moods.Count != 0 || meals.Count != 0 || substances.Count != 0)
+                            filteredData.Add(new DaySummaryViewModel(sleeps, activities, meals, moods, substances, date, _navigator));
+                    }
+                });
             }
             return filteredData;
         }
 
+        /// <summary>
+        /// Sets DaySummaries to GetFilteredData of the date time user inputs
+        /// </summary>
+        /// <returns></returns>
         public async Task LoadData()
         {
+            //Get the stuff
             Loading = true;
-
+            FilterBarVisible = false;
             var data = await GetDateFilteredData(StartDate, EndDate);
-            Loading = false;
-
+            
             // Need to give the filter grid a second to collapse so the cards render full
             await Task.Delay(50);
 
             DaySummaries = data;
             NotifyPropertyChanged(nameof(DaySummaries));
+            Loading = false;
         }
     }
 }

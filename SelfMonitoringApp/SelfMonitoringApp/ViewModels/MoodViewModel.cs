@@ -15,9 +15,10 @@ namespace SelfMonitoringApp.ViewModels
     public class MoodViewModel : NavigatableViewModelBase, INavigationViewModel
     {
         private readonly MoodModel _mood;
-        public const string NavigationNodeName = "mood";
-        public event EventHandler ModelShed;
+        private readonly bool _editing;
 
+        public const string NavigationNodeName = "mood";
+        public event EventHandler ModelShed;        
         public ObservableCollection<string> Emotions { get; private set; }
 
         public string Description
@@ -72,7 +73,6 @@ namespace SelfMonitoringApp.ViewModels
             }
         }
 
-
         public Command SaveLogCommand { get; private set; }
 
         /// <summary>
@@ -82,17 +82,15 @@ namespace SelfMonitoringApp.ViewModels
         public MoodViewModel(INavigationService navService, IModel existingModel = null) : base(navService)
         {
             if (existingModel is null)
-            {
                 _mood = new MoodModel();
-            }
             else
             {
                 _mood = existingModel as MoodModel;
+                _editing = true;
             }
 
             SaveLogCommand = new Command(async () => await SaveAndPop());
         }
-
 
         /// <summary>
         /// Get the view models model
@@ -100,11 +98,11 @@ namespace SelfMonitoringApp.ViewModels
         /// <returns></returns>
         public IModel RegisterAndGetModel()
         {
-            _mood.RegisteredTime = DateTime.Now;
+            if(!_editing)
+                _mood.RegisteredTime = DateTime.Now;
+            
             return _mood;
         }
-
-    
 
         public async Task SaveAndPop()
         {

@@ -16,11 +16,6 @@ namespace SelfMonitoringApp.UnitTests
     {
         private MoodViewModel _newMoodModel;
         private MoodViewModel _existingMoodModel;
-        private MoodModel _existingMood = new MoodModel
-        {
-            Description = "was v sad",
-            OverallMood = 4.20,
-        };
 
         private INavigationService _navService;
 
@@ -29,16 +24,15 @@ namespace SelfMonitoringApp.UnitTests
         {
             _navService = new Mock<INavigationService>().Object;          
             _newMoodModel = new MoodViewModel(_navService);
-            _existingMoodModel = new MoodViewModel(_navService, _existingMood);
+            _existingMoodModel = new MoodViewModel(_navService, LogSamples.TestMood);
         }
 
-
-        //todo: make good-er once i settle on how I'm storing data
         [TestMethod]
-        public void TestSavingLog()
+        public async Task TestSavingLog()
         {
-            _newMoodModel.SaveAndPop();
-            _existingMoodModel.SaveAndPop();
+            await App.Database.InitializeAsync();
+            await _newMoodModel.SaveAndPop();
+            await _existingMoodModel.SaveAndPop();
         }
 
         [TestCleanup]
@@ -46,6 +40,7 @@ namespace SelfMonitoringApp.UnitTests
         {
             _navService = null;
             _newMoodModel = null;
+            _existingMoodModel = null;
         }
     }
 }

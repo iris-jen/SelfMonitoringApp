@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SelfMonitoringApp.ViewModels
+namespace SelfMonitoringApp.ViewModels.Base
 {
     public class ModelShedEventArgs :EventArgs
     {

@@ -17,8 +17,7 @@ namespace SelfMonitoringApp.UnitTests
         [TestInitialize]
         public async Task Init()
         {
-            Logger.LogMessage("Adding samples to get the lazy initializer to go");
-            await AddAllSampleLogs();
+            await App.Database.InitializeAsync();
         }
 
         private async Task AddAllSampleLogs()
@@ -42,8 +41,7 @@ namespace SelfMonitoringApp.UnitTests
         [TestMethod]
         public async Task TestDatabase()
         {
-        
-
+            await AddAllSampleLogs();
         }
 
 

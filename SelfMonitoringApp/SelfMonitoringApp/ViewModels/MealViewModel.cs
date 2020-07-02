@@ -15,6 +15,7 @@ namespace SelfMonitoringApp.ViewModels
         private readonly MealModel _mealModel;
         public const string NavigationNodeName = "meal";
         public event EventHandler ModelShed;
+        private bool _editing;
 
         public Command SaveLogCommand { get; private set; }
 
@@ -74,16 +75,21 @@ namespace SelfMonitoringApp.ViewModels
             :base(navService)
         {
             if (existingMeal is null)
-                _mealModel= new MealModel();
+                _mealModel = new MealModel();
             else
+            {
                 _mealModel = existingMeal as MealModel;
+                _editing = true;
+            }
 
             SaveLogCommand = new Command(async () => await SaveAndPop());
         }
 
         public IModel RegisterAndGetModel()
         {
-            _mealModel.RegisteredTime = DateTime.Now;
+            if(!_editing)
+                _mealModel.RegisteredTime = DateTime.Now;
+
             return _mealModel;
         }
 

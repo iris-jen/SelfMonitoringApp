@@ -11,8 +11,11 @@ namespace SelfMonitoringApp.ViewModels
     class ActivityViewModel : NavigatableViewModelBase, INavigationViewModel
     {
         private readonly ActivityModel _activity;
+        private readonly bool _editing;
 
         public const string NavigationNodeName = "activity";
+        public event EventHandler ModelShed;
+
         public Command SaveLogCommand { get; private set; }
 
         public string Description
@@ -97,19 +100,24 @@ namespace SelfMonitoringApp.ViewModels
 
         public ActivityViewModel(INavigationService navService, IModel activityModel = null) : base(navService)
         {
-       
             if (activityModel is null)
                 _activity = new ActivityModel();
             else
+            {
                 _activity = activityModel as ActivityModel;
+                _editing = true;
+            }
 
             SaveLogCommand = new Command(async()=> await SaveAndPop());
         }
 
         public IModel RegisterAndGetModel()
         {
-            var now = DateTime.Now; 
-            _activity.RegisteredTime = DateTime.Now;
+            var now = DateTime.Now;
+            
+            if(!_editing)
+                _activity.RegisteredTime = DateTime.Now;
+
             _activity.StartTime = new DateTime(now.Year, now.Month, now.Day, StartTime.Hours, StartTime.Minutes, StartTime.Seconds);
             var endDateTime = new DateTime(now.Year, now.Month, now.Day, EndTime.Hours, EndTime.Minutes, EndTime.Seconds);
             _activity.Duration = endDateTime.Subtract(_activity.StartTime).TotalHours;
@@ -118,8 +126,10 @@ namespace SelfMonitoringApp.ViewModels
 
         public async Task SaveAndPop()
         {
-            await App.Database.AddOrModifyModelAsync(RegisterAndGetModel());
+            var model = RegisterAndGetModel();
+            await App.Database.AddOrModifyModelAsync(model);
             await _navigator.NavigateBack();
+            ModelShed?.Invoke(this, new ModelShedEventArgs(model));
         }
     }
 }

@@ -4,9 +4,6 @@ using SelfMonitoringApp.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq.Expressions;
-using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -105,7 +102,7 @@ namespace SelfMonitoringApp.ViewModels
         public bool MoodsLogged { get; private set; }
         public bool SubstancesLogged { get; private set; }
 
-
+        #region Selected Log Objects
         private MealModel _selectedMeal;
         public MealModel SelectedMeal
         {
@@ -175,10 +172,10 @@ namespace SelfMonitoringApp.ViewModels
                 NotifyPropertyChanged();
             }
         }
+        #endregion
 
         // Show commands for specific categories
         public Command<ModelType> ShowCategoryComand { get; private set; }
-
         // Edit / Delete commands for selected objects
         public Command<ModelType> EditSelectedCommand { get; private set; }
         public Command<ModelType> DeleteSelectedCommand { get; private set; }
@@ -186,59 +183,89 @@ namespace SelfMonitoringApp.ViewModels
         public DaySummaryViewModel(List<SleepModel> sleeps, List<ActivityModel> activities,
             List<MealModel> meals, List<MoodModel> moods, List<SubstanceModel> substances, DateTime date, INavigationService navService) : base(navService)
         {
-            Meals = new ObservableCollection<MealModel>(meals);
+            Meals      = new ObservableCollection<MealModel>(meals);
             Substances = new ObservableCollection<SubstanceModel>(substances);
             Activities = new ObservableCollection<ActivityModel>(activities);
-            Moods = new ObservableCollection<MoodModel>(moods);
-            Sleeps = new ObservableCollection<SleepModel>(sleeps);
+            Moods      = new ObservableCollection<MoodModel>(moods);
+            Sleeps     = new ObservableCollection<SleepModel>(sleeps);
 
-            ShowCategoryComand = new Command<ModelType>((type) => SetVisibility(type));
-            EditSelectedCommand = new Command<ModelType>(async(type) => await EditSelected(type));
-            DeleteSelectedCommand = new Command<ModelType>((type) => DeleteSelected(type));
+            ShowCategoryComand    = new Command<ModelType>((type) => SetVisibility(type));
+            EditSelectedCommand   = new Command<ModelType>(async(type) => await EditSelected(type));
+            DeleteSelectedCommand = new Command<ModelType>(async(type) => await DeleteSelected(type));
 
-            MoodsVisibility = true;
-            
+            MoodsLogged = moods.Count > 0;
+            SubstancesLogged = substances.Count > 0;
+            MealsLogged = meals.Count > 0;
+            SleepsLogged = sleeps.Count > 0;
+            ActivitiesLogged = activities.Count > 0;
+
+            if (MoodsLogged)
+                MoodsVisibility = true;
+            else if (MealsLogged)
+                MealsVisibility = true;
+            else if (SleepsLogged)
+                SleepsVisibility = true;
+            else if (ActivitiesLogged)
+                ActivitiesVisibility = true;
+            else if (SubstancesLogged)
+                SubstanceVisibility = true;
+
             Date = $"{date.DayOfWeek}: {date.Year}-{date.Month}-{date.Day}";
         }
 
-
+        /// <summary>
+        /// Sets the visible collection on the day card to the type passed in.
+        /// </summary>
+        /// <param name="type">Type of model to show</param>
         private void SetVisibility(ModelType type)
         {
             switch (type)
             {
                 case ModelType.Activity:
                     ActivitiesVisibility = true;
-                    MealsVisibility = MoodsVisibility = SleepsVisibility = SubstanceVisibility = false;
+                    MealsVisibility = MoodsVisibility =
+                    SleepsVisibility = SubstanceVisibility = false;
                     break;
                 case ModelType.Meal:
                     MealsVisibility = true;
-                    ActivitiesVisibility = MoodsVisibility = SleepsVisibility = SubstanceVisibility = false;
+                    ActivitiesVisibility = MoodsVisibility = 
+                    SleepsVisibility = SubstanceVisibility = false;
                     break;
                 case ModelType.Mood:
                     MoodsVisibility = true;
-                    ActivitiesVisibility = MealsVisibility = SleepsVisibility = SubstanceVisibility = false;
+                    ActivitiesVisibility = MealsVisibility = 
+                    SleepsVisibility = SubstanceVisibility = false;
                     break;
                 case ModelType.Sleep: 
                     SleepsVisibility = true;
-                    ActivitiesVisibility = MealsVisibility = MoodsVisibility = SubstanceVisibility = false;
+                    ActivitiesVisibility = MealsVisibility = 
+                    MoodsVisibility = SubstanceVisibility = false;
                     break;
                 case ModelType.Substance:
                     SubstanceVisibility = true;
-                    ActivitiesVisibility = MealsVisibility = MoodsVisibility = SleepsVisibility = false;
+                    ActivitiesVisibility = MealsVisibility = 
+                    MoodsVisibility = SleepsVisibility = false;
                     break;
             }
         }
 
+        /// <summary>
+        /// Pushes the editor page for the passed in type. Subscribes this object to wait for a new model
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         private async Task EditSelected(ModelType type)
         {
             switch (type)
             {
                 case ModelType.Activity:
-                    await _navigator.NavigateTo(new ActivityViewModel(_navigator, SelectedActivity));
+                    _activityEditor = new ActivityViewModel(_navigator, SelectedActivity);
+                    _activityEditor.ModelShed += Vm_ModelShed;
+                    await _navigator.NavigateTo(_activityEditor);
                     break;
                 case ModelType.Meal:
                     _mealEditor = new MealViewModel(_navigator, SelectedMeal);
-                    _mealEditor
+                    _mealEditor.ModelShed += Vm_ModelShed;
                     await _navigator.NavigateTo(_mealEditor);
                     break;
                 case ModelType.Mood:
@@ -247,10 +274,14 @@ namespace SelfMonitoringApp.ViewModels
                     await _navigator.NavigateTo(_moodEditor);
                     break;
                 case ModelType.Sleep:
-                    await _navigator.NavigateTo(new SleepViewModel(_navigator, SelectedSleep));
+                    _sleepEditor = new SleepViewModel(_navigator, SelectedSleep);
+                    _sleepEditor.ModelShed += Vm_ModelShed;
+                    await _navigator.NavigateTo(_sleepEditor);
                     break;
                 case ModelType.Substance:
-                    await _navigator.NavigateTo(new SubstanceViewModel(_navigator, SelectedSubstance));
+                    _substanceEditor = new SubstanceViewModel(_navigator, SelectedSubstance);
+                    _substanceEditor.ModelShed += Vm_ModelShed;
+                    await _navigator.NavigateTo(_substanceEditor);
                     break;
             }
         }
@@ -269,76 +300,105 @@ namespace SelfMonitoringApp.ViewModels
                     var newActivity = model as ActivityModel;
                     var id = newActivity.ID;
 
-                    var oldIndex = Moods.IndexOf(x => x.ID == id);
-                    Moods.Insert(oldIndex, newActivity);
-                    Moods.RemoveAt(oldIndex + 1);
-                    SelectedMood = newActivity;
+                    var oldIndex = Activities.IndexOf(x => x.ID == id);
+                    Activities.Insert(oldIndex, newActivity);
+                    Activities.RemoveAt(oldIndex + 1);
+                    SelectedActivity = newActivity;
 
-                    MoodEditor.ModelShed -= Vm_ModelShed;
+                    _activityEditor.ModelShed -= Vm_ModelShed;
                     break;
                 case ModelType.Meal:
-                    var newMood = model as MoodModel;
-                    var id = newMood.ID;
+                    var newMeal = model as MealModel;
+                    id = newMeal.ID;
 
-                    var oldIndex = Moods.IndexOf(x => x.ID == id);
-                    Moods.Insert(oldIndex, newMood);
-                    Moods.RemoveAt(oldIndex + 1);
-                    SelectedMood = newMood;
+                    oldIndex = Meals.IndexOf(x => x.ID == id);
+                    Meals.Insert(oldIndex, newMeal);
+                    Meals.RemoveAt(oldIndex + 1);
+                    SelectedMeal = newMeal;
 
-                    MoodEditor.ModelShed -= Vm_ModelShed;
+                    _mealEditor.ModelShed -= Vm_ModelShed;
                     break;
                 case ModelType.Mood:
                     var newMood = model as MoodModel;
-                    var id = newMood.ID;
+                    id = newMood.ID;
 
-                    var oldIndex = Moods.IndexOf(x => x.ID == id);
+                    oldIndex = Moods.IndexOf(x => x.ID == id);
                     Moods.Insert(oldIndex, newMood);
                     Moods.RemoveAt(oldIndex + 1);
                     SelectedMood = newMood;
 
-                    MoodEditor.ModelShed -= Vm_ModelShed;
+                    _moodEditor.ModelShed -= Vm_ModelShed;
                     break;
                 case ModelType.Sleep:
-                    var newMood = model as MoodModel;
-                    var id = newMood.ID;
+                    var newSleep = model as SleepModel;
+                    id = newSleep.ID;
 
-                    var oldIndex = Moods.IndexOf(x => x.ID == id);
-                    Moods.Insert(oldIndex, newMood);
-                    Moods.RemoveAt(oldIndex + 1);
-                    SelectedMood = newMood;
+                    oldIndex = Sleeps.IndexOf(x => x.ID == id);
+                    Sleeps.Insert(oldIndex, newSleep);
+                    Sleeps.RemoveAt(oldIndex + 1);
+                    SelectedSleep = newSleep;
 
-                    MoodEditor.ModelShed -= Vm_ModelShed;
+                    _sleepEditor.ModelShed -= Vm_ModelShed;
                     break;
                 case ModelType.Substance:
-                    var newMood = model as MoodModel;
-                    var id = newMood.ID;
+                    var newSubstance = model as SubstanceModel;
+                    id = newSubstance.ID;
 
-                    var oldIndex = Moods.IndexOf(x => x.ID == id);
-                    Moods.Insert(oldIndex, newMood);
-                    Moods.RemoveAt(oldIndex + 1);
-                    SelectedMood = newMood;
+                    oldIndex = Substances.IndexOf(x => x.ID == id);
+                    Substances.Insert(oldIndex, newSubstance);
+                    Substances.RemoveAt(oldIndex + 1);
+                    SelectedSubstance = newSubstance;
 
-                    MoodEditor.ModelShed -= Vm_ModelShed;
+                    _substanceEditor.ModelShed -= Vm_ModelShed;
                     break;
             }
         }
 
-        private void DeleteSelected(ModelType type)
+        private async Task DeleteSelected(ModelType type)
         {
             switch (type)
             {
                 case ModelType.Activity:
+                    if (SelectedActivity != null)
+                    {
+                        await App.Database.DeleteLog(SelectedActivity);
+                        Activities.Remove(SelectedActivity);
+                        SelectedActivity = null;
+                    }
                     break;
                 case ModelType.Meal:
+                    if(SelectedMeal != null)
+                    {
+                        await App.Database.DeleteLog(SelectedMeal);
+                        Meals.Remove(SelectedMeal);
+                        SelectedMeal = null;
+                    }
                     break;
                 case ModelType.Mood:
+                    if (SelectedMood != null)
+                    {
+                        await App.Database.DeleteLog(SelectedMood);
+                        Moods.Remove(SelectedMood);
+                        SelectedMood = null;
+                    }
                     break;
                 case ModelType.Sleep:
+                    if(SelectedSleep != null)
+                    {
+                        await App.Database.DeleteLog(SelectedSleep);
+                        Sleeps.Remove(SelectedSleep);
+                        SelectedSleep = null;
+                    }
                     break;
                 case ModelType.Substance:
+                    if(SelectedSubstance != null)
+                    {
+                        await App.Database.DeleteLog(SelectedSubstance);
+                        Substances.Remove(SelectedSubstance);
+                        SelectedSubstance = null;
+                    }
                     break;
             }
         }
-
     }
 }
