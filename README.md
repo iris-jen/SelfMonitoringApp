@@ -1,6 +1,7 @@
 # SelfMonitoringApp
 A Xamarin forms application to keep track of mood / eating / sleep / substance use, and to view logs
-Still in prototyping stages
+
+https://youtu.be/BhMc-u2Qktg
 
 Home Page
 ------------------
