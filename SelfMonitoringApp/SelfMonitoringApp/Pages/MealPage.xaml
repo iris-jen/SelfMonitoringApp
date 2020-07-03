@@ -26,13 +26,13 @@
 
                 <controls:HeaderBlock HeaderText="What kind of meal?" Grid.Row="1">
                     <Frame Padding="5" CornerRadius="5" Margin="2">
-                        <Picker SelectedItem="{Binding MealType}">
+                        <Picker SelectedItem="{Binding MealType}" >
                             <Picker.Items>
                                 <x:String>Breakfast</x:String>
                                 <x:String>Lunch</x:String>
                                 <x:String>Dinner</x:String>
                                 <x:String>Snack</x:String>
-                                <x:String>?¿?</x:String>
+                                <x:String>?¿?Mystery?¿?</x:String>
                             </Picker.Items>
                         </Picker>
                     </Frame>
@@ -45,7 +45,6 @@
                                 <x:String>Small</x:String>
                                 <x:String>Regular</x:String>
                                 <x:String>Large</x:String>
-                                <x:String>HECKK'N CHONKKKKKeee</x:String>
                             </Picker.Items>
                         </Picker>
                     </Frame>

@@ -80,7 +80,7 @@
                                 </Grid.ColumnDefinitions>
                                 <Label Text="Did you want to do it?" HorizontalOptions="Center" VerticalOptions="Center"/>
                                 <Frame Grid.Column="1" BackgroundColor="{StaticResource PrimaryLight}" Padding="0" Margin="3">
-                                    <Switch Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" IsToggled="{Binding Enjoyment}"/>
+                                    <Switch Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" IsToggled="{Binding WantedToStart}"/>
                                 </Frame>
                             </Grid>
                         </Frame>

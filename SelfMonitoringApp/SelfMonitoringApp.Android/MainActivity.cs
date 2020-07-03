@@ -9,7 +9,7 @@ using Android.OS;
 
 namespace SelfMonitoringApp.Android
 {
-    [Activity(Label = "SelfMonitoringApp", Theme = "@style/MainTheme", MainLauncher = true,
+    [Activity(Label = "SelfMonitoringApp", Icon = "@mipmap/ico1", Theme = "@style/MainTheme", MainLauncher = true,
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
