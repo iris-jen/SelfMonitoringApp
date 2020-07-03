@@ -2,7 +2,10 @@
 A Xamarin forms application to keep track of mood / eating / sleep / substance use, and to view logs
 
 Watch a beta demo here!
+------------------------- 
+
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/BhMc-u2Qktg/0.jpg)](https://www.youtube.com/watch?v=BhMc-u2Qktg)
+
 Home Page
 ------------------
 ![image](https://user-images.githubusercontent.com/7981120/85096952-e6f86900-b1c3-11ea-9eb7-cf2d550ec5f1.png)
