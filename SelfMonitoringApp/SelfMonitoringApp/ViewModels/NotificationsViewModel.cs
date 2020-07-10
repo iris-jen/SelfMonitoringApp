@@ -7,7 +7,7 @@ using System.Text;
 
 namespace SelfMonitoringApp.ViewModels
 {
-    class NotificationsViewModel : NavigatableViewModelBase, INavigationViewModel
+    class NotificationsViewModel : ViewModelBase, INavigationViewModel
     {
         public const string NavigationNodeName = "notifications";
 

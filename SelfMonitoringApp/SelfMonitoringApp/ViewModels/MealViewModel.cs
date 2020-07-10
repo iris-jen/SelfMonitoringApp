@@ -10,12 +10,13 @@ using Xamarin.Forms;
 
 namespace SelfMonitoringApp.ViewModels
 {
-    public class MealViewModel: NavigatableViewModelBase, INavigationViewModel
+    public class MealViewModel: ViewModelBase, INavigationViewModel
     {
         private readonly MealModel _mealModel;
+        private readonly bool _editing;
+
         public const string NavigationNodeName = "meal";
         public event EventHandler ModelShed;
-        private bool _editing;
 
         public Command SaveLogCommand { get; private set; }
 
@@ -71,8 +72,7 @@ namespace SelfMonitoringApp.ViewModels
             }
         }
 
-        public MealViewModel(INavigationService navService, IModel existingMeal = null)
-            :base(navService)
+        public MealViewModel(IModel existingMeal = null)
         {
             if (existingMeal is null)
                 _mealModel = new MealModel();
@@ -96,7 +96,7 @@ namespace SelfMonitoringApp.ViewModels
         public async Task SaveAndPop()
         {
             var model = RegisterAndGetModel();
-            await App.Database.AddOrModifyModelAsync(model);
+            await _database.AddOrModifyModelAsync(model);
             await _navigator.NavigateBack();
             ModelShed?.Invoke(this, new ModelShedEventArgs(model));
         }

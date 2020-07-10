@@ -2,13 +2,14 @@
 using SelfMonitoringApp.Navigation;
 using SelfMonitoringApp.Services;
 using SelfMonitoringApp.ViewModels.Base;
+using Splat;
 using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace SelfMonitoringApp.ViewModels
 {
-    class ActivityViewModel : NavigatableViewModelBase, INavigationViewModel
+    class ActivityViewModel : ViewModelBase, INavigationViewModel
     {
         private readonly ActivityModel _activity;
         private readonly bool _editing;
@@ -113,7 +114,7 @@ namespace SelfMonitoringApp.ViewModels
         }
 
 
-        public ActivityViewModel(INavigationService navService, IModel activityModel = null) : base(navService)
+        public ActivityViewModel(IModel activityModel = null)
         {
             if (activityModel is null)
                 _activity = new ActivityModel();
@@ -142,7 +143,7 @@ namespace SelfMonitoringApp.ViewModels
         public async Task SaveAndPop()
         {
             var model = RegisterAndGetModel();
-            await App.Database.AddOrModifyModelAsync(model);
+            await _database.AddOrModifyModelAsync(model);
             await _navigator.NavigateBack();
             ModelShed?.Invoke(this, new ModelShedEventArgs(model));
         }

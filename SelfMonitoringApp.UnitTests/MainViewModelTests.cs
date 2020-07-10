@@ -18,7 +18,7 @@ namespace SelfMonitoringApp.UnitTests
         public void Init()
         {
             _navService = new Mock<INavigationService>().Object;          
-            _mainViewModel = new MainViewModel(_navService);
+            _mainViewModel = new MainViewModel();
         }
 
         [TestMethod]

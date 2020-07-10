@@ -9,10 +9,10 @@ using Xamarin.Forms;
 
 namespace SelfMonitoringApp.ViewModels
 {
-    public class SleepViewModel : NavigatableViewModelBase, INavigationViewModel
+    public class SleepViewModel : ViewModelBase, INavigationViewModel
     {
         private readonly SleepModel _sleepModel;
-        private bool _editing;
+        private readonly bool _editing;
         public const string NavigationNodeName = "sleep";
         public event EventHandler ModelShed;
         public Command SaveLogCommand { get; private set; }
@@ -140,14 +140,15 @@ namespace SelfMonitoringApp.ViewModels
             }
         }
 
-        public SleepViewModel(INavigationService navService, IModel existingModel = null) : 
-            base(navService)
+        public SleepViewModel(IModel existingModel = null)
         {
             if (existingModel is null)
                 _sleepModel = new SleepModel();
             else
+            {
+                _editing = true;
                 _sleepModel = existingModel as SleepModel;
-
+            }
             SaveLogCommand = new Command(async () => await SaveAndPop());
         }
 
@@ -186,7 +187,7 @@ namespace SelfMonitoringApp.ViewModels
         public async Task SaveAndPop()
         {
             var model = RegisterAndGetModel();
-            await App.Database.AddOrModifyModelAsync(RegisterAndGetModel());
+            await _database.AddOrModifyModelAsync(RegisterAndGetModel());
             await _navigator.NavigateBack();
             ModelShed?.Invoke(this, new ModelShedEventArgs(model));
         }

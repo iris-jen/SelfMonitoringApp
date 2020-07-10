@@ -1,6 +1,8 @@
 ﻿using SelfMonitoringApp.Models;
 using SelfMonitoringApp.Navigation;
+using SelfMonitoringApp.Services;
 using SelfMonitoringApp.ViewModels.Base;
+using Splat;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,7 +13,7 @@ using Xamarin.Forms.Internals;
 
 namespace SelfMonitoringApp.ViewModels
 {
-    public class DaySummaryViewModel : NavigatableViewModelBase, INavigationViewModel
+    public class DaySummaryViewModel : ViewModelBase, INavigationViewModel
     {
         public ObservableCollection<MealModel> Meals { get; private set; }
         public ObservableCollection<SubstanceModel> Substances { get; private set; }
@@ -182,7 +184,7 @@ namespace SelfMonitoringApp.ViewModels
         public Command<ModelType> DeleteSelectedCommand { get; private set; }
 
         public DaySummaryViewModel(List<SleepModel> sleeps, List<ActivityModel> activities,
-            List<MealModel> meals, List<MoodModel> moods, List<SubstanceModel> substances, DateTime date, INavigationService navService) : base(navService)
+            List<MealModel> meals, List<MoodModel> moods, List<SubstanceModel> substances, DateTime date) 
         {
             Meals      = new ObservableCollection<MealModel>(meals);
             Substances = new ObservableCollection<SubstanceModel>(substances);
@@ -263,7 +265,7 @@ namespace SelfMonitoringApp.ViewModels
                     if (SelectedActivity is null)
                         return;
 
-                    _activityEditor = new ActivityViewModel(_navigator, SelectedActivity);
+                    _activityEditor = new ActivityViewModel(SelectedActivity);
                     _activityEditor.ModelShed += Vm_ModelShed;
                     await _navigator.NavigateTo(_activityEditor);
                     break;
@@ -271,7 +273,7 @@ namespace SelfMonitoringApp.ViewModels
                     if (SelectedMeal is null)
                         return;
 
-                    _mealEditor = new MealViewModel(_navigator, SelectedMeal);
+                    _mealEditor = new MealViewModel(SelectedMeal);
                     _mealEditor.ModelShed += Vm_ModelShed;
                     await _navigator.NavigateTo(_mealEditor);
                     break;
@@ -279,7 +281,7 @@ namespace SelfMonitoringApp.ViewModels
                     if (SelectedMood is null)
                         return;
 
-                    _moodEditor = new MoodViewModel(_navigator, SelectedMood);
+                    _moodEditor = new MoodViewModel(SelectedMood);
                     _moodEditor.ModelShed += Vm_ModelShed;
                     await _navigator.NavigateTo(_moodEditor);
                     break;
@@ -287,7 +289,7 @@ namespace SelfMonitoringApp.ViewModels
                     if (SelectedSleep is null)
                         return;
 
-                    _sleepEditor = new SleepViewModel(_navigator, SelectedSleep);
+                    _sleepEditor = new SleepViewModel(SelectedSleep);
                     _sleepEditor.ModelShed += Vm_ModelShed;
                     await _navigator.NavigateTo(_sleepEditor);
                     break;
@@ -295,7 +297,7 @@ namespace SelfMonitoringApp.ViewModels
                     if (SelectedSubstance is null)
                         return;
 
-                    _substanceEditor = new SubstanceViewModel(_navigator, SelectedSubstance);
+                    _substanceEditor = new SubstanceViewModel(SelectedSubstance);
                     _substanceEditor.ModelShed += Vm_ModelShed;
                     await _navigator.NavigateTo(_substanceEditor);
                     break;
@@ -377,7 +379,7 @@ namespace SelfMonitoringApp.ViewModels
                 case ModelType.Activity:
                     if (SelectedActivity != null)
                     {
-                        await App.Database.DeleteLog(SelectedActivity);
+                        await _database.DeleteLog(SelectedActivity);
                         Activities.Remove(SelectedActivity);
                         SelectedActivity = null;
                     }
@@ -385,7 +387,7 @@ namespace SelfMonitoringApp.ViewModels
                 case ModelType.Meal:
                     if(SelectedMeal != null)
                     {
-                        await App.Database.DeleteLog(SelectedMeal);
+                        await _database.DeleteLog(SelectedMeal);
                         Meals.Remove(SelectedMeal);
                         SelectedMeal = null;
                     }
@@ -393,7 +395,7 @@ namespace SelfMonitoringApp.ViewModels
                 case ModelType.Mood:
                     if (SelectedMood != null)
                     {
-                        await App.Database.DeleteLog(SelectedMood);
+                        await _database.DeleteLog(SelectedMood);
                         Moods.Remove(SelectedMood);
                         SelectedMood = null;
                     }
@@ -401,7 +403,7 @@ namespace SelfMonitoringApp.ViewModels
                 case ModelType.Sleep:
                     if(SelectedSleep != null)
                     {
-                        await App.Database.DeleteLog(SelectedSleep);
+                        await _database.DeleteLog(SelectedSleep);
                         Sleeps.Remove(SelectedSleep);
                         SelectedSleep = null;
                     }
@@ -409,7 +411,7 @@ namespace SelfMonitoringApp.ViewModels
                 case ModelType.Substance:
                     if(SelectedSubstance != null)
                     {
-                        await App.Database.DeleteLog(SelectedSubstance);
+                        await _database.DeleteLog(SelectedSubstance);
                         Substances.Remove(SelectedSubstance);
                         SelectedSubstance = null;
                     }

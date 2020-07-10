@@ -18,19 +18,18 @@ namespace SelfMonitoringApp.UnitTests
         private SubstanceViewModel _existingModel;
 
         private INavigationService _navService;
+        private IDatabaseService _dbService;
 
         [TestInitialize]
         public void Init()
         {
-            _navService = new Mock<INavigationService>().Object;
-            _newModel = new SubstanceViewModel(_navService);
-            _existingModel = new SubstanceViewModel(_navService, LogSamples.TestSubstance);
+            _newModel = new SubstanceViewModel();
+            _existingModel = new SubstanceViewModel(LogSamples.TestSubstance);
         }
 
         [TestMethod]
         public async Task TestSavingLog()
         {
-            await App.Database.InitializeAsync();
             await _newModel.SaveAndPop();
             await _existingModel.SaveAndPop();
         }

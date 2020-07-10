@@ -5,7 +5,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
-
+using SelfMonitoringApp.Services;
 
 namespace SelfMonitoringApp.Android
 {
@@ -20,18 +20,16 @@ namespace SelfMonitoringApp.Android
 
             base.OnCreate(savedInstanceState);
             Xamarin.Forms.Forms.SetFlags("Expander_Experimental");
-            global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            global::Xamarin.Forms.FormsMaterial.Init(this, savedInstanceState);
-
-            int uiOptions = (int)Window.DecorView.SystemUiVisibility;
-            ////uiOptions |= (int)SystemUiFlags.LowProfile;
-            //uiOptions |= (int)SystemUiFlags.Fullscreen;
-            //uiOptions |= (int)SystemUiFlags.HideNavigation;
-            //uiOptions |= (int)SystemUiFlags.ImmersiveSticky;
-
-            Window.DecorView.SystemUiVisibility = (StatusBarVisibility)uiOptions;
+            Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            Xamarin.Forms.FormsMaterial.Init(this, savedInstanceState);
 
             LoadApplication(new App());
+        }
+
+        private void BootStrap()
+        {
+            var assembly = GetType().Assembly;
+            var assemblyName = assembly.GetName().Name;
         }
     }
 }

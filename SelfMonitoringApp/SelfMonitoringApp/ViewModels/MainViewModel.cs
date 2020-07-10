@@ -1,4 +1,5 @@
 ﻿using SelfMonitoringApp.Navigation;
+using SelfMonitoringApp.Services;
 using SelfMonitoringApp.ViewModels.Base;
 using System.Globalization;
 using System.IO;
@@ -6,15 +7,15 @@ using Xamarin.Forms;
 
 namespace SelfMonitoringApp.ViewModels
 {
-    public class MainViewModel : NavigatableViewModelBase, INavigationViewModel
+    public class MainViewModel : ViewModelBase, INavigationViewModel
     {
         public Command<string> NavigateCommand { get; set; }
 
         public string NavigationNodeName => "main";
 
-        public MainViewModel(INavigationService navService) : base(navService)
+        public MainViewModel()   
         {
-            NavigateCommand = new Command<string>( (param) => Navigate(param));
+            NavigateCommand = new Command<string>((param) => Navigate(param));
         }
 
         public void Navigate(string page)
@@ -22,28 +23,28 @@ namespace SelfMonitoringApp.ViewModels
             switch(page.ToLower(CultureInfo.CurrentCulture))
             {
                 case MoodViewModel.NavigationNodeName:
-                    _navigator.NavigateTo(new MoodViewModel(_navigator)).SafeFireAndForget(false);
+                    _navigator.NavigateTo(new MoodViewModel()).SafeFireAndForget(false);
                     break;
                 case SleepViewModel.NavigationNodeName:
-                    _navigator.NavigateTo(new SleepViewModel(_navigator)).SafeFireAndForget(false);
+                    _navigator.NavigateTo(new SleepViewModel()).SafeFireAndForget(false);
                     break;
                 case SubstanceViewModel.NavigationNodeName:
-                    _navigator.NavigateTo(new SubstanceViewModel(_navigator)).SafeFireAndForget(false);
+                    _navigator.NavigateTo(new SubstanceViewModel()).SafeFireAndForget(false);
                     break;
                 case MealViewModel.NavigationNodeName:
-                    _navigator.NavigateTo(new MealViewModel(_navigator)).SafeFireAndForget(false);
+                    _navigator.NavigateTo(new MealViewModel()).SafeFireAndForget(false);
                     break;
                 case ActivityViewModel.NavigationNodeName:
-                    _navigator.NavigateTo(new ActivityViewModel(_navigator)).SafeFireAndForget(false);
+                    _navigator.NavigateTo(new ActivityViewModel()).SafeFireAndForget(false);
                     break;
                 case SettingsViewModel.NavigationNodeName:
-                    _navigator.NavigateTo(new SettingsViewModel(_navigator)).SafeFireAndForget(false);
+                    _navigator.NavigateTo(new SettingsViewModel()).SafeFireAndForget(false);
                     break;
                 case DataExplorerViewModel.NavigationNodeName:
-                    _navigator.NavigateTo(new DataExplorerViewModel(_navigator)).SafeFireAndForget(false);
+                    _navigator.NavigateTo(new DataExplorerViewModel()).SafeFireAndForget(false);
                     break;
                 case HelpViewModel.NavigationNodeName:
-                    _navigator.NavigateTo(new HelpViewModel(_navigator)).SafeFireAndForget(false);
+                    _navigator.NavigateTo(new HelpViewModel()).SafeFireAndForget(false);
                     break;
                 case NotificationsViewModel.NavigationNodeName:
                     _navigator.NavigateTo(new NotificationsViewModel(_navigator)).SafeFireAndForget(false);

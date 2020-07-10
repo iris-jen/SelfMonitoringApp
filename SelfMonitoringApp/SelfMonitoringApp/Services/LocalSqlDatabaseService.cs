@@ -1,41 +1,43 @@
 ﻿using SelfMonitoringApp.Models;
 using SQLite;
 
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using System;
 
 namespace SelfMonitoringApp.Services
 {
-    public class Database  
+    public class LocalSqlDatabaseService : IDatabaseService
     {
-        public const string _databaseFilename = "UserLogs.db3";
+        public const string DatabaseFilename = "UserLogs.db3";
 
         private const SQLiteOpenFlags _openFlags = 
             SQLiteOpenFlags.ReadWrite |
             SQLiteOpenFlags.Create | 
             SQLiteOpenFlags.SharedCache;
 
-        private static string _filePath
+        public static string FilePath
         {
             get
             {
-                var basePath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-                return Path.Combine(basePath, _databaseFilename);
+                string basePath;
+                basePath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+                return Path.Combine(basePath, DatabaseFilename);
             }
         }
 
         private SQLiteAsyncConnection _database;
         private static bool _initialized;
 
-        public Database(){}
+        public LocalSqlDatabaseService()
+        {
+            InitializeAsync().SafeFireAndForget(false);
+        }
 
         public async Task InitializeAsync()
         {
-            _database = new SQLiteAsyncConnection(_filePath, _openFlags);
+            _database = new SQLiteAsyncConnection(FilePath, _openFlags);
 
             var tables = new Type[]
             {
@@ -53,24 +55,21 @@ namespace SelfMonitoringApp.Services
             }
         }
 
-        public Task ClearSpecificDatabase(ModelType modelType) => 
-            modelType switch
+        public Task ClearSpecificDatabase(ModelType modelType) => modelType switch
         {
-            ModelType.Activity => _database.DeleteAllAsync<ActivityModel>(),
-            ModelType.Meal => _database.DeleteAllAsync<MealModel>(),
-            ModelType.Mood => _database.DeleteAllAsync<MoodModel>(),
+            ModelType.Activity  => _database.DeleteAllAsync<ActivityModel>(),
+            ModelType.Meal      => _database.DeleteAllAsync<MealModel>(),
+            ModelType.Mood      => _database.DeleteAllAsync<MoodModel>(),
             ModelType.Substance => _database.DeleteAllAsync<SubstanceModel>(),
-            ModelType.Sleep => _database.DeleteAllAsync<SleepModel>(),
-            _ => throw new ArgumentException("Model type does not exist in db")
+            ModelType.Sleep     => _database.DeleteAllAsync<SleepModel>(),
+            _=> throw new ArgumentException("Model type does not exist in db")
         };
 
-        #region Get Items
-        public Task<List<MoodModel>> GetMoodsAsync() => _database.Table<MoodModel>().ToListAsync();
-        public Task<List<MealModel>> GetMealsAsync() => _database.Table<MealModel>().ToListAsync();
-        public Task<List<SleepModel>> GetSleepsAsync() => _database.Table<SleepModel>().ToListAsync();
+        public Task<List<MoodModel>> GetMoodsAsync()           => _database.Table<MoodModel>().ToListAsync();
+        public Task<List<MealModel>> GetMealsAsync()           => _database.Table<MealModel>().ToListAsync();
+        public Task<List<SleepModel>> GetSleepsAsync()         => _database.Table<SleepModel>().ToListAsync();
         public Task<List<SubstanceModel>> GetSubstancesAsync() => _database.Table<SubstanceModel>().ToListAsync();
-        public Task<List<ActivityModel>> GetActivitiesAsync() => _database.Table<ActivityModel>().ToListAsync();
-        #endregion
+        public Task<List<ActivityModel>> GetActivitiesAsync()  => _database.Table<ActivityModel>().ToListAsync();
 
         public Task<int> AddOrModifyModelAsync(IModel model)
         {
@@ -89,6 +88,5 @@ namespace SelfMonitoringApp.Services
         }
 
         public Task DeleteLog(IModel model) => _database.DeleteAsync(model);
-
     }
 }

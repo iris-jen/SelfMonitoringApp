@@ -1,9 +1,8 @@
-﻿using SelfMonitoringApp.Models;
-using SelfMonitoringApp.Navigation;
+﻿using SelfMonitoringApp.Navigation;
 using SelfMonitoringApp.Services;
 using SelfMonitoringApp.ViewModels;
-using System;
-using System.IO;
+using Splat;
+
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -13,28 +12,21 @@ namespace SelfMonitoringApp
 {
     public partial class App : Application, IHaveMainPage
     {
-        private static Database _database;
-
-        public static Database Database
-        {
-            get
-            {
-                if (_database is null)
-                {
-                    _database = new Database();
-                }
-
-                return _database;
-            }
-        }
 
         public App()
         {
             InitializeComponent();
-            Database.InitializeAsync().SafeFireAndForget(true);
-            var navigator = new NavigationService(this, new ViewLocator());
-            var rootViewModel = new MainViewModel(navigator);
-            navigator.PresentAsNavigatableMainPage(rootViewModel);
+            ConfigureContainer();
+
+            // Present the root view
+            Locator.Current.GetService<INavigationService>().
+               PresentAsNavigatableMainPage(new MainViewModel());
+        }
+
+        public void ConfigureContainer()
+        {
+            Locator.CurrentMutable.Register(() => new LocalSqlDatabaseService(), typeof(IDatabaseService));
+            Locator.CurrentMutable.Register(() => new NavigationService(this, new ViewLocator()), typeof(INavigationService));
         }
 
         protected override void OnStart()

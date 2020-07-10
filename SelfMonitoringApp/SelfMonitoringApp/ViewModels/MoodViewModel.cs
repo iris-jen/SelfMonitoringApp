@@ -12,7 +12,7 @@ using Xamarin.Forms;
 
 namespace SelfMonitoringApp.ViewModels
 {
-    public class MoodViewModel : NavigatableViewModelBase, INavigationViewModel
+    public class MoodViewModel : ViewModelBase, INavigationViewModel
     {
         private readonly MoodModel _mood;
         private readonly bool _editing;
@@ -77,7 +77,7 @@ namespace SelfMonitoringApp.ViewModels
         /// Constructor for loading an existing mood log;
         /// </summary>
         /// <param name="existingModel">a log created in the past</param>
-        public MoodViewModel(INavigationService navService, IModel existingModel = null) : base(navService)
+        public MoodViewModel(IModel existingModel = null)
         {
             if (existingModel is null)
                 _mood = new MoodModel();
@@ -105,7 +105,7 @@ namespace SelfMonitoringApp.ViewModels
         public async Task SaveAndPop()
         {
             var model = RegisterAndGetModel();
-            await App.Database.AddOrModifyModelAsync(model);
+            await _database.AddOrModifyModelAsync(model);
             await _navigator.NavigateBack();
             ModelShed?.Invoke(this, new ModelShedEventArgs(model));
         }

@@ -50,7 +50,7 @@ namespace SelfMonitoringApp.Navigation
                 .NavigationStack
                 .Skip(1)
                 .Select(vw => vw.BindingContext)
-                .OfType<NavigatableViewModelBase>()
+                .OfType<ViewModelBase>()
                 .ToArray();
 
             await Navigator.PopToRootAsync();

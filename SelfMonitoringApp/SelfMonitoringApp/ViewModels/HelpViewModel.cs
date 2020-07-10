@@ -7,10 +7,10 @@ using Xamarin.Forms;
 
 namespace SelfMonitoringApp.ViewModels
 {
-    public class HelpViewModel : NavigatableViewModelBase, INavigationViewModel
+    public class HelpViewModel : ViewModelBase, INavigationViewModel
     {
         public const string NavigationNodeName = "help";
-        public HelpViewModel(INavigationService navService): base(navService)
+        public HelpViewModel()
         {
 
         }

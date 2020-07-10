@@ -17,13 +17,10 @@ namespace SelfMonitoringApp.UnitTests
         private SleepViewModel _newModel;
         private SleepViewModel _existingModel;
 
-        private INavigationService _navService;
-
         [TestInitialize]
         public void Init()
         {
-            _navService = new Mock<INavigationService>().Object;
-            _newModel = new SleepViewModel(_navService);
+            _newModel = new SleepViewModel();
 
             //todo existing model
         }
@@ -31,15 +28,12 @@ namespace SelfMonitoringApp.UnitTests
         [TestMethod]
         public async Task TestSavingLog()
         {
-            await App.Database.InitializeAsync();
             await _newModel.SaveAndPop();
-
         }
 
         [TestCleanup]
         public void Cleanup()
         {
-            _navService = null;
             _newModel = null;
             _existingModel = null;
         }

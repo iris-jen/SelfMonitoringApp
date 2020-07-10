@@ -12,7 +12,7 @@ using Xamarin.Forms;
 
 namespace SelfMonitoringApp.ViewModels
 {
-    public class DataExplorerViewModel : NavigatableViewModelBase, INavigationViewModel
+    public class DataExplorerViewModel : ViewModelBase, INavigationViewModel
     {
         public const string NavigationNodeName = "data";
         public ObservableCollection<DaySummaryViewModel> DaySummaries { get; private set; }
@@ -75,8 +75,7 @@ namespace SelfMonitoringApp.ViewModels
 
         public Command LoadDataCommand { get; private set; }
 
-        public DataExplorerViewModel(INavigationService navService) 
-            : base(navService)
+        public DataExplorerViewModel()
         {
             LoadDataCommand = new Command(async () => await LoadData());
             LoadData().SafeFireAndForget(false);
@@ -98,11 +97,11 @@ namespace SelfMonitoringApp.ViewModels
                 List<ActivityModel> activityData = null;
                 List<Task> loadingTasks = new List<Task>()
                 {
-                    Task.Run( async ()=> sleepData = await App.Database.GetSleepsAsync()),
-                    Task.Run( async ()=> moodData = await App.Database.GetMoodsAsync()),
-                    Task.Run( async ()=> mealData = await App.Database.GetMealsAsync()),
-                    Task.Run( async ()=> substanceData = await App.Database.GetSubstancesAsync()),
-                    Task.Run( async ()=> activityData = await App.Database.GetActivitiesAsync())
+                    Task.Run( async ()=> sleepData = await _database.GetSleepsAsync()),
+                    Task.Run( async ()=> moodData = await _database.GetMoodsAsync()),
+                    Task.Run( async ()=> mealData = await _database.GetMealsAsync()),
+                    Task.Run( async ()=> substanceData = await _database.GetSubstancesAsync()),
+                    Task.Run( async ()=> activityData = await _database.GetActivitiesAsync())
                 };
 
                 await Task.WhenAll(loadingTasks);
@@ -114,8 +113,8 @@ namespace SelfMonitoringApp.ViewModels
                         var sleeps     = (sleepData.Where(sleep => DateInRange(startDate, endDate, sleep.RegisteredTime, date))).ToList();
                         var moods      = (moodData.Where(mood => DateInRange(startDate, endDate, mood.RegisteredTime, date))).ToList();
                         var meals      = (mealData.Where(meal => DateInRange(startDate, endDate, meal.RegisteredTime, date))).ToList();
-                        var activities = (activityData.Where(activities => DateInRange(startDate, endDate, activities.RegisteredTime, date))).ToList();
-                        var substances = (substanceData.Where(substances => DateInRange(startDate, endDate, substances.RegisteredTime, date))).ToList();
+                        var activities = (activityData.Where(activity => DateInRange(startDate, endDate, activity.RegisteredTime, date))).ToList();
+                        var substances = (substanceData.Where(substance => DateInRange(startDate, endDate, substance.RegisteredTime, date))).ToList();
 
                         if (sleeps.Count > 0)
                             sleeps.Sort((t1, t2) => DateTime.Compare(t1.RegisteredTime, t2.RegisteredTime));
@@ -126,7 +125,7 @@ namespace SelfMonitoringApp.ViewModels
                         substances.Sort((t1, t2) => DateTime.Compare(t1.RegisteredTime, t2.RegisteredTime));
 
                         if (sleeps.Count != 0 || activities.Count != 0 || moods.Count != 0 || meals.Count != 0 || substances.Count != 0)
-                            filteredData.Add(new DaySummaryViewModel(sleeps, activities, meals, moods, substances, date, _navigator));
+                            filteredData.Add(new DaySummaryViewModel(sleeps, activities, meals, moods, substances, date));
                     }
                 });
             }

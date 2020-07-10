@@ -10,7 +10,7 @@ using Xamarin.Forms;
 
 namespace SelfMonitoringApp.ViewModels
 {
-    public class SubstanceViewModel: NavigatableViewModelBase, INavigationViewModel
+    public class SubstanceViewModel: ViewModelBase, INavigationViewModel
     {
         private readonly SubstanceModel _substance;
         private readonly bool _editing;
@@ -97,7 +97,7 @@ namespace SelfMonitoringApp.ViewModels
             }
         }
 
-        public SubstanceViewModel(INavigationService navService, IModel existingModel = null) : base(navService)
+        public SubstanceViewModel(IModel existingModel = null) 
         {
             if (existingModel is null)
                 _substance = new SubstanceModel();
@@ -121,10 +121,9 @@ namespace SelfMonitoringApp.ViewModels
         public async Task SaveAndPop()
         {
             var model = RegisterAndGetModel();
-            await App.Database.AddOrModifyModelAsync(model);
+            await _database.AddOrModifyModelAsync(model);
             await _navigator.NavigateBack();
             ModelShed?.Invoke(this, new ModelShedEventArgs(model));
         }
-        
     }
 }

@@ -22,15 +22,13 @@ namespace SelfMonitoringApp.UnitTests
         [TestInitialize]
         public void Init()
         {
-            _navService = new Mock<INavigationService>().Object;
-            _newModel = new MealViewModel(_navService);
-            _existingModel = new MealViewModel(_navService, LogSamples.TestMeal);
+            _newModel = new MealViewModel();
+            _existingModel = new MealViewModel(LogSamples.TestMeal);
         }
 
         [TestMethod]
         public async Task TestSavingLog()
         {
-            await App.Database.InitializeAsync();
             await _newModel.SaveAndPop();
             await _existingModel.SaveAndPop();
         }
