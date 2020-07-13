@@ -1,6 +1,4 @@
-﻿using SelfMonitoringApp.Models;
-using SelfMonitoringApp.Navigation;
-using SelfMonitoringApp.Services;
+﻿using SelfMonitoringApp.Models.Base;
 using SelfMonitoringApp.ViewModels.Base;
 
 using System.Globalization;

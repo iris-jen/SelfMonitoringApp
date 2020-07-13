@@ -1,26 +1,17 @@
-﻿using System;
+﻿using SelfMonitoringApp.Models.Base;
 
 namespace SelfMonitoringApp.Models
 {
     public class MealModel : LogModelBase, IModel
     {
-        /// <summary>
-        /// User description of their meals size
-        /// </summary>
-        public string MealSize     { get; set; } = string.Empty;
-        
-        /// <summary>
-        /// User description of meal type (snack, dinner, etc)
-        /// </summary>
-        public string MealType     { get; set; } = string.Empty;
-
-        /// <summary>
-        /// What the user ate
-        /// </summary>
-        public string Description  { get; set; } = string.Empty;
-
+        public string MealSize     { get; set; }
+        public string MealType     { get; set; }
+        public string Description  { get; set; }
         public double Satisfaction { get; set; } 
 
-        public MealModel():base (ModelType.Meal) { }
+        public MealModel() : base (ModelType.Meal) 
+        {
+            MealSize = MealType = Description = string.Empty;
+        }
     }
 }

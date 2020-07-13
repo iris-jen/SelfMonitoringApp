@@ -1,5 +1,5 @@
-﻿using SelfMonitoringApp.Navigation;
-using SelfMonitoringApp.Services;
+﻿using SelfMonitoringApp.Services;
+using SelfMonitoringApp.Services.Navigation;
 using SelfMonitoringApp.ViewModels;
 using Splat;
 
@@ -12,7 +12,6 @@ namespace SelfMonitoringApp
 {
     public partial class App : Application, IHaveMainPage
     {
-
         public App()
         {
             InitializeComponent();
@@ -27,6 +26,11 @@ namespace SelfMonitoringApp
         {
             Locator.CurrentMutable.Register(() => new LocalSqlDatabaseService(), typeof(IDatabaseService));
             Locator.CurrentMutable.Register(() => new NavigationService(this, new ViewLocator()), typeof(INavigationService));
+            var Logger = new DebugLogger()
+            {
+                Level = LogLevel.Debug
+            };
+            Locator.CurrentMutable.RegisterConstant(Logger, typeof(ILogger));
         }
 
         protected override void OnStart()

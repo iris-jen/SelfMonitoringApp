@@ -1,8 +1,7 @@
 ﻿using SelfMonitoringApp.Models;
-using SelfMonitoringApp.Navigation;
-using SelfMonitoringApp.Services;
+using SelfMonitoringApp.Models.Base;
 using SelfMonitoringApp.ViewModels.Base;
-using Splat;
+
 using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -12,7 +11,6 @@ namespace SelfMonitoringApp.ViewModels
     class ActivityViewModel : ViewModelBase, INavigationViewModel
     {
         private readonly ActivityModel _activity;
-        private readonly bool _editing;
 
         public const string NavigationNodeName = "activity";
         public event EventHandler ModelShed;
@@ -60,6 +58,34 @@ namespace SelfMonitoringApp.ViewModels
             }
         }
 
+        private DateTime _startDateTime;
+        public DateTime StartDateTime
+        {
+            get => _startDateTime;
+            set
+            {
+                if (_startDateTime == value)
+                    return;
+
+                _startDateTime = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private DateTime _endDateTime;
+        public DateTime EndDateTime
+        {
+            get => _endDateTime;
+            set
+            {
+                if (_endDateTime == value)
+                    return;
+
+                _endDateTime = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public double Duration
         {
             get => _activity.Duration;
@@ -99,7 +125,6 @@ namespace SelfMonitoringApp.ViewModels
             }
         }
 
-
         public bool WantedToStart
         {
             get => _activity.WantedToStart;
@@ -113,7 +138,6 @@ namespace SelfMonitoringApp.ViewModels
             }
         }
 
-
         public ActivityViewModel(IModel activityModel = null)
         {
             if (activityModel is null)
@@ -121,7 +145,10 @@ namespace SelfMonitoringApp.ViewModels
             else
             {
                 _activity = activityModel as ActivityModel;
-                _editing = true;
+
+                StartDateTime = _activity.StartTime;
+                EndDateTime = _activity.EndTime;
+                StartTime = new TimeSpan(_activity.StartTime.Hour, _activity.StartTime.Minute, _activity.StartTime.Second);
             }
 
             SaveLogCommand = new Command(async()=> await SaveAndPop());
@@ -129,14 +156,9 @@ namespace SelfMonitoringApp.ViewModels
 
         public IModel RegisterAndGetModel()
         {
-            var now = DateTime.Now;
-            
-            if(!_editing)
-                _activity.RegisteredTime = DateTime.Now;
-
-            _activity.StartTime = new DateTime(now.Year, now.Month, now.Day, StartTime.Hours, StartTime.Minutes, StartTime.Seconds);
-            var endDateTime = new DateTime(now.Year, now.Month, now.Day, EndTime.Hours, EndTime.Minutes, EndTime.Seconds);
-            _activity.Duration = endDateTime.Subtract(_activity.StartTime).TotalHours;
+            _activity.StartTime = new DateTime(StartDateTime.Year, StartDateTime.Month, StartDateTime.Day, StartTime.Hours, StartTime.Minutes, StartTime.Seconds);
+            _activity.EndTime   = new DateTime(EndDateTime.Year, EndDateTime.Month, EndDateTime.Day, EndTime.Hours, EndTime.Minutes, EndTime.Seconds);
+            _activity.Duration  = _activity.EndTime.Subtract(_activity.StartTime).TotalHours;
             return _activity;
         }
 

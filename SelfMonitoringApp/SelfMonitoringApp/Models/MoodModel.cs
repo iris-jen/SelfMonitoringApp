@@ -1,30 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using SelfMonitoringApp.Models.Base;
 
 namespace SelfMonitoringApp.Models
 {
     public class MoodModel : LogModelBase, IModel
     {
-        /// <summary>
-        /// What was happening at the time of the logs creation
-        /// </summary>
-        public string Description    { get; set; } = string.Empty;
+        public string Description      { get; set; }
+        public string StrongestEmotion { get; set; }
+        public string Location         { get; set; }
+        public double OverallMood      { get; set; }
 
-        /// <summary>
-        /// Strongest emotion that the user experienced
-        /// </summary>
-        public string StrongestEmotion { get; set; } = string.Empty;
-
-        /// <summary>
-        /// Location it happened
-        /// </summary>
-        public string Location { get; set; } = string.Empty;
-
-        /// <summary>
-        /// A numerical rating (out of 10) of how the user felt
-        /// </summary>
-        public double OverallMood    { get; set; }
-
-        public MoodModel(): base(ModelType.Mood) { }
+        public MoodModel(): base(ModelType.Mood) 
+        {
+            Description = StrongestEmotion = Location = string.Empty;
+        }
     }
-}
+}   

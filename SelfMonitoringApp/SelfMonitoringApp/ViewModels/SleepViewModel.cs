@@ -1,6 +1,5 @@
 ﻿using SelfMonitoringApp.Models;
-using SelfMonitoringApp.Navigation;
-using SelfMonitoringApp.Services;
+using SelfMonitoringApp.Models.Base;
 using SelfMonitoringApp.ViewModels.Base;
 
 using System;
@@ -13,19 +12,21 @@ namespace SelfMonitoringApp.ViewModels
     {
         private readonly SleepModel _sleepModel;
         private readonly bool _editing;
+
         public const string NavigationNodeName = "sleep";
         public event EventHandler ModelShed;
         public Command SaveLogCommand { get; private set; }
 
+        private TimeSpan _sleepStart;
         public TimeSpan SleepStart
         {
-            get => _sleepModel.SleepStart;
+            get => _sleepStart;
             set
             {
-                if (_sleepModel.SleepStart == value)
+                if (_sleepStart == value)
                     return;
 
-                _sleepModel.SleepStart = value;
+                _sleepStart = value;
                 TotalSleep = GetSleep();
                 NotifyPropertyChanged();
             }
@@ -44,15 +45,16 @@ namespace SelfMonitoringApp.ViewModels
             }
         }
 
+        private TimeSpan _sleepEnd;
         public TimeSpan SleepEnd
         {
-            get => _sleepModel.SleepEnd;
+            get => _sleepEnd;
             set
             {
-                if (_sleepModel.SleepEnd == value)
+                if (_sleepEnd == value)
                     return;
 
-                _sleepModel.SleepEnd = value;
+                _sleepEnd = value;
                 TotalSleep = GetSleep();
                 NotifyPropertyChanged();
             }
@@ -154,7 +156,11 @@ namespace SelfMonitoringApp.ViewModels
 
         public IModel RegisterAndGetModel()
         {
-            _sleepModel.RegisteredTime = DateTime.Now;
+            if (_editing)
+            {
+                _sleepModel.RegisteredTime = DateTime.Now;
+            }
+
             return _sleepModel;
         }
 

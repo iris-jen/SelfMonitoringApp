@@ -1,13 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using SelfMonitoringApp.Models;
-using SelfMonitoringApp.Navigation;
-using SelfMonitoringApp.Services;
 using SelfMonitoringApp.ViewModels;
-using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using Xamarin.Forms;
 
 namespace SelfMonitoringApp.UnitTests
 {
@@ -21,7 +14,6 @@ namespace SelfMonitoringApp.UnitTests
         public void Init()
         {
             _newModel = new SleepViewModel();
-
             //todo existing model
         }
 

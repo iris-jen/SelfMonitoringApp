@@ -34,14 +34,11 @@
 
                         <Button Grid.Row="4" Command="{Binding DeleteLogCommand}" Style="{StaticResource ButtonStyle}"
                                 Text="Delete all logs" CommandParameter="all" Margin="0"/>
-                        
+
                     </Grid>
                 </controls:HeaderBlock>
 
-  
-                
             </StackLayout>
         </ScrollView>
-
     </ContentPage.Content>
 </ContentPage>

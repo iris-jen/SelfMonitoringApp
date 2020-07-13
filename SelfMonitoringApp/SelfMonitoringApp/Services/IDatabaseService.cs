@@ -1,5 +1,5 @@
 ﻿using SelfMonitoringApp.Models;
-
+using SelfMonitoringApp.Models.Base;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

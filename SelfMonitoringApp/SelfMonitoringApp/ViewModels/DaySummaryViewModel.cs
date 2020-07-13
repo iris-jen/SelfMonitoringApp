@@ -1,12 +1,10 @@
 ﻿using SelfMonitoringApp.Models;
-using SelfMonitoringApp.Navigation;
-using SelfMonitoringApp.Services;
+using SelfMonitoringApp.Models.Base;
 using SelfMonitoringApp.ViewModels.Base;
-using Splat;
+
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;

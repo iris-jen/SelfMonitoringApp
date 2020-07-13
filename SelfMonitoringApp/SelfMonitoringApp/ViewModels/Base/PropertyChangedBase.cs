@@ -21,6 +21,5 @@ namespace SelfMonitoringApp.ViewModels.Base
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
     }
 }

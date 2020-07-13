@@ -2,7 +2,7 @@
 using System;
 using Xamarin.Forms;
 
-namespace SelfMonitoringApp.Navigation
+namespace SelfMonitoringApp.Services.Navigation
 {
     public class ViewLocator : IViewLocator
     {

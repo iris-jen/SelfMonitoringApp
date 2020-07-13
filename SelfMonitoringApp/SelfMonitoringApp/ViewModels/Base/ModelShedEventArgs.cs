@@ -1,4 +1,5 @@
 ﻿using SelfMonitoringApp.Models;
+using SelfMonitoringApp.Models.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;

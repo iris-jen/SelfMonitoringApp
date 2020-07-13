@@ -1,10 +1,10 @@
-﻿using SelfMonitoringApp.Models;
-using SelfMonitoringApp.Navigation;
-using SelfMonitoringApp.Services;
+﻿using Acr.UserDialogs;
+using SelfMonitoringApp.Models;
+using SelfMonitoringApp.Models.Base;
 using SelfMonitoringApp.ViewModels.Base;
+
 using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -13,11 +13,38 @@ namespace SelfMonitoringApp.ViewModels
     public class SubstanceViewModel: ViewModelBase, INavigationViewModel
     {
         private readonly SubstanceModel _substance;
-        private readonly bool _editing;
-
         public const string NavigationNodeName = "substance";
-        public event EventHandler ModelShed;
+
         public Command SaveLogCommand { get; private set; }
+        public event EventHandler ModelShed;
+
+        private DateTime _logTime;
+        public DateTime LogTime
+        {
+            get => _logTime;
+            set
+            {
+                if (_logTime == value)
+                    return;
+
+                _logTime = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private TimeSpan _startTimeSpan;
+        public TimeSpan StartTimeSpan
+        {
+            get => _startTimeSpan;
+            set
+            {
+                if (_startTimeSpan == value)
+                    return;
+
+                _startTimeSpan = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         public string ConsumptionMethod
         {
@@ -100,27 +127,32 @@ namespace SelfMonitoringApp.ViewModels
         public SubstanceViewModel(IModel existingModel = null) 
         {
             if (existingModel is null)
+            {
                 _substance = new SubstanceModel();
+                LogTime = DateTime.Now;
+                StartTimeSpan = new TimeSpan(LogTime.Hour, LogTime.Hour, LogTime.Second);
+            }
             else
             {
                 _substance = existingModel as SubstanceModel;
-                _editing = true;
+                LogTime = new DateTime(_substance.RegisteredTime.Year, _substance.RegisteredTime.Month, _substance.RegisteredTime.Day);
+                StartTimeSpan = new TimeSpan(_substance.RegisteredTime.Hour, _substance.RegisteredTime.Minute, _substance.RegisteredTime.Second);
             }
-
+   
             SaveLogCommand = new Command(async ()=> await SaveAndPop());
         }
 
         public IModel RegisterAndGetModel()
         {
-            if(!_editing)
-                _substance.RegisteredTime = DateTime.Now;
-
+            _substance.RegisteredTime = new DateTime(LogTime.Year, LogTime.Month, LogTime.Day,
+                StartTimeSpan.Hours, StartTimeSpan.Minutes, StartTimeSpan.Seconds);
             return _substance;
         }
 
         public async Task SaveAndPop()
         {
             var model = RegisterAndGetModel();
+
             await _database.AddOrModifyModelAsync(model);
             await _navigator.NavigateBack();
             ModelShed?.Invoke(this, new ModelShedEventArgs(model));

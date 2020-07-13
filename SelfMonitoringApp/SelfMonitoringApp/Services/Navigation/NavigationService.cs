@@ -1,11 +1,10 @@
-﻿using SelfMonitoringApp.Models;
-using SelfMonitoringApp.ViewModels.Base;
-using System;
-using System.Linq;
+﻿using SelfMonitoringApp.ViewModels.Base;
+
 using System.Threading.Tasks;
+using System.Linq;
 using Xamarin.Forms;
 
-namespace SelfMonitoringApp.Navigation
+namespace SelfMonitoringApp.Services.Navigation
 {
     public class NavigationService : INavigationService
     {

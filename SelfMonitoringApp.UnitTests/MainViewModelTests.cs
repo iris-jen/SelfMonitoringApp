@@ -1,10 +1,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using SelfMonitoringApp.Navigation;
+using SelfMonitoringApp.Services.Navigation;
 using SelfMonitoringApp.ViewModels;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using Xamarin.Forms;
 
 namespace SelfMonitoringApp.UnitTests
 {

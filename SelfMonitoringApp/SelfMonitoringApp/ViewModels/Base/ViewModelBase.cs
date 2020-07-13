@@ -1,5 +1,5 @@
-﻿using SelfMonitoringApp.Navigation;
-using SelfMonitoringApp.Services;
+﻿using SelfMonitoringApp.Services;
+using SelfMonitoringApp.Services.Navigation;
 using Splat;
 
 using Xamarin.Forms;

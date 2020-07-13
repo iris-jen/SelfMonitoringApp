@@ -1,10 +1,8 @@
 ﻿using SelfMonitoringApp.Models;
-using SelfMonitoringApp.Navigation;
-using SelfMonitoringApp.Services;
+using SelfMonitoringApp.Models.Base;
 using SelfMonitoringApp.ViewModels.Base;
+
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -13,12 +11,39 @@ namespace SelfMonitoringApp.ViewModels
     public class MealViewModel: ViewModelBase, INavigationViewModel
     {
         private readonly MealModel _mealModel;
-        private readonly bool _editing;
 
         public const string NavigationNodeName = "meal";
         public event EventHandler ModelShed;
 
         public Command SaveLogCommand { get; private set; }
+
+        private DateTime _logTime;
+        public DateTime LogTime
+        {
+            get => _logTime;
+            set
+            {
+                if (_logTime == value)
+                    return;
+
+                _logTime = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private TimeSpan _startTimeSpan;
+        public TimeSpan StartTimeSpan
+        {
+            get => _startTimeSpan;
+            set
+            {
+                if (_startTimeSpan == value)
+                    return;
+
+                _startTimeSpan = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         public string MealSize
         {
@@ -79,7 +104,8 @@ namespace SelfMonitoringApp.ViewModels
             else
             {
                 _mealModel = existingMeal as MealModel;
-                _editing = true;
+                LogTime = new DateTime(_mealModel.RegisteredTime.Year, _mealModel.RegisteredTime.Month, _mealModel.RegisteredTime.Day);
+                StartTimeSpan = new TimeSpan(_mealModel.RegisteredTime.Hour, _mealModel.RegisteredTime.Minute, _mealModel.RegisteredTime.Second);
             }
 
             SaveLogCommand = new Command(async () => await SaveAndPop());
@@ -87,8 +113,8 @@ namespace SelfMonitoringApp.ViewModels
 
         public IModel RegisterAndGetModel()
         {
-            if(!_editing)
-                _mealModel.RegisteredTime = DateTime.Now;
+            _mealModel.RegisteredTime = new DateTime(LogTime.Year, LogTime.Month, LogTime.Day,
+                StartTimeSpan.Hours, StartTimeSpan.Minutes, StartTimeSpan.Seconds);
 
             return _mealModel;
         }

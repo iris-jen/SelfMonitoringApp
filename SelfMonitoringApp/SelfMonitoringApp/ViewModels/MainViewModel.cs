@@ -1,6 +1,4 @@
-﻿using SelfMonitoringApp.Navigation;
-using SelfMonitoringApp.Services;
-using SelfMonitoringApp.ViewModels.Base;
+﻿using SelfMonitoringApp.ViewModels.Base;
 using System.Globalization;
 using System.IO;
 using Xamarin.Forms;
@@ -47,7 +45,7 @@ namespace SelfMonitoringApp.ViewModels
                     _navigator.NavigateTo(new HelpViewModel()).SafeFireAndForget(false);
                     break;
                 case NotificationsViewModel.NavigationNodeName:
-                    _navigator.NavigateTo(new NotificationsViewModel(_navigator)).SafeFireAndForget(false);
+                    _navigator.NavigateTo(new NotificationsViewModel()).SafeFireAndForget(false);
                     break;
                 default:
                     throw new DirectoryNotFoundException($"Cant find nav directory {page}");

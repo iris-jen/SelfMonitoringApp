@@ -7,10 +7,9 @@
              x:Class="SelfMonitoringApp.Controls.RatingSlider" >
     <ContentView.ControlTemplate>
         <ControlTemplate>
-            <Frame Padding="5">
+            <Frame Padding="5" HasShadow="True" BorderColor="Black">
                 <Grid >
                     <Grid.RowDefinitions>
-                        <!--Might put slider header back in, ill keep this empty row for now-->
                         <RowDefinition Height="20"/>
                         <RowDefinition Height="80"/>
                     </Grid.RowDefinitions>
@@ -22,7 +21,7 @@
 
                     <!--Slider-->
                     <Slider Grid.Row = "0" Grid.Column = "0" Grid.ColumnSpan = "3" Margin = "0" Minimum ="0" Maximum = "10" 
-                            x:Name = "Slider" ThumbColor="{StaticResource Secondary}" MinimumTrackColor="GreenYellow" MaximumTrackColor="Red"
+                            x:Name = "Slider" ThumbColor="{StaticResource Secondary}" MinimumTrackColor="#15ff00" MaximumTrackColor="#ff1900"
                             Value="{TemplateBinding Rating}"  ValueChanged="Slider_ValueChanged"/>
 
                     <!--Min Value Label-->

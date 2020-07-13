@@ -7,7 +7,7 @@
              NavigationPage.HasNavigationBar="True"
              Title="View Data"
              xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
-             xmlns:models ="clr-namespace:SelfMonitoringApp.Models"
+             xmlns:models ="clr-namespace:SelfMonitoringApp.Models.Base"
              x:Class="SelfMonitoringApp.Pages.DataExplorerPage">
     <ContentPage.Resources>
         <GridLength x:Key="EditDeleteHeght">40</GridLength>

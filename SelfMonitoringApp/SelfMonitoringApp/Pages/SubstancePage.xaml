@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:behaviors="clr-namespace:Behaviors;assembly=Behaviors"
              xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
              mc:Ignorable="d"
              NavigationPage.HasNavigationBar="True" Title="Log Substance Use"
@@ -10,21 +11,41 @@
              x:Class="SelfMonitoringApp.Pages.SubstancePage">
     <ContentPage.Content>
         <controls:SaveCancelPage CancelCommand="{Binding BackCommand}" SaveCommand="{Binding SaveLogCommand}">
-            <Grid Margin="0,8,0,0">
+            <Grid Margin="0,3,0,0">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="90"/>
                     <RowDefinition Height="{StaticResource RowHeightSingle}"/>
                     <RowDefinition Height="{StaticResource RowHeightSingle}"/>
                     <RowDefinition Height="{StaticResource RowHeightSlider}"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <controls:HeaderBlock HeaderText="Substance Name">
-                    <Frame Padding="5">
-                        <Entry Text="{Binding SubstanceName}" Placeholder="Coffee" HorizontalTextAlignment="Center"/>
+
+                <!--Registered time grid-->
+                <Grid>
+                    <!--Date Picker-->
+                    <controls:HeaderBlock HeaderText="Date">
+                        <Frame Padding="0" BorderColor="Black">
+                            <DatePicker HorizontalOptions="Center" FontSize="14" Date="{Binding SelectedDate}"/>
+                        </Frame>
+                    </controls:HeaderBlock>
+                    
+                    <!--Time Picker-->
+                    <controls:HeaderBlock HeaderText="Time" Grid.Column="1" Margin="0">
+                        <Frame Padding="0" BorderColor="Black">
+                            <TimePicker HorizontalOptions="Center" FontSize="14" Time="{Binding SelectedTime}"/>
+                        </Frame>
+                    </controls:HeaderBlock>
+                </Grid>
+
+                <!--Substance Name Picker-->
+                <controls:HeaderBlock HeaderText="Substance Name" Grid.Row="1">
+                    <Frame Padding="0" BorderColor="Black">
+                        <Picker SelectedItem="{Binding SubstanceName}" ItemsSource="{Binding Substances}"/>
                     </Frame>
                 </controls:HeaderBlock>
-                
+
                 <!--Use method / quantity / unit grid-->
-                <Grid Grid.Row="1">
+                <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition Width=".9*"/>
@@ -32,35 +53,36 @@
                     </Grid.ColumnDefinitions>
                     
                     <!--Use Method-->
-                    <controls:HeaderBlock  HeaderText="Method" Margin="0,0,-10,0">
-                        <Frame Padding="5">
-                            <Entry Text="{Binding ConsumptionMethod}" Placeholder="Drank" HorizontalTextAlignment="Center"/>
+                    <controls:HeaderBlock HeaderText="Method">
+                        <Frame Padding="0" BorderColor="Black">
+                            <Picker SelectedItem="{Binding ConsumptionMethod}" ItemsSource="{Binding ConsumptionMethods}" FontSize="14"/>
                         </Frame>
                     </controls:HeaderBlock>
                     
                     <!--Ammount of substance-->
-                    <controls:HeaderBlock Grid.Column="1" HeaderText="Qty." Margin="0,0,0,0">
-                        <Frame Padding="5">
+                    <controls:HeaderBlock Grid.Column="1" HeaderText="Qty.">
+                        <Frame Padding="0" BorderColor="Black">
                             <Entry Text="{Binding Ammount}" HorizontalTextAlignment="Center" Placeholder="1"/>
                         </Frame>
                     </controls:HeaderBlock>
 
-                    <controls:HeaderBlock Grid.Column="2" HeaderText="Unit" Margin="0,0,0,0">
-                        <Frame Padding="5">
-                            <Entry Text="{Binding Unit}" HorizontalTextAlignment="Center" Placeholder="Cup"/>
+                    <controls:HeaderBlock Grid.Column="2" HeaderText="Unit" >
+                        <Frame Padding="1" BorderColor="Black">
+                            <Picker SelectedItem="{Binding Unit}" ItemsSource="{Binding Units}"/>
                         </Frame>
                     </controls:HeaderBlock>
                 </Grid>
 
-                <controls:HeaderBlock HeaderText="Rate how you feel" Grid.Row="2">
+                <controls:HeaderBlock HeaderText="Rate how you feel" Grid.Row="3">
                     <controls:RatingSlider Rating="{Binding Satisfaction}"/>
                 </controls:HeaderBlock>
 
-                <controls:HeaderBlock HeaderText="Comment" Grid.Row="3" Margin="0,0,0,5">
-                    <Frame Padding="4">
+                <controls:HeaderBlock HeaderText="Comment" Grid.Row="4" Margin="0,0,0,5">
+                    <Frame Padding="4" BorderColor="Black">
                         <Editor Text="{Binding Comment}" Placeholder="Any thoughts?" AutoSize="TextChanges"/>
-                    </Frame>
+                    </Frame> 
                 </controls:HeaderBlock>
+                
             </Grid>
         </controls:SaveCancelPage>
     </ContentPage.Content>

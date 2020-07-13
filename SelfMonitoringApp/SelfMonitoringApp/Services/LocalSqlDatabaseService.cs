@@ -5,10 +5,12 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.IO;
 using System;
+using Splat;
+using SelfMonitoringApp.Models.Base;
 
 namespace SelfMonitoringApp.Services
 {
-    public class LocalSqlDatabaseService : IDatabaseService
+    public class LocalSqlDatabaseService : IDatabaseService, IEnableLogger
     {
         public const string DatabaseFilename = "UserLogs.db3";
 
@@ -32,7 +34,11 @@ namespace SelfMonitoringApp.Services
 
         public LocalSqlDatabaseService()
         {
+            this.Log().Info("Initializing database.");
+
             InitializeAsync().SafeFireAndForget(false);
+
+            this.Log().Info("....done");
         }
 
         public async Task InitializeAsync()

@@ -14,31 +14,53 @@
         <controls:SaveCancelPage CancelCommand="{Binding BackCommand}" SaveCommand="{Binding SaveLogCommand}">
             <Grid Margin="0,8,0,0">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="{StaticResource RowHeightSingle}"/>
                     <RowDefinition Height="{StaticResource RowHeightSlider}"/>
                     <RowDefinition Height="{StaticResource RowHeightSingle}"/>
                     <RowDefinition Height="{StaticResource RowHeightSingle}"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-            
+
+                <!--Registered time grid-->
+                <Grid >
+                    <!--Date Picker-->
+                    <controls:HeaderBlock HeaderText="Date">
+                        <Frame Padding="0" BorderColor="Black">
+                            <DatePicker HorizontalOptions="Center" BackgroundColor="White" FontSize="14" Date="{Binding SelectedDate}"/>
+                        </Frame>
+                    </controls:HeaderBlock>
+
+                    <!--Time Picker-->
+                    <controls:HeaderBlock HeaderText="Time" Grid.Column="1" Margin="0">
+                        <Frame Padding="0" BorderColor="Black">
+                            <TimePicker HorizontalOptions="Center" FontSize="14" Time="{Binding SelectedTime}"/>
+                        </Frame>
+                    </controls:HeaderBlock>
+                </Grid>
+
                 <!--Rating slider-->
-                <controls:HeaderBlock HeaderText="Rate how you feel">
+                <controls:HeaderBlock HeaderText="Rate how you feel" Grid.Row="1">
                     <controls:RatingSlider Rating="{Binding OverallMood}" />
                 </controls:HeaderBlock>
             
                 <!--Emotions entry box-->
-                <controls:HeaderBlock Grid.Row="1" HeaderText="Strongest Emotion">
-                    <Entry Text="{Binding StrongestEmotion}" BackgroundColor="White" Placeholder="What emotion is most intense?" />
+                <controls:HeaderBlock Grid.Row="2" HeaderText="Strongest Emotion">
+                    <Frame Padding="2" BorderColor="Black">
+                        <Picker SelectedItem="{Binding StrongestEmotion}" ItemsSource="{Binding Emotions}" />
+                    </Frame>
                 </controls:HeaderBlock>
 
-                <controls:HeaderBlock Grid.Row="2" HeaderText="Location">
-                    <Entry Text="{Binding Location}" BackgroundColor="White" Placeholder="Where were you?" />
+                <controls:HeaderBlock Grid.Row="3" HeaderText="Location">
+                    <Frame Padding="2" BorderColor="Black">
+                        <Picker  SelectedItem="{Binding Location}" BackgroundColor="White" ItemsSource="{Binding Locations}"/>
+                    </Frame>
                 </controls:HeaderBlock>
                 
-                <!--Descripition Box-->
-                <controls:HeaderBlock Grid.Row="3" HeaderText="Description">
+                <!--Description Box-->
+                <controls:HeaderBlock Grid.Row="4" HeaderText="Description">
                     <Frame Padding="4">
                         <Editor BackgroundColor="White" IsSpellCheckEnabled="True" Text="{Binding Description}" VerticalOptions="CenterAndExpand"
-                                Placeholder="How do you feel?  What happened?" AutoSize="TextChanges"/>
+                                Placeholder="How do you feel?  What happened?" AutoSize="TextChanges" />
                     </Frame>
                 </controls:HeaderBlock>
 

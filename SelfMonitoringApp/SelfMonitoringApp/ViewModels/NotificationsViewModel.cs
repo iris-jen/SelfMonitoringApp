@@ -1,9 +1,4 @@
-﻿using SelfMonitoringApp.Models;
-using SelfMonitoringApp.Navigation;
-using SelfMonitoringApp.ViewModels.Base;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using SelfMonitoringApp.ViewModels.Base;
 
 namespace SelfMonitoringApp.ViewModels
 {
@@ -11,8 +6,7 @@ namespace SelfMonitoringApp.ViewModels
     {
         public const string NavigationNodeName = "notifications";
 
-        public NotificationsViewModel(INavigationService navService, IList<NotificationModel> existingNotifications = null)  : 
-            base (navService)
+        public NotificationsViewModel()
         {
 
 

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SelfMonitoringApp.Navigation
+namespace SelfMonitoringApp.Services.Navigation
 {
     public interface INavigationService
     {

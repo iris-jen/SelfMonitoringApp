@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using SelfMonitoringApp.Models.Base;
+using System;
 
 namespace SelfMonitoringApp.Models
 {
@@ -8,6 +7,7 @@ namespace SelfMonitoringApp.Models
     {
         public string Description { get; set; }
         public DateTime StartTime { get; set; }
+        public DateTime EndTime   { get; set; }
         public double Duration    { get; set; }
         public double Enjoyment   { get; set; }
         public bool Exersice      { get; set; }
@@ -15,7 +15,8 @@ namespace SelfMonitoringApp.Models
 
         public ActivityModel() : base(ModelType.Activity)
         {
-
+            Description = string.Empty;
+            StartTime = EndTime = DateTime.Now;
         }
     }
 }

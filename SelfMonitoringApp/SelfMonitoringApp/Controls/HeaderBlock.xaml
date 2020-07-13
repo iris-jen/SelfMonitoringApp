@@ -7,21 +7,21 @@
              x:Class="SelfMonitoringApp.Controls.HeaderBlock">
     <ContentView.ControlTemplate>
         <ControlTemplate>
-            <Frame BackgroundColor="{StaticResource Primary}" Padding="10,3,10,10" CornerRadius="10" 
-                   Margin="10,2,10,2">
+            <Frame BackgroundColor="{StaticResource Primary}" Padding="8,1,8,10" CornerRadius="10" 
+                   Margin="2" BorderColor="Black" HasShadow="True" >
                 <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="22"/>
+                        <RowDefinition Height="18"/>
                         <RowDefinition Height="2"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <Label Text="{TemplateBinding HeaderText}" FontSize="18" FontAttributes="Bold" 
-                           FontFamily="Roboto" 
+                    <Label Text="{TemplateBinding HeaderText}" FontSize="16" FontAttributes="Bold" 
+                           FontFamily="Roboto" Padding="0"
                            TextColor="White" HorizontalTextAlignment="Center" VerticalTextAlignment="Start"/>
                     <BoxView Grid.Row="1" BackgroundColor="{StaticResource Secondary}" />
 
                     <ContentPresenter Grid.Row="2" HorizontalOptions="FillAndExpand"
-                                      VerticalOptions="FillAndExpand" Margin="0,3,0,0"/>
+                                      VerticalOptions="FillAndExpand" Margin="0,0,0,0"/>
                 </Grid>
             </Frame>
         </ControlTemplate>

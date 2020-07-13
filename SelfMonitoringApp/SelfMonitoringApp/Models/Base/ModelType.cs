@@ -1,4 +1,4 @@
-﻿namespace SelfMonitoringApp.Models
+﻿namespace SelfMonitoringApp.Models.Base
 {
     public enum ModelType
     {

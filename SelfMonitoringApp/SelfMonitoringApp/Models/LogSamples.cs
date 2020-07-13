@@ -1,14 +1,5 @@
-﻿using Newtonsoft.Json;
-using SelfMonitoringApp.Models;
+﻿using System.Collections.Generic;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Diagnostics;
-using System.Text;
-using System.Runtime.Serialization;
-using System.Data;
-using System.Threading.Tasks;
-using Xamarin.Forms.Internals;
 
 namespace SelfMonitoringApp.Models
 {
@@ -277,11 +268,9 @@ namespace SelfMonitoringApp.Models
         {
             new SleepModel()
             {
-                SleepStart = new TimeSpan(23,0,0),
                 SleepStartDate = new DateTime(year,month, _day1,23,0,0),
                 RegisteredTime = new DateTime(year,month,_day2),
 
-                SleepEnd = new TimeSpan(8,0,0),
                 SleepEndDate = new DateTime(year, month,_day2,8,0,0),
                 TotalSleep = 9,
 
@@ -291,14 +280,11 @@ namespace SelfMonitoringApp.Models
             },  
             new SleepModel()
             {
-                SleepStart = new TimeSpan(23,59,59),
                 SleepStartDate = new DateTime(year,month, _day2,23,59,59),
                 RegisteredTime = new DateTime(year,month,_day2),
 
-                SleepEnd = new TimeSpan(8,0,0),
                 SleepEndDate = new DateTime(year, month,_day3,8,0,0),
                 TotalSleep = 8,
-
 
                 DreamLog="someone gave my cats bak",
                 RestRating = 9.9

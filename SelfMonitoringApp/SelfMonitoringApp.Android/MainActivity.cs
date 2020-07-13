@@ -6,6 +6,7 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using SelfMonitoringApp.Services;
+using Acr.UserDialogs;
 
 namespace SelfMonitoringApp.Android
 {
@@ -22,14 +23,9 @@ namespace SelfMonitoringApp.Android
             Xamarin.Forms.Forms.SetFlags("Expander_Experimental");
             Xamarin.Forms.Forms.Init(this, savedInstanceState);
             Xamarin.Forms.FormsMaterial.Init(this, savedInstanceState);
-
+            UserDialogs.Init(this);
             LoadApplication(new App());
         }
 
-        private void BootStrap()
-        {
-            var assembly = GetType().Assembly;
-            var assemblyName = assembly.GetName().Name;
-        }
     }
 }
