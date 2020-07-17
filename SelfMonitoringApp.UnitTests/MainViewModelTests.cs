@@ -2,6 +2,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using SelfMonitoringApp.Services.Navigation;
 using SelfMonitoringApp.ViewModels;
+using SelfMonitoringApp.ViewModels.Logs;
 using System.Collections.Generic;
 
 namespace SelfMonitoringApp.UnitTests

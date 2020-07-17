@@ -1,8 +1,9 @@
-﻿using SelfMonitoringApp.Services;
+﻿using Newtonsoft.Json;
+using SelfMonitoringApp.Services;
 using SelfMonitoringApp.Services.Navigation;
 using SelfMonitoringApp.ViewModels;
 using Splat;
-
+using System.IO;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -24,8 +25,10 @@ namespace SelfMonitoringApp
 
         public void ConfigureContainer()
         {
-            Locator.CurrentMutable.Register(() => new LocalSqlDatabaseService(), typeof(IDatabaseService));
-            Locator.CurrentMutable.Register(() => new NavigationService(this, new ViewLocator()), typeof(INavigationService));
+            Locator.CurrentMutable.RegisterConstant( new SuggestionService(), typeof(ISuggestionService));
+            Locator.CurrentMutable.RegisterConstant( new LocalSqlDatabaseService(), typeof(IDatabaseService));
+            Locator.CurrentMutable.RegisterConstant( new NavigationService(this, new ViewLocator()), typeof(INavigationService));
+
             var Logger = new DebugLogger()
             {
                 Level = LogLevel.Debug

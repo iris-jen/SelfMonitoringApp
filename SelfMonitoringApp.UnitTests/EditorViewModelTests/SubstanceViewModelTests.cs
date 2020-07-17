@@ -3,6 +3,7 @@ using SelfMonitoringApp.Models;
 using SelfMonitoringApp.Services;
 using SelfMonitoringApp.Services.Navigation;
 using SelfMonitoringApp.ViewModels;
+using SelfMonitoringApp.ViewModels.Logs;
 using System.Threading.Tasks;
 
 namespace SelfMonitoringApp.UnitTests

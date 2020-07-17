@@ -6,7 +6,7 @@
              mc:Ignorable="d"
              Title="Activity Log"
              xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
-             x:Class="SelfMonitoringApp.Pages.ActivityPage">
+             x:Class="SelfMonitoringApp.Pages.Logs.SocializationPage">
     <ContentPage.Content>
 
         <controls:SaveCancelPage SaveCommand="{Binding SaveLogCommand}" CancelCommand="{Binding BackCommand}" Margin="0,8,0,0">

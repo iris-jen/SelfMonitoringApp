@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace SelfMonitoringApp.Pages
+namespace SelfMonitoringApp.Pages.Logs
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MealPage : ContentPage
+    public partial class SleepPage : ContentPage
     {
-        public MealPage()
+        public SleepPage()
         {
             InitializeComponent();
         }

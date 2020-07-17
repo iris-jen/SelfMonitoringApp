@@ -3,6 +3,8 @@
 using System.Threading.Tasks;
 using System.Linq;
 using Xamarin.Forms;
+using System;
+using Acr.UserDialogs;
 
 namespace SelfMonitoringApp.Services.Navigation
 {
@@ -34,8 +36,15 @@ namespace SelfMonitoringApp.Services.Navigation
         
         public async Task NavigateTo(INavigationViewModel viewModel)
         {
-            var page = _viewLocator.CreateAndBindPageFor(viewModel);
-            await Navigator.PushAsync(page);
+            try
+            {
+                var page = _viewLocator.CreateAndBindPageFor(viewModel);
+                await Navigator.PushAsync(page);
+            }
+            catch (Exception ex)
+            {
+                UserDialogs.Instance.Alert(ex.ToString(), "Oh no i could not navigate :(");
+            }
         }
 
         public async Task NavigateBack()

@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SelfMonitoringApp.ViewModels;
+using SelfMonitoringApp.ViewModels.Logs;
 using System.Threading.Tasks;
 
 namespace SelfMonitoringApp.UnitTests

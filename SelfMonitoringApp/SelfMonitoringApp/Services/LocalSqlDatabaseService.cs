@@ -23,8 +23,7 @@ namespace SelfMonitoringApp.Services
         {
             get
             {
-                string basePath;
-                basePath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+                var basePath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
                 return Path.Combine(basePath, DatabaseFilename);
             }
         }

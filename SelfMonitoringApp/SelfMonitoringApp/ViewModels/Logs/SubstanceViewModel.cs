@@ -1,14 +1,12 @@
-﻿using Acr.UserDialogs;
-using SelfMonitoringApp.Models;
+﻿using SelfMonitoringApp.Models;
 using SelfMonitoringApp.Models.Base;
 using SelfMonitoringApp.ViewModels.Base;
 
 using System;
-using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace SelfMonitoringApp.ViewModels
+namespace SelfMonitoringApp.ViewModels.Logs
 {
     public class SubstanceViewModel: ViewModelBase, INavigationViewModel
     {

@@ -21,6 +21,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Models\Sugges\" />
       <Folder Include="Properties" />
     </ItemGroup>
 
@@ -34,16 +35,19 @@
       <Compile Update="Controls\SaveCancelPage.xaml.cs">
         <DependentUpon>SaveCancelPage.xaml</DependentUpon>
       </Compile>
-      <Compile Update="Pages\MealPage.xaml.cs">
+      <Compile Update="Pages\Logs\SocializationPage.xaml.cs">
+        <DependentUpon>SocializationPage.xaml</DependentUpon>
+      </Compile>
+      <Compile Update="Pages\Logs\MealPage.xaml.cs">
         <DependentUpon>MealPage.xaml</DependentUpon>
       </Compile>
-      <Compile Update="Pages\MoodPage.xaml.cs">
+      <Compile Update="Pages\Logs\MoodPage.xaml.cs">
         <DependentUpon>MoodPage.xaml</DependentUpon>
       </Compile>
-      <Compile Update="Pages\SleepPage.xaml.cs">
+      <Compile Update="Pages\Logs\SleepPage.xaml.cs">
         <DependentUpon>SleepPage.xaml</DependentUpon>
       </Compile>
-      <Compile Update="Pages\SubstancePage.xaml.cs">
+      <Compile Update="Pages\Logs\SubstancePage.xaml.cs">
         <DependentUpon>SubstancePage.xaml</DependentUpon>
       </Compile>
     </ItemGroup>
@@ -58,7 +62,7 @@
       <EmbeddedResource Update="Controls\SaveCancelPage.xaml">
         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       </EmbeddedResource>
-      <EmbeddedResource Update="Pages\ActivityPage.xaml">
+      <EmbeddedResource Update="Pages\Logs\ActivityPage.xaml">
         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       </EmbeddedResource>
       <EmbeddedResource Update="Pages\DataExplorerPage.xaml">
@@ -67,10 +71,10 @@
       <EmbeddedResource Update="Pages\HelpPage.xaml">
         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       </EmbeddedResource>
-      <EmbeddedResource Update="Pages\MealPage.xaml">
+      <EmbeddedResource Update="Pages\Logs\MealPage.xaml">
         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       </EmbeddedResource>
-      <EmbeddedResource Update="Pages\MoodPage.xaml">
+      <EmbeddedResource Update="Pages\Logs\MoodPage.xaml">
         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       </EmbeddedResource>
       <EmbeddedResource Update="Pages\NotificationsPage.xaml">
@@ -79,10 +83,10 @@
       <EmbeddedResource Update="Pages\SettingsPage.xaml">
         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       </EmbeddedResource>
-      <EmbeddedResource Update="Pages\SleepPage.xaml">
+      <EmbeddedResource Update="Pages\Logs\SleepPage.xaml">
         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       </EmbeddedResource>
-      <EmbeddedResource Update="Pages\SubstancePage.xaml">
+      <EmbeddedResource Update="Pages\Logs\SubstancePage.xaml">
         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       </EmbeddedResource>
     </ItemGroup>

@@ -1,6 +1,6 @@
 ﻿using SelfMonitoringApp.Models.Base;
 using SelfMonitoringApp.ViewModels.Base;
-
+using SelfMonitoringApp.ViewModels.Logs;
 using System.Globalization;
 using System.Threading.Tasks;
 using Xamarin.Forms;

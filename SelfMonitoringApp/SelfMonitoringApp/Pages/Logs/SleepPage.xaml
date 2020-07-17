@@ -6,7 +6,7 @@
              xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
              mc:Ignorable="d"
              Title="Log Sleep"
-             x:Class="SelfMonitoringApp.Pages.SleepPage">
+             x:Class="SelfMonitoringApp.Pages.Logs.SleepPage">
     <ContentPage.Content>
         <controls:SaveCancelPage CancelCommand="{Binding BackCommand}" SaveCommand="{Binding SaveLogCommand}">
             <Grid Margin="0,8,0,0">

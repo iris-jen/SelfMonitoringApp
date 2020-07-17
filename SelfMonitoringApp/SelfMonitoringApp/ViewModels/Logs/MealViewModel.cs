@@ -6,7 +6,7 @@ using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace SelfMonitoringApp.ViewModels
+namespace SelfMonitoringApp.ViewModels.Logs
 {
     public class MealViewModel: ViewModelBase, INavigationViewModel
     {

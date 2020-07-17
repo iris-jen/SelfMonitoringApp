@@ -8,6 +8,7 @@
         Meal,
         Sleep,
         Substance,
-        Settings
+        Settings,
+        Socialization
     }
 }

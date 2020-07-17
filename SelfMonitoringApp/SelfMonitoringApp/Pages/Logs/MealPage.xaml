@@ -7,7 +7,7 @@
              mc:Ignorable="d"
              NavigationPage.HasNavigationBar="True"
              Title="Log Meal"
-             x:Class="SelfMonitoringApp.Pages.MealPage">
+             x:Class="SelfMonitoringApp.Pages.Logs.MealPage">
     <ContentPage.Content>
         <controls:SaveCancelPage CancelCommand="{Binding BackCommand}" SaveCommand="{Binding SaveLogCommand}">
             <Grid Margin="0,8,0,0">

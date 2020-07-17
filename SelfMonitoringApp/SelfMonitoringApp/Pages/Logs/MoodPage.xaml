@@ -4,12 +4,14 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
+             xmlns:services="clr-namespace:SelfMonitoringApp.Services"
              mc:Ignorable="d"
              Visual="Material"
              NavigationPage.HasBackButton="true"
              NavigationPage.HasNavigationBar="True"
+             
              Title="Log Mood"
-             x:Class="SelfMonitoringApp.Pages.MoodPage">
+             x:Class="SelfMonitoringApp.Pages.Logs.MoodPage">
     <ContentPage.Content>
         <controls:SaveCancelPage CancelCommand="{Binding BackCommand}" SaveCommand="{Binding SaveLogCommand}">
             <Grid Margin="0,8,0,0">
@@ -26,14 +28,14 @@
                     <!--Date Picker-->
                     <controls:HeaderBlock HeaderText="Date">
                         <Frame Padding="0" BorderColor="Black">
-                            <DatePicker HorizontalOptions="Center" BackgroundColor="White" FontSize="14" Date="{Binding SelectedDate}"/>
+                            <DatePicker  HorizontalOptions="Center" BackgroundColor="White" FontSize="13" Date="{Binding SelectedDate}"/>
                         </Frame>
                     </controls:HeaderBlock>
 
                     <!--Time Picker-->
                     <controls:HeaderBlock HeaderText="Time" Grid.Column="1" Margin="0">
                         <Frame Padding="0" BorderColor="Black">
-                            <TimePicker HorizontalOptions="Center" FontSize="14" Time="{Binding SelectedTime}"/>
+                            <TimePicker HorizontalOptions="Center" FontSize="14" BackgroundColor="White" Time="{Binding SelectedTime}"/>
                         </Frame>
                     </controls:HeaderBlock>
                 </Grid>
@@ -46,14 +48,30 @@
                 <!--Emotions entry box-->
                 <controls:HeaderBlock Grid.Row="2" HeaderText="Strongest Emotion">
                     <Frame Padding="2" BorderColor="Black">
-                        <Picker SelectedItem="{Binding StrongestEmotion}" ItemsSource="{Binding Emotions}" />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width=".2*"/>
+                            </Grid.ColumnDefinitions>
+                            <Picker ItemsSource="{Binding Emotions}" SelectedItem="{Binding StrongestEmotion, Mode=TwoWay}" ItemDisplayBinding="{Binding SuggestionText}" VerticalOptions="CenterAndExpand" Margin="0,-19,0,0"/>
+                            <Button Grid.Column="1" Style="{d:StaticResource ButtonStyle}" Margin="2" Text="+" FontSize="16" Command="{Binding AddSuggestionCommand}"
+                                    CommandParameter="{x:Static services:SuggestionTypes.Emotions}" />
+                        </Grid>
                     </Frame>
                 </controls:HeaderBlock>
 
                 <controls:HeaderBlock Grid.Row="3" HeaderText="Location">
                     <Frame Padding="2" BorderColor="Black">
-                        <Picker  SelectedItem="{Binding Location}" BackgroundColor="White" ItemsSource="{Binding Locations}"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width=".2*"/>
+                            </Grid.ColumnDefinitions>
+                            <Picker  SelectedItem="{Binding Location}" BackgroundColor="White" ItemsSource="{Binding Locations}"/>
+                            <Button Grid.Column="1" Style="{d:StaticResource ButtonStyle}" Margin="2" Text="+" FontSize="16" />
+                        </Grid>
                     </Frame>
+                 
                 </controls:HeaderBlock>
                 
                 <!--Description Box-->

@@ -1,7 +1,7 @@
 ﻿using SelfMonitoringApp.Models;
 using SelfMonitoringApp.Models.Base;
 using SelfMonitoringApp.ViewModels.Base;
-
+using SelfMonitoringApp.ViewModels.Logs;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

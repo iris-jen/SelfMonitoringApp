@@ -8,7 +8,7 @@
              mc:Ignorable="d"
              NavigationPage.HasNavigationBar="True" Title="Log Substance Use"
 
-             x:Class="SelfMonitoringApp.Pages.SubstancePage">
+             x:Class="SelfMonitoringApp.Pages.Logs.SubstancePage">
     <ContentPage.Content>
         <controls:SaveCancelPage CancelCommand="{Binding BackCommand}" SaveCommand="{Binding SaveLogCommand}">
             <Grid Margin="0,3,0,0">

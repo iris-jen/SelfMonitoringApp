@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             Title="Activity Log"
+             xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
+             x:Class="SelfMonitoringApp.Pages.Logs.ActivityPage">
+    <ContentPage.Content>
+
+        <controls:SaveCancelPage SaveCommand="{Binding SaveLogCommand}" CancelCommand="{Binding BackCommand}" Margin="0,8,0,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="130"/>
+                    <RowDefinition Height="{StaticResource RowHeightSingle}"/>
+                    <RowDefinition Height="{StaticResource RowHeightSlider}"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="0.75*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <!--Start Box-->
+                    <controls:HeaderBlock HeaderText="Sleep" Margin="0,0,0,0">
+                        <Frame Padding="0" BorderColor="Black">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <TimePicker HorizontalOptions="CenterAndExpand"  FontAttributes="Bold" 
+                                    Time="{Binding StartTimeSpan}"/>
+                                <DatePicker Grid.Row="1" HorizontalOptions="CenterAndExpand" Date="{Binding StartDateTime}"/>
+                            </Grid>
+                        </Frame>
+                    </controls:HeaderBlock>
+
+                    <!--Total sleep box-->
+                    <controls:HeaderBlock HeaderText="Total" Grid.Column="1">
+                        <Frame Padding="5" BorderColor="Black">
+                            <Label Text="{Binding TotalSleep , StringFormat ='{0:0.0}'}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                        </Frame>
+                    </controls:HeaderBlock>
+
+                    <!--Wake up time box-->
+                    <controls:HeaderBlock HeaderText="Wake" Grid.Column="2" Margin="0,0,0,0">
+                        <Frame Padding="0" BorderColor="Black">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <TimePicker HorizontalOptions="Center" FontAttributes="Bold" Time ="{Binding EndTimeSpan}"/>
+                                <DatePicker Grid.Row="1" HorizontalOptions="CenterAndExpand" Date="{Binding EndDateTime}"/>
+                            </Grid>
+                        </Frame>
+                    </controls:HeaderBlock>
+                </Grid>
+
+                <!--Activity Description-->
+                <controls:HeaderBlock HeaderText="What was the activity?" Grid.Row="1">
+                    <Frame Padding="0">
+                        <Entry Text="{Binding Description}"/>
+                    </Frame>
+                </controls:HeaderBlock>
+   
+
+                <controls:HeaderBlock HeaderText="How much did you enjoy it?" Grid.Row="2">
+                    <controls:RatingSlider Rating="{Binding Enjoyment}"/>
+                </controls:HeaderBlock>
+                
+                <controls:HeaderBlock Grid.Row="3" HeaderText="Details">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="30"/>
+                        </Grid.RowDefinitions>
+
+                        <Frame Padding="0" BorderColor="Black">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width=".5*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Text="Was it exercise?" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                <Frame Grid.Column="1" BackgroundColor="{StaticResource PrimaryLight}" Padding="0" Margin="3">
+                                    <Switch Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" IsToggled="{Binding Exersice}"/>
+                                </Frame>
+                            </Grid>
+                        </Frame>
+
+                        <Frame Padding="0" Grid.Row="1" BorderColor="Black">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width=".5*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Text="Did you want to do it?" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                <Frame Grid.Column="1" BackgroundColor="{StaticResource PrimaryLight}" Padding="0" Margin="3">
+                                    <Switch Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" IsToggled="{Binding WantedToStart}"/>
+                                </Frame>
+                            </Grid>
+                        </Frame>
+
+                        <Frame Grid.Row="2" Padding="0" BorderColor="Black">
+                            <Entry Placeholder="Any Comments?" HorizontalTextAlignment="Center"/>
+                        </Frame>
+                    </Grid>
+                </controls:HeaderBlock>
+                
+                
+            </Grid>
+        </controls:SaveCancelPage>
+    </ContentPage.Content>
+</ContentPage>

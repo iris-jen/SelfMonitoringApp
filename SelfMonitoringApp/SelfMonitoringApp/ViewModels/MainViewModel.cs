@@ -1,7 +1,11 @@
 ﻿using SelfMonitoringApp.ViewModels.Base;
+using SelfMonitoringApp.ViewModels.Logs;
+using System;
 using System.Globalization;
 using System.IO;
+using Acr;
 using Xamarin.Forms;
+using Acr.UserDialogs;
 
 namespace SelfMonitoringApp.ViewModels
 {
@@ -18,37 +22,45 @@ namespace SelfMonitoringApp.ViewModels
 
         public void Navigate(string page)
         {
-            switch(page.ToLower(CultureInfo.CurrentCulture))
+
+            try
             {
-                case MoodViewModel.NavigationNodeName:
-                    _navigator.NavigateTo(new MoodViewModel()).SafeFireAndForget(false);
-                    break;
-                case SleepViewModel.NavigationNodeName:
-                    _navigator.NavigateTo(new SleepViewModel()).SafeFireAndForget(false);
-                    break;
-                case SubstanceViewModel.NavigationNodeName:
-                    _navigator.NavigateTo(new SubstanceViewModel()).SafeFireAndForget(false);
-                    break;
-                case MealViewModel.NavigationNodeName:
-                    _navigator.NavigateTo(new MealViewModel()).SafeFireAndForget(false);
-                    break;
-                case ActivityViewModel.NavigationNodeName:
-                    _navigator.NavigateTo(new ActivityViewModel()).SafeFireAndForget(false);
-                    break;
-                case SettingsViewModel.NavigationNodeName:
-                    _navigator.NavigateTo(new SettingsViewModel()).SafeFireAndForget(false);
-                    break;
-                case DataExplorerViewModel.NavigationNodeName:
-                    _navigator.NavigateTo(new DataExplorerViewModel()).SafeFireAndForget(false);
-                    break;
-                case HelpViewModel.NavigationNodeName:
-                    _navigator.NavigateTo(new HelpViewModel()).SafeFireAndForget(false);
-                    break;
-                case NotificationsViewModel.NavigationNodeName:
-                    _navigator.NavigateTo(new NotificationsViewModel()).SafeFireAndForget(false);
-                    break;
-                default:
-                    throw new DirectoryNotFoundException($"Cant find nav directory {page}");
+                switch(page.ToLower(CultureInfo.CurrentCulture))
+                {
+                    case MoodViewModel.NavigationNodeName:
+                        _navigator.NavigateTo(new MoodViewModel()).SafeFireAndForget(false);
+                        break;
+                    case SleepViewModel.NavigationNodeName:
+                        _navigator.NavigateTo(new SleepViewModel()).SafeFireAndForget(false);
+                        break;
+                    case SubstanceViewModel.NavigationNodeName:
+                        _navigator.NavigateTo(new SubstanceViewModel()).SafeFireAndForget(false);
+                        break;
+                    case MealViewModel.NavigationNodeName:
+                        _navigator.NavigateTo(new MealViewModel()).SafeFireAndForget(false);
+                        break;
+                    case ActivityViewModel.NavigationNodeName:
+                        _navigator.NavigateTo(new ActivityViewModel()).SafeFireAndForget(false);
+                        break;
+                    case SettingsViewModel.NavigationNodeName:
+                        _navigator.NavigateTo(new SettingsViewModel()).SafeFireAndForget(false);
+                        break;
+                    case DataExplorerViewModel.NavigationNodeName:
+                        _navigator.NavigateTo(new DataExplorerViewModel()).SafeFireAndForget(false);
+                        break;
+                    case HelpViewModel.NavigationNodeName:
+                        _navigator.NavigateTo(new HelpViewModel()).SafeFireAndForget(false);
+                        break;
+                    case NotificationsViewModel.NavigationNodeName:
+                        _navigator.NavigateTo(new NotificationsViewModel()).SafeFireAndForget(false);
+                        break;
+                    default:
+                        throw new DirectoryNotFoundException($"Cant find nav directory {page}");
+                }
+            }
+            catch(Exception ex)
+            {
+                UserDialogs.Instance.Alert(ex.ToString(), "Oh no i could not navigate :(");
             }
         }
     }

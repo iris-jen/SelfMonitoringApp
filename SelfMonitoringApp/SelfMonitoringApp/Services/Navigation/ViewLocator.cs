@@ -1,4 +1,5 @@
-﻿using SelfMonitoringApp.ViewModels.Base;
+﻿using Acr.UserDialogs;
+using SelfMonitoringApp.ViewModels.Base;
 using System;
 using Xamarin.Forms;
 
@@ -8,13 +9,21 @@ namespace SelfMonitoringApp.Services.Navigation
     {
         public Page CreateAndBindPageFor<TViewModel>(TViewModel viewModel) where TViewModel : INavigationViewModel
         {
-            var pageType = FindPageForViewModel(viewModel.GetType());
+            try
+            {
+                var pageType = FindPageForViewModel(viewModel.GetType());
 
-            var page = (Page)Activator.CreateInstance(pageType);
+                var page = (Page)Activator.CreateInstance(pageType);
 
-            page.BindingContext = viewModel;
+                page.BindingContext = viewModel;
 
-            return page;
+                return page;
+            }
+            catch (Exception ex)
+            {
+                UserDialogs.Instance.Alert(ex.ToString(), "Oh no i could not navigate :(");
+                return null;
+            }
         }
 
         protected virtual Type FindPageForViewModel(Type viewModelType)
