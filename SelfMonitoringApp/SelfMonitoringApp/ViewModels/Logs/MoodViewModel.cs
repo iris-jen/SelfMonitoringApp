@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Acr.UserDialogs;
 using Xamarin.Forms;
 using System.Collections.Generic;
+using Plugin.Media.Abstractions;
 
 namespace SelfMonitoringApp.ViewModels.Logs
 {
@@ -16,23 +17,36 @@ namespace SelfMonitoringApp.ViewModels.Logs
     {
         private readonly MoodModel _mood;
         public const string NavigationNodeName = "mood";
-
         public event EventHandler ModelShed;
 
         #region Bindings
+        
+        //Commands
         public Command SaveLogCommand { get; private set; }
         public Command<SuggestionTypes> AddSuggestionCommand { get; private set; }
+        public Command<SuggestionTypes> RemoveSuggestionCommand { get; private set; }
 
-        private List<string> _emotions;
 
-        public ObservableCollection<SuggestionModel> Emotions { get; private set; }
-
+        //Collections
+        public ObservableCollection<string> Emotions { get; private set; }
         public ObservableCollection<string> Locations { get; private set; }
 
+        //General Notify
+        private bool _removeSuggestionEnabled;
+        public bool RemoveSuggestionEnabled
+        {
+            get =>  _removeSuggestionEnabled;
+            set
+            {
+                if ( _removeSuggestionEnabled == value)
+                    return;
+
+                 _removeSuggestionEnabled = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         private DateTime _logTime;
-        /// <summary>
-        /// User selected date this occurred
-        /// </summary>
         public DateTime LogTime
         {
             get => _logTime;
@@ -47,9 +61,6 @@ namespace SelfMonitoringApp.ViewModels.Logs
         }
 
         private TimeSpan _startTimeSpan;
-        /// <summary>
-        /// User selected hour this occurred
-        /// </summary>
         public TimeSpan StartTimeSpan
         {
             get => _startTimeSpan;
@@ -89,90 +100,87 @@ namespace SelfMonitoringApp.ViewModels.Logs
             }
         }
 
-        public string Location
+        private int _selectedLocation;
+        public int SelectedLocation
         {
-            get => _mood.Location;
+            get => _selectedLocation;
             set
             {
-                if (_mood.Location == value)
+                if (value == -1)
                     return;
 
-                _mood.Location = value;
+                _selectedLocation = value;
+                _mood.Location = Locations[value];
                 NotifyPropertyChanged();
             }
         }
 
-        private SuggestionModel _strongestEmotion;
-
-        public SuggestionModel StrongestEmotion
+        private int _strongestEmotion;
+        public int StrongestEmotion
         {
             get => _strongestEmotion;
             set
             {
-                if (_strongestEmotion == value)
+                if (value == -1)
                     return;
 
                 _strongestEmotion = value;
+               _mood.StrongestEmotion = Emotions[value];
                 NotifyPropertyChanged();
             }
         }
-
-
         #endregion
 
         public MoodViewModel(IModel existingModel = null)
         {
             Emotions = _suggestions.GetSuggestionCollection(SuggestionTypes.Emotions);
+            Locations = _suggestions.GetSuggestionCollection(SuggestionTypes.Locations);
 
-            if (existingModel is null)
+            if (existingModel is null) // New Log
             {
-                // This is a fresh log, create one and set some defaults
-                _mood = new MoodModel();
+                _mood = new MoodModel() { OverallMood = 5.0 };
                 LogTime = DateTime.Now;
                 StartTimeSpan = new TimeSpan
                 (
-                    hours: LogTime.Hour,
+                    hours  : LogTime.Hour,
                     minutes: LogTime.Minute,
                     seconds: LogTime.Second
                 );
             }
-            else
+            else // Editing existing log
             {
                 _mood = existingModel as MoodModel;
                 LogTime = _mood.RegisteredTime;
                 StartTimeSpan = new TimeSpan
                 (
-                    _mood.RegisteredTime.Hour,
-                    _mood.RegisteredTime.Minute,
-                    _mood.RegisteredTime.Second
+                    hours  : _mood.RegisteredTime.Hour,
+                    minutes: _mood.RegisteredTime.Minute,
+                    seconds:_mood.RegisteredTime.Second
                 );
+
+                SelectedLocation = Locations.IndexOf(_mood.Location);
+                StrongestEmotion = Emotions.IndexOf(_mood.StrongestEmotion);
             }
 
             AddSuggestionCommand = new Command<SuggestionTypes>(async(type)=> await AddSuggestion(type));
             SaveLogCommand = new Command(async () => await SaveAndPop());
         }
 
-        public IModel RegisterAndGetModel()
+        public async Task SaveAndPop()
         {
             _mood.RegisteredTime = new DateTime
             (
-                year: LogTime.Year,
-                month: LogTime.Month,
-                day: LogTime.Day,
-                hour: StartTimeSpan.Hours,
-                minute: StartTimeSpan.Minutes,
-                second: StartTimeSpan.Seconds
+               year   : LogTime.Year,
+               month  : LogTime.Month,
+               day    : LogTime.Day,
+               hour   : StartTimeSpan.Hours,
+               minute : StartTimeSpan.Minutes,
+               second : StartTimeSpan.Seconds
             );
-            _mood.StrongestEmotion = StrongestEmotion.SuggestionText;
-            return _mood;
-        }
 
-        public async Task SaveAndPop()
-        {
-            var model = RegisterAndGetModel();
-            await _database.AddOrModifyModelAsync(model);
+            await _database.AddOrModifyModelAsync(_mood);
             await _navigator.NavigateBack();
-            ModelShed?.Invoke(this, new ModelShedEventArgs(model));
+            ModelShed?.Invoke(this, new ModelShedEventArgs(_mood));
         }
 
         public async Task AddSuggestion(SuggestionTypes type)
@@ -183,20 +191,41 @@ namespace SelfMonitoringApp.ViewModels.Logs
                 return;
 
             _suggestions.AddSuggestion(type,  promptResult.Text);
-            
             switch(type)
             {
                 case SuggestionTypes.Emotions:
-                    var newSug = new SuggestionModel() { SuggestionText = promptResult.Text };
-
+                    var newSug = promptResult.Text;
                     Emotions.Add(newSug);
-
-                    await Task.Delay(50);
-
-                    StrongestEmotion = newSug;
+                    StrongestEmotion = Emotions.IndexOf(newSug);
                     break;
                 case SuggestionTypes.Locations:
-                    Locations.Add(promptResult.Text);
+                    newSug = promptResult.Text;
+                    Locations.Add(newSug);
+                    SelectedLocation = Locations.IndexOf(newSug);
+                    break;
+            }
+        }
+
+
+        public async Task RemoveSuggestion(SuggestionTypes type)
+        {
+            var promptResult = await UserDialogs.Instance.PromptAsync("Enter a picker value");
+
+            if (!promptResult.Ok)
+                return;
+
+            _suggestions.AddSuggestion(type, promptResult.Text);
+            switch (type)
+            {
+                case SuggestionTypes.Emotions:
+                    var newSug = promptResult.Text;
+                    Emotions.Add(newSug);
+                    StrongestEmotion = Emotions.IndexOf(newSug);
+                    break;
+                case SuggestionTypes.Locations:
+                    newSug = promptResult.Text;
+                    Locations.Add(newSug);
+                    SelectedLocation = Locations.IndexOf(newSug);
                     break;
             }
         }

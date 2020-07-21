@@ -11,13 +11,13 @@ namespace SelfMonitoringApp.ViewModels.Logs
     public class SleepViewModel : ViewModelBase, INavigationViewModel
     {
         private readonly SleepModel _sleepModel;
-        private readonly bool _editing;
 
         public const string NavigationNodeName = "sleep";
         public event EventHandler ModelShed;
+
         public Command SaveLogCommand { get; private set; }
 
-        private TimeSpan _sleepStart;
+        private TimeSpan _sleepStart = new TimeSpan(23,0,0);
         public TimeSpan SleepStart
         {
             get => _sleepStart;
@@ -45,7 +45,7 @@ namespace SelfMonitoringApp.ViewModels.Logs
             }
         }
 
-        private TimeSpan _sleepEnd;
+        private TimeSpan _sleepEnd = new TimeSpan(8,0,0);
         public TimeSpan SleepEnd
         {
             get => _sleepEnd;
@@ -145,23 +145,28 @@ namespace SelfMonitoringApp.ViewModels.Logs
         public SleepViewModel(IModel existingModel = null)
         {
             if (existingModel is null)
-                _sleepModel = new SleepModel();
+                _sleepModel = new SleepModel() { RestRating = 5 };
             else
             {
-                _editing = true;
                 _sleepModel = existingModel as SleepModel;
+                _sleepStartDate = _sleepModel.SleepStartDate;
+                _sleepEndDate = _sleepModel.SleepEndDate;
+
+                _sleepStart = new TimeSpan
+                (
+                    hours   : _sleepStartDate.Hour,
+                    minutes : _sleepStartDate.Minute,
+                    seconds : _sleepStartDate.Second
+                );
+                _sleepEnd = new TimeSpan
+                (
+                    hours   : _sleepEndDate.Hour,
+                    minutes : _sleepEndDate.Minute,
+                    seconds : _sleepEndDate.Second
+                );
             }
+
             SaveLogCommand = new Command(async () => await SaveAndPop());
-        }
-
-        public IModel RegisterAndGetModel()
-        {
-            if (_editing)
-            {
-                _sleepModel.RegisteredTime = DateTime.Now;
-            }
-
-            return _sleepModel;
         }
 
         public double GetSleep()
@@ -184,7 +189,7 @@ namespace SelfMonitoringApp.ViewModels.Logs
                 second: SleepEnd.Seconds
                 );
 
-            _sleepModel.SleepEndDate = endDateTime;
+            _sleepModel.SleepEndDate = _sleepModel.RegisteredTime = endDateTime;
             _sleepModel.SleepStartDate = startDateTime;
 
             return endDateTime.Subtract(startDateTime).TotalHours;
@@ -192,10 +197,9 @@ namespace SelfMonitoringApp.ViewModels.Logs
 
         public async Task SaveAndPop()
         {
-            var model = RegisterAndGetModel();
-            await _database.AddOrModifyModelAsync(RegisterAndGetModel());
+            await _database.AddOrModifyModelAsync(_sleepModel);
             await _navigator.NavigateBack();
-            ModelShed?.Invoke(this, new ModelShedEventArgs(model));
+            ModelShed?.Invoke(this, new ModelShedEventArgs(_sleepModel));
         }
     }
 }

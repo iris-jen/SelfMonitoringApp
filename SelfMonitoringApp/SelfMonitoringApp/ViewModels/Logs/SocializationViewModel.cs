@@ -64,13 +64,14 @@ namespace SelfMonitoringApp.ViewModels.Logs
 
         public IModel RegisterAndGetModel()
         {
-            _social.RegisteredTime = new DateTime(LogTime.Year, LogTime.Month, LogTime.Day,
-                StartTimeSpan.Hours, StartTimeSpan.Minutes, StartTimeSpan.Seconds);
+
             return _social;
         }
 
         public async Task SaveAndPop()
         {
+            _social.RegisteredTime = new DateTime(LogTime.Year, LogTime.Month, LogTime.Day,
+            StartTimeSpan.Hours, StartTimeSpan.Minutes, StartTimeSpan.Seconds);
             var model = RegisterAndGetModel();
             await _database.AddOrModifyModelAsync(model);
             await _navigator.NavigateBack();

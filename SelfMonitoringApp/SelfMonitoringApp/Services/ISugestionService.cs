@@ -6,7 +6,7 @@ namespace SelfMonitoringApp.Services
 {
     public interface ISuggestionService
     {
-        ObservableCollection<SuggestionModel> GetSuggestionCollection(SuggestionTypes type);
+        ObservableCollection<string> GetSuggestionCollection(SuggestionTypes type);
 
         void AddSuggestion(SuggestionTypes type, string sugestion);
 

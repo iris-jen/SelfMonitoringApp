@@ -7,6 +7,9 @@
         MealTypes,
         SubstanceNames,
         SubstanceConsumptionMethods,
-        Units
+        Units,
+        MealSizes,
+        MealNames,
+        ActivityNames
     }
 }

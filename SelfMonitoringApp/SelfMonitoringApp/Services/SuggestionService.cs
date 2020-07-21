@@ -47,14 +47,9 @@ namespace SelfMonitoringApp.Services
             }
         }
 
-        public ObservableCollection<SuggestionModel> GetSuggestionCollection(SuggestionTypes type)
+        public ObservableCollection<string> GetSuggestionCollection(SuggestionTypes type)
         {
-            var output = new ObservableCollection<SuggestionModel>();
-
-            foreach (var suggestion in _suggestions[type])
-                output.Add(new SuggestionModel() { SuggestionText = suggestion });
-
-            return output;
+            return new ObservableCollection<string>(_suggestions[type]);
         }
        
         public void AddSuggestion(SuggestionTypes type, string suggestion)

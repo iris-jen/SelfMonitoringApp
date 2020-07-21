@@ -1,8 +1,12 @@
-﻿using SelfMonitoringApp.Models;
+﻿using Acr.UserDialogs;
+using SelfMonitoringApp.Models;
 using SelfMonitoringApp.Models.Base;
+using SelfMonitoringApp.Services;
 using SelfMonitoringApp.ViewModels.Base;
 
 using System;
+using System.Collections.ObjectModel;
+using System.Reflection;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -12,9 +16,35 @@ namespace SelfMonitoringApp.ViewModels.Logs
     {
         private readonly SubstanceModel _substance;
         public const string NavigationNodeName = "substance";
-
-        public Command SaveLogCommand { get; private set; }
         public event EventHandler ModelShed;
+
+        #region Bindings
+
+        //Commands
+        public Command SaveLogCommand { get; private set; }
+        public Command<SuggestionTypes> AddSuggestionCommand { get; private set; }
+        public Command<SuggestionTypes> RemoveSuggestionCommand { get; private set; }
+
+        //Collections
+        public ObservableCollection<string> SubstanceNames              { get; private set; }
+        public ObservableCollection<string> SubstanceConsumptionMethods { get; private set; }
+        public ObservableCollection<string> Units                       { get; private set; }
+        public ObservableCollection<string> Locations                   { get; private set; }
+
+        //General Notify
+        private bool _removeSuggestionEnabled;
+        public bool RemoveSuggestionEnabled
+        {
+            get => _removeSuggestionEnabled;
+            set
+            {
+                if (_removeSuggestionEnabled == value)
+                    return;
+
+                _removeSuggestionEnabled = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         private DateTime _logTime;
         public DateTime LogTime
@@ -30,42 +60,51 @@ namespace SelfMonitoringApp.ViewModels.Logs
             }
         }
 
-        private TimeSpan _startTimeSpan;
+        private TimeSpan _logTimeSpan;
         public TimeSpan StartTimeSpan
         {
-            get => _startTimeSpan;
+            get => _logTimeSpan;
             set
             {
-                if (_startTimeSpan == value)
+                if (_logTimeSpan == value)
                     return;
 
-                _startTimeSpan = value;
+                _logTimeSpan = value;
                 NotifyPropertyChanged();
             }
         }
 
-        public string ConsumptionMethod
+
+        //idk why xamarin's doing this, but trying to bind the SelectedItem
+        //on the picker to a string wont allow me to set the picker when I'm restoring it?
+        //only setting the selected index works?
+
+        private int _selectedConsumptionMethod;
+        public int SelectedConsumptionMethod
         {
-            get => _substance.ConsumptionMethod;
+            get => _selectedConsumptionMethod;
             set
             {
-                if (_substance.ConsumptionMethod == value)
+                if (value == -1)
                     return;
 
-                _substance.ConsumptionMethod = value;
+                _selectedConsumptionMethod = value;
+                _substance.ConsumptionMethod = SubstanceConsumptionMethods[value];
                 NotifyPropertyChanged();
             }
         }
 
-        public string SubstanceName
+        private int _selectedSubstanceName;
+        public int SelectedSubstanceName
         {
-            get => _substance.SubstanceName;
+            get => _selectedSubstanceName;
             set
             {
-                if (_substance.SubstanceName == value)
+                if (value == -1)
                     return;
 
-                _substance.SubstanceName = value;
+                _selectedSubstanceName = value;
+                _substance.SubstanceName = SubstanceNames[value];
                 NotifyPropertyChanged();
             }
         }
@@ -96,15 +135,17 @@ namespace SelfMonitoringApp.ViewModels.Logs
             }
         }
 
-        public string Unit
+        private int _unitSelection;
+        public int UnitSelection
         {
-            get => _substance.Unit;
+            get => _unitSelection;
             set
             {
-                if (_substance.Unit == value)
+                if (value == -1)
                     return;
 
-                _substance.Unit = value;
+                _unitSelection = value;
+                _substance.Unit = Units[value];
                 NotifyPropertyChanged();
             }
         }
@@ -121,6 +162,7 @@ namespace SelfMonitoringApp.ViewModels.Logs
                 NotifyPropertyChanged();
             }
         }
+        #endregion
 
         public SubstanceViewModel(IModel existingModel = null) 
         {
@@ -128,32 +170,66 @@ namespace SelfMonitoringApp.ViewModels.Logs
             {
                 _substance = new SubstanceModel();
                 LogTime = DateTime.Now;
-                StartTimeSpan = new TimeSpan(LogTime.Hour, LogTime.Hour, LogTime.Second);
+                StartTimeSpan = new TimeSpan
+                (
+                    hours   : LogTime.Hour, 
+                    minutes : LogTime.Hour, 
+                    seconds : LogTime.Second
+                );
             }
             else
             {
                 _substance = existingModel as SubstanceModel;
-                LogTime = new DateTime(_substance.RegisteredTime.Year, _substance.RegisteredTime.Month, _substance.RegisteredTime.Day);
-                StartTimeSpan = new TimeSpan(_substance.RegisteredTime.Hour, _substance.RegisteredTime.Minute, _substance.RegisteredTime.Second);
-            }
-   
+                LogTime = _substance.RegisteredTime;
+                StartTimeSpan = new TimeSpan
+                (
+                    hours   : _substance.RegisteredTime.Hour, 
+                    minutes : _substance.RegisteredTime.Minute, 
+                    seconds : _substance.RegisteredTime.Second
+                );
+            }   
             SaveLogCommand = new Command(async ()=> await SaveAndPop());
+            AddSuggestionCommand = new Command<SuggestionTypes>(async (type) => await AddSuggestion(type));
         }
 
-        public IModel RegisterAndGetModel()
+        public async Task AddSuggestion(SuggestionTypes type)
         {
-            _substance.RegisteredTime = new DateTime(LogTime.Year, LogTime.Month, LogTime.Day,
-                StartTimeSpan.Hours, StartTimeSpan.Minutes, StartTimeSpan.Seconds);
-            return _substance;
+            var promptResult = await UserDialogs.Instance.PromptAsync("Enter a value");
+
+            if (!promptResult.Ok)
+                return;
+
+            _suggestions.AddSuggestion(type, promptResult.Text);
+            switch (type)
+            {
+                case SuggestionTypes.Units:
+                    var newSug = promptResult.Text;
+                    Units.Add(newSug);
+                    UnitSelection = Units.IndexOf(newSug);
+                    break;
+                case SuggestionTypes.Locations:
+                    newSug = promptResult.Text;
+                    Locations.Add(newSug);
+                    break;
+            }
         }
+
 
         public async Task SaveAndPop()
         {
-            var model = RegisterAndGetModel();
+            _substance.RegisteredTime = new DateTime
+            (
+                year   : LogTime.Year,
+                month  : LogTime.Month,
+                day    : LogTime.Day,
+                hour   : StartTimeSpan.Hours,
+                minute : StartTimeSpan.Minutes,
+                second : StartTimeSpan.Seconds
+            );
 
-            await _database.AddOrModifyModelAsync(model);
+            await _database.AddOrModifyModelAsync(_substance);
             await _navigator.NavigateBack();
-            ModelShed?.Invoke(this, new ModelShedEventArgs(model));
+            ModelShed?.Invoke(this, new ModelShedEventArgs(_substance));
         }
     }
 }

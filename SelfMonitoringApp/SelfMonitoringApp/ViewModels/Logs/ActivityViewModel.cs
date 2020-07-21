@@ -1,8 +1,11 @@
-﻿using SelfMonitoringApp.Models;
+﻿using Acr.UserDialogs;
+using SelfMonitoringApp.Models;
 using SelfMonitoringApp.Models.Base;
+using SelfMonitoringApp.Services;
 using SelfMonitoringApp.ViewModels.Base;
 
 using System;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -14,18 +17,22 @@ namespace SelfMonitoringApp.ViewModels.Logs
 
         public const string NavigationNodeName = "activity";
         public event EventHandler ModelShed;
-
+        #region Bindings
         public Command SaveLogCommand { get; private set; }
+        public Command<SuggestionTypes> AddSuggestionCommand { get; private set; }
+        public ObservableCollection<string> ActivityNames { get; private set; }
 
-        public string Description
+        public int _activityNameSelection;
+        public int ActivityNameSelection
         {
-            get => _activity.Description;
+            get => _activityNameSelection;
             set
             {
-                if (_activity.Description == value)
+                if (value == -1)
                     return;
 
-                _activity.Description = value;
+                _activityNameSelection = value;
+                _activity.Description = ActivityNames[value];
                 NotifyPropertyChanged();
             }
         }
@@ -41,6 +48,7 @@ namespace SelfMonitoringApp.ViewModels.Logs
 
                 _startTime = value;
                 NotifyPropertyChanged();
+                Duration = GetActivityLength();
             }
         }
 
@@ -55,6 +63,7 @@ namespace SelfMonitoringApp.ViewModels.Logs
 
                 _endTime = value;
                 NotifyPropertyChanged();
+                Duration = GetActivityLength();
             }
         }
 
@@ -69,6 +78,7 @@ namespace SelfMonitoringApp.ViewModels.Logs
 
                 _startDateTime = value;
                 NotifyPropertyChanged();
+                Duration = GetActivityLength();
             }
         }
 
@@ -83,6 +93,7 @@ namespace SelfMonitoringApp.ViewModels.Logs
 
                 _endDateTime = value;
                 NotifyPropertyChanged();
+                Duration = GetActivityLength();
             }
         }
 
@@ -137,9 +148,12 @@ namespace SelfMonitoringApp.ViewModels.Logs
                 NotifyPropertyChanged();
             }
         }
+        #endregion
 
         public ActivityViewModel(IModel activityModel = null)
         {
+            ActivityNames = _suggestions.GetSuggestionCollection(SuggestionTypes.ActivityNames);
+
             if (activityModel is null)
                 _activity = new ActivityModel();
             else
@@ -148,26 +162,75 @@ namespace SelfMonitoringApp.ViewModels.Logs
 
                 StartDateTime = _activity.StartTime;
                 EndDateTime = _activity.EndTime;
-                StartTime = new TimeSpan(_activity.StartTime.Hour, _activity.StartTime.Minute, _activity.StartTime.Second);
+                StartTime = new TimeSpan
+                (
+                    hours   : _activity.StartTime.Hour, 
+                    minutes : _activity.StartTime.Minute, 
+                    seconds : _activity.StartTime.Second
+                );
+                EndTime = new TimeSpan
+                (
+                    hours   : _activity.EndTime.Hour,
+                    minutes : _activity.EndTime.Minute,
+                    seconds : _activity.EndTime.Hour
+                );
             }
 
+            AddSuggestionCommand = new Command<SuggestionTypes>(async (type) => await AddSuggestion(type));
             SaveLogCommand = new Command(async()=> await SaveAndPop());
         }
 
-        public IModel RegisterAndGetModel()
+        public double GetActivityLength()
         {
-            _activity.StartTime = new DateTime(StartDateTime.Year, StartDateTime.Month, StartDateTime.Day, StartTime.Hours, StartTime.Minutes, StartTime.Seconds);
-            _activity.EndTime   = new DateTime(EndDateTime.Year, EndDateTime.Month, EndDateTime.Day, EndTime.Hours, EndTime.Minutes, EndTime.Seconds);
-            _activity.Duration  = _activity.EndTime.Subtract(_activity.StartTime).TotalHours;
-            return _activity;
+            var startDateTime = new DateTime
+            (
+                year   : StartDateTime.Year,
+                month  : StartDateTime.Month,
+                day    : StartDateTime.Day,
+                hour   : StartTime.Hours,
+                minute : StartTime.Minutes,
+                second : StartTime.Seconds
+            );
+
+            var endDateTime = new DateTime
+            (
+                year  : EndDateTime.Year,
+                month : EndDateTime.Month,
+                day   : EndDateTime.Day,
+                hour  : EndTime.Hours,
+                minute: EndTime.Minutes,
+                second: EndTime.Seconds
+            );
+
+            _activity.EndTime   = _activity.RegisteredTime = endDateTime;
+            _activity.StartTime = startDateTime;
+
+            return endDateTime.Subtract(startDateTime).TotalHours;
         }
 
         public async Task SaveAndPop()
         {
-            var model = RegisterAndGetModel();
-            await _database.AddOrModifyModelAsync(model);
+            await _database.AddOrModifyModelAsync(_activity);
             await _navigator.NavigateBack();
-            ModelShed?.Invoke(this, new ModelShedEventArgs(model));
+            ModelShed?.Invoke(this, new ModelShedEventArgs(_activity));
+        }
+
+        public async Task AddSuggestion(SuggestionTypes type)
+        {
+            var promptResult = await UserDialogs.Instance.PromptAsync("Enter a picker value");
+
+            if (!promptResult.Ok)
+                return;
+
+            _suggestions.AddSuggestion(type, promptResult.Text);
+            switch (type)
+            {
+                case SuggestionTypes.ActivityNames:
+                    var newSug = promptResult.Text;
+                    ActivityNames.Add(newSug);
+                    ActivityNameSelection = ActivityNames.IndexOf(newSug);
+                    break;
+            }
         }
     }
 }

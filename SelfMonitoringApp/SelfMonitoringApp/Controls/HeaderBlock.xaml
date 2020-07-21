@@ -11,11 +11,11 @@
                    Margin="2" BorderColor="Black" HasShadow="True" >
                 <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="18"/>
+                        <RowDefinition Height="22"/>
                         <RowDefinition Height="2"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <Label Text="{TemplateBinding HeaderText}" FontSize="16" FontAttributes="Bold" 
+                    <Label Text="{TemplateBinding HeaderText}" FontSize="17" FontAttributes="Bold" 
                            FontFamily="Roboto" Padding="0"
                            TextColor="White" HorizontalTextAlignment="Center" VerticalTextAlignment="Start"/>
                     <BoxView Grid.Row="1" BackgroundColor="{StaticResource Secondary}" />

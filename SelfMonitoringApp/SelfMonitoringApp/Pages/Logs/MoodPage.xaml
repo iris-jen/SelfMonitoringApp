@@ -28,14 +28,14 @@
                     <!--Date Picker-->
                     <controls:HeaderBlock HeaderText="Date">
                         <Frame Padding="0" BorderColor="Black">
-                            <DatePicker  HorizontalOptions="Center" BackgroundColor="White" FontSize="13" Date="{Binding SelectedDate}"/>
+                            <DatePicker HorizontalOptions="Center" BackgroundColor="White" Margin="0,-8,0,0" FontSize="13" Date="{Binding LogTime}"/>
                         </Frame>
                     </controls:HeaderBlock>
 
                     <!--Time Picker-->
                     <controls:HeaderBlock HeaderText="Time" Grid.Column="1" Margin="0">
                         <Frame Padding="0" BorderColor="Black">
-                            <TimePicker HorizontalOptions="Center" FontSize="14" BackgroundColor="White" Time="{Binding SelectedTime}"/>
+                            <TimePicker HorizontalOptions="Center" FontSize="14" BackgroundColor="White" Margin="0,-8,0,0" Time="{Binding StartTimeSpan}"/>
                         </Frame>
                     </controls:HeaderBlock>
                 </Grid>
@@ -53,7 +53,7 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition Width=".2*"/>
                             </Grid.ColumnDefinitions>
-                            <Picker ItemsSource="{Binding Emotions}" SelectedItem="{Binding StrongestEmotion, Mode=TwoWay}" ItemDisplayBinding="{Binding SuggestionText}" VerticalOptions="CenterAndExpand" Margin="0,-19,0,0"/>
+                            <Picker ItemsSource="{Binding Emotions}" SelectedIndex="{Binding StrongestEmotion}" Margin="0,-19,0,0"/>
                             <Button Grid.Column="1" Style="{d:StaticResource ButtonStyle}" Margin="2" Text="+" FontSize="16" Command="{Binding AddSuggestionCommand}"
                                     CommandParameter="{x:Static services:SuggestionTypes.Emotions}" />
                         </Grid>
@@ -67,8 +67,9 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition Width=".2*"/>
                             </Grid.ColumnDefinitions>
-                            <Picker  SelectedItem="{Binding Location}" BackgroundColor="White" ItemsSource="{Binding Locations}"/>
-                            <Button Grid.Column="1" Style="{d:StaticResource ButtonStyle}" Margin="2" Text="+" FontSize="16" />
+                            <Picker ItemsSource="{Binding Locations}" SelectedIndex="{Binding SelectedLocation}"  Margin="0,-19,0,0"/>
+                            <Button Grid.Column="1" Style="{d:StaticResource ButtonStyle}" Margin="2" Text="+" FontSize="16"  Command="{Binding AddSuggestionCommand}"
+                                    CommandParameter="{x:Static services:SuggestionTypes.Locations}"/>
                         </Grid>
                     </Frame>
                  
