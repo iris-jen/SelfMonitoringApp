@@ -8,8 +8,6 @@ namespace SelfMonitoringApp.ViewModels
 
         public NotificationsViewModel()
         {
-
-
         }
     }
 }

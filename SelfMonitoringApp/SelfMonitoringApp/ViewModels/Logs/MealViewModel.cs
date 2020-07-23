@@ -17,16 +17,10 @@ namespace SelfMonitoringApp.ViewModels.Logs
         public const string NavigationNodeName = "meal";
         public event EventHandler ModelShed;
 
-        #region Bindings
-        
+        #region Bindings       
         //Commands
         public Command SaveLogCommand { get; private set; }
-        public Command<SuggestionTypes> AddSuggestionCommand { get; private set; }
 
-        //Collections
-        public ObservableCollection<string> MealTypes { get; private set; }
-        public ObservableCollection<string> MealSizes { get; private set; }
-        public ObservableCollection<string> MealNames { get; private set; }
 
         //General Notify
         private DateTime _logDateTime;
@@ -57,47 +51,41 @@ namespace SelfMonitoringApp.ViewModels.Logs
             }
         }
 
-        private int _mealSizeSelection;
-        public int MealSizeSelection
+        public string MealSize
         {
-            get => _mealSizeSelection;
+            get => _mealModel.MealSize;
             set
             {
-                if (value == -1)
+                if (_mealModel.MealSize == value)
                     return;
 
-                _mealSizeSelection = value;
-                _mealModel.MealSize = MealSizes[value];
+                _mealModel.MealSize= value;
                 NotifyPropertyChanged();
             }
         }
 
-        private int _mealTypeSelection;
-        public int MealTypeSelection
+        public string MealType
         {
-            get => _mealTypeSelection;
+            get => _mealModel.MealType;
             set
             {
-                if (value == -1)
+                if (_mealModel.MealType == value)
                     return;
 
-                _mealTypeSelection = value;
-                _mealModel.MealType = MealTypes[value];
+                _mealModel.MealType = value;
                 NotifyPropertyChanged();
             }
         }
 
-        private int _mealNameSelection;
-        public int MealNameSelection
+        public string MealName
         {
-            get => _mealNameSelection;
+            get => _mealModel.Description;
             set
             {
-                if (value ==-1)
+                if (_mealModel.Description == value)
                     return;
 
-                _mealNameSelection = value;
-                _mealModel.Description = MealNames[value];
+                _mealModel.Description = value;
                 NotifyPropertyChanged();
             }
         }
@@ -118,10 +106,6 @@ namespace SelfMonitoringApp.ViewModels.Logs
 
         public MealViewModel(IModel existingMeal = null)
         {
-            MealTypes = _suggestions.GetSuggestionCollection(SuggestionTypes.MealTypes);
-            MealSizes = _suggestions.GetSuggestionCollection(SuggestionTypes.MealSizes);
-            MealNames = _suggestions.GetSuggestionCollection(SuggestionTypes.MealNames);
-
             if (existingMeal is null)
             {
                 _mealModel = new MealModel();
@@ -143,13 +127,8 @@ namespace SelfMonitoringApp.ViewModels.Logs
                     minutes  : _mealModel.RegisteredTime.Minute,
                     seconds  : _mealModel.RegisteredTime.Second
                 );
-
-                MealNameSelection = MealNames.IndexOf(_mealModel.Description);
-                MealSizeSelection = MealSizes.IndexOf(_mealModel.MealSize);
-                MealTypeSelection = MealTypes.IndexOf(_mealModel.MealType);
             }
 
-            AddSuggestionCommand = new Command<SuggestionTypes>(async (type) => await AddSuggestion(type));
             SaveLogCommand = new Command(async () => await SaveAndPop());
         }
 
@@ -168,34 +147,6 @@ namespace SelfMonitoringApp.ViewModels.Logs
             await _database.AddOrModifyModelAsync(_mealModel);
             await _navigator.NavigateBack();
             ModelShed?.Invoke(this, new ModelShedEventArgs(_mealModel));
-        }
-
-        public async Task AddSuggestion(SuggestionTypes type)
-        {
-            var promptResult = await UserDialogs.Instance.PromptAsync("Enter a value");
-
-            if (!promptResult.Ok)
-                return;
-
-            _suggestions.AddSuggestion(type, promptResult.Text);
-            switch (type)
-            {
-                case SuggestionTypes.MealTypes:
-                    var newSug = promptResult.Text;
-                    MealTypes.Add(newSug);
-                    MealTypeSelection = MealTypes.IndexOf(newSug);
-                    break;
-                case SuggestionTypes.MealNames:
-                    newSug = promptResult.Text;
-                    MealNames.Add(newSug);
-                    MealNameSelection = MealNames.IndexOf(newSug);
-                    break;
-                case SuggestionTypes.MealSizes:
-                    newSug = promptResult.Text;
-                    MealSizes.Add(newSug);
-                    MealSizeSelection = MealSizes.IndexOf(newSug);
-                    break;
-            }
         }
     }
 }

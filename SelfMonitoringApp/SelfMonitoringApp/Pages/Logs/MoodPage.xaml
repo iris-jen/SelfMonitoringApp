@@ -44,7 +44,10 @@
                 <controls:HeaderBlock HeaderText="Rate how you feel" Grid.Row="1">
                     <controls:RatingSlider Rating="{Binding OverallMood}" />
                 </controls:HeaderBlock>
-            
+
+
+                <controls:HeaderBlockAddRemove Title="Strongest Emotion" SelectedSuggestion="{Binding StrongestEmotion}" BoxType="{x:Static services:SuggestionTypes.Emotions}"/>
+
                 <!--Emotions entry box-->
                 <controls:HeaderBlock Grid.Row="2" HeaderText="Strongest Emotion">
                     <Frame Padding="2" BorderColor="Black">

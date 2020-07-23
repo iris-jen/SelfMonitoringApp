@@ -6,6 +6,7 @@
              mc:Ignorable="d"
              NavigationPage.HasNavigationBar="True"
              Title="View Data"
+             Visual="Material"
              xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
              xmlns:models ="clr-namespace:SelfMonitoringApp.Models.Base"
              x:Class="SelfMonitoringApp.Pages.DataExplorerPage">

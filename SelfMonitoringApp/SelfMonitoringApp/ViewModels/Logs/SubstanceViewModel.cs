@@ -19,33 +19,10 @@ namespace SelfMonitoringApp.ViewModels.Logs
         public event EventHandler ModelShed;
 
         #region Bindings
-
         //Commands
         public Command SaveLogCommand { get; private set; }
-        public Command<SuggestionTypes> AddSuggestionCommand { get; private set; }
-        public Command<SuggestionTypes> RemoveSuggestionCommand { get; private set; }
-
-        //Collections
-        public ObservableCollection<string> SubstanceNames              { get; private set; }
-        public ObservableCollection<string> SubstanceConsumptionMethods { get; private set; }
-        public ObservableCollection<string> Units                       { get; private set; }
-        public ObservableCollection<string> Locations                   { get; private set; }
 
         //General Notify
-        private bool _removeSuggestionEnabled;
-        public bool RemoveSuggestionEnabled
-        {
-            get => _removeSuggestionEnabled;
-            set
-            {
-                if (_removeSuggestionEnabled == value)
-                    return;
-
-                _removeSuggestionEnabled = value;
-                NotifyPropertyChanged();
-            }
-        }
-
         private DateTime _logTime;
         public DateTime LogTime
         {
@@ -74,37 +51,28 @@ namespace SelfMonitoringApp.ViewModels.Logs
             }
         }
 
-
-        //idk why xamarin's doing this, but trying to bind the SelectedItem
-        //on the picker to a string wont allow me to set the picker when I'm restoring it?
-        //only setting the selected index works?
-
-        private int _selectedConsumptionMethod;
-        public int SelectedConsumptionMethod
+        public string ConsumptionMethod
         {
-            get => _selectedConsumptionMethod;
+            get => _substance.ConsumptionMethod;
             set
             {
-                if (value == -1)
+                if (_substance.ConsumptionMethod == value)
                     return;
 
-                _selectedConsumptionMethod = value;
-                _substance.ConsumptionMethod = SubstanceConsumptionMethods[value];
+                _substance.ConsumptionMethod = value;
                 NotifyPropertyChanged();
             }
         }
 
-        private int _selectedSubstanceName;
-        public int SelectedSubstanceName
+        public string SubstanceName
         {
-            get => _selectedSubstanceName;
+            get => _substance.SubstanceName;
             set
             {
-                if (value == -1)
+                if (_substance.SubstanceName == value)
                     return;
 
-                _selectedSubstanceName = value;
-                _substance.SubstanceName = SubstanceNames[value];
+                _substance.SubstanceName = value;
                 NotifyPropertyChanged();
             }
         }
@@ -135,17 +103,15 @@ namespace SelfMonitoringApp.ViewModels.Logs
             }
         }
 
-        private int _unitSelection;
-        public int UnitSelection
+        public string Unit
         {
-            get => _unitSelection;
+            get => _substance.Unit;
             set
             {
-                if (value == -1)
+                if (_substance.Unit == value)
                     return;
 
-                _unitSelection = value;
-                _substance.Unit = Units[value];
+                _substance.Unit = value;
                 NotifyPropertyChanged();
             }
         }
@@ -189,31 +155,7 @@ namespace SelfMonitoringApp.ViewModels.Logs
                 );
             }   
             SaveLogCommand = new Command(async ()=> await SaveAndPop());
-            AddSuggestionCommand = new Command<SuggestionTypes>(async (type) => await AddSuggestion(type));
         }
-
-        public async Task AddSuggestion(SuggestionTypes type)
-        {
-            var promptResult = await UserDialogs.Instance.PromptAsync("Enter a value");
-
-            if (!promptResult.Ok)
-                return;
-
-            _suggestions.AddSuggestion(type, promptResult.Text);
-            switch (type)
-            {
-                case SuggestionTypes.Units:
-                    var newSug = promptResult.Text;
-                    Units.Add(newSug);
-                    UnitSelection = Units.IndexOf(newSug);
-                    break;
-                case SuggestionTypes.Locations:
-                    newSug = promptResult.Text;
-                    Locations.Add(newSug);
-                    break;
-            }
-        }
-
 
         public async Task SaveAndPop()
         {

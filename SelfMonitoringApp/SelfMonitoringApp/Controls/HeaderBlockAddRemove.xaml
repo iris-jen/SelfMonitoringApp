@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Frame xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             BackgroundColor="{StaticResource Primary}" 
+             Padding="8,1,8,10" CornerRadius="10" 
+             Margin="2" BorderColor="Black" HasShadow="True" 
+             x:Class="SelfMonitoringApp.Controls.HeaderBlockAddRemove">
+    <Frame.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="22"/>
+                <RowDefinition Height="2"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Label x:Name="HeaderLabel" FontSize="17" FontAttributes="Bold" 
+                           FontFamily="Roboto" Padding="0"
+                           TextColor="White" HorizontalTextAlignment="Center" VerticalTextAlignment="Start"/>
+            <BoxView Grid.Row="1" BackgroundColor="{StaticResource Secondary}" />
+
+            <Frame Grid.Row="2" Padding="0" BorderColor="Black">
+                <Grid  >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Picker x:Name="HeaderPicker" SelectedIndexChanged="HeaderPicker_SelectedIndexChanged" Margin="0,-20,0,-10"/>
+
+                    <Button Grid.Column="1" Margin="0,3,0,3" Padding="-20" Text="+" BackgroundColor="LightGreen" TextColor="Black" BorderColor="Black" BorderWidth="1" x:Name="AddButton" />
+                    <Button Grid.Column="2" Margin="0,3,3,3" Padding="-20" Text="-" BackgroundColor="LightCoral" TextColor="Black" BorderColor="Black" BorderWidth="1" Pressed="RemoveButton_Pressed"/>
+
+                </Grid>
+            </Frame>
+        </Grid>
+    </Frame.Content>
+</Frame>

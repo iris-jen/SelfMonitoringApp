@@ -14,25 +14,23 @@ namespace SelfMonitoringApp.ViewModels.Logs
     public class ActivityViewModel : ViewModelBase, INavigationViewModel
     {
         private readonly ActivityModel _activity;
-
         public const string NavigationNodeName = "activity";
         public event EventHandler ModelShed;
-        #region Bindings
-        public Command SaveLogCommand { get; private set; }
-        public Command<SuggestionTypes> AddSuggestionCommand { get; private set; }
-        public ObservableCollection<string> ActivityNames { get; private set; }
 
-        public int _activityNameSelection;
-        public int ActivityNameSelection
+        #region Bindings
+        //Commands
+        public Command SaveLogCommand { get; private set; }
+
+        //General Notify
+        public string ActivityNameSelection
         {
-            get => _activityNameSelection;
+            get => _activity.Description;
             set
             {
-                if (value == -1)
+                if (_activity.Description == value)
                     return;
 
-                _activityNameSelection = value;
-                _activity.Description = ActivityNames[value];
+                _activity.Description = value;
                 NotifyPropertyChanged();
             }
         }
@@ -152,8 +150,6 @@ namespace SelfMonitoringApp.ViewModels.Logs
 
         public ActivityViewModel(IModel activityModel = null)
         {
-            ActivityNames = _suggestions.GetSuggestionCollection(SuggestionTypes.ActivityNames);
-
             if (activityModel is null)
                 _activity = new ActivityModel();
             else
@@ -175,8 +171,6 @@ namespace SelfMonitoringApp.ViewModels.Logs
                     seconds : _activity.EndTime.Hour
                 );
             }
-
-            AddSuggestionCommand = new Command<SuggestionTypes>(async (type) => await AddSuggestion(type));
             SaveLogCommand = new Command(async()=> await SaveAndPop());
         }
 
@@ -213,24 +207,6 @@ namespace SelfMonitoringApp.ViewModels.Logs
             await _database.AddOrModifyModelAsync(_activity);
             await _navigator.NavigateBack();
             ModelShed?.Invoke(this, new ModelShedEventArgs(_activity));
-        }
-
-        public async Task AddSuggestion(SuggestionTypes type)
-        {
-            var promptResult = await UserDialogs.Instance.PromptAsync("Enter a picker value");
-
-            if (!promptResult.Ok)
-                return;
-
-            _suggestions.AddSuggestion(type, promptResult.Text);
-            switch (type)
-            {
-                case SuggestionTypes.ActivityNames:
-                    var newSug = promptResult.Text;
-                    ActivityNames.Add(newSug);
-                    ActivityNameSelection = ActivityNames.IndexOf(newSug);
-                    break;
-            }
         }
     }
 }

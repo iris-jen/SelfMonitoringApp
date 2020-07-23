@@ -21,11 +21,13 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Models\Sugges\" />
       <Folder Include="Properties" />
     </ItemGroup>
 
     <ItemGroup>
+      <Compile Update="Controls\HeaderBlockAddRemove.xaml.cs">
+        <DependentUpon>HeaderBlockAddRemove.xaml</DependentUpon>
+      </Compile>
       <Compile Update="Controls\HeaderBlockLight.xaml.cs">
         <DependentUpon>HeaderBlockLight.xaml</DependentUpon>
       </Compile>
