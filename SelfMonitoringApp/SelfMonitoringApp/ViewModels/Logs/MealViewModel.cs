@@ -108,7 +108,10 @@ namespace SelfMonitoringApp.ViewModels.Logs
         {
             if (existingMeal is null)
             {
-                _mealModel = new MealModel();
+                _mealModel = new MealModel()
+                {
+                    Satisfaction = 5
+                };
                 LogDateTime = DateTime.Now;
                 LogTimeSpan = new TimeSpan
                 (

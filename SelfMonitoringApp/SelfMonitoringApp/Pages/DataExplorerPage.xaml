@@ -44,7 +44,7 @@
                             <StackLayout>
                                 
                                 <!--Sleep Box-->
-                                <controls:LogView Title="Sleep" IsVisible="{Binding SleepsVisibility}" Margin="5,0,5,5">
+                                <controls:LogView Title="Sleep" IsVisible="{Binding SleepsVisibility}" Margin="5,0,5,0">
                                     <StackLayout>
                                         <!--Sleep Collection View-->
                                         <CollectionView ItemsSource="{Binding Sleeps}" Grid.Row="1" SelectionMode="Single" SelectedItem="{Binding SelectedSleep}">
@@ -82,15 +82,17 @@
                                                 </DataTemplate>
                                             </CollectionView.ItemTemplate>
                                         </CollectionView>
-                                        <Grid HeightRequest="80" Margin="0" Padding="0" BackgroundColor="DarkGray">
-                                            <Button Text="Edit" Padding="0" Command="{Binding EditSelectedCommand}" CommandParameter="{x:Static models:ModelType.Sleep}"/>
-                                            <Button Text="Delete" Grid.Column="1" Padding="0" Command="{Binding DeleteSelectedCommand}" CommandParameter="{x:Static models:ModelType.Sleep}"/>
+                                        <Grid HeightRequest="90" Margin="-4,-8,-2,-2" Padding="0" BackgroundColor="DarkGray">
+                                            <Button Text="Edit" Padding="0" Style="{StaticResource ButtonStyleSmall}" Command="{Binding EditSelectedCommand}" 
+                                                    CommandParameter="{x:Static models:ModelType.Sleep}"/>
+                                            <Button Text="Delete" Grid.Column="1" Style="{StaticResource ButtonStyleSmall}" Command="{Binding DeleteSelectedCommand}" 
+                                                    CommandParameter="{x:Static models:ModelType.Sleep}"/>
                                         </Grid>
                                     </StackLayout>
                                 </controls:LogView > 
 
                                 <!--Mood Box-->
-                                <controls:LogView Title="Mood" IsVisible="{Binding MoodsVisibility}" Margin="5,0,5,5">
+                                <controls:LogView Title="Mood" IsVisible="{Binding MoodsVisibility}" Margin="5,0,5,0">
 
                                     <StackLayout Padding="0">
                                         <!--Mood Collection View-->
@@ -121,16 +123,18 @@
                                             </CollectionView.ItemTemplate>
                                         </CollectionView>
                                         
-                                        <Grid HeightRequest="80" Margin="0" Padding="0" BackgroundColor="DarkGray">
-                                            <Button Text="Edit" Padding="0" Command="{Binding EditSelectedCommand}" CommandParameter="{x:Static models:ModelType.Mood}"/>
-                                            <Button Text="Delete" Grid.Column="1" Padding="0" Command="{Binding DeleteSelectedCommand}" CommandParameter="{x:Static models:ModelType.Mood}"/>
+                                        <Grid HeightRequest="90" Margin="-4,-8,-2,-2" Padding="0" BackgroundColor="DarkGray">
+                                            <Button Text="Edit" Padding="0" Style="{StaticResource ButtonStyleSmall}" Command="{Binding EditSelectedCommand}" 
+                                                    CommandParameter="{x:Static models:ModelType.Mood}"/>
+                                            <Button Text="Delete" Grid.Column="1" Style="{StaticResource ButtonStyleSmall}" Command="{Binding DeleteSelectedCommand}" 
+                                                    CommandParameter="{x:Static models:ModelType.Mood}"/>
                                         </Grid>
                                     </StackLayout>
 
                                 </controls:LogView >
 
                                 <!--Meal Box-->
-                                <controls:LogView Title="Meal" IsVisible="{Binding MealsVisibility}" Margin="5,0,5,5">
+                                <controls:LogView Title="Meal" IsVisible="{Binding MealsVisibility}" Margin="5,0,5,0">
                                     <StackLayout>
                                         <!--Mood Collection View-->
                                         <CollectionView ItemsSource="{Binding Meals}" Grid.Row="1" SelectionMode="Single" SelectedItem="{Binding SelectedMeal}">
@@ -166,16 +170,18 @@
                                                 </DataTemplate>
                                             </CollectionView.ItemTemplate>
                                         </CollectionView>
-                                        <Grid HeightRequest="80" Margin="0" Padding="0" BackgroundColor="DarkGray">
-                                            <Button Text="Edit" Padding="0" Command="{Binding EditSelectedCommand}" CommandParameter="{x:Static models:ModelType.Meal}"/>
-                                            <Button Text="Delete" Grid.Column="1" Padding="0" Command="{Binding DeleteSelectedCommand}" CommandParameter="{x:Static models:ModelType.Meal}"/>
+                                        <Grid HeightRequest="90" Margin="-4,-8,-2,-2" Padding="0" BackgroundColor="DarkGray">
+                                            <Button Text="Edit" Padding="0" Style="{StaticResource ButtonStyleSmall}" Command="{Binding EditSelectedCommand}" 
+                                                    CommandParameter="{x:Static models:ModelType.Meal}"/>
+                                            <Button Text="Delete" Grid.Column="1" Style="{StaticResource ButtonStyleSmall}" Command="{Binding DeleteSelectedCommand}" 
+                                                    CommandParameter="{x:Static models:ModelType.Meal}"/>
                                         </Grid>
                                     </StackLayout>
 
                                 </controls:LogView >
 
                                 <!--Activities Box-->
-                                <controls:LogView Title="Activity" IsVisible="{Binding ActivitiesVisibility}" Margin="5,0,5,5">
+                                <controls:LogView Title="Activity" IsVisible="{Binding ActivitiesVisibility}" Margin="5,0,5,0">
                                     <StackLayout>
                                         <!--Activity Collection View-->
                                         <CollectionView ItemsSource="{Binding Activities}" Grid.Row="1" SelectionMode="Single" SelectedItem="{Binding SelectedActivity}">
@@ -213,15 +219,17 @@
                                                 </DataTemplate>
                                             </CollectionView.ItemTemplate>
                                         </CollectionView>
-                                        <Grid HeightRequest="80" Margin="0" Padding="0" BackgroundColor="DarkGray">
-                                            <Button Text="Edit" Padding="0" Command="{Binding EditSelectedCommand}" CommandParameter="{x:Static models:ModelType.Activity}"/>
-                                            <Button Text="Delete" Grid.Column="1" Padding="0" Command="{Binding DeleteSelectedCommand}" CommandParameter="{x:Static models:ModelType.Activity}"/>
+                                        <Grid HeightRequest="90" Margin="-4,-8,-2,-2" Padding="0" BackgroundColor="DarkGray">
+                                            <Button Text="Edit" Padding="0" Style="{StaticResource ButtonStyleSmall}" Command="{Binding EditSelectedCommand}" 
+                                                    CommandParameter="{x:Static models:ModelType.Activity}"/>
+                                            <Button Text="Delete" Grid.Column="1" Style="{StaticResource ButtonStyleSmall}" Command="{Binding DeleteSelectedCommand}" 
+                                                    CommandParameter="{x:Static models:ModelType.Activity}"/>
                                         </Grid>
                                     </StackLayout>
                                 </controls:LogView >
 
                                 <!--Substances Box-->
-                                <controls:LogView Title="Substance" IsVisible="{Binding SubstanceVisibility}" Margin="5,0,5,5">
+                                <controls:LogView Title="Substance" IsVisible="{Binding SubstanceVisibility}" Margin="5,0,5,0">
                                     <StackLayout>
                                         <!--Substance Collection View-->
                                         <CollectionView ItemsSource="{Binding Substances}" SelectionMode="Single" Grid.Row="1" SelectedItem="{Binding SelectedSubstance}">
@@ -260,15 +268,17 @@
                                                 </DataTemplate>
                                             </CollectionView.ItemTemplate>
                                         </CollectionView>
-                                        <Grid HeightRequest="80" Margin="0" Padding="0" BackgroundColor="DarkGray">
-                                            <Button Text="Edit" Padding="0" Command="{Binding EditSelectedCommand}" CommandParameter="{x:Static models:ModelType.Substance}"/>
-                                            <Button Text="Delete" Grid.Column="1" Padding="0" Command="{Binding DeleteSelectedCommand}" CommandParameter="{x:Static models:ModelType.Substance}"/>
+                                        <Grid HeightRequest="90" Margin="-4,-8,-2,-2" Padding="0" BackgroundColor="DarkGray">
+                                            <Button Text="Edit" Padding="0" Style="{StaticResource ButtonStyleSmall}" Command="{Binding EditSelectedCommand}" 
+                                                    CommandParameter="{x:Static models:ModelType.Substance}"/>
+                                            <Button Text="Delete" Grid.Column="1" Style="{StaticResource ButtonStyleSmall}" Command="{Binding DeleteSelectedCommand}" 
+                                                    CommandParameter="{x:Static models:ModelType.Substance}"/>
                                         </Grid>
                                     </StackLayout>
                                 </controls:LogView >
 
 
-                                <Grid Padding="0" HeightRequest="100">
+                                <Grid Padding="0" HeightRequest="70">
                                     <StackLayout Orientation="Horizontal" Padding="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Spacing="0">
                                         <Button Padding="0" Text="Mood"  FontSize="8" Margin="2" MinimumWidthRequest="60" Style="{StaticResource ButtonStyle}" 
                                             Command="{Binding ShowCategoryComand}" CommandParameter="{x:Static models:ModelType.Mood}" IsVisible="{Binding MoodsLogged}"/>

@@ -38,16 +38,20 @@ namespace SelfMonitoringApp.Controls
             if (!block.InitialSet)
             {
                 var type = newValue.ToString();
+
+                if (type == string.Empty) // gtfo dirty space boi
+                    return;
+
+                if (!block.SuggestionItems.Contains(type))
+                {
+                    block.SuggestionService.AddSuggestion(block.BoxType, type);
+                    block.SuggestionItems.Add(type);
+                }
+
                 block.HeaderPicker.SelectedIndex = block.SuggestionItems.IndexOf(type);
                 block.InitialSet = true;
             }
-
-            //block.BoxType = type;
-            //block.SuggestionItems = block.SuggestionService.GetSuggestionCollection(type);
-            //block.HeaderPicker.ItemsSource = block.SuggestionItems;
-            //block.HeaderPicker.SelectedIndex = block.SuggestionItems.IndexOf(block.SelectedSuggestion);
         }
-
 
         public string Title
         {
@@ -57,7 +61,7 @@ namespace SelfMonitoringApp.Controls
 
         public static readonly BindableProperty BoxTypeProperty =
             BindableProperty.Create(nameof(BoxType), typeof(SuggestionTypes), typeof(HeaderBlockAddRemove), 
-                SuggestionTypes.Units, BindingMode.TwoWay, propertyChanged: HandleBoxTypeChanged);
+                SuggestionTypes.Invalid, BindingMode.TwoWay, propertyChanged: HandleBoxTypeChanged);
 
         public SuggestionTypes BoxType
         {
@@ -123,19 +127,25 @@ namespace SelfMonitoringApp.Controls
             var res = await UserDialogs.Instance.PromptAsync(new PromptConfig() { Message = promptStr });
             SuggestionItems.Add(res.Text);
             SuggestionService.AddSuggestion(BoxType, res.Text);
-
+            HeaderPicker.SelectedIndex = SuggestionItems.IndexOf(res.Text);
         }
 
         private void RemoveButton_Pressed(object sender, EventArgs e)
         {
+            if (HeaderPicker.SelectedItem == null)
+                return;
+
             var selectedItem = HeaderPicker.SelectedItem.ToString();
 
-            if (string.IsNullOrEmpty(selectedItem))
-                return;
+            SuggestionService.RemoveSuggestion(BoxType, selectedItem);
+            SuggestionItems.Remove(selectedItem);
         }
 
         private void HeaderPicker_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (HeaderPicker.SelectedIndex == -1)
+                return;
+
             SelectedSuggestion = SuggestionItems[HeaderPicker.SelectedIndex];
         }
     }

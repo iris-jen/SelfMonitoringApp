@@ -2,6 +2,7 @@
 {
     public enum SuggestionTypes
     {
+        Invalid = -1,
         Emotions,
         Locations,
         MealTypes,
@@ -11,5 +12,6 @@
         MealSizes,
         MealNames,
         ActivityNames
+     
     }
 }

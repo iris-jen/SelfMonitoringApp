@@ -15,6 +15,19 @@ namespace SelfMonitoringApp.Services
 {
     public class SuggestionService : ISuggestionService
     {
+        private static readonly Dictionary<SuggestionTypes, List<string>> _defaults = new Dictionary<SuggestionTypes, List<string>>()
+        {
+            {SuggestionTypes.Emotions, new List<string>(){"Happiness","Anger","Fear","Sadness" } },
+            {SuggestionTypes.Locations,new List<string>(){"Home","Work"} },
+            {SuggestionTypes.MealTypes,new List<string>(){"Breakfast","Lunch","Dinner"} },
+            {SuggestionTypes.SubstanceNames,new List<string>() {"Coffee","Tobacco","Cannabis","Alcohol"}},
+            {SuggestionTypes.SubstanceConsumptionMethods,new List<string>() {"Drank","Smoked","Vaporized"}},
+            {SuggestionTypes.Units,new List<string>(){"Cup","g","Cigarette","Drink","Pint"}},
+            {SuggestionTypes.MealSizes,new List<string>() {"Small","Modest","Large"}},
+            {SuggestionTypes.MealNames,new List<string>(){"Sandwich"} },
+            {SuggestionTypes.ActivityNames,new List<string>(){"Played Guitar","Went for a walk","Had a remote meeting"}}
+        };
+
         [JsonConverter(typeof(StringEnumConverter))]
         private Dictionary<SuggestionTypes, List<string>> _suggestions;
 
@@ -36,8 +49,12 @@ namespace SelfMonitoringApp.Services
 
             if (File.Exists(FilePath))
             {
-    
                 _suggestions = JsonConvert.DeserializeObject<Dictionary<SuggestionTypes, List<string>>>(File.ReadAllText(FilePath));
+            }
+            else
+            {
+                _suggestions = new Dictionary<SuggestionTypes, List<string>>(_defaults);
+                Save();
             }
             
             foreach (var suggestionType in Enum.GetValues(typeof(SuggestionTypes)))

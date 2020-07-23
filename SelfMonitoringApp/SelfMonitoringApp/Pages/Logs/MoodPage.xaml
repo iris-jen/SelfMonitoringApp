@@ -8,8 +8,7 @@
              mc:Ignorable="d"
              Visual="Material"
              NavigationPage.HasBackButton="true"
-             NavigationPage.HasNavigationBar="True"
-             
+             NavigationPage.HasNavigationBar="True"         
              Title="Log Mood"
              x:Class="SelfMonitoringApp.Pages.Logs.MoodPage">
     <ContentPage.Content>
@@ -17,10 +16,10 @@
             <Grid Margin="0,8,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="{StaticResource RowHeightSingle}"/>
-                    <RowDefinition Height="{StaticResource RowHeightSlider}"/>
+                    <RowDefinition Height="100"/>
                     <RowDefinition Height="{StaticResource RowHeightSingle}"/>
                     <RowDefinition Height="{StaticResource RowHeightSingle}"/>
-                    <RowDefinition/>
+                    <RowDefinition />
                 </Grid.RowDefinitions>
 
                 <!--Registered time grid-->
@@ -46,38 +45,9 @@
                 </controls:HeaderBlock>
 
 
-                <controls:HeaderBlockAddRemove Title="Strongest Emotion" SelectedSuggestion="{Binding StrongestEmotion}" BoxType="{x:Static services:SuggestionTypes.Emotions}"/>
+                <controls:HeaderBlockAddRemove Grid.Row="2" Title="Strongest Emotion" SelectedSuggestion="{Binding StrongestEmotion}" BoxType="{x:Static services:SuggestionTypes.Emotions}"/>
+                <controls:HeaderBlockAddRemove Grid.Row="3" Title="Location" SelectedSuggestion="{Binding Location}" BoxType="{x:Static services:SuggestionTypes.Locations}"/>
 
-                <!--Emotions entry box-->
-                <controls:HeaderBlock Grid.Row="2" HeaderText="Strongest Emotion">
-                    <Frame Padding="2" BorderColor="Black">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition Width=".2*"/>
-                            </Grid.ColumnDefinitions>
-                            <Picker ItemsSource="{Binding Emotions}" SelectedIndex="{Binding StrongestEmotion}" Margin="0,-19,0,0"/>
-                            <Button Grid.Column="1" Style="{d:StaticResource ButtonStyle}" Margin="2" Text="+" FontSize="16" Command="{Binding AddSuggestionCommand}"
-                                    CommandParameter="{x:Static services:SuggestionTypes.Emotions}" />
-                        </Grid>
-                    </Frame>
-                </controls:HeaderBlock>
-
-                <controls:HeaderBlock Grid.Row="3" HeaderText="Location">
-                    <Frame Padding="2" BorderColor="Black">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition Width=".2*"/>
-                            </Grid.ColumnDefinitions>
-                            <Picker ItemsSource="{Binding Locations}" SelectedIndex="{Binding SelectedLocation}"  Margin="0,-19,0,0"/>
-                            <Button Grid.Column="1" Style="{d:StaticResource ButtonStyle}" Margin="2" Text="+" FontSize="16"  Command="{Binding AddSuggestionCommand}"
-                                    CommandParameter="{x:Static services:SuggestionTypes.Locations}"/>
-                        </Grid>
-                    </Frame>
-                 
-                </controls:HeaderBlock>
-                
                 <!--Description Box-->
                 <controls:HeaderBlock Grid.Row="4" HeaderText="Description">
                     <Frame Padding="4">

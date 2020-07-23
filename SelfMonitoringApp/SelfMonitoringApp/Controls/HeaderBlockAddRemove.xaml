@@ -23,13 +23,13 @@
             <Frame Grid.Row="2" Padding="0" BorderColor="Black">
                 <Grid  >
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Picker x:Name="HeaderPicker" SelectedIndexChanged="HeaderPicker_SelectedIndexChanged" Margin="0,-20,0,-10"/>
+                    <Picker x:Name="HeaderPicker" SelectedIndexChanged="HeaderPicker_SelectedIndexChanged" Margin="5,-17,0,-10"/>
 
                     <Button Grid.Column="1" Margin="0,3,0,3" Padding="-20" Text="+" BackgroundColor="LightGreen" TextColor="Black" BorderColor="Black" BorderWidth="1" x:Name="AddButton" />
-                    <Button Grid.Column="2" Margin="0,3,3,3" Padding="-20" Text="-" BackgroundColor="LightCoral" TextColor="Black" BorderColor="Black" BorderWidth="1" Pressed="RemoveButton_Pressed"/>
+                    <Button Grid.Column="2" Margin="0,3,5,3" Padding="-20" Text="-" BackgroundColor="LightCoral" TextColor="Black" BorderColor="Black" BorderWidth="1" Pressed="RemoveButton_Pressed"/>
 
                 </Grid>
             </Frame>

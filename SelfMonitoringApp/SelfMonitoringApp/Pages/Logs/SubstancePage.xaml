@@ -4,21 +4,22 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:behaviors="clr-namespace:Behaviors;assembly=Behaviors"
-                         Visual="Material"
+             Visual="Material"
              xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
              mc:Ignorable="d"
-             NavigationPage.HasNavigationBar="True" Title="Log Substance Use"
-
+             NavigationPage.HasNavigationBar="True"
+             Title="Log Substance Use"
+             xmlns:services="clr-namespace:SelfMonitoringApp.Services"
              x:Class="SelfMonitoringApp.Pages.Logs.SubstancePage">
     <ContentPage.Content>
         <controls:SaveCancelPage CancelCommand="{Binding BackCommand}" SaveCommand="{Binding SaveLogCommand}">
             <Grid Margin="0,3,0,0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="90"/>
+                    <RowDefinition Height="{StaticResource RowHeightSingle}"/>
+                    <RowDefinition Height="{StaticResource RowHeightSingle}"/>
                     <RowDefinition Height="{StaticResource RowHeightSingle}"/>
                     <RowDefinition Height="{StaticResource RowHeightSingle}"/>
                     <RowDefinition Height="{StaticResource RowHeightSlider}"/>
-                    <RowDefinition/>
                 </Grid.RowDefinitions>
 
                 <!--Registered time grid-->
@@ -26,78 +27,42 @@
                     <!--Date Picker-->
                     <controls:HeaderBlock HeaderText="Date">
                         <Frame Padding="0" BorderColor="Black">
-                            <DatePicker HorizontalOptions="Center" FontSize="14" Date="{Binding SelectedDate}"/>
+                            <DatePicker HorizontalOptions="Center" FontSize="14" Date="{Binding LogTime}" BackgroundColor="White" Margin="0,-10,0,0"/>
                         </Frame>
                     </controls:HeaderBlock>
                     
                     <!--Time Picker-->
                     <controls:HeaderBlock HeaderText="Time" Grid.Column="1" Margin="0">
                         <Frame Padding="0" BorderColor="Black">
-                            <TimePicker HorizontalOptions="Center" FontSize="14" Time="{Binding SelectedTime}"/>
+                            <TimePicker HorizontalOptions="Center" FontSize="14" Time="{Binding StartTimeSpan}" BackgroundColor="White" Margin="0,-10,0,0"/>
                         </Frame>
                     </controls:HeaderBlock>
                 </Grid>
 
-                <Grid Grid.Row="1">
-                    <!--Substance Name Picker-->
-                    <controls:HeaderBlock HeaderText="Substance Name" Grid.Column="1">
-                        <Frame Padding="0" BorderColor="Black">
-                            <Picker SelectedItem="{Binding SubstanceName}" ItemsSource="{Binding Substances}"/>
-                        </Frame>
-                    </controls:HeaderBlock>
-
-                    <!--Use Method-->
-                    <controls:HeaderBlock HeaderText="Method" >
-                        <Frame Padding="0" BorderColor="Black">
-                            <Picker SelectedItem="{Binding ConsumptionMethod}" ItemsSource="{Binding ConsumptionMethods}" FontSize="14"/>
-                        </Frame>
-                    </controls:HeaderBlock>
-
-                </Grid>
+                <controls:HeaderBlockAddRemove Grid.Row="1" Title="Substance Name" SelectedSuggestion="{Binding SubstanceName}" BoxType="{x:Static services:SuggestionTypes.SubstanceNames}"/>
+                <controls:HeaderBlockAddRemove Grid.Row="2" Title="Consumed by" SelectedSuggestion="{Binding ConsumptionMethod}" BoxType="{x:Static services:SuggestionTypes.SubstanceConsumptionMethods}"/>
 
                 <!--Use method / quantity / unit grid-->
-                <Grid Grid.Row="2">
+                <Grid Grid.Row="3">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    
-                    
+                                      
                     <!--Ammount of substance-->
                     <controls:HeaderBlock Grid.Column="0" HeaderText="Qty.">
                         <Frame Padding="0" BorderColor="Black">
-                            <Entry Text="{Binding Ammount}" HorizontalTextAlignment="Center" Placeholder="1"/>
+                            <Entry Text="{Binding Ammount}" HorizontalTextAlignment="Center" Margin="0,-10,0,0"/>
                         </Frame>
                     </controls:HeaderBlock>
-
-                    <controls:HeaderBlock Grid.Column="1" HeaderText="Unit" >
-                        
-                        <Frame Padding="1" BorderColor="Black">
-                            <Grid Padding="0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="3*"/>
-                                    
-                                </Grid.ColumnDefinitions>
-                                <Picker SelectedItem="{Binding Unit}" ItemsSource="{Binding Units}"/>
-
-                                <Button Grid.Column="1" Margin="0,3,0,3" Padding="-20" Text="+" BackgroundColor="LightGreen" TextColor="Black" BorderColor="Black" BorderWidth="1"/>
-                                <Button Grid.Column="2" Margin="0,3,3,3" Padding="-20" Text="-" BackgroundColor="LightCoral" TextColor="Black" BorderColor="Black" BorderWidth="1"/>
-                            </Grid>
-                        </Frame>
-                            
-                    </controls:HeaderBlock>
+                    
+                    <controls:HeaderBlockAddRemove Grid.Column="1" Title="Unit" SelectedSuggestion="{Binding Unit}" 
+                                                   BoxType="{x:Static services:SuggestionTypes.Units}"/>
                 </Grid>
 
-                <controls:HeaderBlock HeaderText="Rate how you feel" Grid.Row="3">
+                <controls:HeaderBlock HeaderText="Rate how you feel" Grid.Row="4">
                     <controls:RatingSlider Rating="{Binding Satisfaction}"/>
                 </controls:HeaderBlock>
-
-                <controls:HeaderBlock HeaderText="Comment" Grid.Row="4" Margin="0,0,0,5">
-                    <Frame Padding="4" BorderColor="Black">
-                        <Editor Text="{Binding Comment}" Placeholder="Any thoughts?" AutoSize="TextChanges"/>
-                    </Frame> 
-                </controls:HeaderBlock>
-                
             </Grid>
         </controls:SaveCancelPage>
     </ContentPage.Content>

@@ -22,7 +22,7 @@ namespace SelfMonitoringApp.ViewModels.Logs
         public Command SaveLogCommand { get; private set; }
 
         //General Notify
-        public string ActivityNameSelection
+        public string ActivityName
         {
             get => _activity.Description;
             set

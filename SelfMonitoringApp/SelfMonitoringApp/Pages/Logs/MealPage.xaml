@@ -4,9 +4,10 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
+             xmlns:services="clr-namespace:SelfMonitoringApp.Services"
              mc:Ignorable="d"
              NavigationPage.HasNavigationBar="True"
-                 Visual="Material"
+             Visual="Material"
              Title="Log Meal"
              x:Class="SelfMonitoringApp.Pages.Logs.MealPage">
     <ContentPage.Content>
@@ -16,8 +17,8 @@
                     <RowDefinition Height="{StaticResource RowHeightSingle}"/>
                     <RowDefinition Height="{StaticResource RowHeightSingle}"/>
                     <RowDefinition Height="{StaticResource RowHeightSingle}"/>
-                    <RowDefinition Height="140"/>
-                    <RowDefinition/>
+                    <RowDefinition Height="{StaticResource RowHeightSingle}"/>
+                    <RowDefinition Height="{StaticResource RowHeightSlider}"/>
                 </Grid.RowDefinitions>
 
                 <!--Registered time grid-->
@@ -25,50 +26,24 @@
                     <!--Date Picker-->
                     <controls:HeaderBlock HeaderText="Date">
                         <Frame Padding="0" BorderColor="Black">
-                            <DatePicker HorizontalOptions="Center" BackgroundColor="White" Margin="0,-8,0,0" FontSize="13" Date="{Binding LogTime}"/>
+                            <DatePicker HorizontalOptions="Center" BackgroundColor="White" Margin="0,-10,0,0" FontSize="13" Date="{Binding LogDateTime}"/>
                         </Frame>
                     </controls:HeaderBlock>
 
                     <!--Time Picker-->
                     <controls:HeaderBlock HeaderText="Time" Grid.Column="1" Margin="0">
                         <Frame Padding="0" BorderColor="Black">
-                            <TimePicker HorizontalOptions="Center" FontSize="14" BackgroundColor="White"  Margin="0,-8,0,0"  Time="{Binding StartTimeSpan}"/>
+                            <TimePicker HorizontalOptions="Center" FontSize="14" BackgroundColor="White"  Margin="0,-10,0,0"  Time="{Binding LogTimeSpan}"/>
                         </Frame>
                     </controls:HeaderBlock>
                 </Grid>
 
-
-                <Grid Grid.Row="1">
-                    <controls:HeaderBlock HeaderText="What did you eat?" >
-                        <Frame Padding="2" BorderColor="Black">
-                            <Entry HorizontalTextAlignment="Center" Text="{Binding Description}"/>
-                        </Frame>
-                    </controls:HeaderBlock>
-
-                    <controls:HeaderBlock HeaderText="What kind of meal?" Grid.Column="1">
-                        <Frame Padding="2" BorderColor="Black">
-                            <Picker SelectedItem="{Binding MealType}" ItemsSource="{Binding MealTypes}">
-                                
-                            </Picker>
-                        </Frame>
-                    </controls:HeaderBlock>
-                </Grid>
-
-
-                <controls:HeaderBlock HeaderText="How big was it?" Grid.Row="2">
-                    <Frame Padding="5" CornerRadius="5" Margin="2">
-                        <Picker BackgroundColor="White" Opacity="1" SelectedItem="{Binding MealSize}">
-                            <Picker.Items>
-                                <x:String>Small</x:String>
-                                <x:String>Regular</x:String>
-                                <x:String>Large</x:String>
-                            </Picker.Items>
-                        </Picker>
-                    </Frame>
-                </controls:HeaderBlock>
+                <controls:HeaderBlockAddRemove Grid.Row="1" Title="Meal Name" SelectedSuggestion="{Binding MealName}" BoxType="{x:Static services:SuggestionTypes.MealNames}"/>
+                <controls:HeaderBlockAddRemove Grid.Row="2" Title="Meal Type" SelectedSuggestion="{Binding MealType}" BoxType="{x:Static services:SuggestionTypes.MealTypes}"/>
+                <controls:HeaderBlockAddRemove Grid.Row="3" Title="Meal Size" SelectedSuggestion="{Binding MealSize}" BoxType="{x:Static services:SuggestionTypes.MealSizes}"/>
 
                 <!--Rating slider-->
-                <controls:HeaderBlock HeaderText="How satisfied are you?" Grid.Row="3" >
+                <controls:HeaderBlock HeaderText="How satisfied are you?" Grid.Row="4" >
                     <controls:RatingSlider Rating="{Binding Satisfaction}"/>
                 </controls:HeaderBlock>
 

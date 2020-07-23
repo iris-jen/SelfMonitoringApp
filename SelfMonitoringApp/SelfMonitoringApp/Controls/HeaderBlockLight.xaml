@@ -7,7 +7,7 @@
              x:Class="SelfMonitoringApp.Controls.HeaderBlockLight">
     <ContentView.ControlTemplate>
         <ControlTemplate>
-            <Frame BackgroundColor="{StaticResource PrimaryLight}" Padding="10,3,10,10" CornerRadius="10" 
+            <Frame BackgroundColor="{StaticResource Primary}" Padding="10,3,10,10" CornerRadius="10" 
                    Margin="10,2,10,2">
                 <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                     <Grid.RowDefinitions>
