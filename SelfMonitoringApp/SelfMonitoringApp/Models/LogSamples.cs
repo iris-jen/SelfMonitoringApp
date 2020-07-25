@@ -13,7 +13,7 @@ namespace SelfMonitoringApp.Models
 
         public static ActivityModel TestActivity => new ActivityModel()
         {
-            Description = "Hopscotch",
+            ActivityName = "Hopscotch",
             StartTime = DateTime.Now,
             Duration = 1,
             Enjoyment = 8.2,
@@ -295,7 +295,7 @@ namespace SelfMonitoringApp.Models
         {
             new ActivityModel()
             {
-                Description = "Painted a picture of a pie", 
+                ActivityName = "Painted a picture of a pie", 
                 StartTime = new DateTime(year,month,_day1,7,30,15,0),
                 WantedToStart = true,
                 Duration = 1.4,

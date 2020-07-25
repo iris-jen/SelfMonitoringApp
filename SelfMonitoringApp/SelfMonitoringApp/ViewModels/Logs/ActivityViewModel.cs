@@ -24,13 +24,13 @@ namespace SelfMonitoringApp.ViewModels.Logs
         //General Notify
         public string ActivityName
         {
-            get => _activity.Description;
+            get => _activity.ActivityName;
             set
             {
-                if (_activity.Description == value)
+                if (_activity.ActivityName == value)
                     return;
 
-                _activity.Description = value;
+                _activity.ActivityName = value;
                 NotifyPropertyChanged();
             }
         }
@@ -146,12 +146,45 @@ namespace SelfMonitoringApp.ViewModels.Logs
                 NotifyPropertyChanged();
             }
         }
+
+
+        public string Comments
+        {
+            get => _activity.Comments;
+            set
+            {
+                if (_activity.Comments == value)
+                    return;
+
+                _activity.Comments = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         #endregion
 
         public ActivityViewModel(IModel activityModel = null)
         {
             if (activityModel is null)
+            {
                 _activity = new ActivityModel();
+
+                StartDateTime = DateTime.Now.AddMinutes(-30);
+                EndDateTime = DateTime.Now;
+                StartTime = new TimeSpan
+                (
+                    hours: StartDateTime.Hour,
+                    minutes: StartDateTime.Minute,
+                    seconds: StartDateTime.Second
+                );
+                EndTime = new TimeSpan
+                (
+                    hours: EndDateTime.Hour,
+                    minutes: EndDateTime.Minute,
+                    seconds: EndDateTime.Hour
+                );
+
+            }
             else
             {
                 _activity = activityModel as ActivityModel;
@@ -160,15 +193,15 @@ namespace SelfMonitoringApp.ViewModels.Logs
                 EndDateTime = _activity.EndTime;
                 StartTime = new TimeSpan
                 (
-                    hours   : _activity.StartTime.Hour, 
-                    minutes : _activity.StartTime.Minute, 
-                    seconds : _activity.StartTime.Second
+                    hours: _activity.StartTime.Hour,
+                    minutes: _activity.StartTime.Minute,
+                    seconds: _activity.StartTime.Second
                 );
                 EndTime = new TimeSpan
                 (
-                    hours   : _activity.EndTime.Hour,
-                    minutes : _activity.EndTime.Minute,
-                    seconds : _activity.EndTime.Hour
+                    hours: _activity.EndTime.Hour,
+                    minutes: _activity.EndTime.Minute,
+                    seconds: _activity.EndTime.Hour
                 );
             }
             SaveLogCommand = new Command(async()=> await SaveAndPop());

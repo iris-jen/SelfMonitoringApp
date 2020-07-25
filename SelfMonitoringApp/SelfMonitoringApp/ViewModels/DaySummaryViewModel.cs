@@ -1,4 +1,5 @@
-﻿using SelfMonitoringApp.Models;
+﻿using Acr.UserDialogs.Infrastructure;
+using SelfMonitoringApp.Models;
 using SelfMonitoringApp.Models.Base;
 using SelfMonitoringApp.ViewModels.Base;
 using SelfMonitoringApp.ViewModels.Logs;
@@ -18,6 +19,7 @@ namespace SelfMonitoringApp.ViewModels
         public ObservableCollection<ActivityModel> Activities { get; private set; }
         public ObservableCollection<MoodModel> Moods { get; private set; }
         public ObservableCollection<SleepModel> Sleeps { get; private set; }
+        public ObservableCollection<ModelType> ModelTypes { get; private set; } 
 
         private MoodViewModel _moodEditor;
         private MealViewModel _mealEditor;
@@ -173,10 +175,24 @@ namespace SelfMonitoringApp.ViewModels
                 NotifyPropertyChanged();
             }
         }
-        #endregion
 
-        // Show commands for specific categories
-        public Command<ModelType> ShowCategoryComand { get; private set; }
+        private ModelType _selectedModel;
+        public ModelType SelectedModel
+        {
+            get => _selectedModel;
+            set
+            {
+                if (_selectedModel == value)
+                    return;
+
+                _selectedModel = value;
+
+                SetVisibility(value);
+                NotifyPropertyChanged();
+            }
+        }
+
+        #endregion
         // Edit / Delete commands for selected objects
         public Command<ModelType> EditSelectedCommand { get; private set; }
         public Command<ModelType> DeleteSelectedCommand { get; private set; }
@@ -189,8 +205,8 @@ namespace SelfMonitoringApp.ViewModels
             Activities = new ObservableCollection<ActivityModel>(activities);
             Moods      = new ObservableCollection<MoodModel>(moods);
             Sleeps     = new ObservableCollection<SleepModel>(sleeps);
+            ModelTypes = new ObservableCollection<ModelType>();
 
-            ShowCategoryComand    = new Command<ModelType>((type) => SetVisibility(type));
             EditSelectedCommand   = new Command<ModelType>(async(type) => await EditSelected(type));
             DeleteSelectedCommand = new Command<ModelType>(async(type) => await DeleteSelected(type));
 
@@ -199,6 +215,17 @@ namespace SelfMonitoringApp.ViewModels
             MealsLogged = meals.Count > 0;
             SleepsLogged = sleeps.Count > 0;
             ActivitiesLogged = activities.Count > 0;
+
+            if (MealsLogged)
+                ModelTypes.Add(ModelType.Meal);
+            if (MoodsLogged)
+                ModelTypes.Add(ModelType.Mood);
+            if (SubstancesLogged)
+                ModelTypes.Add(ModelType.Substance);
+            if (ActivitiesLogged)
+                ModelTypes.Add(ModelType.Activity);
+            if (SleepsLogged)
+                ModelTypes.Add(ModelType.Sleep);
 
             if (MoodsLogged)
                 MoodsVisibility = true;
@@ -210,6 +237,7 @@ namespace SelfMonitoringApp.ViewModels
                 ActivitiesVisibility = true;
             else if (SubstancesLogged)
                 SubstanceVisibility = true;
+
 
             Date = $"{date.DayOfWeek}: {date.Year}-{date.Month}-{date.Day}";
         }
@@ -369,6 +397,8 @@ namespace SelfMonitoringApp.ViewModels
                     break;
             }
         }
+
+
 
         private async Task DeleteSelected(ModelType type)
         {

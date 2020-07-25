@@ -277,26 +277,12 @@
                                     </StackLayout>
                                 </controls:LogView >
 
-
-                                <Grid Padding="0" HeightRequest="70">
-                                    <StackLayout Orientation="Horizontal" Padding="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Spacing="0">
-                                        <Button Padding="0" Text="Mood"  FontSize="8" Margin="2" MinimumWidthRequest="60" Style="{StaticResource ButtonStyle}" 
-                                            Command="{Binding ShowCategoryComand}" CommandParameter="{x:Static models:ModelType.Mood}" IsVisible="{Binding MoodsLogged}"/>
-
-                                        <Button Padding="0" Text="Sleep" Grid.Column="1" Style="{StaticResource ButtonStyle}"  FontSize="9" Margin="2" MinimumWidthRequest="60"
-                                            Command="{Binding ShowCategoryComand}" CommandParameter="{x:Static models:ModelType.Sleep}" IsVisible="{Binding SleepsLogged}"/>
-
-                                        <Button Padding="0" Text="Meals" Grid.Column="2" FontSize="9" Margin="2" MinimumWidthRequest="60" Style="{StaticResource ButtonStyle}" 
-                                            Command="{Binding ShowCategoryComand}" CommandParameter="{x:Static models:ModelType.Meal}" IsVisible="{Binding MealsLogged}"/>
-
-                                        <Button Padding="0" Text="Activity" FontSize="9" Margin="2" MinimumWidthRequest="60" Style="{StaticResource ButtonStyle}" 
-                                            Command="{Binding ShowCategoryComand}" CommandParameter="{x:Static models:ModelType.Activity}" IsVisible="{Binding ActivitiesLogged}"/>
-
-                                        <Button Padding="0" Text="Substance" Style="{StaticResource ButtonStyle}" MinimumWidthRequest="60" FontSize="9" Margin="2" 
-                                            Command="{Binding ShowCategoryComand}" CommandParameter="{x:Static models:ModelType.Substance}" IsVisible="{Binding SubstancesLogged}"/>
-                                    </StackLayout>
+                                <Grid HeightRequest="120" Margin="9">
+                                                                
+                                    <Frame Padding="2" BorderColor="Black">
+                                        <Picker FontSize="14" Margin="0,-5,0,0" Title ="Selected Catagory"  ItemsSource="{Binding ModelTypes}" SelectedItem="{Binding SelectedModel}"></Picker>
+                                    </Frame>
                                 </Grid>
-
                             </StackLayout>
                            
                         </controls:HeaderBlock>

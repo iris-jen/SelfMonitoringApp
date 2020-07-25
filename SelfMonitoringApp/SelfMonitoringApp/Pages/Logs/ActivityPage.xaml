@@ -10,7 +10,6 @@
              xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
              x:Class="SelfMonitoringApp.Pages.Logs.ActivityPage">
     <ContentPage.Content>
-
         <controls:SaveCancelPage SaveCommand="{Binding SaveLogCommand}" CancelCommand="{Binding BackCommand}" Margin="0,8,0,0">
             <Grid>
                 <Grid.RowDefinitions>
@@ -104,7 +103,8 @@
                         </Frame>
 
                         <Frame Grid.Row="2" Padding="0" BorderColor="Black">
-                            <Editor Placeholder="Any Comments?"  />
+                            <Editor Placeholder="Any Comments?" AutoSize="TextChanges" 
+                                    HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
                         </Frame>
                     </Grid>
                 </controls:HeaderBlock>
