@@ -298,39 +298,18 @@
 
             <!--Filter Panel-->
             <Frame Padding="0" Margin="6" BackgroundColor="LightGray" BorderColor="Black">
-                <StackLayout>
-                    <Grid HeightRequest="50" BackgroundColor="DarkGray">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="70"/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <Switch VerticalOptions="Center" Grid.Column="2" x:Name="filterSwitch" IsToggled="{Binding FilterBarVisible}"/>
-                        <ActivityIndicator Grid.Column="1" IsRunning="True" IsVisible="{Binding Loading}"/>
-                        <Button Grid.Column="0" Padding="0" Command="{Binding LoadDataCommand}" Text="Load" Style="{StaticResource ButtonStyle}" 
-                                BackgroundColor="{StaticResource PrimaryDark}" TextColor="White"  Margin="3" CornerRadius="10" BorderColor="Black"/>
-                    </Grid>
+                <Grid HeightRequest="50" BackgroundColor="DarkGray">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="70"/>
+                        
+                    </Grid.ColumnDefinitions>
                     
-                    <Grid Padding="0" VerticalOptions="CenterAndExpand" HeightRequest="150" Margin="3" IsVisible="{Binding Source={x:Reference filterSwitch}, Path=IsToggled}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-  
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-
-                        <controls:HeaderBlock Padding="0" HeaderText="Start Date">
-                            <Frame BackgroundColor="White" Padding="0" Margin="0">
-                                <DatePicker HorizontalOptions="Center" Grid.Row="1" Date="{Binding StartDate}" FontSize="11" TextColor="Black"/>
-                            </Frame>
-                        </controls:HeaderBlock>
-
-                        <controls:HeaderBlock Padding="0" Grid.Column="1" HeaderText="End Date">
-                            <Frame BackgroundColor="White" Padding="0" Margin="0">
-                                <DatePicker HorizontalOptions="Center" Date="{Binding EndDate}" FontSize="11"  TextColor="Black"/>
-                            </Frame>
-                        </controls:HeaderBlock>
-                    </Grid>
-                </StackLayout>
+                    <Button Grid.Column="0" Padding="0" Command="{Binding LoadDataCommand}" Text="Select date range" Style="{StaticResource ButtonStyle}" 
+                                BackgroundColor="{StaticResource PrimaryDark}" TextColor="White"  Margin="3" CornerRadius="10" BorderColor="Black"/>
+ 
+                    <ActivityIndicator Grid.Column="1" IsRunning="True" IsVisible="{Binding Loading}" Margin="2"/>
+                </Grid>
             </Frame>
         </StackLayout>
     </ContentPage.Content>

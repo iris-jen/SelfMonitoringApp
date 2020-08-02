@@ -48,10 +48,10 @@
                             CommandParameter="data" Text="View Logs" Margin="3"/>
 
                     <Button Grid.Row="1"  Style="{StaticResource ButtonStyle}" 
-                            CommandParameter="data" Text="Coming soon - [Goals and trends]" Margin="3" IsEnabled="False"/>
+                            CommandParameter="data" Text="Coming soon - [Trends]" Margin="3" IsEnabled="False"/>
                     
                     <Button Grid.Row="2"  Style="{StaticResource ButtonStyle}" 
-                            CommandParameter="data" Text="Coming soon - [Set Reminders]" Margin="3" IsEnabled="False"/>
+                            CommandParameter="data" Text="Reminders / Goals" Margin="3" IsEnabled="True"/>
 
                     <Button Grid.Row="3" Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}"
                             CommandParameter="settings" Text="Settings" Margin="3"/>
