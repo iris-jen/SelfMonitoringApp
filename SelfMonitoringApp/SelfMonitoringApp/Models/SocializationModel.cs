@@ -17,7 +17,6 @@ namespace SelfMonitoringApp.Models
 
         public SocializationModel(): base(ModelType.Socialization)
         {
-
         }
     }
 }

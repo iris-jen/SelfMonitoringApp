@@ -34,8 +34,21 @@ namespace SelfMonitoringApp.ViewModels
             }
         }
 
-        public Command LoadDataCommand { get; private set; }
+        private bool _noData;
+        public bool NoData
+        {
+            get => _noData;
+            set
+            {
+                if (_noData == value)
+                    return;
 
+                _noData = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public Command LoadDataCommand { get; private set; }
         public DataExplorerViewModel()
         {
             LoadDataCommand = new Command(async () => await LoadData());
@@ -112,28 +125,38 @@ namespace SelfMonitoringApp.ViewModels
         public async Task LoadData()
         {
             Loading = true;
-
-            if (!_firstLoad)
+            try
             {
-                DatePromptResult fromResult = await UserDialogs.Instance.DatePromptAsync("Select From Date", _startDate);
-                if (fromResult.Ok)
-                    _startDate = fromResult.SelectedDate;
-                else
-                    return;
+                if (!_firstLoad)
+                {
+                    DatePromptResult fromResult = await UserDialogs.Instance.DatePromptAsync("Select From Date", _startDate);
+                    if (fromResult.Ok)
+                        _startDate = fromResult.SelectedDate;
+                    else
+                        return;
 
-                DatePromptResult toResult = await UserDialogs.Instance.DatePromptAsync("Select To Date", _endDate);
-                if (toResult.Ok)
-                    _endDate = toResult.SelectedDate;
+                    DatePromptResult toResult = await UserDialogs.Instance.DatePromptAsync("Select To Date", _endDate);
+                    if (toResult.Ok)
+                        _endDate = toResult.SelectedDate;
+                    else
+                        return;
+                }
                 else
-                    return;
+                    _firstLoad = false;
+
+                ObservableCollection<DaySummaryViewModel> data = await GetDateFilteredData(_startDate, _endDate);
+
+                NoData = data.Count == 0;
+                //Let the render catch up after hiding / showing the warning
+                await Task.Delay(50);
+
+                DaySummaries = data;
+                NotifyPropertyChanged(nameof(DaySummaries));
             }
-            else
-                _firstLoad = false;
-
-            ObservableCollection<DaySummaryViewModel> data = await GetDateFilteredData(_startDate, _endDate);
-            DaySummaries = data;
-            NotifyPropertyChanged(nameof(DaySummaries));
-            Loading = false;
+            finally
+            {
+                Loading = false;
+            }
         }
     }
 }

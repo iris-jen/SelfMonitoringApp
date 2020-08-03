@@ -6,17 +6,9 @@
              xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
              xmlns:services="clr-namespace:SelfMonitoringApp.Services"
              mc:Ignorable="d"
-             x:Class="SelfMonitoringApp.Pages.NotificationsPage">
+             x:Class="SelfMonitoringApp.Pages.GoalEditorPage">
     <ContentPage.Content>
         <Grid>
-            <controls:HeaderBlock HeaderText="Add a new notification">
-                <Frame>
-                    <Grid>
-                        <Picker Title="Notify me about"></Picker>
-                        <Switch/>
-                    </Grid>
-                </Frame>
-            </controls:HeaderBlock>
             <controls:HeaderBlock Grid.Row="1" HeaderText="Existing Notifcations">
 
             </controls:HeaderBlock>

@@ -53,6 +53,12 @@
       <Compile Update="Pages\Logs\SubstancePage.xaml.cs">
         <DependentUpon>SubstancePage.xaml</DependentUpon>
       </Compile>
+      <Compile Update="Pages\GoalEditorPage.xaml.cs">
+        <DependentUpon>GoalEditorPage.xaml</DependentUpon>
+      </Compile>
+      <Compile Update="Pages\NotificationEditorPage.xaml.cs">
+        <DependentUpon>NotificationEditorPage.xaml</DependentUpon>
+      </Compile>
     </ItemGroup>
 
     <ItemGroup>

@@ -19,7 +19,7 @@
             <Style x:Key="ButtonStyle" TargetType="Button">
                 <Setter Property="BackgroundColor" Value="{StaticResource Secondary}"/>
                 <Setter Property="FontAttributes" Value="Bold"/>
-                <Setter Property="BorderColor" Value="White"/>
+                <Setter Property="BorderColor" Value="Black"/>
                 <Setter Property="TextColor" Value="Black"/>
                 <Setter Property="BorderWidth" Value="1"/>
                 <Setter Property="Margin" Value="10,5,10,10"/>

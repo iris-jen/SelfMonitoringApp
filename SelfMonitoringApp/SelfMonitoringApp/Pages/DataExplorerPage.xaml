@@ -296,9 +296,15 @@
                    SelectedIndicatorColor="DarkGray"
                    HorizontalOptions="Center" />
 
+            <Frame HeightRequest="80" IsVisible="{Binding NoData}">
+                <Label Text="Uh-oh! theres no logs here :O ....                 
+                       Try selecting a larger date range with that button ↓↓↓↓↓" HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center" TextColor="Black" FontSize="18"/>
+            </Frame>
+            
             <!--Filter Panel-->
             <Frame Padding="0" Margin="6" BackgroundColor="LightGray" BorderColor="Black">
-                <Grid HeightRequest="50" BackgroundColor="DarkGray">
+                <Grid HeightRequest="70" BackgroundColor="DarkGray">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="2*"/>
                         <ColumnDefinition Width="70"/>

@@ -1,12 +1,11 @@
-﻿using System;
+﻿using SelfMonitoringApp.Models;
+using System;
 
 namespace SelfMonitoringApp.Services
 {
     interface INotificationManagerService
     {
-        event EventHandler NotificationReceived;
-        void Initialize();
-        int ScheduleNotification(string title, string message);
-        int ReceiveNotification(string title, string message);
+        void RemoveNotification(NotificationModel model);
+        void AddOrUpdateNotification(NotificationModel model);
     }
 }
