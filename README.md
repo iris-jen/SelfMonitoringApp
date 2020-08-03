@@ -28,9 +28,11 @@ Watch a beta demo here!
 # Pages
 Main
 --------------
-![image](https://user-images.githubusercontent.com/7981120/89141181-c6853380-d511-11ea-9383-39126e4f0950.png)
+![image](https://user-images.githubusercontent.com/7981120/89141251-064c1b00-d512-11ea-81e8-40cce5135a85.png)
 
-
+Sleep Log
+--------------
+![image](https://user-images.githubusercontent.com/7981120/89141320-48755c80-d512-11ea-961d-219c567a73d4.png)
 
 
 
