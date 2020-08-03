@@ -6,57 +6,42 @@ using System.IO;
 using Acr;
 using Xamarin.Forms;
 using Acr.UserDialogs;
+using SelfMonitoringApp.Pages;
+using System.Threading.Tasks;
+using System.Net.Http.Headers;
+using SelfMonitoringApp.Models;
 
 namespace SelfMonitoringApp.ViewModels
 {
     public class MainViewModel : ViewModelBase, INavigationViewModel
     {
-        public Command<string> NavigateCommand { get; set; }
-
-        public string NavigationNodeName => "main";
+        public Command<PageNames> NavigateCommand { get; set; }
 
         public MainViewModel()   
         {
-            NavigateCommand = new Command<string>((param) => Navigate(param));
+            NavigateCommand = new Command<PageNames>((page) => Navigate(page));
         }
 
-        public void Navigate(string page)
+        private Task GetNavigatorTask(PageNames page) => page switch
         {
+            PageNames.MoodEditor          => _navigator.NavigateTo(new MoodViewModel()),
+            PageNames.SleepEditor         => _navigator.NavigateTo(new SleepViewModel()),
+            PageNames.ActivityEditor      => _navigator.NavigateTo(new ActivityViewModel()),
+            PageNames.MealEditor          => _navigator.NavigateTo(new MealViewModel()),
+            PageNames.SocializationEditor => _navigator.NavigateTo(new SocializationViewModel()),
+            PageNames.SubstanceEditor     => _navigator.NavigateTo(new SubstanceViewModel()),
+            PageNames.RawLogViewer        => _navigator.NavigateTo(new DataExplorerViewModel()),
+            PageNames.NotificationsViewer => _navigator.NavigateTo(new NotificationsViewModel()),
+            PageNames.GoalsViewer         => _navigator.NavigateTo(new GoalsViewModel()), 
+            PageNames.Settings            => _navigator.NavigateTo(new SettingsViewModel()),
+            _ => throw new DirectoryNotFoundException($"Cant find directory -- {page}")
+        };
 
+        public void Navigate(PageNames page)
+        {
             try
             {
-                switch(page.ToLower(CultureInfo.CurrentCulture))
-                {
-                    case MoodViewModel.NavigationNodeName:
-                        _navigator.NavigateTo(new MoodViewModel()).SafeFireAndForget(false);
-                        break;
-                    case SleepViewModel.NavigationNodeName:
-                        _navigator.NavigateTo(new SleepViewModel()).SafeFireAndForget(false);
-                        break;
-                    case SubstanceViewModel.NavigationNodeName:
-                        _navigator.NavigateTo(new SubstanceViewModel()).SafeFireAndForget(false);
-                        break;
-                    case MealViewModel.NavigationNodeName:
-                        _navigator.NavigateTo(new MealViewModel()).SafeFireAndForget(false);
-                        break;
-                    case ActivityViewModel.NavigationNodeName:
-                        _navigator.NavigateTo(new ActivityViewModel()).SafeFireAndForget(false);
-                        break;
-                    case SettingsViewModel.NavigationNodeName:
-                        _navigator.NavigateTo(new SettingsViewModel()).SafeFireAndForget(false);
-                        break;
-                    case DataExplorerViewModel.NavigationNodeName:
-                        _navigator.NavigateTo(new DataExplorerViewModel()).SafeFireAndForget(false);
-                        break;
-                    case HelpViewModel.NavigationNodeName:
-                        _navigator.NavigateTo(new HelpViewModel()).SafeFireAndForget(false);
-                        break;
-                    case NotificationsViewModel.NavigationNodeName:
-                        _navigator.NavigateTo(new NotificationsViewModel()).SafeFireAndForget(false);
-                        break;
-                    default:
-                        throw new DirectoryNotFoundException($"Cant find nav directory {page}");
-                }
+                GetNavigatorTask(page).SafeFireAndForget(false);
             }
             catch(Exception ex)
             {

@@ -10,40 +10,29 @@ namespace SelfMonitoringApp.ViewModels
     public class SettingsViewModel : ViewModelBase, INavigationViewModel
     {
         public const string NavigationNodeName = "settings";
-        public Command<string> DeleteLogCommand { get; private set; }
+        public Command<ModelType> DeleteLogCommand { get; private set; }
 
         public SettingsViewModel()
         {
-            DeleteLogCommand = new Command<string>(async(s)=> await DeleteModelFile(s));
+            DeleteLogCommand = new Command<ModelType>(async(s)=> await DeleteModelFile(s));
         }
 
-        public async Task DeleteModelFile(string modelType)
+        public async Task DeleteModelFile(ModelType modelType)
         {
-            switch(modelType.ToLower(CultureInfo.CurrentCulture))
+            if (modelType == ModelType.All)
             {
-                case SleepViewModel.NavigationNodeName:
-                     await _database.ClearSpecificDatabase(ModelType.Sleep);
-                    break;
-                case MoodViewModel.NavigationNodeName:
-                    await _database.ClearSpecificDatabase(ModelType.Mood);
-                    break;
-                case ActivityViewModel.NavigationNodeName:
-                    await _database.ClearSpecificDatabase(ModelType.Activity);
-                    break;
-                case MealViewModel.NavigationNodeName:
-                    await _database.ClearSpecificDatabase(ModelType.Meal);
-                    break;
-                case SubstanceViewModel.NavigationNodeName:
-                    await _database.ClearSpecificDatabase(ModelType.Substance);
-                    break;
-                case "all":
-                    await Task.WhenAll(_database.ClearSpecificDatabase(ModelType.Substance),
+                await Task.WhenAll
+                (   
+                    _database.ClearSpecificDatabase(ModelType.Substance),
                     _database.ClearSpecificDatabase(ModelType.Meal),
                     _database.ClearSpecificDatabase(ModelType.Activity),
                     _database.ClearSpecificDatabase(ModelType.Mood),
-                    _database.ClearSpecificDatabase(ModelType.Sleep));
-                    break;
+                    _database.ClearSpecificDatabase(ModelType.Sleep)
+                );
             }
+            else
+                await _database.ClearSpecificDatabase(modelType);
+            
         }
     }
 }

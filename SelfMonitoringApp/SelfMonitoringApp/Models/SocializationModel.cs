@@ -9,9 +9,8 @@ namespace SelfMonitoringApp.Models
     {
         public string SocializationType { get; set; }
         public string Location { get; set; }
-        public string Comment { get; set; }
         public bool WantedToSocialize { get; set; }
-        public bool WasInPerson { get; set; }
+        public bool WasRemote { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
 

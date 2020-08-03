@@ -39,7 +39,7 @@ namespace SelfMonitoringApp.Controls
             {
                 var type = newValue.ToString();
 
-                if (type == string.Empty) // gtfo dirty space boi
+                if (type == string.Empty)
                     return;
 
                 if (!block.SuggestionItems.Contains(type))
@@ -122,9 +122,16 @@ namespace SelfMonitoringApp.Controls
                 case SuggestionTypes.Units:
                     promptStr = "Enter a new unit";
                     break;
+                case SuggestionTypes.SocializationTypes:
+                    promptStr = "How did you socialize?";
+                    break;
             }
 
             var res = await UserDialogs.Instance.PromptAsync(new PromptConfig() { Message = promptStr });
+
+            if (!res.Ok)
+                return;
+
             SuggestionItems.Add(res.Text);
             SuggestionService.AddSuggestion(BoxType, res.Text);
             HeaderPicker.SelectedIndex = SuggestionItems.IndexOf(res.Text);

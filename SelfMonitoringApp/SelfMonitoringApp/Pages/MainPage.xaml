@@ -2,62 +2,64 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
+             xmlns:pages="clr-namespace:SelfMonitoringApp.Pages"
              x:Class="SelfMonitoringApp.Pages.MainPage"
-             Visual="Material"
+             Visual="Material" 
              Title="Home"
              NavigationPage.HasNavigationBar="True" >
     <ScrollView>
-        <Grid  Margin="0,7,0,0">
+        <Grid  Margin="0,3,0,0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="250"/>
+                <RowDefinition Height="220"/>
                 <RowDefinition />
             </Grid.RowDefinitions>
             
             <!--Log creation block-->
             <controls:HeaderBlock HeaderText="Create a log">
-                <Grid Padding="0" Margin="7">
-
+                <Grid>
                     <!--Mood Log Button-->
-                    <Button Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="social" Text="Mood"
-                            Grid.Row="0" Margin="3"  Grid.Column="0" ImageSource="mood_black.png" />
+                    <Button Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="{x:Static pages:PageNames.MoodEditor}" 
+                            Margin="3" ImageSource="mood_black.png" Text="Mood"/>
 
-                    <!--Mood Log Button-->
-                    <Button Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="mood" Text="Mood"
-                            Grid.Row="0" Margin="3"  Grid.Column="1" ImageSource="social_black.png" />
+                    <!--Socialization Log Button-->
+                    <Button Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="{x:Static pages:PageNames.SocializationEditor}"
+                            Margin="3" Grid.Column="1" ImageSource="social_black.png" Text="Social"/>
 
                     <!--Meal Log Button-->
-                    <Button Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="meal" Text="Meal"
-                            Grid.Column="1" Grid.Row="1" Margin="3" ImageSource="meal_black.png" />
+                    <Button Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="{x:Static pages:PageNames.MealEditor}" 
+                            Grid.Column="1" Grid.Row="1" Margin="3" ImageSource="meal_black.png" Text="Meal"/>
 
                     <!--Sleep Log Button-->
-                    <Button Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="sleep" Text="Sleep"
-                            Margin="3" Grid.Row="1" ImageSource="sleep_black.png" />
+                    <Button Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="{x:Static pages:PageNames.SleepEditor}" 
+                            Margin="3" Grid.Row="1" ImageSource="sleep_black.png" Text="Sleep"/>
 
                     <!--Activity Log Button-->
-                    <Button Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="activity" Grid.Row="2" 
-                            Text="Activity"  Margin="3" ImageSource="activity_black.png" />
+                    <Button Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="{x:Static pages:PageNames.ActivityEditor}" 
+                            Grid.Row="2" Margin="3" ImageSource="activity_black.png" Text="Activity"/>
                     
                     <!--Substance Log Button-->
-                    <Button  Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}" Grid.Row="2" Margin="3"
-                             Grid.Column="1" CommandParameter="substance"  ImageSource="substance_black" Text="Substance"/>
-
+                    <Button Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="{x:Static pages:PageNames.SubstanceEditor}" 
+                            Grid.Row="2" Margin="3" Grid.Column="1" ImageSource="substance_black" Text="Substance"/>
                 </Grid>
             </controls:HeaderBlock>
 
-            <!--App features block-->
+            <!--Features block-->
             <controls:HeaderBlock Grid.Row="1" HeaderText="Features" Margin="0,0,0,7">
                 <Grid>
-                    <Button Grid.Row="0"  Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}"
-                            CommandParameter="data" Text="View Logs" Margin="3" ImageSource="data_black.png" />
+                    <Button Grid.Row="0" Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="{x:Static pages:PageNames.RawLogViewer}"
+                            Margin="3" ImageSource="data_black.png" Text="View Logs"/>
 
-                    <Button Grid.Row="1"  Style="{StaticResource ButtonStyle}" ImageSource="goals_black.png"
-                            CommandParameter="data" Text="Goals" Margin="3" IsEnabled="False"/>
+                    <Button Grid.Row="1" Style="{StaticResource ButtonStyle}" ImageSource="data_black.png"
+                             Margin="3" IsEnabled="False" Text="Trends [Coming Soon]"/>
 
-                    <Button Grid.Row="2"  Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}"
-                            CommandParameter="notifications" Text="Notifications" ImageSource="notifications_black.png" Margin="3" IsEnabled="True"/>
+                    <Button Grid.Row="2" Style="{StaticResource ButtonStyle}" ImageSource="goals_black.png"
+                            CommandParameter="data" Margin="3" IsEnabled="False" Text="Goals [Coming Soon]"/>
 
-                    <Button Grid.Row="3" Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}"
-                            CommandParameter="settings" Text="Settings" ImageSource="settings_black.png" Margin="3"/>
+                    <Button Grid.Row="3" Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="{x:Static pages:PageNames.NotificationsViewer}"
+                            ImageSource="notifications_black.png" Margin="3" IsEnabled="True" Text="Notifications"/>
+
+                    <Button Grid.Row="4" Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="{x:Static pages:PageNames.Settings}"
+                            Text="Settings" ImageSource="settings_black.png" Margin="3"/>
                 </Grid>
             </controls:HeaderBlock>
        

@@ -33,11 +33,7 @@ namespace SelfMonitoringApp.Services
 
         public LocalSqlDatabaseService()
         {
-            this.Log().Info("Initializing database.");
-
             InitializeAsync().SafeFireAndForget(false);
-
-            this.Log().Info("....done");
         }
 
         public async Task InitializeAsync()
@@ -67,6 +63,7 @@ namespace SelfMonitoringApp.Services
             ModelType.Mood      => _database.DeleteAllAsync<MoodModel>(),
             ModelType.Substance => _database.DeleteAllAsync<SubstanceModel>(),
             ModelType.Sleep     => _database.DeleteAllAsync<SleepModel>(),
+            ModelType.Socialization => _database.DeleteAllAsync<SocializationModel>(),
             _=> throw new ArgumentException("Model type does not exist in db")
         };
 
@@ -91,7 +88,6 @@ namespace SelfMonitoringApp.Services
                 throw;
             }
         }
-
         public Task DeleteLog(IModel model) => _database.DeleteAsync(model);
     }
 }

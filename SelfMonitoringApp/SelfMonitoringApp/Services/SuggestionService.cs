@@ -25,7 +25,8 @@ namespace SelfMonitoringApp.Services
             {SuggestionTypes.Units,new List<string>(){"Cup","g","Cigarette","Drink","Pint"}},
             {SuggestionTypes.MealSizes,new List<string>() {"Small","Modest","Large"}},
             {SuggestionTypes.MealNames,new List<string>(){"Sandwich"} },
-            {SuggestionTypes.ActivityNames,new List<string>(){"Played Guitar","Went for a walk","Had a remote meeting"}}
+            {SuggestionTypes.ActivityNames,new List<string>(){"Played Guitar","Went for a walk"}},
+            {SuggestionTypes.SocializationTypes,new List<string>(){"Talked to a friend","Work meeting","Talked to a stranger"}}
         };
 
         [JsonConverter(typeof(StringEnumConverter))]
@@ -47,7 +48,7 @@ namespace SelfMonitoringApp.Services
         {
             _suggestions = new Dictionary<SuggestionTypes, List<string>>();
 
-            if (File.Exists(FilePath))
+            if (false)//File.Exists(FilePath))
             {
                 _suggestions = JsonConvert.DeserializeObject<Dictionary<SuggestionTypes, List<string>>>(File.ReadAllText(FilePath));
             }

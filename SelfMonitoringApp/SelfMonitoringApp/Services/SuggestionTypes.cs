@@ -11,7 +11,7 @@
         Units,
         MealSizes,
         MealNames,
-        ActivityNames
-     
+        ActivityNames,
+        SocializationTypes,
     }
 }

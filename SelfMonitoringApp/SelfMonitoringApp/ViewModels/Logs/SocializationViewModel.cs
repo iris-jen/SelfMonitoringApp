@@ -8,11 +8,9 @@ using Xamarin.Forms;
 
 namespace SelfMonitoringApp.ViewModels.Logs
 {
-    public class SocalizationViewModel : ViewModelBase, INavigationViewModel
+    public class SocializationViewModel : ViewModelBase, INavigationViewModel
     {
         private readonly SocializationModel _social;
-        public const string NavigationNodeName = "social";
-
         public Command SaveLogCommand { get; private set; }
         public event EventHandler ModelShed;
 
@@ -44,7 +42,7 @@ namespace SelfMonitoringApp.ViewModels.Logs
             }
         }
 
-        public SocalizationViewModel(IModel existingModel = null) 
+        public SocializationViewModel(IModel existingModel = null) 
         {
             if (existingModel is null)
             {
@@ -64,7 +62,6 @@ namespace SelfMonitoringApp.ViewModels.Logs
 
         public IModel RegisterAndGetModel()
         {
-
             return _social;
         }
 
