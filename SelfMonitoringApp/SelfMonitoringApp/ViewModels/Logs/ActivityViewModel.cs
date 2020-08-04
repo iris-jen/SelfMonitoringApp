@@ -166,15 +166,15 @@ namespace SelfMonitoringApp.ViewModels.Logs
             {
                 _activity = new ActivityModel();
 
-                StartDateTime = DateTime.Now.AddMinutes(-30);
-                EndDateTime = DateTime.Now;
-                StartTime = new TimeSpan
+                _startDateTime = DateTime.Now.AddMinutes(-30);
+                _endDateTime = DateTime.Now;
+                _startTime = new TimeSpan
                 (
                     hours: StartDateTime.Hour,
                     minutes: StartDateTime.Minute,
                     seconds: StartDateTime.Second
                 );
-                EndTime = new TimeSpan
+                _endTime = new TimeSpan
                 (
                     hours: EndDateTime.Hour,
                     minutes: EndDateTime.Minute,
@@ -185,15 +185,15 @@ namespace SelfMonitoringApp.ViewModels.Logs
             {
                 _activity = activityModel as ActivityModel;
 
-                StartDateTime = _activity.StartTime;
-                EndDateTime = _activity.EndTime;
-                StartTime = new TimeSpan
+                _startDateTime = _activity.StartTime;
+                _endDateTime = _activity.EndTime;
+                _startTime = new TimeSpan
                 (
                     hours: _activity.StartTime.Hour,
                     minutes: _activity.StartTime.Minute,
                     seconds: _activity.StartTime.Second
                 );
-                EndTime = new TimeSpan
+                _endTime = new TimeSpan
                 (
                     hours: _activity.EndTime.Hour,
                     minutes: _activity.EndTime.Minute,

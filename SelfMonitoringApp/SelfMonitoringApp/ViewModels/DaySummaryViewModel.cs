@@ -313,8 +313,8 @@ namespace SelfMonitoringApp.ViewModels
                     break;
                 case ModelType.Socialization:
                     SocialsVisibility = true;
-                    ActivitiesVisibility = MealsVisibility =
-                    MoodsVisibility = SleepsVisibility = SocialsVisibility = false;
+                    ActivitiesVisibility = MealsVisibility = SubstanceVisibility =
+                    MoodsVisibility = SleepsVisibility  = false;
                     break;
             }
         }

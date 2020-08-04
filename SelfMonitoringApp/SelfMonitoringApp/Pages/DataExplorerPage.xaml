@@ -228,6 +228,51 @@
                                     </StackLayout>
                                 </controls:LogView >
 
+                                <!--Social Box-->
+                                <controls:LogView Title="Socialization" IsVisible="{Binding SocialsVisibility}" Margin="5,0,5,0">
+                                    <StackLayout>
+                                        <!--Social Collection View-->
+                                        <CollectionView ItemsSource="{Binding Socials}" Grid.Row="1" SelectionMode="Single" SelectedItem="{Binding SelectedSocial}">
+                                            <CollectionView.ItemTemplate>
+                                                <DataTemplate>
+
+                                                    <!--Block-->
+                                                    <controls:HeaderBlockLight Margin="0" Padding="0" HeaderText="{Binding SocializationType}">
+                                                        <Frame Margin="2" Padding="0">
+                                                            <StackLayout Padding="0">
+                                                                <Grid HeightRequest="100">
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition />
+                                                                        <ColumnDefinition />
+                                                                        <ColumnDefinition Width=".9*"/>
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <Label Text="Duration" Style="{StaticResource HeaderLabel}"/>
+                                                                    <Label Text="{Binding Duration, StringFormat='{0:N2}h'}" Style="{StaticResource ListBoxLabel}" Grid.Row="1"/>
+
+                                                                    <Label Text="Start" Style="{StaticResource HeaderLabel}" Grid.Column="1"/>
+                                                                    <Label Text="{Binding StartTime, StringFormat='{0:hh:mm tt}'}" Style="{StaticResource ListBoxLabel}" Grid.Row="1" Grid.Column="1"/>
+
+                                                                    <Label Text="Enjoyment" Style="{StaticResource HeaderLabel}" Grid.Column="2"/>
+                                                                    <Label Text="{Binding Enjoyment}" Style="{StaticResource ListBoxLabel}" Grid.Row="1" Grid.Column="2"/>
+
+                                                                    <Label Text="Interest" Style="{StaticResource HeaderLabel}" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2"/>
+                                                                    <CheckBox IsChecked="{Binding WantedToSocialize}" Color="Black" HorizontalOptions="Center" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" IsEnabled="False"/>
+                                                                </Grid>
+                                                            </StackLayout>
+                                                        </Frame>
+                                                    </controls:HeaderBlockLight>
+                                                </DataTemplate>
+                                            </CollectionView.ItemTemplate>
+                                        </CollectionView>
+                                        <Grid HeightRequest="90" Margin="-4,-8,-2,-2" Padding="0" BackgroundColor="DarkGray">
+                                            <Button Text="Edit" Padding="0" Style="{StaticResource ButtonStyleSmall}" Command="{Binding EditSelectedCommand}" 
+                                                    CommandParameter="{x:Static models:ModelType.Socialization}"/>
+                                            <Button Text="Delete" Grid.Column="1" Style="{StaticResource ButtonStyleSmall}" Command="{Binding DeleteSelectedCommand}" 
+                                                    CommandParameter="{x:Static models:ModelType.Socialization}"/>
+                                        </Grid>
+                                    </StackLayout>
+                                </controls:LogView >
+
                                 <!--Substances Box-->
                                 <controls:LogView Title="Substance" IsVisible="{Binding SubstanceVisibility}" Margin="5,0,5,0">
                                     <StackLayout>

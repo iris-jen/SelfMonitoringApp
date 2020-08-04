@@ -165,20 +165,21 @@ namespace SelfMonitoringApp.ViewModels.Logs
             {
                 _social = existingModel as SocializationModel;
 
-                StartDateTime = _social.StartTime;
-                EndDateTime = _social.EndTime;
-                StartTime = new TimeSpan
+                _startDateTime = _social.StartTime;
+                _endDateTime = _social.EndTime;
+                _startTime = new TimeSpan
                 (
                     hours: _social.StartTime.Hour,
                     minutes: _social.StartTime.Minute,
                     seconds: _social.StartTime.Second
                 );
-                EndTime = new TimeSpan
+                _endTime = new TimeSpan
                 (
                     hours: _social.EndTime.Hour,
                     minutes: _social.EndTime.Minute,
                     seconds: _social.EndTime.Hour
                 );
+
             }
             SaveLogCommand = new Command(async ()=> await SaveAndPop());
         }
@@ -213,6 +214,8 @@ namespace SelfMonitoringApp.ViewModels.Logs
         
         public async Task SaveAndPop()
         {
+            Duration = GetLength();
+
             await _database.AddOrModifyModelAsync(_social);
             await _navigator.NavigateBack();
             ModelShed?.Invoke(this, new ModelShedEventArgs(_social));
