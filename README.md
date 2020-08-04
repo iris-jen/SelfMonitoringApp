@@ -53,3 +53,16 @@ Mood log collection display
 -------- 
 ![image](https://user-images.githubusercontent.com/7981120/89336614-aa93a600-d667-11ea-97cd-36fcf1625c2a.png)
 
+Sleep Log
+------- 
+Here the user indicates when they went to sleep, and when they woke up. The duration is computed when any of the date / time selectors change.
+They can indicate any of the binary choices (if they slept and / or had a nightmare)
+As Well as fill out a description of their dream.
+
+
+![image](https://user-images.githubusercontent.com/7981120/89338100-12e38700-d66a-11ea-9350-1a58cdd60f7b.png)
+
+Sleep log collection display
+------------- 
+![image](https://user-images.githubusercontent.com/7981120/89338312-6a81f280-d66a-11ea-88b6-1d67368d79d4.png) 
+![image](https://user-images.githubusercontent.com/7981120/89338713-fc89fb00-d66a-11ea-9418-3b287649e8a1.png)
