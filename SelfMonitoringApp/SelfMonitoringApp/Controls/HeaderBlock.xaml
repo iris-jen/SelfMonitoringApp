@@ -8,7 +8,7 @@
     <ContentView.ControlTemplate>
         <ControlTemplate>
             <Frame BackgroundColor="{StaticResource Primary}" Padding="8,1,8,10" CornerRadius="6" 
-                   HasShadow="True" BorderColor="Black" Margin="3">
+                   HasShadow="True" BorderColor="Black" Margin="1">
                 <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="22"/>

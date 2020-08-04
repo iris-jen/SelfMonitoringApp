@@ -18,10 +18,8 @@ namespace SelfMonitoringApp.ViewModels.Logs
         public event EventHandler ModelShed;
 
         #region Bindings
-        //Commands
         public Command SaveLogCommand { get; private set; }
-
-        //General Notify
+     
         public string ActivityName
         {
             get => _activity.ActivityName;
@@ -147,7 +145,6 @@ namespace SelfMonitoringApp.ViewModels.Logs
             }
         }
 
-
         public string Comments
         {
             get => _activity.Comments;
@@ -183,7 +180,6 @@ namespace SelfMonitoringApp.ViewModels.Logs
                     minutes: EndDateTime.Minute,
                     seconds: EndDateTime.Hour
                 );
-
             }
             else
             {
@@ -231,7 +227,6 @@ namespace SelfMonitoringApp.ViewModels.Logs
 
             _activity.EndTime   = _activity.RegisteredTime = endDateTime;
             _activity.StartTime = startDateTime;
-
             return endDateTime.Subtract(startDateTime).TotalHours;
         }
 

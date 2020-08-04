@@ -15,6 +15,7 @@ namespace SelfMonitoringApp.Services
         Task<List<SleepModel>> GetSleepsAsync();
         Task<List<SubstanceModel>> GetSubstancesAsync();
         Task<List<ActivityModel>> GetActivitiesAsync();
+        Task<List<SocializationModel>> GetSocialsAsync();
         Task DeleteLog(IModel model);
     }
 }

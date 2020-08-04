@@ -70,13 +70,16 @@ namespace SelfMonitoringApp.ViewModels
                 List<MealModel> mealData = null; 
                 List<SubstanceModel> substanceData = null;
                 List<ActivityModel> activityData = null;
+                List<SocializationModel> socialData = null;
+
                 List<Task> loadingTasks = new List<Task>()
                 {
                     Task.Run( async ()=> sleepData = await _database.GetSleepsAsync()),
                     Task.Run( async ()=> moodData = await _database.GetMoodsAsync()),
                     Task.Run( async ()=> mealData = await _database.GetMealsAsync()),
                     Task.Run( async ()=> substanceData = await _database.GetSubstancesAsync()),
-                    Task.Run( async ()=> activityData = await _database.GetActivitiesAsync())
+                    Task.Run( async ()=> activityData = await _database.GetActivitiesAsync()),
+                    Task.Run( async ()=> socialData = await _database.GetSocialsAsync())
                 };
 
                 await Task.WhenAll(loadingTasks);
@@ -98,6 +101,8 @@ namespace SelfMonitoringApp.ViewModels
                             = (activityData.Where(activity => DateInRange(startDate, endDate, activity.RegisteredTime, date))).ToList();
                         List<SubstanceModel> substances 
                             = (substanceData.Where(substance => DateInRange(startDate, endDate, substance.RegisteredTime, date))).ToList();
+                        List<SocializationModel> socials
+                            = (socialData.Where(social => DateInRange(startDate, endDate, social.RegisteredTime, date))).ToList();
 
                         if (sleeps.Count > 0)
                             sleeps.Sort((t1, t2) => DateTime.Compare(t1.RegisteredTime, t2.RegisteredTime));
@@ -109,9 +114,11 @@ namespace SelfMonitoringApp.ViewModels
                             activities.Sort((t1, t2) => DateTime.Compare(t1.RegisteredTime, t2.RegisteredTime));
                         if(substances.Count > 0)
                             substances.Sort((t1, t2) => DateTime.Compare(t1.RegisteredTime, t2.RegisteredTime));
+                        if (socials.Count > 0)
+                            socials.Sort((t1, t2) => DateTime.Compare(t1.RegisteredTime, t2.RegisteredTime));
 
                         if (sleeps.Count != 0 || activities.Count != 0 || moods.Count != 0 || meals.Count != 0 || substances.Count != 0)
-                            filteredData.Add(new DaySummaryViewModel(sleeps, activities, meals, moods, substances, date));
+                            filteredData.Add(new DaySummaryViewModel(sleeps, activities, meals, moods, substances,socials, date));
                     }
                 });
             }

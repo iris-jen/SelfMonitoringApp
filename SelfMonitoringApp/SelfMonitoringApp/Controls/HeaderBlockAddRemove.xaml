@@ -5,8 +5,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              BackgroundColor="{StaticResource Primary}" 
-             Padding="8,1,8,10" CornerRadius="10" 
-             Margin="2" BorderColor="Black" HasShadow="True" 
+             Padding="8,1,8,10" CornerRadius="6" 
+             Margin="1" BorderColor="Black" HasShadow="True" 
              x:Class="SelfMonitoringApp.Controls.HeaderBlockAddRemove">
     <Frame.Content>
         <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">

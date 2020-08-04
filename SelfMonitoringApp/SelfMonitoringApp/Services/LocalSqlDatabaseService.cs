@@ -46,7 +46,8 @@ namespace SelfMonitoringApp.Services
                 typeof(MealModel),
                 typeof(SleepModel),
                 typeof(SubstanceModel),
-                typeof(ActivityModel)
+                typeof(ActivityModel),
+                typeof(SocializationModel)
             };
 
             if (!_initialized)
@@ -72,6 +73,8 @@ namespace SelfMonitoringApp.Services
         public Task<List<SleepModel>> GetSleepsAsync()         => _database.Table<SleepModel>().ToListAsync();
         public Task<List<SubstanceModel>> GetSubstancesAsync() => _database.Table<SubstanceModel>().ToListAsync();
         public Task<List<ActivityModel>> GetActivitiesAsync()  => _database.Table<ActivityModel>().ToListAsync();
+        public Task<List<SocializationModel>> GetSocialsAsync() => _database.Table<SocializationModel>().ToListAsync();
+
 
         public Task<int> AddOrModifyModelAsync(IModel model)
         {

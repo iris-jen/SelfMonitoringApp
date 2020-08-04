@@ -18,11 +18,8 @@ namespace SelfMonitoringApp.ViewModels.Logs
         public event EventHandler ModelShed;
 
         #region Bindings       
-        //Commands
         public Command SaveLogCommand { get; private set; }
 
-
-        //General Notify
         private DateTime _logDateTime;
         public DateTime LogDateTime
         {
@@ -106,7 +103,7 @@ namespace SelfMonitoringApp.ViewModels.Logs
 
         public MealViewModel(IModel existingMeal = null)
         {
-            if (existingMeal is null)
+            if (existingMeal is null) // Creating new log
             {
                 _mealModel = new MealModel()
                 {
@@ -120,7 +117,7 @@ namespace SelfMonitoringApp.ViewModels.Logs
                     seconds : LogDateTime.Second
                 );
             }
-            else
+            else // Editing Log
             {
                 _mealModel = existingMeal as MealModel;
                 LogDateTime = _mealModel.RegisteredTime;
