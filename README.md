@@ -44,6 +44,7 @@ Allows the user to indicate which emotion they felt the strongest,
 record where they were while logging, rate how they feel, as well as add a description.
 
 ![image](https://user-images.githubusercontent.com/7981120/89335891-a1560980-d666-11ea-8d5c-415ed8ae198c.png)
+![image](https://user-images.githubusercontent.com/7981120/89337374-d6635b80-d668-11ea-92b6-097be4780a52.png)
 
 Future plans....
 - Allow user to take / attach photo for this log, if there's some particular image that prompted this log to be created
