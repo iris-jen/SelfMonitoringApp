@@ -9,15 +9,8 @@
              x:Class="SelfMonitoringApp.Pages.NotificationEditorPage">
     <ContentPage.Content>
         <Grid>
-            <controls:HeaderBlock HeaderText="Add a new notification">
-                <Frame>
-                    <Grid>
-                        <Picker Title="Notify me about"></Picker>
-                    </Grid>
-                </Frame>
-            </controls:HeaderBlock>
             <controls:HeaderBlock Grid.Row="1" HeaderText="Existing Notifcations">
-
+                
             </controls:HeaderBlock>
         </Grid>
     </ContentPage.Content>

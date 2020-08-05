@@ -3,13 +3,12 @@ using SelfMonitoringApp.ViewModels.Logs;
 using System;
 using System.Globalization;
 using System.IO;
-using Acr;
+
 using Xamarin.Forms;
 using Acr.UserDialogs;
 using SelfMonitoringApp.Pages;
 using System.Threading.Tasks;
-using System.Net.Http.Headers;
-using SelfMonitoringApp.Models;
+
 
 namespace SelfMonitoringApp.ViewModels
 {

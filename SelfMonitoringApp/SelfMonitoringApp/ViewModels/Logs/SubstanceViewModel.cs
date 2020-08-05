@@ -90,6 +90,25 @@ namespace SelfMonitoringApp.ViewModels.Logs
             }
         }
 
+        private int _stepperOffset = 50;
+        public int StepperOffset
+        {
+            get => _stepperOffset;
+            set
+            {
+                if (_stepperOffset == value)
+                    return;
+
+                int direction = value - StepperOffset;
+                
+                if (Ammount + direction >= 0)
+                    Ammount += direction;
+
+                _stepperOffset = value;
+            }
+        }
+
+
         public double Ammount
         {
             get => _substance.Amount;
@@ -134,7 +153,11 @@ namespace SelfMonitoringApp.ViewModels.Logs
         {
             if (existingModel is null)
             {
-                _substance = new SubstanceModel();
+                _substance = new SubstanceModel() 
+                { 
+                    Satisfaction = 5 
+                };
+
                 LogTime = DateTime.Now;
                 StartTimeSpan = new TimeSpan
                 (

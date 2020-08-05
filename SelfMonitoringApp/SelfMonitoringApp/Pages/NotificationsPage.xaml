@@ -6,19 +6,27 @@
              xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
              xmlns:services="clr-namespace:SelfMonitoringApp.Services"
              mc:Ignorable="d"
+             Visual="Material"
              x:Class="SelfMonitoringApp.Pages.NotificationsPage">
     <ContentPage.Content>
-        <Grid>
-            <controls:HeaderBlock HeaderText="Add a new notification">
-                <Frame>
+        <Grid Margin="8">
+            <controls:HeaderBlock HeaderText="Existing Notifcations">
+                <Frame BorderColor="Black" Padding="0">
                     <Grid>
-                        <Picker Title="Notify me about"></Picker>
-                        <Switch/>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="50"/>
+                        </Grid.RowDefinitions>
+                        <CollectionView BackgroundColor="Gray">
+                            
+                        </CollectionView>
+                        <Grid Grid.Row="1">
+                            <Button Grid.Column="0" Margin="5,0,0,5" Style="{StaticResource ButtonStyle}" Command="{Binding DeleteNotificationCommand}" BorderColor="Black" Text="Delete"/>
+                            <Button Grid.Column="1" Margin="0,0,5,5" Style="{StaticResource ButtonStyle}" Command="{Binding AddNotificationCommand}" BorderColor="Black" Text="Add"/>
+                            <Button Grid.Column="2" Margin="0,0,5,5" Style="{StaticResource ButtonStyle}" Command="{Binding EditNotificationCommand}" BorderColor="Black" Text="Edit"/>
+                        </Grid>
                     </Grid>
                 </Frame>
-            </controls:HeaderBlock>
-            <controls:HeaderBlock Grid.Row="1" HeaderText="Existing Notifcations">
-
             </controls:HeaderBlock>
         </Grid>
     </ContentPage.Content>

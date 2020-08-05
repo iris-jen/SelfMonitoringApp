@@ -5,17 +5,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
              mc:Ignorable="d"
+             NavigationPage.HasNavigationBar="False"
              Visual="Material"
              Title="Log Sleep"
              x:Class="SelfMonitoringApp.Pages.Logs.SleepPage">
     <ContentPage.Content>
-        <controls:SaveCancelPage CancelCommand="{Binding BackCommand}" SaveCommand="{Binding SaveLogCommand}">
-            <Grid Margin="0,8,0,0">
+        <controls:SaveCancelPage CancelCommand="{Binding BackCommand}" PageName="Sleep" SaveCommand="{Binding SaveLogCommand}">
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="150"/>
                     <RowDefinition Height="{StaticResource RowHeightSlider}"/>
-                    <RowDefinition /> 
-         
+                    <RowDefinition/> 
                 </Grid.RowDefinitions>
 
                 <Grid>
@@ -71,11 +71,12 @@
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="40"/>
-                            <RowDefinition Height="40"/> 
+                            <RowDefinition Height="40"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
 
-                        <Frame Padding="0" Grid.Row="0">
+                        <!--Dream Prompt-->
+                        <Frame Padding="0" Grid.Row="0" BorderColor="Black">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
@@ -87,8 +88,10 @@
                                 </Frame>
                             </Grid>
                         </Frame>
-                        <Frame Padding="0" Grid.Row="1">
+                        
+                        <Frame Padding="0" Grid.Row="1" BorderColor="Black">
                             <Grid>
+                                
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
                                     <ColumnDefinition Width=".5*"/>
@@ -100,14 +103,11 @@
                             </Grid>
                         </Frame>
 
-                        <Frame Grid.Row="2" CornerRadius="5" Padding="5">
-                            <Editor AutoSize="TextChanges" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Text="{Binding DreamLog}"
-                                     BackgroundColor="White" Placeholder="Can you decribe the dream?"/>
+                        <Frame Grid.Row="2" CornerRadius="5" Padding="5" BorderColor="Black">
+                            <Editor  Text="{Binding DreamLog}" Style="{StaticResource EditorStyle}" Placeholder="What happend in the dream?"/>
                         </Frame>
                     </Grid>
                 </controls:HeaderBlock>
-
-
             </Grid>
         </controls:SaveCancelPage>
     </ContentPage.Content>

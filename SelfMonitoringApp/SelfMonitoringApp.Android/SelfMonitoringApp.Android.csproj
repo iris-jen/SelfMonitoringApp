@@ -107,56 +107,19 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\mood_white.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\twotone_save_black_48dp.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\meal_white.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\twotone_backspace_white_48dp.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\mood_black.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\twotone_backspace_black_48dp.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\meal_black.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\twotone_add_box_black_48dp.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\activity_black.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\data_black.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\sleep_black.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\social_black.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\substance_black.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\settings_black.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\goals_black.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\notifications_black.png" />
+    <AndroidResource Include="Resources\drawable\twotone_delete_forever_black_48dp.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

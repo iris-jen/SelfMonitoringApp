@@ -24,7 +24,7 @@ namespace SelfMonitoringApp.Controls
         }
 
         public static readonly BindableProperty SaveCommandProperty =
-            BindableProperty.Create("SaveCommand", typeof(Command), typeof(SaveCancelPage), default(Command));
+            BindableProperty.Create(nameof(SaveCommand), typeof(Command), typeof(SaveCancelPage), default(Command));
 
         public Command CancelCommand
         {
@@ -33,6 +33,15 @@ namespace SelfMonitoringApp.Controls
         }
 
         public static readonly BindableProperty CancelCommandProperty =
-            BindableProperty.Create("CancelCommand", typeof(Command), typeof(SaveCancelPage), default(Command));
+            BindableProperty.Create(nameof(CancelCommand), typeof(Command), typeof(SaveCancelPage), default(Command));
+
+        public string PageName
+        {
+            get => GetValue(PageNameProperty).ToString();
+            set => SetValue(PageNameProperty, value);
+        }
+
+        public static readonly BindableProperty PageNameProperty =
+            BindableProperty.Create(nameof(PageName), typeof(string), typeof(SaveCancelPage), string.Empty);
     }
 }

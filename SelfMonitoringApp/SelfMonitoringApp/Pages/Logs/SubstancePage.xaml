@@ -7,14 +7,15 @@
              Visual="Material"
              xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
              mc:Ignorable="d"
-             NavigationPage.HasNavigationBar="True"
+             NavigationPage.HasNavigationBar="False"
              Title="Log Substance Use"
              xmlns:services="clr-namespace:SelfMonitoringApp.Services"
              x:Class="SelfMonitoringApp.Pages.Logs.SubstancePage">
     <ContentPage.Content>
-        <controls:SaveCancelPage CancelCommand="{Binding BackCommand}" SaveCommand="{Binding SaveLogCommand}">
+        <controls:SaveCancelPage CancelCommand="{Binding BackCommand}" SaveCommand="{Binding SaveLogCommand}" PageName="Substance Use">
             <Grid Margin="0,3,0,0">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="{StaticResource RowHeightSingle}"/>
                     <RowDefinition Height="{StaticResource RowHeightSingle}"/>
                     <RowDefinition Height="{StaticResource RowHeightSingle}"/>
                     <RowDefinition Height="{StaticResource RowHeightSingle}"/>
@@ -39,28 +40,23 @@
                     </controls:HeaderBlock>
                 </Grid>
 
-                <controls:HeaderBlockAddRemove Grid.Row="1" Title="Substance Name" SelectedSuggestion="{Binding SubstanceName}" BoxType="{x:Static services:SuggestionTypes.SubstanceNames}"/>
-                <controls:HeaderBlockAddRemove Grid.Row="2" Title="Consumed by" SelectedSuggestion="{Binding ConsumptionMethod}" BoxType="{x:Static services:SuggestionTypes.SubstanceConsumptionMethods}"/>
-
-                <!--Use method / quantity / unit grid-->
-                <Grid Grid.Row="3">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                                      
-                    <!--Ammount of substance-->
-                    <controls:HeaderBlock Grid.Column="0" HeaderText="Qty.">
-                        <Frame Padding="0" BorderColor="Black">
-                            <Entry Text="{Binding Ammount}" HorizontalTextAlignment="Center" Margin="0,-10,0,0"/>
-                        </Frame>
-                    </controls:HeaderBlock>
-                    
-                    <controls:HeaderBlockAddRemove Grid.Column="1" Title="Unit" SelectedSuggestion="{Binding Unit}" 
+                <controls:HeaderBlockAddRemove Grid.Row="1" Title="Substance Name" SelectedSuggestion="{Binding SubstanceName}" 
+                                               BoxType="{x:Static services:SuggestionTypes.SubstanceNames}"/>
+                <controls:HeaderBlockAddRemove Grid.Row="2" Title="Consumed by" SelectedSuggestion="{Binding ConsumptionMethod}" 
+                                               BoxType="{x:Static services:SuggestionTypes.SubstanceConsumptionMethods}"/>
+                <controls:HeaderBlockAddRemove Grid.Row="3" Title="Unit" SelectedSuggestion="{Binding Unit}" 
                                                    BoxType="{x:Static services:SuggestionTypes.Units}"/>
-                </Grid>
+                <!--Ammount of substance-->
+                <controls:HeaderBlock Grid.Row="4" HeaderText="Qty.">
+                    <Frame Padding="0" BorderColor="Black">
+                        <Grid >
+                            <Entry Text="{Binding Ammount}" Margin="0,-6,0,0" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" BackgroundColor="White"/>
+                            <Stepper Grid.Column="1" Value="{Binding StepperOffset}"  />
+                        </Grid>
+                    </Frame>
+                </controls:HeaderBlock>
 
-                <controls:HeaderBlock HeaderText="Rate how you feel" Grid.Row="4">
+                <controls:HeaderBlock HeaderText="Rate how you feel" Grid.Row="5">
                     <controls:RatingSlider Rating="{Binding Satisfaction}"/>
                 </controls:HeaderBlock>
             </Grid>

@@ -22,6 +22,12 @@ namespace SelfMonitoringApp.ViewModels
         public ObservableCollection<SocializationModel> Socials { get; private set; }
         public ObservableCollection<ModelType> ModelTypes { get; private set; } 
 
+        public Dictionary<ModelType, ObservableCollection<IModel>> Models { get; set; }
+        
+
+
+
+
         private MoodViewModel _moodEditor;
         private MealViewModel _mealEditor;
         private SubstanceViewModel _substanceEditor;
@@ -231,12 +237,13 @@ namespace SelfMonitoringApp.ViewModels
         public DaySummaryViewModel(List<SleepModel> sleeps, List<ActivityModel> activities,
             List<MealModel> meals, List<MoodModel> moods, List<SubstanceModel> substances, List<SocializationModel> socials, DateTime date) 
         {
-            Meals      = new ObservableCollection<MealModel>(meals);
+
+            Meals = new ObservableCollection<MealModel>(meals);
             Substances = new ObservableCollection<SubstanceModel>(substances);
             Activities = new ObservableCollection<ActivityModel>(activities);
-            Moods      = new ObservableCollection<MoodModel>(moods);
-            Sleeps     = new ObservableCollection<SleepModel>(sleeps);
-            Socials    = new ObservableCollection<SocializationModel>(socials);
+            Moods = new ObservableCollection<MoodModel>(moods);
+            Sleeps = new ObservableCollection<SleepModel>(sleeps);
+            Socials = new ObservableCollection<SocializationModel>(socials);
             ModelTypes = new ObservableCollection<ModelType>();
 
             EditSelectedCommand   = new Command<ModelType>(async(type) => await EditSelected(type));
@@ -454,10 +461,10 @@ namespace SelfMonitoringApp.ViewModels
 
                     oldIndex = Substances.IndexOf(x => x.ID == id);
                     Socials.Insert(oldIndex, newSocial);
-                    Substances.RemoveAt(oldIndex + 1);
+                    Socials.RemoveAt(oldIndex + 1);
                     SelectedSocial = newSocial;
 
-                    _substanceEditor.ModelShed -= Vm_ModelShed;
+                    _socialEditor.ModelShed -= Vm_ModelShed;
                     break;
             }
         }

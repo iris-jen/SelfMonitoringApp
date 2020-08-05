@@ -6,13 +6,13 @@
              xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
              xmlns:services="clr-namespace:SelfMonitoringApp.Services"
              mc:Ignorable="d"
-             NavigationPage.HasNavigationBar="True"
+             NavigationPage.HasNavigationBar="False"
              Visual="Material"
              Title="Log Meal"
              x:Class="SelfMonitoringApp.Pages.Logs.MealPage">
     <ContentPage.Content>
-        <controls:SaveCancelPage CancelCommand="{Binding BackCommand}" SaveCommand="{Binding SaveLogCommand}">
-            <Grid Margin="0,8,0,0">
+        <controls:SaveCancelPage CancelCommand="{Binding BackCommand}" PageName="Meal" SaveCommand="{Binding SaveLogCommand}">
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="{StaticResource RowHeightSingle}"/>
                     <RowDefinition Height="{StaticResource RowHeightSingle}"/>

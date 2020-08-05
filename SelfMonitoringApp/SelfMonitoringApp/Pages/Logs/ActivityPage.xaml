@@ -7,10 +7,11 @@
              mc:Ignorable="d"
              Visual="Material"
              Title="Activity Log"
+             NavigationPage.HasNavigationBar="False"
              xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
              x:Class="SelfMonitoringApp.Pages.Logs.ActivityPage">
     <ContentPage.Content>
-        <controls:SaveCancelPage SaveCommand="{Binding SaveLogCommand}" CancelCommand="{Binding BackCommand}" Margin="0,8,0,0">
+        <controls:SaveCancelPage SaveCommand="{Binding SaveLogCommand}" CancelCommand="{Binding BackCommand}"  PageName="Activity">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="120"/>
@@ -103,8 +104,7 @@
                         </Frame>
 
                         <Frame Grid.Row="2" Padding="0" BorderColor="Black">
-                            <Editor Placeholder="Any Comments?" AutoSize="TextChanges" 
-                                    HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+                            <Editor Placeholder="Anything stand out?" Text="{Binding Comments}" Style="{StaticResource EditorStyle}"/>
                         </Frame>
                     </Grid>
                 </controls:HeaderBlock>

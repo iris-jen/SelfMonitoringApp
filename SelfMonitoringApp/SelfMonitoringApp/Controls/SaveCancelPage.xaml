@@ -10,25 +10,29 @@
         <ControlTemplate>
             <Grid>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
                     <RowDefinition/>
-                    <RowDefinition Height="60"/>
                 </Grid.RowDefinitions>
-
-                <ScrollView Grid.Row="0">
-                    <ContentPresenter HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="4,0,4,0"/>
+                <!--Cancel / save grid-->     
+                <Grid BackgroundColor="{StaticResource Primary}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="80"/>
+                    </Grid.ColumnDefinitions>
+                    <ImageButton Source="twotone_backspace_black_48dp.png" BackgroundColor="LightCoral" Command="{TemplateBinding CancelCommand}" Margin="7" BorderColor="Black"/>
+                    <ImageButton Source="twotone_save_black_48dp.png" Command="{TemplateBinding SaveCommand}" BackgroundColor="LightGreen" Margin="7"  Grid.Column="2" BorderColor="Black"/>
+                    <Frame Margin="6" Padding="1" Grid.Column="1" HasShadow="True" BorderColor="Black"> 
+                        <Label HorizontalOptions="Center" Text="{TemplateBinding PageName}" FontSize="22" TextColor="Black" FontAttributes="Bold"  HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                    </Frame>
+                </Grid>
+                
+                      
+                <ScrollView Grid.Row="1" Margin="2,-6,2,2">
+                    <ContentPresenter HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="5"/>
                 </ScrollView>
 
-                <!--Cancel / save grid-->
-                <Frame Grid.Row="1" Padding="0" Margin="4,0,4,5" BackgroundColor="{StaticResource Primary}" VerticalOptions="CenterAndExpand" BorderColor="Black">
-                    <Grid  Margin="5" >
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <Button Style="{StaticResource ButtonStyle}" Command="{TemplateBinding CancelCommand}" Margin="2" Text="Cancel"/>
-                        <Button Style="{StaticResource ButtonStyle}" Command="{TemplateBinding SaveCommand}" Margin="2" Text="Save" Grid.Column="1"/>
-                    </Grid>
-                </Frame>
+ 
             </Grid>
         </ControlTemplate>
     </ContentView.ControlTemplate>

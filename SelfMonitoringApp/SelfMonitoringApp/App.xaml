@@ -49,6 +49,16 @@
                 <Setter Property="Margin" Value="0,-10,0,0"/>
             </Style>
 
+            <Style x:Key="EditorStyle" TargetType="Editor">
+                <Setter Property="AutoSize"  Value="TextChanges"/>
+                <Setter Property="IsSpellCheckEnabled" Value="True"/>
+                <Setter Property="IsTextPredictionEnabled" Value="True"/>
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+                <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+                <Setter Property="BackgroundColor" Value="White"/>
+                <Setter Property="Margin" Value="5"/>
+            </Style>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -5,15 +5,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:services="clr-namespace:SelfMonitoringApp.Services"
              mc:Ignorable="d"
+             NavigationPage.HasNavigationBar="False"
              Title="Social Log"
              Visual="Material"
              xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
              x:Class="SelfMonitoringApp.Pages.Logs.SocializationPage">
     <ContentPage.Content>
-        <controls:SaveCancelPage SaveCommand="{Binding SaveLogCommand}" CancelCommand="{Binding BackCommand}" Margin="0,8,0,0">
+        <controls:SaveCancelPage SaveCommand="{Binding SaveLogCommand}" CancelCommand="{Binding BackCommand}" PageName="Socialization">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="120"/>
+                    <RowDefinition Height="150"/>
                     <RowDefinition Height="{StaticResource RowHeightSingle}"/>
                     <RowDefinition Height="{StaticResource RowHeightSlider}"/>
                     <RowDefinition />
@@ -27,7 +28,7 @@
                     </Grid.ColumnDefinitions>
 
                     <!--Start Box-->
-                    <controls:HeaderBlock HeaderText="Sleep" Margin="0,0,0,0" Padding="0">
+                    <controls:HeaderBlock HeaderText="Start" Padding="0">
                         <Frame Padding="0" BorderColor="Black">
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -35,8 +36,8 @@
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
                                 <TimePicker HorizontalOptions="CenterAndExpand"  FontAttributes="Bold" FontSize="14" BackgroundColor="White"
-                                    Time="{Binding StartTime}" Margin="0,-16,0,0"/>
-                                <DatePicker Grid.Row="1" HorizontalOptions="CenterAndExpand" FontAttributes="Bold" Margin="0,-16,0,0" Date="{Binding StartDateTime}" FontSize="14" BackgroundColor="White"/>
+                                    Time="{Binding StartTime}" Margin="0,-6,0,0"/>
+                                <DatePicker Grid.Row="1" HorizontalOptions="CenterAndExpand" FontAttributes="Bold" Margin="0,-6,0,0" Date="{Binding StartDateTime}" FontSize="14" BackgroundColor="White"/>
                             </Grid>
                         </Frame>
                     </controls:HeaderBlock>
@@ -49,15 +50,15 @@
                     </controls:HeaderBlock>
 
                     <!--end time box-->
-                    <controls:HeaderBlock HeaderText="Wake" Grid.Column="2" Margin="0,0,0,0">
+                    <controls:HeaderBlock HeaderText="End" Grid.Column="2" Margin="0,0,0,0">
                         <Frame Padding="0" BorderColor="Black">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition/>
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
-                                <TimePicker HorizontalOptions="Center" FontAttributes="Bold" BackgroundColor="White" FontSize="14" Time ="{Binding EndTime}" Margin="0,-16,0,0"/>
-                                <DatePicker Grid.Row="1" FontAttributes="Bold" FontSize="14" BackgroundColor="White" HorizontalOptions="CenterAndExpand" Date="{Binding EndDateTime}" Margin="0,-16,0,0"/>
+                                <TimePicker HorizontalOptions="Center" FontAttributes="Bold" BackgroundColor="White" FontSize="14" Time ="{Binding EndTime}" Margin="0,-6,0,0"/>
+                                <DatePicker Grid.Row="1" FontAttributes="Bold" FontSize="14" BackgroundColor="White" HorizontalOptions="CenterAndExpand" Date="{Binding EndDateTime}" Margin="0,-6,0,0"/>
                             </Grid>
                         </Frame>
                     </controls:HeaderBlock>
@@ -90,8 +91,7 @@
                         </Frame>
 
                         <Frame Grid.Row="1" Padding="0" BorderColor="Black">
-                            <Editor Placeholder="Any Comments?" AutoSize="TextChanges" 
-                                    HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Text="{Binding Comments}" />
+                            <Editor Placeholder="Any Comments?" Style="{StaticResource EditorStyle}" Margin="5" Text="{Binding Comments}"/>
                         </Frame>
                     </Grid>
                 </controls:HeaderBlock>

@@ -8,12 +8,12 @@
              mc:Ignorable="d"
              Visual="Material"
              NavigationPage.HasBackButton="true"
-             NavigationPage.HasNavigationBar="True"         
+             NavigationPage.HasNavigationBar="False"         
              Title="Log Mood"
              x:Class="SelfMonitoringApp.Pages.Logs.MoodPage">
     <ContentPage.Content>
-        <controls:SaveCancelPage CancelCommand="{Binding BackCommand}" SaveCommand="{Binding SaveLogCommand}">
-            <Grid Margin="0,8,0,0">
+        <controls:SaveCancelPage CancelCommand="{Binding BackCommand}" SaveCommand="{Binding SaveLogCommand}" PageName="Mood">
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="{StaticResource RowHeightSingle}"/>
                     <RowDefinition Height="100"/>
@@ -51,8 +51,8 @@
                 <!--Description Box-->
                 <controls:HeaderBlock Grid.Row="4" HeaderText="Description">
                     <Frame Padding="4">
-                        <Editor BackgroundColor="White" IsSpellCheckEnabled="True" Text="{Binding Description}" VerticalOptions="CenterAndExpand"
-                                Placeholder="How do you feel?  What happened?" AutoSize="TextChanges" />
+                        <Editor Text="{Binding Description}"  Style="{StaticResource EditorStyle}"
+                                Placeholder="Whats up?" />
                     </Frame>
                 </controls:HeaderBlock>
 

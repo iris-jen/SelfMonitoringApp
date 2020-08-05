@@ -160,6 +160,10 @@ namespace SelfMonitoringApp.ViewModels
                 DaySummaries = data;
                 NotifyPropertyChanged(nameof(DaySummaries));
             }
+            catch(Exception ex)
+            {
+                await UserDialogs.Instance.AlertAsync(ex.ToString(),  "Could not load data");
+            }
             finally
             {
                 Loading = false;

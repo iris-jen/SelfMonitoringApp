@@ -140,11 +140,14 @@ namespace SelfMonitoringApp.ViewModels.Logs
         }
 
 
-        public SocializationViewModel(IModel existingModel = null) 
+        public SocializationViewModel(IModel existingModel = null)
         {
             if (existingModel is null)
             {
-                _social = new SocializationModel();
+                _social = new SocializationModel()
+                {
+                    Enjoyment = 5
+                };
 
                 StartDateTime = DateTime.Now.AddMinutes(-30);
                 EndDateTime = DateTime.Now;
@@ -181,9 +184,8 @@ namespace SelfMonitoringApp.ViewModels.Logs
                 );
 
             }
-            SaveLogCommand = new Command(async ()=> await SaveAndPop());
+            SaveLogCommand = new Command(async () => await SaveAndPop());
         }
-        
         public double GetLength()
         {
             var startDateTime = new DateTime
