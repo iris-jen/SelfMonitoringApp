@@ -228,7 +228,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SelfMonitoringApp\SelfMonitoringApp\SelfMonitoringApp.csproj">
+    <ProjectReference Include="..\SelfMonitoringApp\SelfMonitoringApp.csproj">
       <Project>{ac40a442-f8f5-4deb-a4a0-a4ba10420ce7}</Project>
       <Name>SelfMonitoringApp</Name>
     </ProjectReference>

@@ -5,11 +5,12 @@ using NUnit.Framework;
 using Xamarin.UITest;
 using Xamarin.UITest.Queries;
 
+
 namespace SelfMonitoringApp.UITests
 {
     [TestFixture(Platform.Android)]
     [TestFixture(Platform.iOS)]
-    public class Tests
+    public class Tests: BaseTestFixture
     {
         IApp app;
         Platform platform;
@@ -22,7 +23,7 @@ namespace SelfMonitoringApp.UITests
         [SetUp]
         public void BeforeEachTest()
         {
-            app = AppInitializer.StartApp(platform);
+
         }
 
         [Test]
