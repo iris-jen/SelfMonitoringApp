@@ -23,7 +23,7 @@ namespace SelfMonitoringApp.Services
         {
             get
             {
-                var basePath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+                var basePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
                 return Path.Combine(basePath, DatabaseFilename);
             }
         }
@@ -57,16 +57,26 @@ namespace SelfMonitoringApp.Services
             }
         }
 
-        public Task ClearSpecificDatabase(ModelType modelType) => modelType switch
+        public Task ClearSpecificDatabase(ModelType modelType)
         {
-            ModelType.Activity  => _database.DeleteAllAsync<ActivityModel>(),
-            ModelType.Meal      => _database.DeleteAllAsync<MealModel>(),
-            ModelType.Mood      => _database.DeleteAllAsync<MoodModel>(),
-            ModelType.Substance => _database.DeleteAllAsync<SubstanceModel>(),
-            ModelType.Sleep     => _database.DeleteAllAsync<SleepModel>(),
-            ModelType.Socialization => _database.DeleteAllAsync<SocializationModel>(),
-            _=> throw new ArgumentException("Model type does not exist in db")
-        };
+            switch (modelType)
+            {
+                case ModelType.Activity:
+                    return _database.DeleteAllAsync<ActivityModel>();
+                case ModelType.Meal:    
+                    return _database.DeleteAllAsync<MealModel>();
+                case ModelType.Mood:
+                    return _database.DeleteAllAsync<MoodModel>();
+                case ModelType.Substance:
+                    return _database.DeleteAllAsync<SubstanceModel>();
+                case ModelType.Sleep:
+                    return _database.DeleteAllAsync<SleepModel>();
+                case ModelType.Socialization:
+                    return _database.DeleteAllAsync<SocializationModel>();
+                default:
+                    throw new ArgumentException("Model type does not exist in db");
+            };
+        }
 
         public Task<List<MoodModel>> GetMoodsAsync()           => _database.Table<MoodModel>().ToListAsync();
         public Task<List<MealModel>> GetMealsAsync()           => _database.Table<MealModel>().ToListAsync();

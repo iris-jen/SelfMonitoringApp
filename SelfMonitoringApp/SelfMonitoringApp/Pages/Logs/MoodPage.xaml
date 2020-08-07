@@ -8,6 +8,7 @@
              mc:Ignorable="d"
              Visual="Material"
              NavigationPage.HasBackButton="true"
+             BackgroundColor="White"
              NavigationPage.HasNavigationBar="False"         
              Title="Log Mood"
              x:Class="SelfMonitoringApp.Pages.Logs.MoodPage">
@@ -16,43 +17,42 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="{StaticResource RowHeightSingle}"/>
-                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="{StaticResource RowHeightSingle}"/>
+                    <RowDefinition Height="{StaticResource RowHeightSlider}"/>
                     <RowDefinition Height="{StaticResource RowHeightSingle}"/>
                     <RowDefinition Height="{StaticResource RowHeightSingle}"/>
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <!--Registered time grid-->
-                <Grid >
-                    <!--Date Picker-->
-                    <controls:HeaderBlock HeaderText="Date">
-                        <Frame Padding="0" BorderColor="Black">
-                            <DatePicker HorizontalOptions="Center" BackgroundColor="White" Margin="0,-8,0,0" FontSize="13" Date="{Binding LogTime}"/>
-                        </Frame>
-                    </controls:HeaderBlock>
 
-                    <!--Time Picker-->
-                    <controls:HeaderBlock HeaderText="Time" Grid.Column="1" Margin="0">
-                        <Frame Padding="0" BorderColor="Black">
-                            <TimePicker HorizontalOptions="Center" FontSize="14" BackgroundColor="White" Margin="0,-8,0,0" Time="{Binding StartTimeSpan}"/>
-                        </Frame>
-                    </controls:HeaderBlock>
-                </Grid>
+                <!--Time Picker-->
+                <controls:HeaderBlock HeaderText="Time" Margin="0">
+                    <Frame Padding="0" BorderColor="Black" BackgroundColor="White">
+                        <TimePicker HorizontalOptions="Center" VerticalOptions="Center" FontSize="14" BackgroundColor="White" Margin="2" Time="{Binding StartTimeSpan}"/>
+                    </Frame>
+                </controls:HeaderBlock>
+
+                <!--Date Picker-->
+                <controls:HeaderBlock HeaderText="Date" Grid.Row="1">
+                    <Frame Padding="0" BorderColor="Black" BackgroundColor="White">
+                        <DatePicker HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="White" Margin="1" FontSize="13" Date="{Binding LogTime}"/>
+                    </Frame>
+                </controls:HeaderBlock>
 
                 <!--Rating slider-->
-                <controls:HeaderBlock HeaderText="Rate how you feel" Grid.Row="1">
+                <controls:HeaderBlock HeaderText="Rate how you feel" Grid.Row="2">
                     <controls:RatingSlider Rating="{Binding OverallMood}" />
                 </controls:HeaderBlock>
 
 
-                <controls:HeaderBlockAddRemove Grid.Row="2" Title="Strongest Emotion" SelectedSuggestion="{Binding StrongestEmotion}" BoxType="{x:Static services:SuggestionTypes.Emotions}"/>
-                <controls:HeaderBlockAddRemove Grid.Row="3" Title="Location" SelectedSuggestion="{Binding Location}" BoxType="{x:Static services:SuggestionTypes.Locations}"/>
+                <controls:HeaderBlockAddRemove Grid.Row="3" Title="Strongest Emotion" SelectedSuggestion="{Binding StrongestEmotion}" BoxType="{x:Static services:SuggestionTypes.Emotions}"/>
+                <controls:HeaderBlockAddRemove Grid.Row="4" Title="Location" SelectedSuggestion="{Binding Location}" BoxType="{x:Static services:SuggestionTypes.Locations}"/>
 
                 <!--Description Box-->
-                <controls:HeaderBlock Grid.Row="4" HeaderText="Description">
-                    <Frame Padding="4">
-                        <Editor Text="{Binding Description}"  Style="{StaticResource EditorStyle}"
-                                Placeholder="Whats up?" />
+                <controls:HeaderBlock Grid.Row="5" HeaderText="Description">
+                    <Frame Padding="4" BackgroundColor="White">
+                        <Editor Text="{Binding Description}"  Style="{StaticResource EditorStyle}" TextColor="Black"
+                                Placeholder="Whats up?"></Editor>
                     </Frame>
                 </controls:HeaderBlock>
 

@@ -7,13 +7,12 @@
         
             <!--Application colors-->
             <!-- https://material.io/resources/color/#!/?view.left=1&view.right=0&primary.color=F44336&secondary.color=4DD0E -->
-            <Color x:Key="Primary">#6a1b9a</Color>
+            <Color x:Key="Primary" >#6a1b9a</Color>
             <Color x:Key="PrimaryLight">#9c4dcc</Color>
             <Color x:Key="PrimaryDark">#38006b</Color>
-
             <Color x:Key="Secondary">#ffc107</Color>
 
-            <GridLength x:Key="RowHeightSingle">90</GridLength>
+            <GridLength x:Key="RowHeightSingle">100</GridLength>
             <GridLength x:Key="RowHeightSlider">110</GridLength>
 
             <Style x:Key="ButtonStyle" TargetType="Button">
@@ -53,8 +52,7 @@
                 <Setter Property="AutoSize"  Value="TextChanges"/>
                 <Setter Property="IsSpellCheckEnabled" Value="True"/>
                 <Setter Property="IsTextPredictionEnabled" Value="True"/>
-                <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
-                <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+
                 <Setter Property="BackgroundColor" Value="White"/>
                 <Setter Property="Margin" Value="5"/>
             </Style>

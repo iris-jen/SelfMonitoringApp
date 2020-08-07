@@ -21,20 +21,35 @@ namespace SelfMonitoringApp.ViewModels
             NavigateCommand = new Command<PageNames>((page) => Navigate(page));
         }
 
-        private Task GetNavigatorTask(PageNames page) => page switch
+
+        private Task GetNavigatorTask(PageNames page)
         {
-            PageNames.MoodEditor          => _navigator.NavigateTo(new MoodViewModel()),
-            PageNames.SleepEditor         => _navigator.NavigateTo(new SleepViewModel()),
-            PageNames.ActivityEditor      => _navigator.NavigateTo(new ActivityViewModel()),
-            PageNames.MealEditor          => _navigator.NavigateTo(new MealViewModel()),
-            PageNames.SocializationEditor => _navigator.NavigateTo(new SocializationViewModel()),
-            PageNames.SubstanceEditor     => _navigator.NavigateTo(new SubstanceViewModel()),
-            PageNames.RawLogViewer        => _navigator.NavigateTo(new DataExplorerViewModel()),
-            PageNames.NotificationsViewer => _navigator.NavigateTo(new NotificationsViewModel()),
-            PageNames.GoalsViewer         => _navigator.NavigateTo(new GoalsViewModel()), 
-            PageNames.Settings            => _navigator.NavigateTo(new SettingsViewModel()),
-            _ => throw new DirectoryNotFoundException($"Cant find directory -- {page}")
-        };
+            switch (page)
+            {
+                case PageNames.MoodEditor:
+                    return _navigator.NavigateTo(new MoodViewModel());
+                case PageNames.SleepEditor:
+                    return _navigator.NavigateTo(new SleepViewModel());
+                case PageNames.ActivityEditor:
+                    return _navigator.NavigateTo(new ActivityViewModel());
+                case PageNames.MealEditor:
+                    return _navigator.NavigateTo(new MealViewModel());
+                case PageNames.SocializationEditor:
+                    return _navigator.NavigateTo(new SocializationViewModel());
+                case PageNames.SubstanceEditor:
+                    return _navigator.NavigateTo(new SubstanceViewModel());
+                case PageNames.RawLogViewer:
+                    return _navigator.NavigateTo(new DataExplorerViewModel());
+                case PageNames.NotificationsViewer:
+                    return _navigator.NavigateTo(new NotificationsViewModel());
+                case PageNames.GoalsViewer:
+                    return _navigator.NavigateTo(new GoalsViewModel());
+                case PageNames.Settings:
+                    return _navigator.NavigateTo(new SettingsViewModel());
+                default:
+                    throw new DirectoryNotFoundException($"Cant find directory -- {page}");
+            };
+        }
 
         public void Navigate(PageNames page)
         {

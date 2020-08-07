@@ -37,7 +37,7 @@ namespace SelfMonitoringApp.Services
         {
             get
             {
-                var basePath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+                var basePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
                 return Path.Combine(basePath, SuggestionsFilename);
             }
         }
@@ -48,7 +48,7 @@ namespace SelfMonitoringApp.Services
         {
             _suggestions = new Dictionary<SuggestionTypes, List<string>>();
 
-            if (false)//File.Exists(FilePath))
+            if (File.Exists(FilePath))
             {
                 _suggestions = JsonConvert.DeserializeObject<Dictionary<SuggestionTypes, List<string>>>(File.ReadAllText(FilePath));
             }

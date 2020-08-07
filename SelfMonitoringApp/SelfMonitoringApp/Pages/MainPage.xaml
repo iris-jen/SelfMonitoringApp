@@ -8,7 +8,7 @@
              Title="Home"
              NavigationPage.HasNavigationBar="True" >
     <ScrollView>
-        <Grid  Margin="0,3,0,0">
+        <Grid  Margin="5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="220"/>
                 <RowDefinition />
@@ -18,28 +18,28 @@
             <controls:HeaderBlock HeaderText="Create a log">
                 <Grid>
                     <!--Mood Log Button-->
-                    <Button Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="{x:Static pages:PageNames.MoodEditor}" 
-                            Margin="3" ImageSource="mood_black.png" Text="Mood"/>
+                    <ImageButton Command="{Binding NavigateCommand}" CommandParameter="{x:Static pages:PageNames.MoodEditor}" 
+                            Padding="5" BackgroundColor="{StaticResource Secondary}" BorderColor="White" BorderWidth="1"  Source="twotone_psychology_black_48dp.png"/>
 
                     <!--Socialization Log Button-->
-                    <Button Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="{x:Static pages:PageNames.SocializationEditor}"
-                            Margin="3" Grid.Column="1" ImageSource="social_black.png" Text="Social"/>
+                    <ImageButton Command="{Binding NavigateCommand}" CommandParameter="{x:Static pages:PageNames.SocializationEditor}"
+                            Padding="5" BackgroundColor="{StaticResource Secondary}" BorderColor="White" BorderWidth="1" Grid.Column="1" Source="baseline_groups_black_48dp.png"/>
 
                     <!--Meal Log Button-->
-                    <Button Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="{x:Static pages:PageNames.MealEditor}" 
-                            Grid.Column="1" Grid.Row="1" Margin="3" ImageSource="meal_black.png" Text="Meal"/>
+                    <ImageButton Command="{Binding NavigateCommand}" CommandParameter="{x:Static pages:PageNames.MealEditor}" 
+                            Grid.Column="1" Grid.Row="1" Padding="5" BackgroundColor="{StaticResource Secondary}" BorderColor="White" BorderWidth="1"  Source="twotone_restaurant_menu_black_48dp.png"/>
 
                     <!--Sleep Log Button-->
-                    <Button Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="{x:Static pages:PageNames.SleepEditor}" 
-                            Margin="3" Grid.Row="1" ImageSource="sleep_black.png" Text="Sleep"/>
+                    <ImageButton Command="{Binding NavigateCommand}" CommandParameter="{x:Static pages:PageNames.SleepEditor}" 
+                           Padding="5" BackgroundColor="{StaticResource Secondary}" BorderColor="White" BorderWidth="1"  Grid.Row="1" Source="twotone_hotel_black_48dp.png"/>
 
                     <!--Activity Log Button-->
-                    <Button Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="{x:Static pages:PageNames.ActivityEditor}" 
-                            Grid.Row="2" Margin="3" ImageSource="activity_black.png" Text="Activity"/>
+                    <ImageButton Command="{Binding NavigateCommand}"  CommandParameter="{x:Static pages:PageNames.ActivityEditor}" 
+                            Grid.Row="2" Padding="5" BackgroundColor="{StaticResource Secondary}" BorderColor="White" BorderWidth="1" Source="twotone_nature_people_black_48dp.png"/>
                     
                     <!--Substance Log Button-->
-                    <Button Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="{x:Static pages:PageNames.SubstanceEditor}" 
-                            Grid.Row="2" Margin="3" Grid.Column="1" ImageSource="substance_black" Text="Substance"/>
+                    <ImageButton  Command="{Binding NavigateCommand}" CommandParameter="{x:Static pages:PageNames.SubstanceEditor}" 
+                            Grid.Row="2" Padding="5" BackgroundColor="{StaticResource Secondary}" BorderColor="White" BorderWidth="1"  Grid.Column="1" Source="twotone_local_bar_black_48dp.png" />
                 </Grid>
             </controls:HeaderBlock>
 
@@ -47,19 +47,19 @@
             <controls:HeaderBlock Grid.Row="1" HeaderText="Features" Margin="0,0,0,7">
                 <Grid>
                     <Button Grid.Row="0" Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="{x:Static pages:PageNames.RawLogViewer}"
-                            Margin="3" ImageSource="data_black.png" Text="View Logs"/>
+                            Margin="3" Text="View Logs" ImageSource="twotone_menu_book_black_48dp.png" HeightRequest="20"/>
 
-                    <Button Grid.Row="1" Style="{StaticResource ButtonStyle}" ImageSource="data_black.png"
-                             Margin="3" IsEnabled="False" Text="Trends [Coming Soon]"/>
+                    <Button Grid.Row="1" Style="{StaticResource ButtonStyle}"  ImageSource="twotone_multiline_chart_black_48dp.png"
+                             Margin="3" IsEnabled="False" Text="Trends [Coming Soon]" HeightRequest="20"/>
 
-                    <Button Grid.Row="2" Style="{StaticResource ButtonStyle}" ImageSource="goals_black.png"
-                            CommandParameter="data" Margin="3" IsEnabled="False" Text="Goals [Coming Soon]"/>
+                    <Button Grid.Row="2" Style="{StaticResource ButtonStyle}" ImageSource="twotone_flag_black_48dp.png"
+                            CommandParameter="data" Margin="3" IsEnabled="False"  Text="Goals [Coming Soon]" HeightRequest="20"/>
 
-                    <Button Grid.Row="3" Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="{x:Static pages:PageNames.NotificationsViewer}"
-                            ImageSource="notifications_black.png" Margin="3" IsEnabled="True" Text="Notifications"/>
+                    <Button Grid.Row="3" Style="{StaticResource ButtonStyle}"
+                            ImageSource="twotone_notifications_black_48dp.png" HeightRequest="20" Margin="3" IsEnabled="False" Text="Notifications [Coming soon]"/>
 
                     <Button Grid.Row="4" Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="{x:Static pages:PageNames.Settings}"
-                            Text="Settings" ImageSource="settings_black.png" Margin="3"/>
+                            Text="Settings" ImageSource="twotone_settings_black_48dp.png" Margin="3" HeightRequest="20"/>
                 </Grid>
             </controls:HeaderBlock>
        

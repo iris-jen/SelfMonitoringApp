@@ -22,7 +22,7 @@
                     </Grid.ColumnDefinitions>
                     <ImageButton Source="twotone_backspace_black_48dp.png" BackgroundColor="LightCoral" Command="{TemplateBinding CancelCommand}" Margin="7" BorderColor="Black"/>
                     <ImageButton Source="twotone_save_black_48dp.png" Command="{TemplateBinding SaveCommand}" BackgroundColor="LightGreen" Margin="7"  Grid.Column="2" BorderColor="Black"/>
-                    <Frame Margin="6" Padding="1" Grid.Column="1" HasShadow="True" BorderColor="Black"> 
+                    <Frame Margin="6" Padding="1" Grid.Column="1" HasShadow="True" BorderColor="Black" BackgroundColor="White"> 
                         <Label HorizontalOptions="Center" Text="{TemplateBinding PageName}" FontSize="22" TextColor="Black" FontAttributes="Bold"  HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
                     </Frame>
                 </Grid>
