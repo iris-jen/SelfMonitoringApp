@@ -10,6 +10,7 @@ Logs that can be created
 - Activity
 - Substance
 - Socialization
+
 The information can be viewed in daily summary cards.
 
 Future improvements include
