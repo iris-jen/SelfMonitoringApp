@@ -2,6 +2,7 @@
 using SelfMonitoringApp.Models;
 using SelfMonitoringApp.Models.Base;
 using SelfMonitoringApp.Services;
+using SelfMonitoringApp.Services.Navigation;
 using SelfMonitoringApp.ViewModels.Base;
 
 using System;
@@ -77,19 +78,6 @@ namespace SelfMonitoringApp.ViewModels.Logs
             }
         }
 
-        public string Comment
-        {
-            get => _substance.Comment;
-            set
-            {
-                if (_substance.Comment == value)
-                    return;
-
-                _substance.Comment = value;
-                NotifyPropertyChanged();
-            }
-        }
-
         private int _stepperOffset = 50;
         public int StepperOffset
         {
@@ -107,7 +95,6 @@ namespace SelfMonitoringApp.ViewModels.Logs
                 _stepperOffset = value;
             }
         }
-
 
         public double Ammount
         {
@@ -149,7 +136,8 @@ namespace SelfMonitoringApp.ViewModels.Logs
         }
         #endregion
 
-        public SubstanceViewModel(IModel existingModel = null) 
+        public SubstanceViewModel(IModel existingModel = null, INavigationService nav = null, IDatabaseService db =null)
+            : base(nav,db)
         {
             if (existingModel is null)
             {

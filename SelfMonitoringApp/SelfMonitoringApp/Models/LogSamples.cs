@@ -48,6 +48,19 @@ namespace SelfMonitoringApp.Models
             RegisteredTime = DateTime.Now
         };
 
+        public static SleepModel TestSleep => new SleepModel()
+        {
+            SleepStartDate = new DateTime(year, month, _day1, 23, 0, 0),
+            RegisteredTime = new DateTime(year, month, _day2),
+
+            SleepEndDate = new DateTime(year, month, _day2, 8, 0, 0),
+            TotalSleep = 9,
+
+            Nightmare = true,
+            DreamLog = "someone took all my cats away",
+            RestRating = 1.2
+        };
+
         public static List<MealModel> GetMealSamples() => new List<MealModel>()
         {
             // Day 1

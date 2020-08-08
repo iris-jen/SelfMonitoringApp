@@ -10,7 +10,7 @@
             <Frame Padding="5" HasShadow="True" BorderColor="Black" BackgroundColor="White">
                 <Grid >
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="30"/>
                         <RowDefinition Height="80"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>

@@ -17,42 +17,47 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="{StaticResource RowHeightSingle}"/>
-                    <RowDefinition Height="{StaticResource RowHeightSingle}"/>
                     <RowDefinition Height="{StaticResource RowHeightSlider}"/>
                     <RowDefinition Height="{StaticResource RowHeightSingle}"/>
                     <RowDefinition Height="{StaticResource RowHeightSingle}"/>
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
+                <!--Date / Time grid-->
+                <Grid>
+                    <!--Time Picker-->
+                    <controls:HeaderBlock HeaderText="Time" Margin="0" >
+                        <Frame Style="{StaticResource InnerFrameStyle}">
+                            <TimePicker Style="{StaticResource TimeSelectorStyle}" Time="{Binding StartTimeSpan}"/>
+                        </Frame>
+                    </controls:HeaderBlock>
 
-                <!--Time Picker-->
-                <controls:HeaderBlock HeaderText="Time" Margin="0">
-                    <Frame Padding="0" BorderColor="Black" BackgroundColor="White">
-                        <TimePicker HorizontalOptions="Center" VerticalOptions="Center" FontSize="14" BackgroundColor="White" Margin="2" Time="{Binding StartTimeSpan}"/>
-                    </Frame>
-                </controls:HeaderBlock>
-
-                <!--Date Picker-->
-                <controls:HeaderBlock HeaderText="Date" Grid.Row="1">
-                    <Frame Padding="0" BorderColor="Black" BackgroundColor="White">
-                        <DatePicker HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="White" Margin="1" FontSize="13" Date="{Binding LogTime}"/>
-                    </Frame>
-                </controls:HeaderBlock>
+                    <!--Date Picker-->
+                    <controls:HeaderBlock HeaderText="Date"  Grid.Column="1">
+                        <Frame Style="{StaticResource InnerFrameStyle}">
+                            <DatePicker Style="{StaticResource DateSelectorStyle}" Date="{Binding LogTime}"/>
+                        </Frame>
+                    </controls:HeaderBlock>
+                </Grid>
 
                 <!--Rating slider-->
-                <controls:HeaderBlock HeaderText="Rate how you feel" Grid.Row="2">
+                <controls:HeaderBlock HeaderText="Rate how you feel" Grid.Row="1">
                     <controls:RatingSlider Rating="{Binding OverallMood}" />
                 </controls:HeaderBlock>
 
-
-                <controls:HeaderBlockAddRemove Grid.Row="3" Title="Strongest Emotion" SelectedSuggestion="{Binding StrongestEmotion}" BoxType="{x:Static services:SuggestionTypes.Emotions}"/>
-                <controls:HeaderBlockAddRemove Grid.Row="4" Title="Location" SelectedSuggestion="{Binding Location}" BoxType="{x:Static services:SuggestionTypes.Locations}"/>
+                <!--Strongest Emotion picker-->
+                <controls:HeaderBlockAddRemove Grid.Row="2" Title="Strongest Emotion" 
+                                               SelectedSuggestion="{Binding StrongestEmotion}" BoxType="{x:Static services:SuggestionTypes.Emotions}"/>
+                
+                <!--Location picker-->
+                <controls:HeaderBlockAddRemove Grid.Row="3" Title="Location" 
+                                               SelectedSuggestion="{Binding Location}" BoxType="{x:Static services:SuggestionTypes.Locations}"/>
 
                 <!--Description Box-->
-                <controls:HeaderBlock Grid.Row="5" HeaderText="Description">
-                    <Frame Padding="4" BackgroundColor="White">
+                <controls:HeaderBlock Grid.Row="4" HeaderText="Description">
+                    <Frame Style="{StaticResource InnerFrameStyle}">
                         <Editor Text="{Binding Description}"  Style="{StaticResource EditorStyle}" TextColor="Black"
-                                Placeholder="Whats up?"></Editor>
+                                Placeholder="Whats up?"/>
                     </Frame>
                 </controls:HeaderBlock>
 

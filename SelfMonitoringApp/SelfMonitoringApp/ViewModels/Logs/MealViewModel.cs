@@ -2,6 +2,7 @@
 using SelfMonitoringApp.Models;
 using SelfMonitoringApp.Models.Base;
 using SelfMonitoringApp.Services;
+using SelfMonitoringApp.Services.Navigation;
 using SelfMonitoringApp.ViewModels.Base;
     
 using System;
@@ -101,9 +102,10 @@ namespace SelfMonitoringApp.ViewModels.Logs
         }
         #endregion
 
-        public MealViewModel(IModel existingMeal = null)
+        public MealViewModel(IModel existingModel = null, INavigationService nav = null, IDatabaseService db = null)
+            : base(nav, db)
         {
-            if (existingMeal is null) // Creating new log
+            if (existingModel is null) // Creating new log
             {
                 _mealModel = new MealModel()
                 {
@@ -119,7 +121,7 @@ namespace SelfMonitoringApp.ViewModels.Logs
             }
             else // Editing Log
             {
-                _mealModel = existingMeal as MealModel;
+                _mealModel = existingModel as MealModel;
                 LogDateTime = _mealModel.RegisteredTime;
                 LogTimeSpan = new TimeSpan
                 (

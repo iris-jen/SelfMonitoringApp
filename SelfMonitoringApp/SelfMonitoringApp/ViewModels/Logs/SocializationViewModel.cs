@@ -1,5 +1,7 @@
 ﻿using SelfMonitoringApp.Models;
 using SelfMonitoringApp.Models.Base;
+using SelfMonitoringApp.Services;
+using SelfMonitoringApp.Services.Navigation;
 using SelfMonitoringApp.ViewModels.Base;
 
 using System;
@@ -140,7 +142,8 @@ namespace SelfMonitoringApp.ViewModels.Logs
         }
 
 
-        public SocializationViewModel(IModel existingModel = null)
+        public SocializationViewModel(IModel existingModel = null, INavigationService nav = null, IDatabaseService db = null)
+            : base(nav, db)
         {
             if (existingModel is null)
             {

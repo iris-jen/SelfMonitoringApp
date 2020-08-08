@@ -27,31 +27,34 @@
                 <Grid>
                     <!--Date Picker-->
                     <controls:HeaderBlock HeaderText="Date">
-                        <Frame Padding="0" BorderColor="Black">
-                            <DatePicker HorizontalOptions="Center" FontSize="14" Date="{Binding LogTime}" BackgroundColor="White" Margin="0,-10,0,0"/>
+                        <Frame Style="{StaticResource InnerFrameStyle}">
+                            <DatePicker Style="{StaticResource DateSelectorStyle}" Date="{Binding LogTime}"/>
                         </Frame>
                     </controls:HeaderBlock>
                     
                     <!--Time Picker-->
                     <controls:HeaderBlock HeaderText="Time" Grid.Column="1" Margin="0">
-                        <Frame Padding="0" BorderColor="Black">
-                            <TimePicker HorizontalOptions="Center" FontSize="14" Time="{Binding StartTimeSpan}" BackgroundColor="White" Margin="0,-10,0,0"/>
+                        <Frame Style="{StaticResource InnerFrameStyle}">
+                            <TimePicker Style="{StaticResource TimeSelectorStyle}" Time="{Binding StartTimeSpan}"/>
                         </Frame>
                     </controls:HeaderBlock>
                 </Grid>
 
                 <controls:HeaderBlockAddRemove Grid.Row="1" Title="Substance Name" SelectedSuggestion="{Binding SubstanceName}" 
                                                BoxType="{x:Static services:SuggestionTypes.SubstanceNames}"/>
+                
                 <controls:HeaderBlockAddRemove Grid.Row="2" Title="Consumed by" SelectedSuggestion="{Binding ConsumptionMethod}" 
                                                BoxType="{x:Static services:SuggestionTypes.SubstanceConsumptionMethods}"/>
+                
                 <controls:HeaderBlockAddRemove Grid.Row="3" Title="Unit" SelectedSuggestion="{Binding Unit}" 
                                                    BoxType="{x:Static services:SuggestionTypes.Units}"/>
+                
                 <!--Ammount of substance-->
                 <controls:HeaderBlock Grid.Row="4" HeaderText="Qty.">
-                    <Frame Padding="0" BorderColor="Black">
+                    <Frame Style="{StaticResource InnerFrameStyle}">
                         <Grid >
-                            <Entry Text="{Binding Ammount}" Margin="0,-6,0,0" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" BackgroundColor="White"/>
-                            <Stepper Grid.Column="1" Value="{Binding StepperOffset}"  />
+                            <Entry Text="{Binding Ammount}" Margin="10,-6,10,0" HorizontalTextAlignment="Center" TextColor="Black" VerticalTextAlignment="Center" BackgroundColor="White"/>
+                            <Stepper Grid.Column="1" Value="{Binding StepperOffset}" Margin="5" BackgroundColor="{StaticResource Secondary}" />
                         </Grid>
                     </Frame>
                 </controls:HeaderBlock>

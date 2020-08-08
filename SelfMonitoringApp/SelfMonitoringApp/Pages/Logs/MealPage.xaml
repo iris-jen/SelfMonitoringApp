@@ -25,15 +25,15 @@
                 <Grid>
                     <!--Date Picker-->
                     <controls:HeaderBlock HeaderText="Date">
-                        <Frame Padding="0" BorderColor="Black">
-                            <DatePicker HorizontalOptions="Center" BackgroundColor="White" Margin="0,-10,0,0" FontSize="13" Date="{Binding LogDateTime}"/>
+                        <Frame Style="{StaticResource InnerFrameStyle}">
+                            <DatePicker Style="{StaticResource DateSelectorStyle}" FontSize="13" Date="{Binding LogDateTime}"/>
                         </Frame>
                     </controls:HeaderBlock>
 
                     <!--Time Picker-->
                     <controls:HeaderBlock HeaderText="Time" Grid.Column="1" Margin="0">
-                        <Frame Padding="0" BorderColor="Black">
-                            <TimePicker HorizontalOptions="Center" FontSize="14" BackgroundColor="White"  Margin="0,-10,0,0"  Time="{Binding LogTimeSpan}"/>
+                        <Frame Style="{StaticResource InnerFrameStyle}">
+                            <TimePicker Style="{StaticResource TimeSelectorStyle}" Time="{Binding LogTimeSpan}"/>
                         </Frame>
                     </controls:HeaderBlock>
                 </Grid>

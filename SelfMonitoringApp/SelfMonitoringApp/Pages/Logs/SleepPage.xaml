@@ -13,7 +13,8 @@
         <controls:SaveCancelPage CancelCommand="{Binding BackCommand}" PageName="Sleep" SaveCommand="{Binding SaveLogCommand}">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="150"/>
+                    <RowDefinition Height="{StaticResource RowHeightDateTime}"/>
+                    <RowDefinition Height="{StaticResource RowHeightSingle}"/>
                     <RowDefinition Height="{StaticResource RowHeightSlider}"/>
                     <RowDefinition/> 
                 </Grid.RowDefinitions>
@@ -21,89 +22,88 @@
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
-                        <ColumnDefinition Width="0.6*"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
                     <!--Time of sleep box-->
-                    <controls:HeaderBlock HeaderText="Sleep" >
-                        <Frame Padding="0">
+                    <controls:HeaderBlock HeaderText="Sleep"  >
+                        <Frame Style="{StaticResource InnerFrameStyle}">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition/>
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
-                                <TimePicker HorizontalOptions="CenterAndExpand"  FontAttributes="Bold" FontSize="14" BackgroundColor="White"
-                                    Time="{Binding SleepStart}"/>
-                                <DatePicker Grid.Row="1" HorizontalOptions="CenterAndExpand" FontSize="14" FontAttributes="Bold"  Date="{Binding SleepStartDate}" BackgroundColor="White"/>
+                                <TimePicker Style="{StaticResource TimeSelectorStyle}" Time="{Binding SleepStart}"/>
+                                <DatePicker Grid.Row="1" Style="{StaticResource DateSelectorStyle}" Date="{Binding SleepStartDate}"/>
                             </Grid>
                         </Frame>
                     </controls:HeaderBlock>
 
-                    <!--Total sleep box-->
-                    <controls:HeaderBlock HeaderText="Total" Grid.Column="1">
-                        <Frame Padding="5" >
-                            <Label Text="{Binding TotalSleep , StringFormat ='{0:0.0}'}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                        </Frame>
-                    </controls:HeaderBlock>
 
                     <!--Wake up time box-->
-                    <controls:HeaderBlock HeaderText="Wake" Grid.Column="2" >
-                        <Frame Padding="0">
+                    <controls:HeaderBlock HeaderText="Wake" Grid.Column="1">
+                        <Frame Style="{StaticResource InnerFrameStyle}">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition/>
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
-                                <TimePicker HorizontalOptions="Center" FontAttributes="Bold" FontSize="14" Time ="{Binding SleepEnd}" BackgroundColor="White"/>
-                                <DatePicker Grid.Row="1" HorizontalOptions="CenterAndExpand" FontSize="14" Date="{Binding SleepEndDate}" BackgroundColor="White"/>
+                                <TimePicker Style="{StaticResource TimeSelectorStyle}" Time ="{Binding SleepEnd}"/>
+                                <DatePicker Grid.Row="1" Style="{StaticResource DateSelectorStyle}" Date="{Binding SleepEndDate}"/>
                             </Grid>
                         </Frame>
                     </controls:HeaderBlock>
                 </Grid>
 
+
+                <!--Total sleep box-->
+                <controls:HeaderBlock HeaderText="Total" Grid.Row="1">
+                    <Frame Style="{StaticResource InnerFrameStyle}">
+                        <Label Text="{Binding TotalSleep , StringFormat ='{0:0.0}'}" TextColor="Black" Style="{StaticResource InnerLabelStyle}"/>
+                    </Frame>
+                </controls:HeaderBlock>
+
                 <!--Rest rating-->
-                <controls:HeaderBlock HeaderText="How rested do you feel?" Grid.Row="1">
+                <controls:HeaderBlock HeaderText="How rested do you feel?" Grid.Row="2">
                     <controls:RatingSlider  Rating="{Binding RestRating}"/>
                 </controls:HeaderBlock>
 
-                <controls:HeaderBlock Grid.Row="2" HeaderText="Dream Log" Margin="0,0,0,5">
+                <controls:HeaderBlock Grid.Row="3" HeaderText="Dream Log" Margin="0,0,0,5">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="40"/>
-                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="{StaticResource RowHeightSwitch}"/>
+                            <RowDefinition Height="{StaticResource RowHeightSwitch}"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
 
                         <!--Dream Prompt-->
-                        <Frame Padding="0" Grid.Row="0" BorderColor="Black">
+                        <Frame Grid.Row="0" Style="{StaticResource InnerFrameStyle}">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
                                     <ColumnDefinition Width=".5*"/>
                                 </Grid.ColumnDefinitions>
-                                <Label Text="Did you dream?" HorizontalOptions="Center" VerticalOptions="Center"/>
-                                <Frame Grid.Column="1" BackgroundColor="{StaticResource PrimaryLight}" Padding="0" Margin="3">
+                                <Label Text="Did you dream?" Style="{StaticResource InnerLabelStyle}"/>
+                                <Frame Grid.Column="1" BackgroundColor="{StaticResource PrimaryLight}" Padding="0" Margin="3" BorderColor="Black">
                                     <Switch Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" IsToggled="{Binding RememberedDream}" ThumbColor="{StaticResource Secondary}"/>
                                 </Frame>
                             </Grid>
                         </Frame>
-                        
-                        <Frame Padding="0" Grid.Row="1" BorderColor="Black">
+
+                        <Frame Grid.Row="1" Style="{StaticResource InnerFrameStyle}">
                             <Grid>
-                                
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
                                     <ColumnDefinition Width=".5*"/>
                                 </Grid.ColumnDefinitions>
-                                <Label Text="Was it a nightmare?" HorizontalOptions="Center" VerticalOptions="Center"/>
-                                <Frame Grid.Column="1" BackgroundColor="{StaticResource PrimaryLight}" Padding="0" Margin="3">
+                                <Label Text="Was it a nightmare?" Style="{StaticResource InnerLabelStyle}"/>
+                                <Frame Grid.Column="1" BackgroundColor="{StaticResource PrimaryLight}" Padding="0" Margin="3" BorderColor="Black">
                                     <Switch Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" IsToggled="{Binding Nightmare}" ThumbColor="{StaticResource Secondary}"/>
                                 </Frame>
                             </Grid>
                         </Frame>
 
-                        <Frame Grid.Row="2" CornerRadius="5" Padding="5" BorderColor="Black">
+                        <Frame Grid.Row="2" Style="{StaticResource InnerFrameStyle}">
                             <Editor  Text="{Binding DreamLog}" Style="{StaticResource EditorStyle}" Placeholder="What happend in the dream?"/>
                         </Frame>
                     </Grid>

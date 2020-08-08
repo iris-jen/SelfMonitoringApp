@@ -10,8 +10,9 @@
         <ControlTemplate>
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="60"/>
                     <RowDefinition/>
+                    <RowDefinition Height="2"/>
                 </Grid.RowDefinitions>
                 <!--Cancel / save grid-->     
                 <Grid BackgroundColor="{StaticResource Primary}">
@@ -20,19 +21,24 @@
                         <ColumnDefinition />
                         <ColumnDefinition Width="80"/>
                     </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="2"/>
+                    </Grid.RowDefinitions>
                     <ImageButton Source="twotone_backspace_black_48dp.png" BackgroundColor="LightCoral" Command="{TemplateBinding CancelCommand}" Margin="7" BorderColor="Black"/>
                     <ImageButton Source="twotone_save_black_48dp.png" Command="{TemplateBinding SaveCommand}" BackgroundColor="LightGreen" Margin="7"  Grid.Column="2" BorderColor="Black"/>
                     <Frame Margin="6" Padding="1" Grid.Column="1" HasShadow="True" BorderColor="Black" BackgroundColor="White"> 
                         <Label HorizontalOptions="Center" Text="{TemplateBinding PageName}" FontSize="22" TextColor="Black" FontAttributes="Bold"  HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
                     </Frame>
+
+                    <BoxView Grid.Row="1" BackgroundColor="Black" Grid.ColumnSpan="3"/>
                 </Grid>
                 
-                      
-                <ScrollView Grid.Row="1" Margin="2,-6,2,2">
+                <ScrollView Grid.Row="1" Margin="2,-6,2,1">
                     <ContentPresenter HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="5"/>
                 </ScrollView>
 
- 
+                <BoxView Grid.Row="2" BackgroundColor="Black" Margin="-5"/>
             </Grid>
         </ControlTemplate>
     </ContentView.ControlTemplate>

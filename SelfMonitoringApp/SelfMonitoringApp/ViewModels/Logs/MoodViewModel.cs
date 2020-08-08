@@ -1,5 +1,7 @@
 ﻿using SelfMonitoringApp.Models;
 using SelfMonitoringApp.Models.Base;
+using SelfMonitoringApp.Services;
+using SelfMonitoringApp.Services.Navigation;
 using SelfMonitoringApp.ViewModels.Base;
 
 using System;
@@ -78,7 +80,7 @@ namespace SelfMonitoringApp.ViewModels.Logs
             get => _mood.Location;
             set
             {
-                if (_mood.Location ==value)
+                if (_mood.Location == value)
                     return;
 
                 _mood.Location = value;
@@ -100,7 +102,8 @@ namespace SelfMonitoringApp.ViewModels.Logs
         }
         #endregion
 
-        public MoodViewModel(IModel existingModel = null)
+        public MoodViewModel(IModel existingModel = null, INavigationService nav = null, IDatabaseService db = null)
+            : base(nav, db)
         {
             if (existingModel is null) // New Log
             {

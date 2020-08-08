@@ -2,6 +2,7 @@
 using SelfMonitoringApp.Models;
 using SelfMonitoringApp.Models.Base;
 using SelfMonitoringApp.Services;
+using SelfMonitoringApp.Services.Navigation;
 using SelfMonitoringApp.ViewModels.Base;
 
 using System;
@@ -157,12 +158,12 @@ namespace SelfMonitoringApp.ViewModels.Logs
                 NotifyPropertyChanged();
             }
         }
-
         #endregion
 
-        public ActivityViewModel(IModel activityModel = null)
+        public ActivityViewModel(IModel existingModel = null, INavigationService nav = null, IDatabaseService db = null)
+            : base(nav, db)
         {
-            if (activityModel is null)
+            if (existingModel is null)
             {
                 _activity = new ActivityModel();
 
@@ -183,7 +184,7 @@ namespace SelfMonitoringApp.ViewModels.Logs
             }
             else
             {
-                _activity = activityModel as ActivityModel;
+                _activity = existingModel as ActivityModel;
 
                 _startDateTime = _activity.StartTime;
                 _endDateTime = _activity.EndTime;

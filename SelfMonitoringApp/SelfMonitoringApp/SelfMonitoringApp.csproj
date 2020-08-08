@@ -15,6 +15,7 @@
         <PackageReference Include="Acr.UserDialogs" Version="7.1.0.446" />
         <PackageReference Include="Behaviors.Forms" Version="1.4.0" />
         <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+        <PackageReference Include="SkiaSharp.Views.Forms" Version="2.80.1" />
         <PackageReference Include="Splat" Version="9.5.20" />
         <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
         <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
@@ -27,6 +28,9 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Compile Update="Controls\PercentageCircle.xaml.cs">
+        <DependentUpon>PercentageCircle.xaml</DependentUpon>
+      </Compile>
       <Compile Update="Controls\HeaderBlockAddRemove.xaml.cs">
         <DependentUpon>HeaderBlockAddRemove.xaml</DependentUpon>
       </Compile>

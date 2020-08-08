@@ -12,8 +12,10 @@
             <Color x:Key="PrimaryDark">#38006b</Color>
             <Color x:Key="Secondary">#ffc107</Color>
 
-            <GridLength x:Key="RowHeightSingle">100</GridLength>
-            <GridLength x:Key="RowHeightSlider">110</GridLength>
+            <GridLength x:Key="RowHeightSingle">110</GridLength>
+            <GridLength x:Key="RowHeightSlider">130</GridLength>
+            <GridLength x:Key="RowHeightSwitch">50</GridLength>
+            <GridLength x:Key="RowHeightDateTime">160</GridLength>
 
             <Style x:Key="ButtonStyle" TargetType="Button">
                 <Setter Property="BackgroundColor" Value="{StaticResource Secondary}"/>
@@ -57,6 +59,37 @@
                 <Setter Property="Margin" Value="5"/>
             </Style>
 
+            <Style x:Key="DateSelectorStyle" TargetType="DatePicker">
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+
+            <Style x:Key="TimeSelectorStyle" TargetType="TimePicker">
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+   
+            <Style TargetType="Frame" x:Key="InnerFrameStyle">
+                <Setter Property="BackgroundColor" Value="White"/>
+                <Setter Property="BorderColor" Value="Black"/>
+                <Setter Property="HasShadow" Value="True"/>
+                <Setter Property="Padding" Value="0"/>
+            </Style>
+
+            <Style TargetType="Label" x:Key="InnerLabelStyle">
+                <Setter Property="FontSize" Value="14"/>
+
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+            </Style>
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

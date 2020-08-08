@@ -34,8 +34,7 @@
                                 Text="Delete all activity logs" CommandParameter="{x:Static models:ModelType.Activity}" Margin="0"/>
 
                         <Button Grid.Row="6" Command="{Binding DeleteLogCommand}" Style="{StaticResource ButtonStyle}"
-                                Text="Delete all logs" CommandParameter="{x:Static models:ModelType.Activity}" Margin="0"/>
-
+                                Text="Delete all logs" CommandParameter="{x:Static models:ModelType.All}" Margin="0"/>
                     </Grid>
                 </controls:HeaderBlock>
 

@@ -14,83 +14,78 @@
         <controls:SaveCancelPage SaveCommand="{Binding SaveLogCommand}" CancelCommand="{Binding BackCommand}" PageName="Socialization">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="150"/>
+                    <RowDefinition Height="{StaticResource RowHeightDateTime}"/>
+                    <RowDefinition Height="{StaticResource RowHeightSingle}"/>
                     <RowDefinition Height="{StaticResource RowHeightSingle}"/>
                     <RowDefinition Height="{StaticResource RowHeightSlider}"/>
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
+                <!--Start Box-->
                 <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="0.4*"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-
-                    <!--Start Box-->
-                    <controls:HeaderBlock HeaderText="Start" Padding="0">
-                        <Frame Padding="0" BorderColor="Black">
+                    <controls:HeaderBlock HeaderText="Start">
+                        <Frame Style="{StaticResource InnerFrameStyle}">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition/>
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
-                                <TimePicker HorizontalOptions="CenterAndExpand"  FontAttributes="Bold" FontSize="14" BackgroundColor="White"
-                                    Time="{Binding StartTime}" Margin="0,-6,0,0"/>
-                                <DatePicker Grid.Row="1" HorizontalOptions="CenterAndExpand" FontAttributes="Bold" Margin="0,-6,0,0" Date="{Binding StartDateTime}" FontSize="14" BackgroundColor="White"/>
+                                <TimePicker Style="{StaticResource TimeSelectorStyle}" Time="{Binding StartTime}"/>
+                                <DatePicker Style="{d:StaticResource DateSelectorStyle}" Grid.Row="1" Date="{Binding StartDateTime}"/>
                             </Grid>
                         </Frame>
                     </controls:HeaderBlock>
 
-                    <!--Total time box-->
-                    <controls:HeaderBlock HeaderText="Total" Grid.Column="1">
-                        <Frame Padding="5" BorderColor="Black">
-                            <Label Text="{Binding Duration , StringFormat ='{0:0.0}'}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                        </Frame>
-                    </controls:HeaderBlock>
-
                     <!--end time box-->
-                    <controls:HeaderBlock HeaderText="End" Grid.Column="2" Margin="0,0,0,0">
-                        <Frame Padding="0" BorderColor="Black">
+                    <controls:HeaderBlock HeaderText="End" Grid.Column="1">
+                        <Frame Style="{StaticResource InnerFrameStyle}">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition/>
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
-                                <TimePicker HorizontalOptions="Center" FontAttributes="Bold" BackgroundColor="White" FontSize="14" Time ="{Binding EndTime}" Margin="0,-6,0,0"/>
-                                <DatePicker Grid.Row="1" FontAttributes="Bold" FontSize="14" BackgroundColor="White" HorizontalOptions="CenterAndExpand" Date="{Binding EndDateTime}" Margin="0,-6,0,0"/>
+                                <TimePicker Style="{StaticResource TimeSelectorStyle}" Time ="{Binding EndTime}" />
+                                <DatePicker Style="{d:StaticResource DateSelectorStyle}" Grid.Row="1"  Date="{Binding EndDateTime}" />
                             </Grid>
                         </Frame>
                     </controls:HeaderBlock>
                 </Grid>
 
-                <controls:HeaderBlockAddRemove Grid.Row="1" Title="Socialization Type" SelectedSuggestion="{Binding SocializationType}" BoxType="{x:Static services:SuggestionTypes.SocializationTypes}"/>
+                <!--Total time box-->
+                <controls:HeaderBlock HeaderText="Total" Grid.Row="1">
+                    <Frame Style="{StaticResource InnerFrameStyle}">
+                        <Label Text="{Binding Duration , StringFormat ='{0:0.0}'}" Style="{StaticResource InnerLabelStyle}"/>
+                    </Frame>
+                </controls:HeaderBlock>
 
-                <controls:HeaderBlock HeaderText="How much did you enjoy it?" Grid.Row="2">
+                <controls:HeaderBlockAddRemove Grid.Row="2" Title="Socialization Type" 
+                                               SelectedSuggestion="{Binding SocializationType}" BoxType="{x:Static services:SuggestionTypes.SocializationTypes}"/>
+                
+                <controls:HeaderBlock HeaderText="How much did you enjoy it?" Grid.Row="3">
                     <controls:RatingSlider Rating="{Binding Enjoyment}"/>
                 </controls:HeaderBlock>
 
-                <controls:HeaderBlock Grid.Row="3" HeaderText="Details">
+                <controls:HeaderBlock Grid.Row="4" HeaderText="Details">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="{StaticResource RowHeightSwitch}"/>
                             <RowDefinition />
                         </Grid.RowDefinitions>
 
-                        <Frame Padding="0" BorderColor="Black">
+                        <Frame Style="{StaticResource InnerFrameStyle}">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
                                     <ColumnDefinition Width=".5*"/>
                                 </Grid.ColumnDefinitions>
-                                <Label Text="Did you want to do it?" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                <Label Text="Did you want to do it?" Style="{StaticResource InnerLabelStyle}"/>
                                 <Frame Grid.Column="1" BackgroundColor="{StaticResource PrimaryLight}" Padding="0" Margin="3">
                                     <Switch Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" ThumbColor="{StaticResource Secondary}" IsToggled="{Binding WantedToSocialize}"/>
                                 </Frame>
                             </Grid>
                         </Frame>
 
-                        <Frame Grid.Row="1" Padding="0" BorderColor="Black">
+                        <Frame Grid.Row="1" Style="{StaticResource InnerFrameStyle}">
                             <Editor Placeholder="Any Comments?" Style="{StaticResource EditorStyle}" Margin="5" Text="{Binding Comments}"/>
                         </Frame>
                     </Grid>

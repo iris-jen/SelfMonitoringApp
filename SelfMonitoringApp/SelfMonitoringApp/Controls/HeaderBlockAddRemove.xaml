@@ -11,30 +11,34 @@
     <Frame.Content>
         <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
             <Grid.RowDefinitions>
-                <RowDefinition Height="28"/>
+                <RowDefinition Height="32"/>
                 <RowDefinition Height="2"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Label x:Name="HeaderLabel" FontSize="18" FontAttributes="Bold" 
-                           FontFamily="Roboto" Padding="0"
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="30"/>
+                </Grid.ColumnDefinitions>
+
+                <ImageButton Margin="0,4,0,0" Source="twotone_add_box_black_48dp.png" BackgroundColor="LightGreen" 
+                             Opacity=".9" x:Name="AddButton" HorizontalOptions="Center" Grid.Column="2" BorderColor="Black" BorderWidth="1" VerticalOptions="Center" />
+
+                <Label x:Name="HeaderLabel" FontSize="18" FontAttributes="Bold" Grid.Column="1"
+                           FontFamily="Roboto" Padding="0" Margin="0,4,0,0"
                            TextColor="White" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+
+                <ImageButton Source="twotone_delete_forever_black_48dp.png" Margin="0,4,0,0" Padding="0" Opacity="0.9"
+                             Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="LightCoral" BorderColor="Black" BorderWidth="1" Pressed="RemoveButton_Pressed"/>
+            </Grid>
+            
+
             <BoxView Grid.Row="1" BackgroundColor="{StaticResource Secondary}" />
 
-            <Frame Grid.Row="2" Padding="0" BorderColor="Black" BackgroundColor="White">
-                <Grid  >
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="30"/>
-                        <ColumnDefinition Width="30"/>
-                        <ColumnDefinition Width="2"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Picker x:Name="HeaderPicker" SelectedIndexChanged="HeaderPicker_SelectedIndexChanged" Margin="5" BackgroundColor="White" TextColor="Black"/>
-
-                    <ImageButton Grid.Column="1" Margin="0,4,0,4" Source="twotone_add_box_black_48dp.png" BackgroundColor="LightGreen" BorderColor="Black" BorderWidth="1" x:Name="AddButton" />
-                    <ImageButton Grid.Column="2" Margin="0,4,0,4" Source="twotone_delete_forever_black_48dp.png"  BackgroundColor="LightCoral"  BorderColor="Black" BorderWidth="1" Pressed="RemoveButton_Pressed"/>
-
-                </Grid>
+            <Frame Grid.Row="2" Style="{StaticResource InnerFrameStyle}">
+                <Picker HorizontalTextAlignment="Center" x:Name="HeaderPicker" Margin="10,-10,10,0" FontSize="16" VerticalTextAlignment="Center" VerticalOptions="Center"
+                        SelectedIndexChanged="HeaderPicker_SelectedIndexChanged" BackgroundColor="White" TextColor="Black"/>
             </Frame>
         </Grid>
     </Frame.Content>
