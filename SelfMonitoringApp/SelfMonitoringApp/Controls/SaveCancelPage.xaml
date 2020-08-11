@@ -17,9 +17,9 @@
                 <!--Cancel / save grid-->     
                 <Grid BackgroundColor="{StaticResource Primary}">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="60"/>
                         <ColumnDefinition />
-                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="60"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition/>

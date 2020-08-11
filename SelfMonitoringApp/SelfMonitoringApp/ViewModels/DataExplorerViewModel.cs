@@ -48,6 +48,20 @@ namespace SelfMonitoringApp.ViewModels
             }
         }
 
+        private string _dateDisplay;
+        public string DateDisplay
+        {
+            get => _dateDisplay;
+            set
+            {
+                if (_dateDisplay == value)
+                    return;
+
+                _dateDisplay = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public Command LoadDataCommand { get; private set; }
         public DataExplorerViewModel()
         {
@@ -61,7 +75,8 @@ namespace SelfMonitoringApp.ViewModels
 
         public async Task<ObservableCollection<DaySummaryViewModel>> GetDateFilteredData(DateTime startDate, DateTime endDate)
         {
-            
+            DateDisplay = $"From: {startDate:ddd dd MMM}\nTo: {endDate:ddd dd MMM}";
+
             var filteredData = new ObservableCollection<DaySummaryViewModel>();
             if (startDate <= endDate)
             {

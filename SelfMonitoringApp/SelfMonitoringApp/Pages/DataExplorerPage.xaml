@@ -4,11 +4,14 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             NavigationPage.HasNavigationBar="True"
+             NavigationPage.HasNavigationBar="False"
+
              Title="View Data"
              Visual="Material"
              xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
              xmlns:models ="clr-namespace:SelfMonitoringApp.Models.Base"
+
+             BackgroundColor="White"
              x:Class="SelfMonitoringApp.Pages.DataExplorerPage">
     <ContentPage.Resources>
         <GridLength x:Key="EditDeleteHeght">40</GridLength>
@@ -31,344 +34,544 @@
             <Setter Property="FontAttributes" Value="Bold"/>
         </Style>
 
+        <DataTemplate x:Key="MoodDataTemplate" >
+            <Grid>
+                <Frame Margin="10" Padding="2" BorderColor="Black" CornerRadius="10" BackgroundColor="White">
+                    <StackLayout>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width=".4*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Column="0" Margin="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="1"/>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="1"/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Column="0">
+                                    <Label Text="Time" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Style="{StaticResource HeaderLabel}"/>
+                                    <Label Text="{Binding RegisteredTime, StringFormat='{0:hh:mm tt}'}" HorizontalOptions="CenterAndExpand" 
+                                                                                       VerticalOptions="Start" Style="{StaticResource InnerLabelStyle}" Grid.Row="1"/>
+                                </Grid>
+
+                                <Grid Grid.Column="1">
+                                    <Label Text="Location" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Style="{StaticResource HeaderLabel}"/>
+                                    <Label Text="{Binding Location}" HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Style="{StaticResource InnerLabelStyle}" Grid.Row="1"/>
+                                </Grid>
+                                <BoxView BackgroundColor="Black" Grid.Row="1" Grid.ColumnSpan="2"/>
+                                <Grid Grid.ColumnSpan="2" Grid.Row="2">
+
+                                    <Label Text="Strongest Emotion:"  Style="{StaticResource HeaderLabel}"/>
+                                    <Label Text="{Binding StrongestEmotion}" Style="{StaticResource InnerLabelStyle}" Grid.Column="1"/>
+                                </Grid>
+                                <BoxView BackgroundColor="Black" Grid.Row="3" Grid.ColumnSpan="2"/>
+                            </Grid>
+
+                            <Grid Margin="10" Grid.Column="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Label Text="{Binding OverallMood, StringFormat='Overall: {0:F1} / 10'}"  Style="{StaticResource HeaderLabel}"/>
+                                <controls:PercentageCircle HasShadow="False" Ammount="{Binding OverallMood}" Grid.Row="1" Padding="4"/>
+                            </Grid>
+                        </Grid>
+                        <Label Text="{Binding Description}" MinimumHeightRequest="100" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  Margin="5" TextColor="Black"/>
+                    </StackLayout>
+                </Frame>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="SocialDataTemplate" >
+            <Grid>
+                <Frame Margin="10" Padding="2" BorderColor="Black" CornerRadius="10" BackgroundColor="White">
+                    <StackLayout>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width=".4*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Column="0" Margin="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="1"/>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="1"/>
+                                </Grid.RowDefinitions>
+                                
+                                <Grid>
+                                    <Grid Grid.Column="0">
+                                        <Label Text="Start" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Style="{StaticResource HeaderLabel}"/>
+                                        <Label Text="{Binding StartTime, StringFormat='{0:hh:mm tt}'}" HorizontalOptions="CenterAndExpand" 
+                                                                                       VerticalOptions="Start" Style="{StaticResource InnerLabelStyle}" Grid.Row="1"/>
+                                    </Grid>
+
+                                    <Grid Grid.Column="1">
+                                        <Label Text="End" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Style="{StaticResource HeaderLabel}"/>
+                                        <Label Text="{Binding EndTime, StringFormat='{0:hh:mm tt}'}" HorizontalOptions="CenterAndExpand" 
+                                                                                       VerticalOptions="Start" Style="{StaticResource InnerLabelStyle}" Grid.Row="1"/>
+                                    </Grid>
+
+                                    <Grid Grid.Column="2">
+                                        <Label Text="Total" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Style="{StaticResource HeaderLabel}"/>
+                                        <Label Text="{Binding Duration, StringFormat='{0:F2} hours'}" HorizontalOptions="CenterAndExpand" 
+                                                                                       VerticalOptions="Start" Style="{StaticResource InnerLabelStyle}" Grid.Row="1"/>
+                                    </Grid>
+                                </Grid>
+                                <BoxView BackgroundColor="Black" Grid.Row="1" />
+
+                                <Grid Grid.Column="0" Grid.Row="2">
+             
+                                    <Grid Grid.Column="0">
+                                        <Label Text="What did you do?" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Style="{StaticResource HeaderLabel}"/>
+                                        <Label Text="{Binding SocializationType}" HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Style="{StaticResource InnerLabelStyle}" Grid.Row="1"/>
+                                    </Grid>
+                                    
+                                    <Grid Grid.Column="1">
+                                        <Label Text="Did you want to?" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Style="{StaticResource HeaderLabel}"/>
+                                        <CheckBox IsChecked="{Binding WantedToSocialize}" IsEnabled="False" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Grid.Row="1"/>
+                                    </Grid>
+                                </Grid>
+
+                                <BoxView BackgroundColor="Black" Grid.Row="3" />
+                            </Grid>
+
+                            <Grid Margin="10" Grid.Column="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Label Text="{Binding Enjoyment, StringFormat='Enjoyment: {0:F1} / 10'}"  Style="{StaticResource HeaderLabel}"/>
+                                <controls:PercentageCircle HasShadow="False" Ammount="{Binding Enjoyment}" Grid.Row="1" Padding="4"/>
+                            </Grid>
+                        </Grid>
+                        <Label Text="{Binding Comments}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  Margin="5" TextColor="Black"/>
+                    </StackLayout>
+                </Frame>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="ActivityDataTemplate" >
+            <Grid>
+                <Frame Margin="10" Padding="2" BorderColor="Black" CornerRadius="10" BackgroundColor="White">
+                    <StackLayout>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width=".4*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Column="0" Margin="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="1"/>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="1"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid>
+                                    <Grid Grid.Column="0">
+                                        <Label Text="Start" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Style="{StaticResource HeaderLabel}"/>
+                                        <Label Text="{Binding StartTime, StringFormat='{0:hh:mm tt}'}" HorizontalOptions="CenterAndExpand" 
+                                                                                       VerticalOptions="Start" Style="{StaticResource InnerLabelStyle}" Grid.Row="1"/>
+                                    </Grid>
+
+                                    <Grid Grid.Column="1">
+                                        <Label Text="End" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Style="{StaticResource HeaderLabel}"/>
+                                        <Label Text="{Binding EndTime, StringFormat='{0:hh:mm tt}'}" HorizontalOptions="CenterAndExpand" 
+                                                                                       VerticalOptions="Start" Style="{StaticResource InnerLabelStyle}" Grid.Row="1"/>
+                                    </Grid>
+
+                                    <Grid Grid.Column="2">
+                                        <Label Text="Total" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Style="{StaticResource HeaderLabel}"/>
+                                        <Label Text="{Binding Duration, StringFormat='{0:F2} hours'}" HorizontalOptions="CenterAndExpand" 
+                                                                                       VerticalOptions="Start" Style="{StaticResource InnerLabelStyle}" Grid.Row="1"/>
+                                    </Grid>
+                                </Grid>
+                                <BoxView BackgroundColor="Black" Grid.Row="1" />
+
+                                <Grid Grid.Column="0" Grid.Row="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1.5*"/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Grid.Column="0">
+                                        <Label Text="Name" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Style="{StaticResource HeaderLabel}"/>
+                                        <Label Text="{Binding ActivityName}" HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Style="{StaticResource InnerLabelStyle}" Grid.Row="1"/>
+                                    </Grid>
+
+                                    <Grid Grid.Column="1">
+                                        <Label Text="Want to" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Style="{StaticResource HeaderLabel}"/>
+                                        <CheckBox IsChecked="{Binding WantedToStart}" IsEnabled="False" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Grid.Row="1"/>
+                                    </Grid>
+
+                                    <Grid Grid.Column="2">
+                                        <Label Text="Exercise" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Style="{StaticResource HeaderLabel}"/>
+                                        <CheckBox IsChecked="{Binding Exersice}" IsEnabled="False" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Grid.Row="1"/>
+                                    </Grid>
+                                </Grid>
+
+                                <BoxView BackgroundColor="Black" Grid.Row="3" />
+                            </Grid>
+
+                            <Grid Margin="10" Grid.Column="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Label Text="{Binding Enjoyment, StringFormat='Enjoyment: {0:F1} / 10'}"  Style="{StaticResource HeaderLabel}"/>
+                                <controls:PercentageCircle HasShadow="False" Ammount="{Binding Enjoyment}" Grid.Row="1" Padding="4"/>
+                            </Grid>
+                        </Grid>
+                        <Label Text="{Binding Comments}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  Margin="5" TextColor="Black"/>
+                    </StackLayout>
+                </Frame>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="SubstanceDataTemplate" >
+            <Grid>
+                <Frame Margin="10" Padding="2" BorderColor="Black" CornerRadius="10" BackgroundColor="White">
+                    <StackLayout>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width=".4*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Column="0" Margin="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="1"/>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="1"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid>
+                                    <Grid Grid.Column="0">
+                                        <Label Text="Time" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Style="{StaticResource HeaderLabel}"/>
+                                        <Label Text="{Binding RegisteredTime, StringFormat='{0:hh:mm tt}'}" HorizontalOptions="CenterAndExpand" 
+                                                                                       VerticalOptions="Start" Style="{StaticResource InnerLabelStyle}" Grid.Row="1"/>
+                                    </Grid>
+
+                                    <Grid Grid.Column="1">
+                                        <Label Text="Name" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Style="{StaticResource HeaderLabel}"/>
+                                        <Label Text="{Binding SubstanceName}" HorizontalOptions="CenterAndExpand" 
+                                                                                       VerticalOptions="Start" Style="{StaticResource InnerLabelStyle}" Grid.Row="1"/>
+                                    </Grid>
+                                </Grid>
+                                <BoxView BackgroundColor="Black" Grid.Row="1" />
+
+                                <Grid Grid.Column="0" Grid.Row="2">
+
+                                    <Grid Grid.Column="0">
+                                        <Label Text="How" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Style="{StaticResource HeaderLabel}"/>
+                                        <Label Text="{Binding ConsumptionMethod}" HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Style="{StaticResource InnerLabelStyle}" Grid.Row="1"/>
+                                    </Grid>
+
+                                    <Grid Grid.Column="1">
+                                        <Label Text="Amount" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Style="{StaticResource HeaderLabel}"/>
+                                        <Label Text="{Binding Amount}" Style="{StaticResource InnerLabelStyle}"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Grid.Row="1"/>
+                                    </Grid>
+
+                                    <Grid Grid.Column="2">
+                                        <Label Text="Unit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Style="{StaticResource HeaderLabel}"/>
+                                        <Label Text="{Binding Unit}" Style="{StaticResource InnerLabelStyle}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Grid.Row="1"/>
+                                    </Grid>
+                                </Grid>
+
+                                <BoxView BackgroundColor="Black" Grid.Row="3" />
+                            </Grid>
+
+                            <Grid Margin="10" Grid.Column="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Label Text="{Binding Satisfaction, StringFormat='Enjoyment: {0:F1} / 10'}"  Style="{StaticResource HeaderLabel}"/>
+                                <controls:PercentageCircle HasShadow="False" Ammount="{Binding Satisfaction}" Grid.Row="1" Padding="4"/>
+                            </Grid>
+                        </Grid>
+                    </StackLayout>
+                </Frame>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="SleepDataTemplate">
+            <Grid>
+                <Frame Margin="10" Padding="2" BorderColor="Black" CornerRadius="10" BackgroundColor="White">
+                    <StackLayout>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width=".4*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Column="0" Margin="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="1"/>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="1"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid>
+                                    <Grid Grid.Column="0">
+                                        <Label Text="Start" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Style="{StaticResource HeaderLabel}"/>
+                                        <Label Text="{Binding SleepStartDate, StringFormat='{0:hh:mm tt}'}" HorizontalOptions="CenterAndExpand" 
+                                                                                       VerticalOptions="Start" Style="{StaticResource InnerLabelStyle}" Grid.Row="1"/>
+                                    </Grid>
+
+                                    <Grid Grid.Column="1">
+                                        <Label Text="End" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Style="{StaticResource HeaderLabel}"/>
+                                        <Label Text="{Binding SleepEndDate, StringFormat='{0:hh:mm tt}'}" HorizontalOptions="CenterAndExpand" 
+                                                                                       VerticalOptions="Start" Style="{StaticResource InnerLabelStyle}" Grid.Row="1"/>
+                                    </Grid>
+
+                                    <Grid Grid.Column="2">
+                                        <Label Text="Total" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Style="{StaticResource HeaderLabel}"/>
+                                        <Label Text="{Binding TotalSleep, StringFormat='{0:F2} hours'}" HorizontalOptions="CenterAndExpand" 
+                                                                                       VerticalOptions="Start" Style="{StaticResource InnerLabelStyle}" Grid.Row="1"/>
+                                    </Grid>
+                                </Grid>
+                                <BoxView BackgroundColor="Black" Grid.Row="1" />
+
+                                <Grid Grid.Column="0" Grid.Row="2">
+
+                                    <Grid Grid.Column="0">
+                                        <Label Text="Nightmare?" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Style="{StaticResource HeaderLabel}"/>
+                                        <CheckBox IsChecked="{Binding RememberedDream}" IsEnabled="False" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Grid.Row="1"/>
+                                    </Grid>
+
+                                    <Grid Grid.Column="1">
+                                        <Label Text="Dream?" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Style="{StaticResource HeaderLabel}"/>
+                                        <CheckBox IsChecked="{Binding Nightmare}" IsEnabled="False" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Grid.Row="1"/>
+                                    </Grid>
+                                </Grid>
+
+                                <BoxView BackgroundColor="Black" Grid.Row="3" />
+                            </Grid>
+
+                            <Grid Margin="10" Grid.Column="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Label Text="{Binding RestRating, StringFormat='Rest Rating: {0:F1} / 10'}"  Style="{StaticResource HeaderLabel}"/>
+                                <controls:PercentageCircle HasShadow="False" Ammount="{Binding RestRating}" Grid.Row="1" Padding="4"/>
+                            </Grid>
+                        </Grid>
+                        <Label Text="{Binding DreamLog}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  Margin="5" TextColor="Black"/>
+                    </StackLayout>
+                </Frame>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="MealDataTemplate" >
+            <Grid>
+                <Frame Margin="10" Padding="2" BorderColor="Black" CornerRadius="10" BackgroundColor="White">
+                    <StackLayout>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width=".4*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Column="0" Margin="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="1"/>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="1"/>
+                                </Grid.RowDefinitions>
+                                
+                                <!--Time-->
+                                <Grid Grid.Column="0">
+                                    <Label Text="Time" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Style="{StaticResource HeaderLabel}"/>
+                                    <Label Text="{Binding RegisteredTime, StringFormat='{0:hh:mm tt}'}" HorizontalOptions="CenterAndExpand" 
+                                                                                       VerticalOptions="Start" Style="{StaticResource InnerLabelStyle}" Grid.Row="1"/>
+                                </Grid>
+
+                                <!--Meal Type-->
+                                <Grid Grid.Column="1">
+                                    <Label Text="Type" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Style="{StaticResource HeaderLabel}"/>
+                                    <Label Text="{Binding MealType}" HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Style="{StaticResource InnerLabelStyle}" Grid.Row="1"/>
+                                </Grid>
+                                <BoxView BackgroundColor="Black" Grid.Row="1" Grid.ColumnSpan="2"/>
+
+                                <!--Meal size and description-->
+                                <Grid  Grid.Row="2" >
+                                    <Label Text="Size" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Style="{StaticResource HeaderLabel}"/>
+                                    <Label Text="{Binding MealSize}" Style="{StaticResource InnerLabelStyle}" Grid.Row="1" />
+                                </Grid>
+                                <Grid Grid.Column="1"  Grid.Row="2">
+                                    <Label Text="Size" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Style="{StaticResource HeaderLabel}"/>
+                                    <Label Text="{Binding Description}" HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Style="{StaticResource InnerLabelStyle}" Grid.Row="1"/>
+                                </Grid>
+
+                                <BoxView BackgroundColor="Black" Grid.Row="3" Grid.ColumnSpan="2"/>
+                            </Grid>
+                            
+                            <!--Satisfaction indicator-->
+                            <Grid Margin="10" Grid.Column="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Label Text="{Binding Satisfaction, StringFormat='Satisfaction: {0:F1} / 10'}"  Style="{StaticResource HeaderLabel}"/>
+                                <controls:PercentageCircle HasShadow="False" Ammount="{Binding Satisfaction}" Grid.Row="1" Padding="4"/>
+                            </Grid>
+                        </Grid>
+
+                    </StackLayout>
+                </Frame>
+            </Grid>
+        </DataTemplate>
+
     </ContentPage.Resources>
     
     <ContentPage.Content>
-        <StackLayout Margin="0,0,0,0">
+        <StackLayout Margin="0" BackgroundColor="White">
+
+            <!--Top filter and navigation bar-->
+            <Grid HeightRequest="80" BackgroundColor="{StaticResource Primary}">
+                <Grid.ColumnDefinitions>
+                <ColumnDefinition Width=".5*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width=".5*"/>
+                <ColumnDefinition Width="70"/>
+
+                </Grid.ColumnDefinitions>
+
+                <ImageButton Grid.Column="0" Padding="0" Command="{Binding BackCommand}" Source="sharp_arrow_back_white_48dp.png" 
+                                Margin="5" CornerRadius="10" BorderColor="Black" BackgroundColor="Transparent"/>
+
+                <Frame Style="{StaticResource InnerFrameStyle}" Grid.Column="1" Margin="5" BackgroundColor="White">
+                     <Label Text="{Binding DateDisplay}" TextColor="Black" FontSize="16" Style="{StaticResource HeaderLabel}"/>
+                </Frame>
+
+                <ImageButton Grid.Column="2" Padding="0" Command="{Binding LoadDataCommand}" Source="baseline_filter_alt_black_48dp.png" 
+                            Margin="5" CornerRadius="10" BorderColor="Black" BackgroundColor="{StaticResource Secondary}" BorderWidth="1"/>
+
+                <ActivityIndicator Grid.Column="3" IsRunning="True" IsVisible="{Binding Loading}" Margin="5" BackgroundColor="White"/>
+            </Grid>
+
             <!--Item Carousel-->
-            <CarouselView BackgroundColor="White" ItemsSource="{Binding DaySummaries}" Margin="0,7,0,2" IndicatorView="indicatorView">
+            <CarouselView BackgroundColor="White" ItemsSource="{Binding DaySummaries}" Margin="5,0,5,5" IndicatorView="indicatorView" >
                 <CarouselView.ItemTemplate>
                     <DataTemplate>
                         <!--Item-->
                         <controls:HeaderBlock HorizontalOptions="CenterAndExpand" HeaderText="{Binding Date}">
-                            <StackLayout>
-                                
-                                <!--Sleep Box-->
-                                <controls:LogView Title="Sleep" IsVisible="{Binding SleepsVisibility}" Margin="5,0,5,0">
-                                    <StackLayout>
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="70"/>
+                                </Grid.RowDefinitions>
+
+                                <StackLayout Margin="0,0,0,-15">
+                                    <!--Sleep Box-->
+                                    <controls:LogView Title="Sleep" IsVisible="{Binding SleepsVisibility}" Margin="5,0,5,0" ModelType="{x:Static models:ModelType.Sleep}"
+                                                      EditCommand="{Binding EditSelectedCommand}" DeleteCommand="{Binding DeleteSelectedCommand}" AddCommand="{Binding AddSelectedCommand}" >
                                         <!--Sleep Collection View-->
-                                        <CollectionView ItemsSource="{Binding Sleeps}" Grid.Row="1" SelectionMode="Single" SelectedItem="{Binding SelectedSleep}">
-                                            <CollectionView.ItemTemplate>
-                                                <DataTemplate>
-                                                    <!--Block-->
-                                                    <controls:HeaderBlockLight Margin="0" Padding="0" HeaderText="{Binding TotalSleep, StringFormat='{0:F1} hours'}">
-                                                        <Frame Margin="2" Padding="0">
-                                                            <StackLayout Padding="0">
+                                        <CollectionView ItemsSource="{Binding Sleeps}" Grid.Row="1" SelectionMode="Single" SelectedItem="{Binding SelectedSleep}"
+                                                        ItemTemplate="{StaticResource SleepDataTemplate}"/>
 
-                                                                <Grid HeightRequest="80">
+                                    </controls:LogView >
 
-                                                                    <Label Text="Start" Style="{StaticResource HeaderLabel}"/>
-                                                                    <Label Text="{Binding SleepStartDate, StringFormat='{0:hh:mm tt}'}" Style="{StaticResource ListBoxLabel}" Grid.Row="1"/>
+                                    <!--Mood Box-->
+                                    <controls:LogView Title="Mood" IsVisible="{Binding MoodsVisibility}" Margin="5,0,5,0" AddCommand="{Binding AddSelectedCommand}" 
+                                                      ModelType="{x:Static models:ModelType.Mood}" EditCommand="{Binding EditSelectedCommand}" DeleteCommand="{Binding DeleteSelectedCommand}">
+                                        <!--Mood Items-->
+                                        <CollectionView ItemsSource="{Binding Moods}" SelectionMode="Single" SelectedItem="{Binding SelectedMood}" 
+                                                            Grid.Row="1" Background="White" ItemTemplate="{StaticResource MoodDataTemplate}"/>
+                                    </controls:LogView >
 
-                                                                    <Label Text="End" Style="{StaticResource HeaderLabel}" Grid.Column="1"/>
-                                                                    <Label Text="{Binding SleepEndDate, StringFormat='{0:hh:mm tt}'}" Style="{StaticResource ListBoxLabel}" Grid.Column="1" Grid.Row="1"/>
+                                    <!--Meal Box-->
+                                    <controls:LogView Title="Meal" IsVisible="{Binding MealsVisibility}" Margin="5,0,5,0" ModelType="{x:Static models:ModelType.Meal}"
+                                                      EditCommand="{Binding EditSelectedCommand}" DeleteCommand="{Binding DeleteSelectedCommand}" AddCommand="{Binding AddSelectedCommand}" >
+                                        <!--Meal Items-->
+                                        <CollectionView ItemsSource="{Binding Meals}" SelectionMode="Single" SelectedItem="{Binding SelectedMeal}" 
+                                                            Grid.Row="1" Background="White" ItemTemplate="{StaticResource MealDataTemplate}"/>
+                                    </controls:LogView >
 
-                                                                    <Label Text="Rest Rating" Style="{StaticResource HeaderLabel}" Grid.Column="2" Grid.ColumnSpan="2"/>
-                                                                    <Label Text="{Binding RestRating, StringFormat='{0:F1} / 10'}" Style="{StaticResource ListBoxLabel}" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2"/>
+                                    <!--Activities Box-->
+                                    <controls:LogView Title="Activity" IsVisible="{Binding ActivitiesVisibility}" Margin="5,0,5,0" ModelType="{x:Static models:ModelType.Activity}"
+                                                      EditCommand="{Binding EditSelectedCommand}" DeleteCommand="{Binding DeleteSelectedCommand}" AddCommand="{Binding AddSelectedCommand}" >
+                                        <!--Activity Items-->
+                                        <CollectionView ItemsSource="{Binding Activities}" SelectionMode="Single" SelectedItem="{Binding SelectedActivity}"  ItemTemplate="{StaticResource ActivityDataTemplate}" 
+                                                            Grid.Row="1" Background="White"/>
+                                    </controls:LogView >
 
-                                                                    <Label Text="Had Dream" Style="{StaticResource HeaderLabel}" Grid.Row="2" Grid.ColumnSpan="2"/>
-                                                                    <CheckBox IsChecked="{Binding RememberedDream}" Color="Black" IsEnabled="False" HorizontalOptions="Center"  
-                                                                            Grid.Row="3" Grid.ColumnSpan="2"/>
-
-                                                                    <Label Text="Was Nightmare" Style="{StaticResource HeaderLabel}" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="2"/>
-                                                                    <CheckBox IsChecked="{Binding Nightmare}" Grid.Column="2" Color="Black" IsEnabled="False" HorizontalOptions="Center"  
-                                                                                Grid.Row="3" Grid.ColumnSpan="2"/>
-
-                                                                </Grid>
-                                                                <Label Text="{Binding DreamLog}" Grid.Row="1" Style="{StaticResource ListBoxLabel}" />
-                                                            </StackLayout>
-                                                        </Frame>
-                                                    </controls:HeaderBlockLight>
-                                                </DataTemplate>
-                                            </CollectionView.ItemTemplate>
-                                        </CollectionView>
-                                        <Grid HeightRequest="90" Margin="-4,-8,-2,-2" Padding="0" BackgroundColor="DarkGray">
-                                            <Button Text="Edit" Padding="0" Style="{StaticResource ButtonStyleSmall}" Command="{Binding EditSelectedCommand}" 
-                                                    CommandParameter="{x:Static models:ModelType.Sleep}"/>
-                                            <Button Text="Delete" Grid.Column="1" Style="{StaticResource ButtonStyleSmall}" Command="{Binding DeleteSelectedCommand}" 
-                                                    CommandParameter="{x:Static models:ModelType.Sleep}"/>
-                                        </Grid>
-                                    </StackLayout>
-                                </controls:LogView > 
-
-                                <!--Mood Box-->
-                                <controls:LogView Title="Mood" IsVisible="{Binding MoodsVisibility}" Margin="5,0,5,0">
-
-                                    <StackLayout Padding="0">
-                                        <!--Mood Collection View-->
-                                        <CollectionView ItemsSource="{Binding Moods}" SelectionMode="Single" SelectedItem="{Binding SelectedMood}" Grid.Row="1">
-                                            <CollectionView.ItemTemplate>
-                                                <DataTemplate>
-                                                    <Grid>
-
-                                                        <Frame Margin="10" Padding="0" BorderColor="Black" CornerRadius="20">
-
-                                                            <StackLayout>
-                                                                <Grid>
-
-                                                                    <Grid.ColumnDefinitions>
-                                                                        <ColumnDefinition/>
-                                                                        <ColumnDefinition Width="120"/>
-                                                                    </Grid.ColumnDefinitions>
-
-                                                                    <Grid Grid.Column="0" Margin="10">
-                                                                        <Grid.RowDefinitions>
-                                                                            <RowDefinition/>
-                                                                            <RowDefinition Height="1"/>
-                                                                            <RowDefinition/>
-                                                                            <RowDefinition Height="1"/>
-                                                                        </Grid.RowDefinitions>
-                                                                        <Grid Grid.Column="0">
-                                                                            <Label Text="Time" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Style="{StaticResource HeaderLabel}"/>
-                                                                            <Label Text="{Binding RegisteredTime, StringFormat='{0:hh:mm tt}'}" 
-                                                                           HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Style="{StaticResource InnerLabelStyle}" Grid.Row="1"/>
-                                                                        </Grid>
-
-                                                                        <Grid Grid.Column="1">
-                                                                            <Label Text="Location" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Style="{StaticResource HeaderLabel}"/>
-                                                                            <Label Text="{Binding Location}"
-                                                                           HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Style="{StaticResource InnerLabelStyle}" Grid.Row="1"/>
-                                                                        </Grid>
-                                                                        <BoxView BackgroundColor="Black" Grid.Row="1" Grid.ColumnSpan="2"/>
-                                                                        <Grid Grid.ColumnSpan="2" Grid.Row="2">
-                                                                            
-                                                                            <Label Text="Strongest Emotion:"  Style="{StaticResource HeaderLabel}"/>
-                                                                            <Label Text="{Binding StrongestEmotion}" Style="{StaticResource InnerLabelStyle}" Grid.Column="1"/>
-                                                                        </Grid>
-                                                                        <BoxView BackgroundColor="Black" Grid.Row="3" Grid.ColumnSpan="2"/>
-                                                                    </Grid>
-
-                                                                    <Grid Margin="10" Grid.Column="1">
-                                                                        <Grid.RowDefinitions>
-                                                                            <RowDefinition Height="30"/>
-                                                                            <RowDefinition/>
-                                                                        </Grid.RowDefinitions>
-                                                                        <Label Text="{Binding OverallMood, StringFormat='Overall: {0:F1} / 10'}"  Style="{StaticResource HeaderLabel}"/>
-                                                                        <controls:PercentageCircle HasShadow="False" Ammount="{Binding OverallMood}" Grid.Row="1" Padding="4"/>
-
-                                                                    </Grid>
-                                                                </Grid>
-                                                                <Label Text="{Binding Description}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  Margin="5" TextColor="Black"/>
-                                                            </StackLayout>
-
-                                                        </Frame>
-                                                    </Grid>
-
-                                                </DataTemplate>
-                                            </CollectionView.ItemTemplate>
-                                        </CollectionView>
-                                    </StackLayout>
-                                </controls:LogView >
-
-                                <!--Meal Box-->
-                                <controls:LogView Title="Meal" IsVisible="{Binding MealsVisibility}" Margin="5,0,5,0">
-                                    <!--<StackLayout>
-                                        --><!--Mood Collection View--><!--
-                                        <CollectionView ItemsSource="{Binding Meals}" Grid.Row="1" SelectionMode="Single" SelectedItem="{Binding SelectedMeal}">
-                                            <CollectionView.ItemTemplate>
-                                                <DataTemplate>
-
-                                                    --><!--Block--><!--
-                                                    <controls:HeaderBlockLight Margin="0" Padding="0" HeaderText="{Binding Description}">
-                                                        <Frame Margin="2" Padding="0">
-                                                            <StackLayout Padding="0">
-                                                                <Grid HeightRequest="40">
-                                                                    <Grid.ColumnDefinitions>
-                                                                        <ColumnDefinition Width=".4*"/>
-                                                                        <ColumnDefinition/>
-                                                                        <ColumnDefinition/>
-                                                                    </Grid.ColumnDefinitions>
-                                                                    <Label Text="Time" Style="{StaticResource HeaderLabel}"/>
-                                                                    <Label Text="{Binding RegisteredTime, StringFormat='{0:hh:mm tt}'}" Style="{StaticResource ListBoxLabel}" Grid.Row="1"/>
-
-                                                                    <Label Text="Satisfaction" Style="{StaticResource HeaderLabel}" Grid.Column="1"/>
-                                                                    <Label Text="{Binding Satisfaction, StringFormat='{0:F1} / 10'}" Style="{StaticResource ListBoxLabel}" Grid.Row="1" Grid.Column="1"/>
-
-                                                                    <Label Text="Size" Style="{StaticResource HeaderLabel}" Grid.Column="2"/>
-                                                                    <Label Text="{Binding MealSize}" Style="{StaticResource ListBoxLabel}" Grid.Row="1" Grid.Column="2"/>
-
-                                                                    <Label Text="Type" Style="{StaticResource HeaderLabel}" Grid.Column="3"/>
-                                                                    <Label Text="{Binding MealType}" Style="{StaticResource ListBoxLabel}" Grid.Row="1" Grid.Column="3"/>
-
-                                                                </Grid>
-                                                            </StackLayout>
-                                                        </Frame>
-                                                    </controls:HeaderBlockLight>
-                                                </DataTemplate>
-                                            </CollectionView.ItemTemplate>
-                                        </CollectionView>
-                                    </StackLayout>-->
-
-                                </controls:LogView >
-
-                                <!--Activities Box-->
-                                <controls:LogView Title="Activity" IsVisible="{Binding ActivitiesVisibility}" Margin="5,0,5,0">
-                                    <StackLayout>
-                                        <!--Activity Collection View-->
-                                        <CollectionView ItemsSource="{Binding Activities}" Grid.Row="1" SelectionMode="Single" SelectedItem="{Binding SelectedActivity}">
-                                            <CollectionView.ItemTemplate>
-                                                <DataTemplate>
-
-                                                    <!--Block-->
-                                                    <controls:HeaderBlockLight Margin="0" Padding="0" HeaderText="{Binding Description}">
-                                                        <Frame Margin="2" Padding="0">
-                                                            <StackLayout Padding="0">
-                                                                <Grid HeightRequest="100">
-                                                                    <Grid.ColumnDefinitions>
-                                                                        <ColumnDefinition />
-                                                                        <ColumnDefinition />
-                                                                        <ColumnDefinition Width=".9*"/>
-                                                                    </Grid.ColumnDefinitions>
-                                                                    <Label Text="Duration" Style="{StaticResource HeaderLabel}"/>
-                                                                    <Label Text="{Binding Duration, StringFormat='{0:N2}h'}" Style="{StaticResource ListBoxLabel}" Grid.Row="1"/>
-
-                                                                    <Label Text="Start" Style="{StaticResource HeaderLabel}" Grid.Column="1"/>
-                                                                    <Label Text="{Binding StartTime, StringFormat='{0:hh:mm tt}'}" Style="{StaticResource ListBoxLabel}" Grid.Row="1" Grid.Column="1"/>
-
-                                                                    <Label Text="Enjoyment" Style="{StaticResource HeaderLabel}" Grid.Column="2"/>
-                                                                    <Label Text="{Binding Enjoyment}" Style="{StaticResource ListBoxLabel}" Grid.Row="1" Grid.Column="2"/>
-
-                                                                    <Label Text="Exercise" Style="{StaticResource HeaderLabel}" Grid.Row="2"/>
-                                                                    <CheckBox IsChecked="{Binding Exersice}" HorizontalOptions="Center" Grid.Row="3" IsEnabled="False" Color="Black"/>
-
-                                                                    <Label Text="Interest" Style="{StaticResource HeaderLabel}" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2"/>
-                                                                    <CheckBox IsChecked="{Binding WantedToStart}" Color="Black" HorizontalOptions="Center" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" IsEnabled="False"/>
-                                                                </Grid>
-                                                            </StackLayout>
-                                                        </Frame>
-                                                    </controls:HeaderBlockLight>
-                                                </DataTemplate>
-                                            </CollectionView.ItemTemplate>
-                                        </CollectionView>
-                       
-                                    </StackLayout>
-                                </controls:LogView >
-
-                                <!--Social Box-->
-                                <controls:LogView Title="Socialization" IsVisible="{Binding SocialsVisibility}" Margin="5,0,5,0">
-                                    <StackLayout>
-                                        <!--Social Collection View-->
-                                        <CollectionView ItemsSource="{Binding Socials}" Grid.Row="1" SelectionMode="Single" SelectedItem="{Binding SelectedSocial}">
-                                            <CollectionView.ItemTemplate>
-                                                <DataTemplate>
-
-                                                    <!--Block-->
-                                                    <controls:HeaderBlockLight Margin="0" Padding="0" HeaderText="{Binding SocializationType}">
-                                                        <Frame Margin="2" Padding="0">
-                                                            <StackLayout Padding="0">
-                                                                <Grid HeightRequest="100">
-                                                                    <Grid.ColumnDefinitions>
-                                                                        <ColumnDefinition />
-                                                                        <ColumnDefinition />
-                                                                        <ColumnDefinition Width=".9*"/>
-                                                                    </Grid.ColumnDefinitions>
-                                                                    <Label Text="Duration" Style="{StaticResource HeaderLabel}"/>
-                                                                    <Label Text="{Binding Duration, StringFormat='{0:N2}h'}" Style="{StaticResource ListBoxLabel}" Grid.Row="1"/>
-
-                                                                    <Label Text="Start" Style="{StaticResource HeaderLabel}" Grid.Column="1"/>
-                                                                    <Label Text="{Binding StartTime, StringFormat='{0:hh:mm tt}'}" Style="{StaticResource ListBoxLabel}" Grid.Row="1" Grid.Column="1"/>
-
-                                                                    <Label Text="Enjoyment" Style="{StaticResource HeaderLabel}" Grid.Column="2"/>
-                                                                    <Label Text="{Binding Enjoyment}" Style="{StaticResource ListBoxLabel}" Grid.Row="1" Grid.Column="2"/>
-
-                                                                    <Label Text="Interest" Style="{StaticResource HeaderLabel}" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2"/>
-                                                                    <CheckBox IsChecked="{Binding WantedToSocialize}" Color="Black" HorizontalOptions="Center" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" IsEnabled="False"/>
-                                                                </Grid>
-                                                            </StackLayout>
-                                                        </Frame>
-                                                    </controls:HeaderBlockLight>
-                                                </DataTemplate>
-                                            </CollectionView.ItemTemplate>
-                                        </CollectionView>
-                
-                                    </StackLayout>
-                                </controls:LogView >
-
-                                <!--Substances Box-->
-                                <controls:LogView Title="Substance" IsVisible="{Binding SubstanceVisibility}" Margin="5,0,5,0">
-                                    <StackLayout>
+                                    <!--Social Box-->
+                                    <controls:LogView Title="Socialization" IsVisible="{Binding SocialsVisibility}" Margin="5,0,5,0" ModelType="{x:Static models:ModelType.Socialization}"
+                                                      EditCommand="{Binding EditSelectedCommand}" DeleteCommand="{Binding DeleteSelectedCommand}" AddCommand="{Binding AddSelectedCommand}" >
                                         <!--Substance Collection View-->
-                                        <CollectionView ItemsSource="{Binding Substances}" SelectionMode="Single" Grid.Row="1" SelectedItem="{Binding SelectedSubstance}" >
-                                            <CollectionView.ItemTemplate>
-                                                <DataTemplate>
+                                        <CollectionView ItemsSource="{Binding Socials}" SelectionMode="Single" SelectedItem="{Binding SelectedSocial}" ItemTemplate="{StaticResource SocialDataTemplate}"/>
+                                    </controls:LogView >
 
-                                                    <!--Block-->
-                                                    <controls:HeaderBlockLight Margin="0" Padding="0" HeaderText="{Binding RegisteredTime, StringFormat='{0:hh:mm tt}'}">
-                                                        <Frame Margin="2" Padding="0">
-                                                            <StackLayout Padding="0">
-                                                                <Grid HeightRequest="40">
-                                                                    <Grid.ColumnDefinitions>
-                                                                        <ColumnDefinition Width="50"/>
-                                                                        <ColumnDefinition Width="40"/>
-                                                                        <ColumnDefinition Width="40"/>
-                                                                    </Grid.ColumnDefinitions>
-                                                                    <Label Text="Method" Style="{StaticResource HeaderLabel}"/>
-                                                                    <Label Text="{Binding ConsumptionMethod}" Style="{StaticResource ListBoxLabel}" Grid.Row="1"/>
+                                    <!--Substances Box-->
+                                    <controls:LogView Title="Substance" IsVisible="{Binding SubstanceVisibility}" Margin="5,0,5,0" ModelType="{x:Static models:ModelType.Substance}"
+                                                      EditCommand="{Binding EditSelectedCommand}" DeleteCommand="{Binding DeleteSelectedCommand}" AddCommand="{Binding AddSelectedCommand}" >
 
-                                                                    <Label Text="Qty." Style="{StaticResource HeaderLabel}" Grid.Column="1"/>
-                                                                    <Label Text="{Binding Amount}" Style="{StaticResource ListBoxLabel}" Grid.Row="1" Grid.Column="1"/>
+                                        <!--Substance Collection View-->
+                                        <CollectionView ItemsSource="{Binding Substances}" SelectionMode="Single" SelectedItem="{Binding SelectedSubstance}" ItemTemplate="{StaticResource SubstanceDataTemplate}"/>
+                                    </controls:LogView >
 
-                                                                    <Label Text="Unit" Style="{StaticResource HeaderLabel}" Grid.Column="2"/>
-                                                                    <Label Text="{Binding Unit}" Style="{StaticResource ListBoxLabel}" Grid.Row="1" Grid.Column="2"/>
+                                </StackLayout >
+                                <!--Log selection image Buttons-->
+                                <StackLayout  Margin="0" Padding="0" Orientation="Horizontal" Grid.Row="1" FlowDirection="LeftToRight" >
+                                    <ImageButton WidthRequest="40" BackgroundColor="{StaticResource Secondary}" HeightRequest="20"
+                                                 BorderColor="Black" BorderWidth="1" Padding="5"  Source="twotone_psychology_black_48dp.png" HorizontalOptions="CenterAndExpand"
+                                                 Command="{Binding SwitchViewCommand}" CommandParameter="{x:Static models:ModelType.Mood}" IsVisible="{Binding MoodsLogged}"/>
 
-                                                                    <Label Text="Name" Style="{StaticResource HeaderLabel}" Grid.Column="3"/>
-                                                                    <Label Text="{Binding SubstanceName}" Style="{StaticResource ListBoxLabel}" Grid.Row="1" Grid.Column="3"/>
+                                    <ImageButton WidthRequest="40" BackgroundColor="{StaticResource Secondary}" 
+                                                 BorderColor="Black" BorderWidth="1" Padding="5"   Source="twotone_hotel_black_48dp.png" HorizontalOptions="CenterAndExpand"
+                                                 Command="{Binding SwitchViewCommand}" CommandParameter="{x:Static models:ModelType.Sleep}" IsVisible="{Binding SleepsLogged}"/>
 
-                                                                    <Label Text="Enj." Style="{StaticResource HeaderLabel}" Grid.Column="4"/>
-                                                                    <Label Text="{Binding Satisfaction, StringFormat='{0:N1}/10'}" Style="{StaticResource ListBoxLabel}" Grid.Row="1" Grid.Column="4"/>
-                                                                </Grid>
-                                                                <Label Text="{Binding Comment}" Grid.Row="1" Style="{StaticResource ListBoxLabel}" />
-                                                            </StackLayout>
-                                                        </Frame>
-                                                    </controls:HeaderBlockLight>
-                                                   
-                                                </DataTemplate>
-                                            </CollectionView.ItemTemplate>
-                                        </CollectionView>
-                    
-                                    </StackLayout>
-                                </controls:LogView >
+                                    <ImageButton WidthRequest="40" BackgroundColor="{StaticResource Secondary}" 
+                                                 BorderColor="Black" BorderWidth="1" Padding="5"  Source="twotone_local_bar_black_48dp.png" HorizontalOptions="CenterAndExpand"
+                                                 Command="{Binding SwitchViewCommand}" CommandParameter="{x:Static models:ModelType.Substance}" IsVisible="{Binding SubstancesLogged}"/>
 
-                                <Grid HeightRequest="120" Margin="9">
-                                                                
-                                    <Frame Padding="2" BorderColor="Black">
-                                        <Picker FontSize="14" Margin="0,-5,0,0" Title ="Selected Catagory"  ItemsSource="{Binding ModelTypes}" SelectedItem="{Binding SelectedModel}"></Picker>
-                                    </Frame>
-                                </Grid>
-                            </StackLayout>
-                           
+                                    <ImageButton WidthRequest="40" BackgroundColor="{StaticResource Secondary}" 
+                                                 BorderColor="Black" BorderWidth="1" Padding="5"  Source="baseline_groups_black_48dp.png" HorizontalOptions="CenterAndExpand"
+                                                 Command="{Binding SwitchViewCommand}" CommandParameter="{x:Static models:ModelType.Socialization}" IsVisible="{Binding SocialsLogged}"/>
+
+                                    <ImageButton WidthRequest="40" BackgroundColor="{StaticResource Secondary}" 
+                                                 BorderColor="Black" BorderWidth="1" Padding="5" 
+                                                 Source="twotone_nature_people_black_48dp.png"  HorizontalOptions="CenterAndExpand"
+                                                 Command="{Binding SwitchViewCommand}" CommandParameter="{x:Static models:ModelType.Activity}" IsVisible="{Binding ActivitiesLogged}"/>
+
+                                    <ImageButton WidthRequest="40" BackgroundColor="{StaticResource Secondary}"
+                                                 BorderColor="Black" BorderWidth="1" Padding="5" Source="twotone_restaurant_menu_black_48dp.png"
+                                                 HorizontalOptions="CenterAndExpand" Command="{Binding SwitchViewCommand}"
+                                                 CommandParameter="{x:Static models:ModelType.Meal}" IsVisible="{Binding MealsLogged}"/>
+                                </StackLayout>
+                            </Grid>
                         </controls:HeaderBlock>
                     </DataTemplate>
-                    
+               
                 </CarouselView.ItemTemplate>
             </CarouselView>
             
-            <IndicatorView x:Name="indicatorView"
-                   IndicatorColor="LightGray"
-                   SelectedIndicatorColor="DarkGray"
-                   HorizontalOptions="Center" />
+            <IndicatorView x:Name="indicatorView" IndicatorColor="Black" IndicatorsShape="Circle"
+                   IndicatorSize="20" VerticalOptions="Center" SelectedIndicatorColor="{StaticResource Primary}" HorizontalOptions="Center" />
 
-            <Frame HeightRequest="80" IsVisible="{Binding NoData}">
-                <Label Text="Uh-oh! theres no logs here :O ....                 
-                       Try selecting a larger date range with that button ↓↓↓↓↓" HorizontalTextAlignment="Center"
+            <!--Here to space the indicators away from the bottom-->
+            <BoxView HeightRequest="2"/>
+
+            <Frame HeightRequest="50" IsVisible="{Binding NoData}">
+                <Label Text="Uh-oh, there are no logs here!" HorizontalTextAlignment="Center"
                        VerticalTextAlignment="Center" TextColor="Black" FontSize="18"/>
             </Frame>
             
-            <!--Filter Panel-->
-            <Frame Padding="0" Margin="6" BackgroundColor="LightGray" BorderColor="Black">
-                <Grid HeightRequest="70" BackgroundColor="DarkGray">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition Width="70"/>
-                        
-                    </Grid.ColumnDefinitions>
-                    
-                    <Button Grid.Column="0" Padding="0" Command="{Binding LoadDataCommand}" Text="Select date range" Style="{StaticResource ButtonStyle}" 
-                                BackgroundColor="{StaticResource PrimaryDark}" TextColor="White"  Margin="3" CornerRadius="10" BorderColor="Black"/>
- 
-                    <ActivityIndicator Grid.Column="1" IsRunning="True" IsVisible="{Binding Loading}" Margin="2"/>
-                </Grid>
-            </Frame>
+
         </StackLayout>
+        
     </ContentPage.Content>
 </ContentPage>

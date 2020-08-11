@@ -62,6 +62,7 @@ namespace SelfMonitoringApp.Controls
 
             int greenSeg = (int)(Ammount * 10);
             int redSeg = 100 - greenSeg;
+
             ChartData[] chartData =
             {
                 new ChartData(redSeg, SKColors.Red),
@@ -78,6 +79,21 @@ namespace SelfMonitoringApp.Controls
 
             SKPoint center = new SKPoint(info.Width / 2, height / 2);
             float radius = Math.Min(info.Width / 2, (height -4) / 2);
+
+            if (greenSeg == 100 || redSeg == 100)
+            {
+                using (SKPaint fillPaint = new SKPaint())
+                using (SKPaint outlinePaint = new SKPaint())
+                {
+                    fillPaint.Style = SKPaintStyle.Fill;
+                    fillPaint.Color = greenSeg == 100 ? SKColors.Green : SKColors.Red;
+                    outlinePaint.Style = SKPaintStyle.Stroke;
+                    outlinePaint.Color = SKColors.Black;
+                    canvas.Restore();
+                    canvas.DrawCircle(center, radius, fillPaint);
+                }
+                return;
+            }
 
             SKRect rect = new SKRect(center.X - radius, center.Y - radius,
                                      center.X + radius, center.Y + radius);
@@ -113,7 +129,6 @@ namespace SelfMonitoringApp.Controls
 
                 startAngle += sweepAngle;
             }
-
         }
     }
 }

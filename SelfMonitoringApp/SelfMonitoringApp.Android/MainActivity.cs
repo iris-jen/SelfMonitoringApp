@@ -10,7 +10,7 @@ using Acr.UserDialogs;
 
 namespace SelfMonitoringApp.Android
 {
-    [Activity(Label = "SelfMonitoringApp", Icon = "@mipmap/ico1", Theme = "@style/MainTheme", MainLauncher = true,
+    [Activity(Label = "Log Yourself", Icon = "@mipmap/ico1", Theme = "@style/MainTheme", MainLauncher = true,
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {

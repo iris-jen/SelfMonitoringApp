@@ -10,8 +10,8 @@
     <ScrollView>
         <Grid  Margin="5">
             <Grid.RowDefinitions>
-                <RowDefinition Height="220"/>
                 <RowDefinition />
+                <RowDefinition Height="2*" />
             </Grid.RowDefinitions>
             
             <!--Log creation block-->
@@ -47,19 +47,19 @@
             <controls:HeaderBlock Grid.Row="1" HeaderText="Features" Margin="0,0,0,7">
                 <Grid>
                     <Button Grid.Row="0" Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="{x:Static pages:PageNames.RawLogViewer}" AutomationId="go_logs"
-                            Margin="3" Text="View Logs" ImageSource="twotone_menu_book_black_48dp.png" HeightRequest="20"/>
+                            Margin="3" Text="View Logs" ImageSource="twotone_menu_book_black_48dp.png" MinimumHeightRequest="150"/>
 
                     <Button Grid.Row="1" Style="{StaticResource ButtonStyle}"  ImageSource="twotone_multiline_chart_black_48dp.png" AutomationId="go_trends"
                              Margin="3" IsEnabled="False" Text="Trends [Coming Soon]" HeightRequest="20"/>
 
                     <Button Grid.Row="2" Style="{StaticResource ButtonStyle}" ImageSource="twotone_flag_black_48dp.png" AutomationId="go_data"
-                            CommandParameter="data" Margin="3" IsEnabled="False"  Text="Goals [Coming Soon]" HeightRequest="20"/>
+                            CommandParameter="data" Margin="3" IsEnabled="False"  Text="Goals [Coming Soon]" MinimumHeightRequest="150"/>
 
                     <Button Grid.Row="3" Style="{StaticResource ButtonStyle}" AutomationId="go_notifications"
-                            ImageSource="twotone_notifications_black_48dp.png" HeightRequest="20" Margin="3" IsEnabled="False" Text="Notifications [Coming soon]"/>
+                            ImageSource="twotone_notifications_black_48dp.png" HeightRequest="20" Margin="3"  MinimumHeightRequest="150" IsEnabled="False" Text="Notifications [Coming soon]"/>
 
                     <Button Grid.Row="4" Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="{x:Static pages:PageNames.Settings}" AutomationId="go_properties"
-                            Text="Settings" ImageSource="twotone_settings_black_48dp.png" Margin="3" HeightRequest="20"/>
+                            Text="Settings" ImageSource="twotone_settings_black_48dp.png" Margin="3" MinimumHeightRequest="150"/>
                 </Grid>
             </controls:HeaderBlock>
        

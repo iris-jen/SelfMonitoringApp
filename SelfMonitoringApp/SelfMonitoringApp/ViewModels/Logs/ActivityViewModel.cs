@@ -165,7 +165,10 @@ namespace SelfMonitoringApp.ViewModels.Logs
         {
             if (existingModel is null)
             {
-                _activity = new ActivityModel();
+                _activity = new ActivityModel()
+                {
+                    Enjoyment = 5
+                };
 
                 _startDateTime = DateTime.Now.AddMinutes(-30);
                 _endDateTime = DateTime.Now;
@@ -181,6 +184,8 @@ namespace SelfMonitoringApp.ViewModels.Logs
                     minutes: EndDateTime.Minute,
                     seconds: EndDateTime.Hour
                 );
+
+                Duration = GetActivityLength();
             }
             else
             {

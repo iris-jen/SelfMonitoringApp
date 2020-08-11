@@ -3,30 +3,41 @@ using SelfMonitoringApp.Models;
 using SelfMonitoringApp.Models.Base;
 using SelfMonitoringApp.ViewModels.Base;
 using SelfMonitoringApp.ViewModels.Logs;
+
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
 namespace SelfMonitoringApp.ViewModels
 {
+
+
     public class DaySummaryViewModel : ViewModelBase, INavigationViewModel
     {
+        [ModelType(ModelType.Meal)]
         public ObservableCollection<MealModel> Meals { get; private set; }
+
+       
+        [ModelType(ModelType.Substance)]
         public ObservableCollection<SubstanceModel> Substances { get; private set; }
+
+        [ModelType(ModelType.Activity)]
         public ObservableCollection<ActivityModel> Activities { get; private set; }
+
+        [ModelType(ModelType.Mood)]
         public ObservableCollection<MoodModel> Moods { get; private set; }
+
+        [ModelType(ModelType.Sleep)]
         public ObservableCollection<SleepModel> Sleeps { get; private set; }
+
+        [ModelType(ModelType.Socialization)]
         public ObservableCollection<SocializationModel> Socials { get; private set; }
-        public ObservableCollection<ModelType> ModelTypes { get; private set; } 
-
-        public Dictionary<ModelType, ObservableCollection<IModel>> Models { get; set; }
-        
-
-
-
 
         private MoodViewModel _moodEditor;
         private MealViewModel _mealEditor;
@@ -35,9 +46,14 @@ namespace SelfMonitoringApp.ViewModels
         private ActivityViewModel _activityEditor;
         private SocializationViewModel _socialEditor;
 
+        /// <summary>
+        /// Date for this objects logs 
+        /// </summary>
         public string Date { get; private set; }
 
-        private bool _mealsVisibility;
+        /// <summary>
+        /// Set to true for meal collection visibility. all others must be set false
+        /// </summary>
         public bool MealsVisibility
         {
             get => _mealsVisibility;
@@ -50,8 +66,11 @@ namespace SelfMonitoringApp.ViewModels
                 NotifyPropertyChanged();
             }
         }
+        private bool _mealsVisibility;
 
-        private bool _substancesVisibility;
+        /// <summary>
+        /// Set to true for substance collection visibility. all others must be set false
+        /// </summary>
         public bool SubstanceVisibility
         {
             get => _substancesVisibility;
@@ -64,8 +83,11 @@ namespace SelfMonitoringApp.ViewModels
                 NotifyPropertyChanged();
             }
         }
+        private bool _substancesVisibility;
 
-        private bool _activitiesVisibility;
+        /// <summary>
+        /// Set to true for activity collection visibility. all others must be set false
+        /// </summary>
         public bool ActivitiesVisibility
         {
             get => _activitiesVisibility;
@@ -78,8 +100,11 @@ namespace SelfMonitoringApp.ViewModels
                 NotifyPropertyChanged();
             }
         }
+        private bool _activitiesVisibility;
 
-        private bool _moodsVisibility;
+        /// <summary>
+        /// Set to true for mood collection visibility. all others must be set false
+        /// </summary>
         public bool MoodsVisibility
         {
             get => _moodsVisibility;
@@ -92,8 +117,11 @@ namespace SelfMonitoringApp.ViewModels
                 NotifyPropertyChanged();
             }
         }
+        private bool _moodsVisibility;
 
-        private bool _sleepsVisibility;
+        /// <summary>
+        /// Set to true for sleep collection visibility. all others must be set false
+        /// </summary>
         public bool SleepsVisibility
         {
             get => _sleepsVisibility;
@@ -106,8 +134,11 @@ namespace SelfMonitoringApp.ViewModels
                 NotifyPropertyChanged();
             }
         }
+        private bool _sleepsVisibility;
 
-        private bool _socialVisibility;
+        /// <summary>
+        /// Set to true for socialization collection visibility. all others must be set false
+        /// </summary>
         public bool SocialsVisibility
         {
             get => _socialVisibility;
@@ -120,13 +151,109 @@ namespace SelfMonitoringApp.ViewModels
                 NotifyPropertyChanged();
             }
         }
+        private bool _socialVisibility;
 
-        public bool SleepsLogged { get; private set; }
-        public bool MealsLogged { get; private set; }
-        public bool ActivitiesLogged { get; private set; }
-        public bool MoodsLogged { get; private set; }
-        public bool SubstancesLogged { get; private set; }
-        public bool SocialsLogged { get; private set; }
+        /// <summary>
+        /// True if the user has any sleep logs for this day. 
+        /// </summary>
+        public bool SleepsLogged
+        {
+            get => _sleepsLogged;
+            set
+            {
+                if (_sleepsLogged == value)
+                    return;
+
+                _sleepsLogged = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private bool _sleepsLogged;
+
+        /// <summary>
+        /// True if the user has any meal logs for the day
+        /// </summary>
+        public bool MealsLogged
+        {
+            get => _mealsLogged;
+            set
+            {
+                if (_mealsLogged == value)
+                    return;
+
+                _mealsLogged = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private bool _mealsLogged;
+
+        /// <summary>
+        /// True if the user has any activity logs for the day
+        /// </summary>
+        public bool ActivitiesLogged
+        {
+            get => _activitiesLogged;
+            set
+            {
+                if (_activitiesLogged == value)
+                    return;
+
+                _activitiesLogged = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private bool _activitiesLogged;
+
+        /// <summary>
+        /// True if the user has any mood logs for the day
+        /// </summary>
+        public bool MoodsLogged
+        {
+            get => _moodsLogged;
+            set
+            {
+                if (_moodsLogged == value)
+                    return;
+
+                _moodsLogged = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private bool _moodsLogged;
+
+        /// <summary>
+        /// True if the user has any substance logs for the day
+        /// </summary>
+        public bool SubstancesLogged
+        {
+            get => _substancesLogged;
+            set
+            {
+                if (_substancesLogged == value)
+                    return;
+
+                _substancesLogged = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private bool _substancesLogged;
+
+        /// <summary>
+        /// True if the user has any social logs for the day
+        /// </summary>
+        public bool SocialsLogged
+        {
+            get => _socialsLogged;
+            set
+            {
+                if (_socialsLogged == value)
+                    return;
+
+                _socialsLogged = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private bool _socialsLogged;
 
         #region Selected Log Objects
         private MealModel _selectedMeal;
@@ -228,46 +355,34 @@ namespace SelfMonitoringApp.ViewModels
                 NotifyPropertyChanged();
             }
         }
-
         #endregion
+
         // Edit / Delete commands for selected objects
-        public Command<ModelType> EditSelectedCommand { get; private set; }
+        public Command<ModelType> EditSelectedCommand   { get; private set; }
+        public Command<ModelType> AddSelectedCommand    { get; private set; }
         public Command<ModelType> DeleteSelectedCommand { get; private set; }
+        public Command<ModelType> SwitchViewCommand     { get; private set; }
 
         public DaySummaryViewModel(List<SleepModel> sleeps, List<ActivityModel> activities,
             List<MealModel> meals, List<MoodModel> moods, List<SubstanceModel> substances, List<SocializationModel> socials, DateTime date) 
         {
-
-            Meals = new ObservableCollection<MealModel>(meals);
+            Meals      = new ObservableCollection<MealModel>(meals);
             Substances = new ObservableCollection<SubstanceModel>(substances);
             Activities = new ObservableCollection<ActivityModel>(activities);
-            Moods = new ObservableCollection<MoodModel>(moods);
-            Sleeps = new ObservableCollection<SleepModel>(sleeps);
-            Socials = new ObservableCollection<SocializationModel>(socials);
-            ModelTypes = new ObservableCollection<ModelType>();
+            Moods      = new ObservableCollection<MoodModel>(moods);
+            Sleeps     = new ObservableCollection<SleepModel>(sleeps);
+            Socials    = new ObservableCollection<SocializationModel>(socials);
 
             EditSelectedCommand   = new Command<ModelType>(async(type) => await EditSelected(type));
             DeleteSelectedCommand = new Command<ModelType>(async(type) => await DeleteSelected(type));
+            AddSelectedCommand    = new Command<ModelType>(async (type) => await AddSelected(type));
 
-            MoodsLogged = moods.Count > 0;
+            MoodsLogged      = moods.Count > 0;
             SubstancesLogged = substances.Count > 0;
-            MealsLogged = meals.Count > 0;
-            SleepsLogged = sleeps.Count > 0;
+            MealsLogged      = meals.Count > 0;
+            SleepsLogged     = sleeps.Count > 0;
             ActivitiesLogged = activities.Count > 0;
-            SocialsLogged = socials.Count > 0; 
-
-            if (MealsLogged)
-                ModelTypes.Add(ModelType.Meal);
-            if (MoodsLogged)
-                ModelTypes.Add(ModelType.Mood);
-            if (SubstancesLogged)
-                ModelTypes.Add(ModelType.Substance);
-            if (ActivitiesLogged)
-                ModelTypes.Add(ModelType.Activity);
-            if (SleepsLogged)
-                ModelTypes.Add(ModelType.Sleep);
-            if (SocialsLogged)
-                ModelTypes.Add(ModelType.Socialization);
+            SocialsLogged    = socials.Count > 0; 
 
             if (MoodsLogged)
                 SelectedModel = ModelType.Mood;
@@ -283,6 +398,7 @@ namespace SelfMonitoringApp.ViewModels
                 SelectedModel = ModelType.Socialization;
 
             Date = $"{date.DayOfWeek}: {date.Year}-{date.Month}-{date.Day}";
+            SwitchViewCommand = new Command<ModelType>((e) => SetVisibility(e));
         }
 
         /// <summary>
@@ -375,7 +491,6 @@ namespace SelfMonitoringApp.ViewModels
                     _substanceEditor.ModelShed += Vm_ModelShed;
                     await _navigator.NavigateTo(_substanceEditor);
                     break;
-
                 case ModelType.Socialization:
                     if (SelectedSocial is null)
                         return;
@@ -387,15 +502,69 @@ namespace SelfMonitoringApp.ViewModels
             }
         }
 
+        /// <summary>
+        /// Pushes the editor page for the passed in type. Subscribes this object to wait for a new model
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        private async Task AddSelected(ModelType type)
+        {
+            switch (type)
+            {
+                case ModelType.Activity:
+                    _activityEditor = new ActivityViewModel();
+                    _activityEditor.ModelShed += Vm_ModelShed;
+                    await _navigator.NavigateTo(_activityEditor);
+                    break;
+                case ModelType.Meal:
+                    _mealEditor = new MealViewModel();
+                    _mealEditor.ModelShed += Vm_ModelShed;
+                    await _navigator.NavigateTo(_mealEditor);
+                    break;
+                case ModelType.Mood:
+                    _moodEditor = new MoodViewModel();
+                    _moodEditor.ModelShed += Vm_ModelShed;
+                    await _navigator.NavigateTo(_moodEditor);
+                    break;
+                case ModelType.Sleep:
+                    _sleepEditor = new SleepViewModel();
+                    _sleepEditor.ModelShed += Vm_ModelShed;
+                    await _navigator.NavigateTo(_sleepEditor);
+                    break;
+                case ModelType.Substance:
+                    _substanceEditor = new SubstanceViewModel();
+                    _substanceEditor.ModelShed += Vm_ModelShed;
+                    await _navigator.NavigateTo(_substanceEditor);
+                    break;
+                case ModelType.Socialization:
+                    _socialEditor = new SocializationViewModel();
+                    _socialEditor.ModelShed += Vm_ModelShed;
+                    await _navigator.NavigateTo(_socialEditor);
+                    break;
+            }
+        }
 
-        // todo - all these models are part of the same interface, i should be able to get rid of this repetive junk somehow.
+        private void Vm_ModelShed(object sender, EventArgs e)
+        {
+            Stopwatch ExecutionTimer = Stopwatch.StartNew();
+            
+            bool useReflection = false;
+
+            if (useReflection)
+                Vm_ModelShedReflection(sender, e);
+            else
+                Vm_ModelShedSwitch(sender, e);
+        }
+
+        // todo - all these models are part of the same interface, 
+        //i should be able to get rid of this repetive junk somehow.
 
         /// <summary>
         /// Catches the view model shed by the editor.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Vm_ModelShed(object sender, EventArgs e)
+        private void Vm_ModelShedSwitch(object sender, EventArgs e)
         {
             var model = (e as ModelShedEventArgs).EventModel;
             switch (model.LogType)
@@ -405,67 +574,180 @@ namespace SelfMonitoringApp.ViewModels
                     var id = newActivity.ID;
 
                     var oldIndex = Activities.IndexOf(x => x.ID == id);
-                    Activities.Insert(oldIndex, newActivity);
-                    Activities.RemoveAt(oldIndex + 1);
+
+                    if (oldIndex == -1)
+                    {
+                        Activities.Add(newActivity);
+                    }
+                    else
+                    {
+                        Activities.Insert(oldIndex, newActivity);
+                        Activities.RemoveAt(oldIndex + 1);
+                    }
                     SelectedActivity = newActivity;
 
                     _activityEditor.ModelShed -= Vm_ModelShed;
                     break;
+
+            #region Meal
                 case ModelType.Meal:
                     var newMeal = model as MealModel;
                     id = newMeal.ID;
 
                     oldIndex = Meals.IndexOf(x => x.ID == id);
-                    Meals.Insert(oldIndex, newMeal);
-                    Meals.RemoveAt(oldIndex + 1);
+                    if (oldIndex == -1)
+                    {
+                        Meals.Add(newMeal);
+                    }
+                    else
+                    {
+                        Meals.Insert(oldIndex, newMeal);
+                        Meals.RemoveAt(oldIndex + 1);
+                    }
                     SelectedMeal = newMeal;
 
                     _mealEditor.ModelShed -= Vm_ModelShed;
-                    break;
+                    break; 
+            #endregion
+
+            #region Mood
                 case ModelType.Mood:
                     var newMood = model as MoodModel;
                     id = newMood.ID;
 
                     oldIndex = Moods.IndexOf(x => x.ID == id);
-                    Moods.Insert(oldIndex, newMood);
-                    Moods.RemoveAt(oldIndex + 1);
-                    SelectedMood = newMood;
+                    if (oldIndex == -1)
+                    {
+                        Moods.Add(newMood);
+                    }
+                    else
+                    {
+                        Moods.Insert(oldIndex, newMood);
+                        Moods.RemoveAt(oldIndex + 1);
+                    }
 
+                    SelectedMood = newMood;
                     _moodEditor.ModelShed -= Vm_ModelShed;
                     break;
+            #endregion
+
+            #region Sleep
                 case ModelType.Sleep:
                     var newSleep = model as SleepModel;
                     id = newSleep.ID;
 
                     oldIndex = Sleeps.IndexOf(x => x.ID == id);
-                    Sleeps.Insert(oldIndex, newSleep);
-                    Sleeps.RemoveAt(oldIndex + 1);
-                    SelectedSleep = newSleep;
+                    if (oldIndex == -1)
+                    {
+                        Sleeps.Add(newSleep);
+                    }
+                    else
+                    {
+                        Sleeps.Insert(oldIndex, newSleep);
+                        Sleeps.RemoveAt(oldIndex + 1);
+                    }
 
+                    SelectedSleep = newSleep;
                     _sleepEditor.ModelShed -= Vm_ModelShed;
                     break;
+            #endregion
+
+            #region Substance
                 case ModelType.Substance:
                     var newSubstance = model as SubstanceModel;
                     id = newSubstance.ID;
 
                     oldIndex = Substances.IndexOf(x => x.ID == id);
-                    Substances.Insert(oldIndex, newSubstance);
-                    Substances.RemoveAt(oldIndex + 1);
-                    SelectedSubstance = newSubstance;
+                    if (oldIndex == -1)
+                    {
+                        Substances.Add(newSubstance);
+                    }
+                    else
+                    {
+                        Substances.Insert(oldIndex, newSubstance);
+                        Substances.RemoveAt(oldIndex + 1);
+                    }
 
+                    SelectedSubstance = newSubstance;
                     _substanceEditor.ModelShed -= Vm_ModelShed;
                     break;
+                #endregion
+
+            #region Socialization
                 case ModelType.Socialization:
                     var newSocial = model as SocializationModel;
                     id = newSocial.ID;
 
-                    oldIndex = Substances.IndexOf(x => x.ID == id);
-                    Socials.Insert(oldIndex, newSocial);
-                    Socials.RemoveAt(oldIndex + 1);
-                    SelectedSocial = newSocial;
+                    oldIndex = Socials.IndexOf(x => x.ID == id);
+                    if (oldIndex == -1)
+                    {
+                        Socials.Add(newSocial);
+                    }
+                    else
+                    {
+                        Socials.Insert(oldIndex, newSocial);
+                        Socials.RemoveAt(oldIndex + 1);
+                    }
 
+                    SelectedSocial = newSocial;
                     _socialEditor.ModelShed -= Vm_ModelShed;
+                    break; 
+            #endregion
+            }
+        }
+
+
+
+        private void Vm_ModelShedReflection(object sender, EventArgs e)
+        {
+            IModel model = (e as ModelShedEventArgs).EventModel;
+            Type modelType = model.GetType();
+            PropertyInfo[] classProperties = GetType().GetProperties();
+
+            foreach(var property in classProperties)
+            {
+                Type pType = property.PropertyType;
+
+
+                if(property.PropertyType == typeof(ObservableCollection<>).MakeGenericType(new[] { modelType }))
+                {
+                }
+            }
+
+            switch (model.LogType)
+            {
+                case ModelType.Activity:
+
                     break;
+
+  
+                case ModelType.Meal:
+
+                    break;
+
+
+
+                case ModelType.Mood:
+
+                    break;
+
+
+     
+                case ModelType.Sleep:
+
+                    break;
+  
+
+
+                case ModelType.Substance:
+
+                    break;
+
+
+                case ModelType.Socialization:
+
+                    break;
+
             }
         }
 

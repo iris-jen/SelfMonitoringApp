@@ -24,10 +24,14 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Controls\DataTemplates\" />
       <Folder Include="Properties" />
     </ItemGroup>
 
     <ItemGroup>
+      <Compile Update="Controls\Spinamathing.xaml.cs">
+        <DependentUpon>Spinamathing.xaml</DependentUpon>
+      </Compile>
       <Compile Update="Controls\PercentageCircle.xaml.cs">
         <DependentUpon>PercentageCircle.xaml</DependentUpon>
       </Compile>
