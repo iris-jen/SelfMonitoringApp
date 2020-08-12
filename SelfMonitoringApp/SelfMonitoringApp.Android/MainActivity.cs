@@ -10,7 +10,7 @@ using Acr.UserDialogs;
 
 namespace SelfMonitoringApp.Android
 {
-    [Activity(Label = "Log Yourself", Icon = "@mipmap/ico1", Theme = "@style/MainTheme", MainLauncher = true,
+    [Activity(Label = "SelfMonitoringApp", Icon = "@mipmap/ico1", Theme = "@style/MainTheme", MainLauncher = true,
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
@@ -20,7 +20,6 @@ namespace SelfMonitoringApp.Android
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
-            Xamarin.Forms.Forms.SetFlags("Expander_Experimental");
             Xamarin.Forms.Forms.Init(this, savedInstanceState);
             Xamarin.Forms.FormsMaterial.Init(this, savedInstanceState);
             UserDialogs.Init(this);
