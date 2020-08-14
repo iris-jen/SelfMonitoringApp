@@ -38,6 +38,8 @@ namespace SelfMonitoringApp.ViewModels
                     return _navigator.NavigateTo(new SocializationViewModel());
                 case PageNames.SubstanceEditor:
                     return _navigator.NavigateTo(new SubstanceViewModel());
+                case PageNames.TrendsViewer:
+                    return _navigator.NavigateTo(new TrendsViewModel());
                 case PageNames.RawLogViewer:
                     return _navigator.NavigateTo(new DataExplorerViewModel());
                 case PageNames.NotificationsViewer:

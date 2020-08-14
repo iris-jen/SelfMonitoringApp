@@ -9,7 +9,7 @@ namespace SelfMonitoringApp.UITests
 {
     static class AppManager
     {
-        const string ApkPath = "../../../Binaries/TaskyDroid.apk";
+        const string ApkPath = "../../../Binaries/SelfMonitoringApp.apk";
         const string AppPath = "../../../Binaries/TaskyiOS.app";
         const string IpaBundleId = "com.xamarin.samples.taskytouch";
 

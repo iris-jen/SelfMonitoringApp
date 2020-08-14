@@ -29,7 +29,15 @@ namespace SelfMonitoringApp.UITests
 
         protected void EnterTask(string name, string notes = null)
         {
+            //new TaskListPage()
+            //    .GoToAddTask();
 
+            //new TaskDetailsPage()
+            //    .EnterTask(name, notes)
+            //    .Save();
+
+            //new TaskListPage()
+            //    .VerifyTaskExists(name);
         }
 
         // You can edit this file to define functionality that is common across many or all tests.

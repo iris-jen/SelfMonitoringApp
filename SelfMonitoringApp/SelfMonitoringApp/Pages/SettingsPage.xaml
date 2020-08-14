@@ -12,29 +12,36 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Margin="0,8,0,0">
+                <controls:HeaderBlock HeaderText="Misc" Margin="5">
+                    <Grid>
+                        <Button Command="{Binding AddSampleLogsCommand}"  Style="{StaticResource ButtonStyle}" 
+                                Text="Add Sample logs" Margin="5"/>
+                    </Grid>
+                </controls:HeaderBlock>
+
                 <controls:HeaderBlock HeaderText="Delete Data" Margin="5">
                     <Grid>
 
                         <Button Command="{Binding DeleteLogCommand}"  Style="{StaticResource ButtonStyle}" 
-                                Text="Delete all mood logs" Margin="0" CommandParameter="{x:Static models:ModelType.Mood}"/>
+                                Text="Delete all mood logs" Margin="5" CommandParameter="{x:Static models:ModelType.Mood}"/>
 
                         <Button Grid.Row="1" Command="{Binding DeleteLogCommand}" Style="{StaticResource ButtonStyle}"
-                                Text="Delete all sleep logs" Margin="0" CommandParameter="{x:Static models:ModelType.Sleep}" />
+                                Text="Delete all sleep logs" Margin="5" CommandParameter="{x:Static models:ModelType.Sleep}" />
 
                         <Button Grid.Row="2" Command="{Binding DeleteLogCommand}" Style="{StaticResource ButtonStyle}" 
-                                Text="Delete all meal logs"  Margin="0" CommandParameter="{x:Static models:ModelType.Meal}" />
+                                Text="Delete all meal logs"  Margin="5" CommandParameter="{x:Static models:ModelType.Meal}" />
 
                         <Button Grid.Row="3" Command="{Binding DeleteLogCommand}" Style="{StaticResource ButtonStyle}"
-                                Text="Delete all substance logs" CommandParameter="{x:Static models:ModelType.Substance}" Margin="0"/>
+                                Text="Delete all substance logs" CommandParameter="{x:Static models:ModelType.Substance}" Margin="5"/>
 
                         <Button Grid.Row="4" Command="{Binding DeleteLogCommand}" Style="{StaticResource ButtonStyle}"
-                                Text="Delete all social logs" CommandParameter="{x:Static models:ModelType.Socialization}" Margin="0"/>
+                                Text="Delete all social logs" CommandParameter="{x:Static models:ModelType.Socialization}" Margin="5"/>
 
                         <Button Grid.Row="5" Command="{Binding DeleteLogCommand}" Style="{StaticResource ButtonStyle}"
-                                Text="Delete all activity logs" CommandParameter="{x:Static models:ModelType.Activity}" Margin="0"/>
+                                Text="Delete all activity logs" CommandParameter="{x:Static models:ModelType.Activity}" Margin="5"/>
 
                         <Button Grid.Row="6" Command="{Binding DeleteLogCommand}" Style="{StaticResource ButtonStyle}"
-                                Text="Delete all logs" CommandParameter="{x:Static models:ModelType.All}" Margin="0"/>
+                                Text="Delete all logs" CommandParameter="{x:Static models:ModelType.All}" Margin="5"/>
                     </Grid>
                 </controls:HeaderBlock>
 

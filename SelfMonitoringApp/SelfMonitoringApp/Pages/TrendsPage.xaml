@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
+             xmlns:services="clr-namespace:SelfMonitoringApp.Services"
+             xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms" 
+             mc:Ignorable="d"
+             NavigationPage.HasNavigationBar ="False"
+             x:Class="SelfMonitoringApp.Pages.TrendsPage">
+    <ContentPage.Content>
+        
+        <ScrollView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="350"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <Grid BackgroundColor="{StaticResource Primary}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+  
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <ImageButton Grid.Column="0" BackgroundColor="Transparent"  Margin="6" Source="sharp_arrow_back_white_48dp.png" Command="{Binding BackCommand}"/>
+                    <Button Grid.Column="1" Style="{StaticResource ButtonStyle}" Command="{Binding DateBackwardCommand}" Margin="6" Text="&lt;" FontSize="30"/>
+                    <Frame Grid.Column="2" BorderColor="Black" Margin="6" Padding="0">
+                        <DatePicker BackgroundColor="White" TextColor="Black" HorizontalOptions="Center" VerticalOptions="Center" Date="{Binding SelectedDay}"/>
+                    </Frame>
+
+                    <Button Grid.Column="3" Style="{StaticResource ButtonStyle}" Text=">" FontSize="30" Margin="6" Command="{Binding DateForwardCommand}"/>
+                </Grid>
+
+                <Frame BorderColor="Black" Padding="5" Margin="5" Grid.Row="1">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Frame Margin="5" Padding=" 0" BorderColor="Black">
+                            <Label Text="Mood Vs Time" HorizontalTextAlignment="Center" VerticalTextAlignment="center"/>
+                        </Frame>
+                        <controls:MultiGraph Grid.Row="1" Margin="5" Occurances="{Binding MoodOccurances}"/>
+                    </Grid>
+                </Frame>
+
+                <controls:HeaderBlock HeaderText="Summary" Margin="4" Grid.Row="2">
+                    <Frame Style="{StaticResource InnerFrameStyle}">
+                        <CollectionView ItemsSource="{Binding Trends}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Frame BorderColor="Black" Margin="5" Padding="2">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="30"/>
+                                                    <RowDefinition Height="45"/>
+                                                    <RowDefinition Height="3"/>
+                                                </Grid.RowDefinitions>
+                                                <Label Text ="{Binding TrendName}" Grid.ColumnSpan="2" HorizontalTextAlignment="Center"
+                                                   FontSize="18" VerticalTextAlignment="Center" TextDecorations="Underline" TextColor="Black"/>
+                                                <Grid Grid.Column="0" Grid.Row="1">
+                                                    <Label Text ="Occurrences" Style="{StaticResource InnerLabelStyle}"/>
+                                                    <Label Text ="{Binding TotalOccurances}" Grid.Row="1" HorizontalTextAlignment="Center"/>
+                                                </Grid>
+                                                <Grid Grid.Column="1" Grid.Row="1">
+                                                    <Label Text ="Total" Style="{StaticResource InnerLabelStyle}" Grid.ColumnSpan="2"/>
+                                                    <Label Text ="{Binding TotalOccurances}" Grid.Row="1" HorizontalTextAlignment="End"/>
+                                                    <Label Text ="{Binding TrendContextUnit}" Grid.Row="1" Grid.Column="1" HorizontalTextAlignment="Start"/>
+                                                </Grid>
+
+                                            </Grid>
+                                        </Frame>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </Frame>
+                </controls:HeaderBlock>
+
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

@@ -183,23 +183,41 @@ namespace SelfMonitoringApp.Models
                 RegisteredTime = new DateTime(year,month,_day1, hour: 16, minute:20, second:0)
             },
 
-            //Day 2
+            //Day 1
             new SubstanceModel()
             {
-                ConsumptionMethod= "Smoked",
-                SubstanceName = "Weed",
-                Amount = 0.1,
-                Unit = "g",
+                ConsumptionMethod= "Drank",
+                SubstanceName = "Coffee",
+                Amount = 1,
+                Unit = "Cup",
                 Satisfaction = 7.1,
-                RegisteredTime = new DateTime(year,month,_day2, hour: 18, minute:20, second:0)
+                RegisteredTime = new DateTime(year,month,_day1, hour: 8, minute:20, second:0)
             },
             new SubstanceModel()
             {
                 ConsumptionMethod= "Drank",
-                SubstanceName = "Beer",
+                SubstanceName = "Coffee",
+                Amount = 1.5,
+                Unit = "Cup",
+                Satisfaction = 4,
+                RegisteredTime = new DateTime(year,month,_day1, hour: 9, minute:23, second:0)
+            },
+            new SubstanceModel()
+            {
+                ConsumptionMethod= "Drank",
+                SubstanceName = "Tea",
+                Amount = 10,
+                Unit = "cup",
+                Satisfaction = 8,
+                RegisteredTime = new DateTime(year,month,_day1, hour: 12, minute:20, second:0)
+            },
+            new SubstanceModel()
+            {
+                ConsumptionMethod= "Drank",
+                SubstanceName = "Coffee",
                 Amount = 1,
-                Unit = "Pint",
-                Satisfaction = 7.1,
+                Unit = "Cup",
+                Satisfaction = 3,
                 RegisteredTime = new DateTime(year,month,_day1, hour: 16, minute:20, second:0)
             },
         };
@@ -209,16 +227,16 @@ namespace SelfMonitoringApp.Models
             //Day 1
             new MoodModel()
             {
-                Description = "Wanted to get pie",
+                Description = "Blah blah blah blah blah blah",
                 OverallMood = 7.1,
-                StrongestEmotion = "Pie Thirst",
+                StrongestEmotion = "Anger",
                 Location = "Home",
                 RegisteredTime = new DateTime(year,month,_day1, hour: 8, minute:20, second:0)
             },
 
             new MoodModel()
             {
-                Description = "Pie shop is closed",
+                Description = "Blah blah blah blah blah blah",
                 OverallMood = 5.8,
                 StrongestEmotion = "anger",
                 Location = "Pie Shop",
@@ -238,7 +256,6 @@ namespace SelfMonitoringApp.Models
             },
             new MoodModel()
             {
-                Description = "D",
                 OverallMood = 1.2,
                 Location = "Home",
                 StrongestEmotion = "Devestated",

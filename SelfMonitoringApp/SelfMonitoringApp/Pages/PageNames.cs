@@ -10,7 +10,7 @@
         SocializationEditor,
 
         RawLogViewer,
-        CompositeLogViewer,
+        TrendsViewer,
 
         NotificationsViewer,
         NotificationsEditor,

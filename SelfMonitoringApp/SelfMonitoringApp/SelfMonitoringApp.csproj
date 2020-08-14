@@ -13,7 +13,6 @@
 
     <ItemGroup>
         <PackageReference Include="Acr.UserDialogs" Version="7.1.0.446" />
-        <PackageReference Include="Behaviors.Forms" Version="1.4.0" />
         <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
         <PackageReference Include="SkiaSharp.Views.Forms" Version="2.80.1" />
         <PackageReference Include="Splat" Version="9.5.20" />
@@ -29,6 +28,9 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Compile Update="Controls\MultiGraph.xaml.cs">
+        <DependentUpon>MultiGraph.xaml</DependentUpon>
+      </Compile>
       <Compile Update="Controls\Spinamathing.xaml.cs">
         <DependentUpon>Spinamathing.xaml</DependentUpon>
       </Compile>
@@ -64,6 +66,9 @@
       </Compile>
       <Compile Update="Pages\GoalEditorPage.xaml.cs">
         <DependentUpon>GoalEditorPage.xaml</DependentUpon>
+      </Compile>
+      <Compile Update="Pages\TrendsPage.xaml.cs">
+        <DependentUpon>TrendsPage.xaml</DependentUpon>
       </Compile>
       <Compile Update="Pages\NotificationEditorPage.xaml.cs">
         <DependentUpon>NotificationEditorPage.xaml</DependentUpon>
