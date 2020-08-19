@@ -29,6 +29,13 @@ https://play.google.com/store/apps/details?id=com.companyname.SelfMonitoringApp
 
 Watch a beta demo here!
 ------------------------- 
+
+V7
+------
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/MipfGiSEHcc/0.jpg)](https://www.youtube.com/watch?v=MipfGiSEHcc)
+
+V1
+------ 
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/BhMc-u2Qktg/0.jpg)](https://www.youtube.com/watch?v=BhMc-u2Qktg)
 
 # Pages
