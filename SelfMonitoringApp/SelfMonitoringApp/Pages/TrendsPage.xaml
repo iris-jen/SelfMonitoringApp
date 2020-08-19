@@ -5,7 +5,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
              xmlns:services="clr-namespace:SelfMonitoringApp.Services"
-             xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms" 
              mc:Ignorable="d"
              NavigationPage.HasNavigationBar ="False"
              x:Class="SelfMonitoringApp.Pages.TrendsPage">

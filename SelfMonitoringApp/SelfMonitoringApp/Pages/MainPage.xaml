@@ -55,8 +55,8 @@
                     <Button Grid.Row="2" Style="{StaticResource ButtonStyle}" ImageSource="twotone_flag_black_48dp.png" AutomationId="go_data"
                             CommandParameter="data" Margin="3" IsEnabled="False"  Text="Goals [Coming Soon]" MinimumHeightRequest="150"/>
 
-                    <Button Grid.Row="3" Style="{StaticResource ButtonStyle}" AutomationId="go_notifications"
-                            ImageSource="twotone_notifications_black_48dp.png" HeightRequest="20" Margin="3"  MinimumHeightRequest="150" IsEnabled="False" Text="Notifications [Coming soon]"/>
+                    <Button Grid.Row="3" Style="{StaticResource ButtonStyle}" AutomationId="go_notifications" Command="{Binding NavigateCommand}" CommandParameter="{x:Static pages:PageNames.NotificationsViewer}"
+                            ImageSource="twotone_notifications_black_48dp.png" HeightRequest="20" Margin="3"  MinimumHeightRequest="150" IsEnabled="True" Text="Notifications"/>
 
                     <Button Grid.Row="4" Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="{x:Static pages:PageNames.Settings}" AutomationId="go_properties"
                             Text="Settings" ImageSource="twotone_settings_black_48dp.png" Margin="3" MinimumHeightRequest="150"/>
