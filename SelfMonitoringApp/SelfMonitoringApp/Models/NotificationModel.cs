@@ -8,7 +8,7 @@ namespace SelfMonitoringApp.Models
 {
     public class NotificationModel
     {
-        public NotificationType Type { get; set; }
+        public NotificationType NotificationType { get; set; }
 
         public ModelType ModelTarget { get; set; }
 
@@ -25,8 +25,8 @@ namespace SelfMonitoringApp.Models
         public int Key { get; set; }
 
         //Time the periodic notifications
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
+        public TimeSpan StartTime { get; set; }
+        public TimeSpan EndTime { get; set; }
         
         public List<DateTime> ReminderTimes { get; set; }
     }

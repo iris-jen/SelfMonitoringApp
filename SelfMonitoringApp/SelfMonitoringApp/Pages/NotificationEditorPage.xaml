@@ -4,14 +4,13 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
-             xmlns:services="clr-namespace:SelfMonitoringApp.Services"
+             NavigationPage.HasNavigationBar="False"
              mc:Ignorable="d"
              x:Class="SelfMonitoringApp.Pages.NotificationEditorPage">
     <ContentPage.Content>
-        <Grid>
-            <controls:HeaderBlock Grid.Row="1" HeaderText="Existing Notifcations">
-                
-            </controls:HeaderBlock>
-        </Grid>
+
+        <controls:SaveCancelPage>
+
+        </controls:SaveCancelPage>
     </ContentPage.Content>
 </ContentPage>
