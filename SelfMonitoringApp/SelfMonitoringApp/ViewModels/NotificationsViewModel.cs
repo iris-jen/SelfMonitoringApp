@@ -33,6 +33,8 @@ namespace SelfMonitoringApp.ViewModels
 
         public NotificationsViewModel(INotificationManagerService notificationService = null)
         {
+            Notifications = new ObservableCollection<NotificationModel>();
+
             if (notificationService is null)
             {
                 _notificationService =

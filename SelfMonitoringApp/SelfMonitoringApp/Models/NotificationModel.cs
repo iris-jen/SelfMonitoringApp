@@ -38,6 +38,6 @@ namespace SelfMonitoringApp.Models
         
         public DateTime RegisteredTime { get; set; }
         
-        public List<DateTime> ReminderTimes { get; set; }
+        public List<TimeSpan> ReminderTimes { get; set; }
     }
 }

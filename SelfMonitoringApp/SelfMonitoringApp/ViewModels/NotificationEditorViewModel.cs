@@ -23,7 +23,7 @@ namespace SelfMonitoringApp.ViewModels
         public Command AddTimeCommand { get; set; }
         public Command RemoveTimeCommand { get; set; }
 
-        public ObservableCollection<DateTime> ReminderTimes { get; set; }
+        public ObservableCollection<TimeSpan> ReminderTimes { get; set; }
 
         public bool IsPeriodic
         {
@@ -157,30 +157,30 @@ namespace SelfMonitoringApp.ViewModels
             }
         }
 
-        private DateTime _newSingleDate;
-        public DateTime NewSingleDate
+        private TimeSpan _newSingleTime;
+        public TimeSpan NewSingleTime
         {
-            get => _newSingleDate;
+            get => _newSingleTime;
             set
             {
-                if (_newSingleDate == value)
+                if (_newSingleTime == value)
                     return;
 
-                _newSingleDate = value;
+                _newSingleTime = value;
                 NotifyPropertyChanged();
             }
         }
 
-        private DateTime _selectedSingleDate;
-        public DateTime SelectedSingleDate
+        private TimeSpan _selectedSingleTime;
+        public TimeSpan SelectedSingleTime
         {
-            get => _selectedSingleDate;
+            get => _selectedSingleTime;
             set
             {
-                if (_selectedSingleDate == value)
+                if (_selectedSingleTime == value)
                     return;
 
-                _selectedSingleDate = value;
+                _selectedSingleTime = value;
                 NotifyPropertyChanged();
             }
         }
@@ -193,26 +193,28 @@ namespace SelfMonitoringApp.ViewModels
             if (notification == null)
             {
                 _notification = new NotificationModel();
-                ReminderTimes = new ObservableCollection<DateTime>();
+                ReminderTimes = new ObservableCollection<TimeSpan>();
             }
             else
             {
                 _notification = notification;
-                ReminderTimes = new ObservableCollection<DateTime>(_notification.ReminderTimes);
+                ReminderTimes = new ObservableCollection<TimeSpan>(_notification.ReminderTimes);
             }
 
             SaveNotificationCommand = new Command(async () => await SaveAndPop());
             AddTimeCommand = new Command(AddNewTime);
+            RemoveTimeCommand = new Command(DeleteReminderTime);
         }
 
         public void AddNewTime()
         {
-            ReminderTimes.Add(NewSingleDate);
+            if (!ReminderTimes.Contains(NewSingleTime))
+                ReminderTimes.Add(NewSingleTime);
         }
 
         public void DeleteReminderTime()
         {
-            ReminderTimes.Remove(SelectedSingleDate);
+            ReminderTimes.Remove(SelectedSingleTime);
         }
 
         public async Task SaveAndPop()
@@ -220,6 +222,7 @@ namespace SelfMonitoringApp.ViewModels
             _notification.ReminderTimes = ReminderTimes.ToList();
             _notificationManager.AddOrUpdateNotification(_notification);
             await _navigator.NavigateBack();
+            ModelShed?.Invoke(this, new ModelShedEventArgs(_notification));
         }
 
     }

@@ -4,6 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
+             xmlns:modelBase="clr-namespace:SelfMonitoringApp.Models.Base"
              NavigationPage.HasNavigationBar="False"
              mc:Ignorable="d"
              x:Class="SelfMonitoringApp.Pages.NotificationEditorPage">
@@ -16,6 +17,35 @@
 
         <controls:SaveCancelPage PageName="Notification" CancelCommand="{Binding BackCommand}" SaveCommand="{Binding SaveNotificationCommand}">
             <StackLayout>
+                <controls:HeaderBlock HeaderText="Settings">
+                    <Frame Padding="2" BorderColor="Black">
+                        <StackLayout>
+                            <Frame Padding="2"  BorderColor="Black">
+                                <Picker SelectedItem="{Binding ModelTarget}" Title="Open to screen" TitleColor="Black" HeightRequest="80">
+                                    <Picker.Items>
+                                   
+                                    </Picker.Items>
+                                </Picker>
+                            </Frame>
+                            <Frame Padding="2"  BorderColor="Black">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width=".5*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="Vibrate?" Style="{StaticResource InnerLabelStyle}" />
+                                    <Frame Grid.Column="1" BackgroundColor="{StaticResource PrimaryLight}" Padding="0" Margin="3" BorderColor="Black">
+                                        <Switch Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" 
+                                                IsToggled="{Binding Vibrate}" ThumbColor="{StaticResource Secondary}"/>
+                                    </Frame>
+                                </Grid>
+                            </Frame>
+                            <Frame Padding="2"  BorderColor="Black">
+                                <Editor Text="{Binding Message}" Placeholder="Enter a message to yourself..." PlaceholderColor="Black" />
+                            </Frame>
+                        </StackLayout>
+                    </Frame>
+                </controls:HeaderBlock>
 
                 <controls:HeaderBlock HeaderText="Time">
                     <Frame Padding="3">
@@ -32,8 +62,9 @@
                                     </Frame>
                                 </Grid>
                             </Frame>
+                            <!--Periodic notification settings-->
                             <controls:HeaderBlock  Margin="0" HeaderText="Repeat setings" IsVisible="{Binding IsPeriodic}">
-                                <Frame>
+                                <Frame BorderColor="Black">
                                     <StackLayout>
                                         <!--Repeat frame-->
                                         <Frame BorderColor="Black" Padding="3">
@@ -63,35 +94,59 @@
                                                 <Label Text="Enabled between" HorizontalTextAlignment="Center" TextColor="Black" Grid.ColumnSpan="2" FontSize="16"/>
                                                 <Label Text="Start" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="Black" Grid.Row="1"/>
                                                 <Label Text="End" HorizontalTextAlignment="Center" Grid.Column="1" Grid.Row="1" TextColor="Black"/>
-                                                <TimePicker Grid.Row="2" HorizontalOptions="CenterAndExpand"/>
-                                                <TimePicker Grid.Row="2" Grid.Column="1" HorizontalOptions="CenterAndExpand"/>
+                                                <TimePicker Grid.Row="2" HorizontalOptions="CenterAndExpand" Time="{Binding StartTime}"/>
+                                                <TimePicker Grid.Row="2" Grid.Column="1" HorizontalOptions="CenterAndExpand" Time="{Binding EndTime}"/>
                                             </Grid>
                                         </Frame>
                                     </StackLayout>
                                 </Frame>
                             </controls:HeaderBlock>
+                            <!--Single / multi set notification-->
                             <controls:HeaderBlock  Margin="0" HeaderText="Set Times" IsVisible="{Binding IsPeriodic, Converter={StaticResource BoolInvert}}">
                                 <Frame BorderColor="Black">
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="20"/>
-                                            <RowDefinition/>
-                                        </Grid.RowDefinitions>
-                                        <Label Text="New Time" HorizontalTextAlignment="Center" Grid.ColumnSpan="2" TextColor="Black"/>
-                                        <TimePicker Grid.Row="1" BackgroundColor="White" VerticalOptions="CenterAndExpand"/>
-                                        <ImageButton Grid.Row="1" Grid.Column="1" Source="twotone_add_box_black_48dp.png"  
-                                                        Command="{Binding AddNewTimeCommand}"/>
-                                    </Grid>
+                                    <StackLayout>
+                                        
+                                        <Frame BorderColor="Black" Padding="5">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="40"/>
+                                                    <RowDefinition Height="50"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition/>
+                                                    <ColumnDefinition  Width="80"/>
+                                                    <ColumnDefinition Width="20"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Label Text="New Time" HorizontalTextAlignment="Center" FontSize="18" Grid.ColumnSpan="2" TextColor="Black"/>
+                                                <TimePicker Grid.Row="1" BackgroundColor="White" HorizontalOptions="CenterAndExpand" Time="{Binding NewSingleTime}"/>
+                                                <ImageButton Grid.Row="1" Grid.Column="1" Source="twotone_add_box_black_48dp.png" BackgroundColor="White"
+                                                        Command="{Binding AddTimeCommand}" Margin="5" HorizontalOptions="FillAndExpand"/>
+                                            </Grid>
+                                        </Frame>
+
+                                        <Frame BorderColor="Black" Padding="5">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="40"/>
+                                                    <RowDefinition Height="150"/>
+                                                    <RowDefinition Height="30"/>
+                                                </Grid.RowDefinitions>
+                                                <Label Text="Existing Times" HorizontalTextAlignment="Center" FontSize="18" TextColor="Black"/>
+                                                <Frame Grid.Row="1" BorderColor="Black" Padding="0">
+                                                    <ListView ItemsSource="{Binding ReminderTimes}" SeparatorColor="White" BackgroundColor="Black"
+                                                              SelectedItem="{Binding SelectedSingleTime}"/>
+                                                </Frame>
+                                                <ImageButton Grid.Row="2" BackgroundColor="LightCoral" BorderColor="Black" 
+                                                             BorderWidth="1" Source="twotone_delete_forever_black_48dp.png" Command="{Binding RemoveTimeCommand}"/>
+                                            </Grid>
+                                        </Frame>
+                                    </StackLayout>
                                 </Frame>
                             </controls:HeaderBlock>
                         </StackLayout>
                     </Frame>
                 </controls:HeaderBlock>
-                <controls:HeaderBlock HeaderText="Settings">
-                    <Frame Padding="2">
-          
-                    </Frame>
-                </controls:HeaderBlock>
+      
             </StackLayout>
         </controls:SaveCancelPage>
     </ContentPage.Content>
