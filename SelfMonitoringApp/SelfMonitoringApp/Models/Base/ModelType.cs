@@ -9,6 +9,7 @@
         Sleep,
         Substance,
         Socialization,
-        All
+        All,
+        Notification,
     }
 }

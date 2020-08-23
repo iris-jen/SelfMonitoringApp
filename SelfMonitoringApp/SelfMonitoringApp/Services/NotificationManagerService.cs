@@ -48,15 +48,15 @@ namespace SelfMonitoringApp.Services
 
         public void AddOrUpdateNotification(NotificationModel model)
         {
-            if(model.Key !=0)
+            if(model.ID !=0)
             {
                 int newKey = _keyGen.Next();
-                model.Key = newKey;
+                model.ID = newKey;
                 _notifications.Add(model);
             }
             else
             {
-                NotificationModel lastModel = _notifications.FirstOrDefault(x => x.Key == model.Key);
+                NotificationModel lastModel = _notifications.FirstOrDefault(x => x.ID == model.ID);
                 
                 if(lastModel!=null)
                     _notifications.Remove(lastModel);

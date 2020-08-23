@@ -33,6 +33,7 @@ namespace SelfMonitoringApp
             {
                 Level = LogLevel.Debug
             };
+
             Locator.CurrentMutable.RegisterConstant(Logger, typeof(ILogger));
         }
 

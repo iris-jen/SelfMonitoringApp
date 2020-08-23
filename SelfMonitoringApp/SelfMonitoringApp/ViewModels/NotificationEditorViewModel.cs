@@ -1,4 +1,5 @@
-﻿using SelfMonitoringApp.Models;
+﻿using Newtonsoft.Json.Bson;
+using SelfMonitoringApp.Models;
 using SelfMonitoringApp.Models.Base;
 using SelfMonitoringApp.Services;
 using SelfMonitoringApp.Services.Navigation;
@@ -19,18 +20,20 @@ namespace SelfMonitoringApp.ViewModels
         public event EventHandler ModelShed;
 
         public Command SaveNotificationCommand { get; set; }
+        public Command AddTimeCommand { get; set; }
+        public Command RemoveTimeCommand { get; set; }
 
         public ObservableCollection<DateTime> ReminderTimes { get; set; }
 
-        public NotificationType NotificationType
+        public bool IsPeriodic
         {
-            get => _notification.NotificationType;
+            get => _notification.IsPeriodic;
             set
             {
-                if (_notification.NotificationType == value)
+                if (_notification.IsPeriodic == value)
                     return;
 
-                _notification.NotificationType = value;
+                _notification.IsPeriodic = value;
                 NotifyPropertyChanged();
             }
         }
@@ -115,7 +118,6 @@ namespace SelfMonitoringApp.ViewModels
             }
         }
 
-
         public bool Silent
         {
             get => _notification.Silent;
@@ -155,6 +157,34 @@ namespace SelfMonitoringApp.ViewModels
             }
         }
 
+        private DateTime _newSingleDate;
+        public DateTime NewSingleDate
+        {
+            get => _newSingleDate;
+            set
+            {
+                if (_newSingleDate == value)
+                    return;
+
+                _newSingleDate = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private DateTime _selectedSingleDate;
+        public DateTime SelectedSingleDate
+        {
+            get => _selectedSingleDate;
+            set
+            {
+                if (_selectedSingleDate == value)
+                    return;
+
+                _selectedSingleDate = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public NotificationEditorViewModel(NotificationModel notification = null,  INotificationManagerService notificationManager = null)
         {
             _notificationManager = notificationManager ?? 
@@ -164,9 +194,6 @@ namespace SelfMonitoringApp.ViewModels
             {
                 _notification = new NotificationModel();
                 ReminderTimes = new ObservableCollection<DateTime>();
-
-
-
             }
             else
             {
@@ -175,6 +202,17 @@ namespace SelfMonitoringApp.ViewModels
             }
 
             SaveNotificationCommand = new Command(async () => await SaveAndPop());
+            AddTimeCommand = new Command(AddNewTime);
+        }
+
+        public void AddNewTime()
+        {
+            ReminderTimes.Add(NewSingleDate);
+        }
+
+        public void DeleteReminderTime()
+        {
+            ReminderTimes.Remove(SelectedSingleDate);
         }
 
         public async Task SaveAndPop()
@@ -183,5 +221,6 @@ namespace SelfMonitoringApp.ViewModels
             _notificationManager.AddOrUpdateNotification(_notification);
             await _navigator.NavigateBack();
         }
+
     }
 }

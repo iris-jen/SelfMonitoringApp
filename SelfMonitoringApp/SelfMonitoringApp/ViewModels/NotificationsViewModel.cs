@@ -53,6 +53,5 @@ namespace SelfMonitoringApp.ViewModels
             _notificationService.RemoveNotification(SelectedNotification);
         }
         
-
     }
 }

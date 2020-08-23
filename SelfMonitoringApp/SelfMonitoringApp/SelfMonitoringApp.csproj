@@ -23,7 +23,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Controls\DataTemplates\" />
       <Folder Include="Properties" />
     </ItemGroup>
 

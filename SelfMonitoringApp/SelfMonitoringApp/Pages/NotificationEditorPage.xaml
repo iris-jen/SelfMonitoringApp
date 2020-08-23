@@ -7,10 +7,92 @@
              NavigationPage.HasNavigationBar="False"
              mc:Ignorable="d"
              x:Class="SelfMonitoringApp.Pages.NotificationEditorPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <controls:BoolInverterConverter x:Key="BoolInvert"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
 
-        <controls:SaveCancelPage>
+        <controls:SaveCancelPage PageName="Notification" CancelCommand="{Binding BackCommand}" SaveCommand="{Binding SaveNotificationCommand}">
+            <StackLayout>
 
+                <controls:HeaderBlock HeaderText="Time">
+                    <Frame Padding="3">
+                        <StackLayout>
+                            <Frame Grid.Row="1" Style="{StaticResource InnerFrameStyle}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width=".5*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="Repeating?" Style="{StaticResource InnerLabelStyle}"/>
+                                    <Frame Grid.Column="1" BackgroundColor="{StaticResource PrimaryLight}" Padding="0" Margin="3" BorderColor="Black">
+                                        <Switch Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" IsToggled="{Binding IsPeriodic}" ThumbColor="{StaticResource Secondary}"/>
+                                    </Frame>
+                                </Grid>
+                            </Frame>
+                            <controls:HeaderBlock  Margin="0" HeaderText="Repeat setings" IsVisible="{Binding IsPeriodic}">
+                                <Frame>
+                                    <StackLayout>
+                                        <!--Repeat frame-->
+                                        <Frame BorderColor="Black" Padding="3">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="20"/>
+                                                    <RowDefinition Height="20"/>
+                                                    <RowDefinition/>
+                                                    <RowDefinition/>
+                                                </Grid.RowDefinitions>
+                                                <Label Text="Repeat every" HorizontalTextAlignment="Center" TextColor="Black" Grid.ColumnSpan="2" FontSize="16"/>
+                                                <Label Text="Hours" HorizontalTextAlignment="Center" TextColor="Black" Grid.Row="1"/>
+                                                <Label Text="Minutes" HorizontalTextAlignment="Center" Grid.Column="1" Grid.Row="1" TextColor="Black"/>
+                                                <Entry  Text="{Binding Hour}" HorizontalTextAlignment="Center" Grid.Row="2" VerticalTextAlignment="Center"/>
+                                                <Entry Grid.Column="1" Text="{Binding Minute}" HorizontalTextAlignment="Center" Grid.Row="2" VerticalTextAlignment="Center"/>
+                                                <Stepper Minimum="0" Maximum="10" Increment="1" Grid.Row="3" Value="{Binding Hour}"/>
+                                                <Stepper Minimum="0" Maximum="60" Increment="5" Grid.Column ="1" Grid.Row="3" Value="{Binding Minute}"/>
+                                            </Grid>
+                                        </Frame>
+                                        <Frame BorderColor="Black" Padding="2">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="20"/>
+                                                    <RowDefinition/>
+                                                    <RowDefinition Height="80"/>
+                                                </Grid.RowDefinitions>
+                                                <Label Text="Enabled between" HorizontalTextAlignment="Center" TextColor="Black" Grid.ColumnSpan="2" FontSize="16"/>
+                                                <Label Text="Start" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="Black" Grid.Row="1"/>
+                                                <Label Text="End" HorizontalTextAlignment="Center" Grid.Column="1" Grid.Row="1" TextColor="Black"/>
+                                                <TimePicker Grid.Row="2" HorizontalOptions="CenterAndExpand"/>
+                                                <TimePicker Grid.Row="2" Grid.Column="1" HorizontalOptions="CenterAndExpand"/>
+                                            </Grid>
+                                        </Frame>
+                                    </StackLayout>
+                                </Frame>
+                            </controls:HeaderBlock>
+                            <controls:HeaderBlock  Margin="0" HeaderText="Set Times" IsVisible="{Binding IsPeriodic, Converter={StaticResource BoolInvert}}">
+                                <Frame BorderColor="Black">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="20"/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Label Text="New Time" HorizontalTextAlignment="Center" Grid.ColumnSpan="2" TextColor="Black"/>
+                                        <TimePicker Grid.Row="1" BackgroundColor="White" VerticalOptions="CenterAndExpand"/>
+                                        <ImageButton Grid.Row="1" Grid.Column="1" Source="twotone_add_box_black_48dp.png"  
+                                                        Command="{Binding AddNewTimeCommand}"/>
+                                    </Grid>
+                                </Frame>
+                            </controls:HeaderBlock>
+                        </StackLayout>
+                    </Frame>
+                </controls:HeaderBlock>
+                <controls:HeaderBlock HeaderText="Settings">
+                    <Frame Padding="2">
+          
+                    </Frame>
+                </controls:HeaderBlock>
+            </StackLayout>
         </controls:SaveCancelPage>
     </ContentPage.Content>
 </ContentPage>

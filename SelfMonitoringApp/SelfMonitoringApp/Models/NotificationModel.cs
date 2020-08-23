@@ -6,9 +6,15 @@ using System.Text;
 
 namespace SelfMonitoringApp.Models
 {
-    public class NotificationModel
+    public class NotificationModel : IModel
     {
-        public NotificationType NotificationType { get; set; }
+        public ModelType LogType
+        {
+            get
+            {
+                return ModelType.Notification;
+            }
+        }
 
         public ModelType ModelTarget { get; set; }
 
@@ -22,11 +28,15 @@ namespace SelfMonitoringApp.Models
 
         public bool Silent { get; set; }
 
-        public int Key { get; set; }
+        public int ID { get; set; }
 
-        //Time the periodic notifications
+        public bool IsPeriodic { get; set; }
+
         public TimeSpan StartTime { get; set; }
+
         public TimeSpan EndTime { get; set; }
+        
+        public DateTime RegisteredTime { get; set; }
         
         public List<DateTime> ReminderTimes { get; set; }
     }
