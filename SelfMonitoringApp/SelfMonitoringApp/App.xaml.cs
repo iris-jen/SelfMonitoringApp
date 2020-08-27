@@ -28,6 +28,7 @@ namespace SelfMonitoringApp
             Locator.CurrentMutable.RegisterConstant( new SuggestionService(), typeof(ISuggestionService));
             Locator.CurrentMutable.RegisterConstant( new LocalSqlDatabaseService(), typeof(IDatabaseService));
             Locator.CurrentMutable.RegisterConstant( new NavigationService(this, new ViewLocator()), typeof(INavigationService));
+            Locator.CurrentMutable.RegisterConstant(new NotificationManagerService(), typeof(INotificationManagerService));
 
             var Logger = new DebugLogger()
             {

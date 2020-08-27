@@ -69,7 +69,7 @@
                                                 </Grid>
                                                 <Grid Grid.Column="1" Grid.Row="1">
                                                     <Label Text ="Total" Style="{StaticResource InnerLabelStyle}" Grid.ColumnSpan="2"/>
-                                                    <Label Text ="{Binding TotalOccurances}" Grid.Row="1" HorizontalTextAlignment="End"/>
+                                                    <Label Text ="{Binding TrendContextTotal}" Grid.Row="1" HorizontalTextAlignment="End"/>
                                                     <Label Text ="{Binding TrendContextUnit}" Grid.Row="1" Grid.Column="1" HorizontalTextAlignment="Start"/>
                                                 </Grid>
 

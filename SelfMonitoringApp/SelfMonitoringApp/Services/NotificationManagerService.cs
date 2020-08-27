@@ -48,7 +48,7 @@ namespace SelfMonitoringApp.Services
 
         public void AddOrUpdateNotification(NotificationModel model)
         {
-            if(model.ID !=0)
+            if(model.ID ==0)
             {
                 int newKey = _keyGen.Next();
                 model.ID = newKey;

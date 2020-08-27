@@ -6,6 +6,7 @@ using SelfMonitoringApp.Services.Navigation;
 using SelfMonitoringApp.ViewModels.Base;
 using Splat;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -24,6 +25,21 @@ namespace SelfMonitoringApp.ViewModels
         public Command RemoveTimeCommand { get; set; }
 
         public ObservableCollection<TimeSpan> ReminderTimes { get; set; }
+        public List<ModelType> ModelTypes 
+        {
+            get
+            {
+                return new List<ModelType>()
+                {
+                    ModelType.Activity,
+                    ModelType.Mood,
+                    ModelType.Meal,
+                    ModelType.Sleep,
+                    ModelType.Substance,
+                    ModelType.Socialization
+                };
+            }
+        }
 
         public bool IsPeriodic
         {

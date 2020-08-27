@@ -18,15 +18,18 @@
         <controls:SaveCancelPage PageName="Notification" CancelCommand="{Binding BackCommand}" SaveCommand="{Binding SaveNotificationCommand}">
             <StackLayout>
                 <controls:HeaderBlock HeaderText="Settings">
-                    <Frame Padding="2" BorderColor="Black">
+                    <Frame Padding="5" BorderColor="Black">
                         <StackLayout>
                             <Frame Padding="2"  BorderColor="Black">
-                                <Picker SelectedItem="{Binding ModelTarget}" Title="Open to screen" TitleColor="Black" HeightRequest="80">
-                                    <Picker.Items>
-                                   
-                                    </Picker.Items>
-                                </Picker>
+                                <Picker SelectedItem="{Binding ModelTarget}" Title="Open to screen" TitleColor="Black" HeightRequest="80" 
+                                        ItemsSource="{Binding ModelTypes}"/>
                             </Frame>
+ 
+                            <Frame Padding="2"  BorderColor="Black">
+                                <Editor Text="{Binding Message}" Placeholder="Enter a message to yourself..." PlaceholderColor="Black"
+                                        Style="{StaticResource EditorStyle}"/>
+                            </Frame>
+
                             <Frame Padding="2"  BorderColor="Black">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
@@ -39,9 +42,6 @@
                                                 IsToggled="{Binding Vibrate}" ThumbColor="{StaticResource Secondary}"/>
                                     </Frame>
                                 </Grid>
-                            </Frame>
-                            <Frame Padding="2"  BorderColor="Black">
-                                <Editor Text="{Binding Message}" Placeholder="Enter a message to yourself..." PlaceholderColor="Black" />
                             </Frame>
                         </StackLayout>
                     </Frame>
