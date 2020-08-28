@@ -23,7 +23,7 @@ namespace SelfMonitoringApp.Android
             Xamarin.Forms.Forms.Init(this, savedInstanceState);
             Xamarin.Forms.FormsMaterial.Init(this, savedInstanceState);
             UserDialogs.Init(this);
-            LoadApplication(new App());
+            LoadApplication(new App());                                                                                                                               
         }
 
     }
