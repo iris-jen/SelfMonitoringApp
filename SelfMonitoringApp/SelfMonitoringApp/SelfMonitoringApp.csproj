@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.1</TargetFramework>
+        <TargetFramework>netstandard2.0</TargetFramework>
         <Authors>ThomasJennison</Authors>
         <Product>SelfMonitoringApp</Product>
     </PropertyGroup>
@@ -12,12 +12,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Acr.UserDialogs" Version="7.1.0.446" />
+        <PackageReference Include="Acr.UserDialogs" Version="7.1.0.450" />
         <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
         <PackageReference Include="SkiaSharp.Views.Forms" Version="2.80.1" />
-        <PackageReference Include="Splat" Version="9.5.20" />
+        <PackageReference Include="Splat" Version="9.5.35" />
         <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
         <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
+        <PackageReference Include="Xam.Plugins.Notifier" Version="3.0.1" />
         <PackageReference Include="Xamarin.Forms" Version="4.8.0.1269" />
         <PackageReference Include="Xamarin.Forms.Visual.Material" Version="4.8.0.1269" />
     </ItemGroup>

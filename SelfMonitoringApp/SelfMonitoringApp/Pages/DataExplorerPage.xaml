@@ -410,7 +410,7 @@
                                     <Label Text="{Binding MealSize}" Style="{StaticResource InnerLabelStyle}" Grid.Row="1" />
                                 </Grid>
                                 <Grid Grid.Column="1"  Grid.Row="2">
-                                    <Label Text="Size" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Style="{StaticResource HeaderLabel}"/>
+                                    <Label Text="Name" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Style="{StaticResource HeaderLabel}"/>
                                     <Label Text="{Binding Description}" HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Style="{StaticResource InnerLabelStyle}" Grid.Row="1"/>
                                 </Grid>
 

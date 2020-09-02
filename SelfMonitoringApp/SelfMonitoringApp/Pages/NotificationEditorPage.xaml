@@ -63,8 +63,8 @@
                                 </Grid>
                             </Frame>
                             <!--Periodic notification settings-->
-                            <controls:HeaderBlock  Margin="0" HeaderText="Repeat setings" IsVisible="{Binding IsPeriodic}">
-                                <Frame BorderColor="Black">
+                 
+                                <Frame BorderColor="Black" IsVisible="{Binding IsPeriodic}">
                                     <StackLayout>
                                         <!--Repeat frame-->
                                         <Frame BorderColor="Black" Padding="3">
@@ -100,10 +100,9 @@
                                         </Frame>
                                     </StackLayout>
                                 </Frame>
-                            </controls:HeaderBlock>
-                            <!--Single / multi set notification-->
-                            <controls:HeaderBlock  Margin="0" HeaderText="Set Times" IsVisible="{Binding IsPeriodic, Converter={StaticResource BoolInvert}}">
-                                <Frame BorderColor="Black">
+                  
+
+                                <Frame BorderColor="Black" IsVisible="{Binding IsPeriodic, Converter={StaticResource BoolInvert}}">
                                     <StackLayout>
                                         
                                         <Frame BorderColor="Black" Padding="5">
@@ -133,7 +132,7 @@
                                                 </Grid.RowDefinitions>
                                                 <Label Text="Existing Times" HorizontalTextAlignment="Center" FontSize="18" TextColor="Black"/>
                                                 <Frame Grid.Row="1" BorderColor="Black" Padding="0">
-                                                    <ListView ItemsSource="{Binding ReminderTimes}" SeparatorColor="White" BackgroundColor="Black"
+                                                    <ListView ItemsSource="{Binding ReminderTimes}" SeparatorColor="White" BackgroundColor="White"
                                                               SelectedItem="{Binding SelectedSingleTime}"/>
                                                 </Frame>
                                                 <ImageButton Grid.Row="2" BackgroundColor="LightCoral" BorderColor="Black" 
@@ -142,7 +141,7 @@
                                         </Frame>
                                     </StackLayout>
                                 </Frame>
-                            </controls:HeaderBlock>
+    
                         </StackLayout>
                     </Frame>
                 </controls:HeaderBlock>

@@ -16,14 +16,38 @@ namespace SelfMonitoringApp.ViewModels
     {
         public Command<PageNames> NavigateCommand { get; set; }
 
-        public MainViewModel()   
+        public Command ToggleLogVisibilityCommand { get; set; }
+
+        private bool _logVisibility;
+
+        public bool LogVisibility
         {
-            NavigateCommand = new Command<PageNames>((page) => Navigate(page));
+            get => _logVisibility;
+            set
+            {
+                if (_logVisibility == value)
+                    return;
+
+                _logVisibility = value;
+                NotifyPropertyChanged();
+            }
         }
 
 
+        public MainViewModel()   
+        {
+            NavigateCommand = new Command<PageNames>((page) => Navigate(page));
+            ToggleLogVisibilityCommand = new Command(() => ToggleLogVisibility());
+        }
+
+        public void ToggleLogVisibility()
+        {
+            LogVisibility = !LogVisibility;
+        }
+
         private Task GetNavigatorTask(PageNames page)
         {
+            LogVisibility = false;
             switch (page)
             {
                 case PageNames.MoodEditor:

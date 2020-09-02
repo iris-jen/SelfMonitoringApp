@@ -38,7 +38,7 @@
 
             <Frame Grid.Row="2" Style="{StaticResource InnerFrameStyle}">
                 <Picker HorizontalTextAlignment="Center" x:Name="HeaderPicker" Margin="10,-10,10,0" FontSize="16" VerticalTextAlignment="Center" VerticalOptions="Center"
-                        SelectedIndexChanged="HeaderPicker_SelectedIndexChanged" BackgroundColor="White" TextColor="Black"/>
+                        SelectedIndexChanged="HeaderPicker_SelectedIndexChanged" BackgroundColor="White" TextColor="Black" />
             </Frame>
         </Grid>
     </Frame.Content>

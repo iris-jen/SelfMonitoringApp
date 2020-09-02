@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Plugin.LocalNotifications;
 using SelfMonitoringApp.Models;
 using System;
 using System.Collections.Generic;
@@ -12,33 +13,31 @@ namespace SelfMonitoringApp.Services
     {
         public const string DatabaseFilename = "UserNotifications.json";
 
-        private List<NotificationModel> _notifications;
-
-        private Random _keyGen;
-
+        /// <summary>
+        /// contains all registered notification models
+        /// </summary>
+        private List<NotificationHolder> _notifications;
+ 
         public static string FilePath
         {
             get
             {
-                var basePath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+                var basePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
                 return Path.Combine(basePath, DatabaseFilename);
             }
         }
 
         public NotificationManagerService()
         {
-            _keyGen = new Random(420);
-
             if (File.Exists(FilePath))
             {
-                _notifications = JsonConvert.DeserializeObject<List<NotificationModel>>(File.ReadAllText(FilePath));
+                _notifications = JsonConvert.DeserializeObject<List<NotificationHolder>>(
+                        File.ReadAllText(FilePath));
             }
             else
             {
-                _notifications = new List<NotificationModel>();
                 Save();
             }
- 
         }
         
         public void Save()
@@ -50,25 +49,22 @@ namespace SelfMonitoringApp.Services
         {
             if(model.ID ==0)
             {
-                int newKey = _keyGen.Next();
-                model.ID = newKey;
-                _notifications.Add(model);
+                // Determine how many notifications we need to schedule
+                if (model.IsPeriodic)
+                {
+
+                        
+                }          
             }
             else
             {
-                NotificationModel lastModel = _notifications.FirstOrDefault(x => x.ID == model.ID);
-                
-                if(lastModel!=null)
-                    _notifications.Remove(lastModel);
 
-                _notifications.Add(model);
             }
             Save();
         }
 
         public void RemoveNotification(NotificationModel model)
         {
-            _notifications.Remove(model);
             Save();
         }
 
