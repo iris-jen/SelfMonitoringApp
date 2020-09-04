@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasNavigationBar="True"
 
              Title="View Data"
              Visual="Material"
@@ -462,8 +462,8 @@
             </Grid>
 
             <!--Item Carousel-->
-            <CarouselView BackgroundColor="White" ItemsSource="{Binding DaySummaries}" Margin="5,0,5,5" IndicatorView="indicatorView" >
-                <CarouselView.ItemTemplate>
+            <CollectionView BackgroundColor="White" ItemsSource="{Binding DaySummaries}" Margin="5,0,5,5">
+                <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <!--Item-->
                         <controls:HeaderBlock HorizontalOptions="CenterAndExpand" HeaderText="{Binding Date}">
@@ -556,8 +556,8 @@
                         </controls:HeaderBlock>
                     </DataTemplate>
                
-                </CarouselView.ItemTemplate>
-            </CarouselView>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
             
             <IndicatorView x:Name="indicatorView" IndicatorColor="Black" IndicatorsShape="Circle"
                    IndicatorSize="20" VerticalOptions="Center" SelectedIndicatorColor="{StaticResource Primary}" HorizontalOptions="Center" />

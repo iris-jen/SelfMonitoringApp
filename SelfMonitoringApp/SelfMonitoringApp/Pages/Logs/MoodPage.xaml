@@ -9,8 +9,8 @@
              Visual="Material"
              NavigationPage.HasBackButton="true"
              BackgroundColor="White"
-             NavigationPage.HasNavigationBar="False"         
-             Title="Log Mood"
+             NavigationPage.HasNavigationBar="True"         
+             Title="Log your mood"
              x:Class="SelfMonitoringApp.Pages.Logs.MoodPage">
     <ContentPage.Content>
         <controls:SaveCancelPage CancelCommand="{Binding BackCommand}" SaveCommand="{Binding SaveLogCommand}" PageName="Mood">

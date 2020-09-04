@@ -5,9 +5,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
              mc:Ignorable="d"
-             NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasNavigationBar="True"
              Visual="Material"
              Title="Log Sleep"
+             Background="White"
              x:Class="SelfMonitoringApp.Pages.Logs.SleepPage">
     <ContentPage.Content>
         <controls:SaveCancelPage CancelCommand="{Binding BackCommand}" PageName="Sleep" SaveCommand="{Binding SaveLogCommand}">
@@ -59,7 +60,7 @@
                 <!--Total sleep box-->
                 <controls:HeaderBlock HeaderText="Total" Grid.Row="1">
                     <Frame Style="{StaticResource InnerFrameStyle}">
-                        <Label Text="{Binding TotalSleep , StringFormat ='{0:0.0}'}" TextColor="Black" Style="{StaticResource InnerLabelStyle}"/>
+                        <Label Text="{Binding TotalSleep, StringFormat ='{0:F2}'}" TextColor="Black" Style="{StaticResource InnerLabelStyle}"/>
                     </Frame>
                 </controls:HeaderBlock>
 

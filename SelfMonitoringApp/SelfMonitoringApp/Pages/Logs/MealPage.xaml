@@ -6,9 +6,9 @@
              xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
              xmlns:services="clr-namespace:SelfMonitoringApp.Services"
              mc:Ignorable="d"
-             NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasNavigationBar="True"
              Visual="Material"
-             Title="Log Meal"
+             Title="Log a meal"
              x:Class="SelfMonitoringApp.Pages.Logs.MealPage">
     <ContentPage.Content>
         <controls:SaveCancelPage CancelCommand="{Binding BackCommand}" PageName="Meal" SaveCommand="{Binding SaveLogCommand}">

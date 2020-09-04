@@ -18,12 +18,15 @@ namespace SelfMonitoringApp.UnitTests
         private MealViewModel _newModel;
         private MealViewModel _existingModel;
 
-        private INavigationService _navService;
+        private INavigationService _navigationMock;
+        private IDatabaseService _dbMock;
 
         [TestInitialize]
         public void Init()
         {
-            _newModel = new MealViewModel();
+            _navigationMock = new Mock<INavigationService>().Object;
+            _dbMock = new Mock<IDatabaseService>().Object;
+            _newModel = new MealViewModel(nav: _navigationMock, db: _dbMock);
             _existingModel = new MealViewModel(LogSamples.TestMeal);
         }
 
@@ -37,9 +40,10 @@ namespace SelfMonitoringApp.UnitTests
         [TestCleanup]
         public void Cleanup()
         {
-            _navService = null;
-            _newModel = null;
+            _navigationMock = null;
+            _dbMock = null;
             _existingModel = null;
+            _newModel = null;
         }
     }
 }

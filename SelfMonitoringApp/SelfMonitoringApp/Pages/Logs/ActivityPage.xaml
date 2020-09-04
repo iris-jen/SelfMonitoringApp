@@ -6,8 +6,9 @@
              xmlns:services="clr-namespace:SelfMonitoringApp.Services"
              mc:Ignorable="d"
              Visual="Material"
-             Title="Activity Log"
-             NavigationPage.HasNavigationBar="False"
+             Title="Log an activity"
+             Background="White"
+             NavigationPage.HasNavigationBar="True"
              xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
              x:Class="SelfMonitoringApp.Pages.Logs.ActivityPage">
     <ContentPage.Content>

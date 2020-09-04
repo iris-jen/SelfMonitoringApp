@@ -51,21 +51,25 @@ namespace SelfMonitoringApp.UnitTests
                 EndTime = new TimeSpan(hours: periodicEndHour, minutes: periodicEndMinute, seconds: 0),
                 IsPeriodic = true
             };
+
+            _periodicNotificationHolder = new NotificationHolder();
+            _notificationHolder = new NotificationHolder();
         }
 
         [TestMethod]
         public void TestTimeCalculations()
         {
-            int totalDays = 3;
-            _periodicNotificationHolder = new NotificationHolder(0, _periodicNotification, totalDays);
+            var totalDays = 3;
+            var periodicKeys = 
+                _periodicNotificationHolder.CalculateNotificationTimes(0, _periodicNotification, totalDays);
   
-            foreach(var kvp in _periodicNotificationHolder.SystemKeys)
+            foreach(var kvp in periodicKeys)
             {
                 Debug.WriteLine($"Periodic ---> key - {kvp.Key} Time {kvp.Value:yy/MM/dd @ hh:mm tt}");
             }
 
-            _notificationHolder = new NotificationHolder(300, _notification, totalDays);
-            foreach (var kvp in _notificationHolder.SystemKeys)
+            var regularKeys = _notificationHolder.CalculateNotificationTimes(300, _notification, totalDays);
+            foreach (var kvp in regularKeys)
             {
                 Debug.WriteLine($"Non Periodic ---> key - {kvp.Key} Time {kvp.Value:yy/MM/dd @ hh:mm tt}");
             }

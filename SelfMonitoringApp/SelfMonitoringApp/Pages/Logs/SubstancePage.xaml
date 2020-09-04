@@ -3,11 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:behaviors="clr-namespace:Behaviors;assembly=Behaviors"
              Visual="Material"
              xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
              mc:Ignorable="d"
-             NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasNavigationBar="True"
              Title="Log Substance Use"
              xmlns:services="clr-namespace:SelfMonitoringApp.Services"
              x:Class="SelfMonitoringApp.Pages.Logs.SubstancePage">

@@ -5,7 +5,9 @@
              xmlns:pages="clr-namespace:SelfMonitoringApp.Pages"
              x:Class="SelfMonitoringApp.Pages.MainPage"
              Visual="Material" 
-             NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasNavigationBar="True"
+             NavigationPage.HasBackButton="False"
+             Title="Home"
              BackgroundColor="White">
     <ContentPage.Content>
         <ScrollView>
@@ -17,7 +19,7 @@
                         <ImageButton Source="splash1.png"  BorderColor="Black" BorderWidth="2" BackgroundColor="White" Padding="0" Command="{Binding ToggleLogVisibilityCommand}"/>
 
 
-                        <Grid Grid.Row="1" HeightRequest="400" IsVisible="{Binding LogVisibility}">
+                        <Grid Grid.Row="1" HeightRequest="500" IsVisible="{Binding LogVisibility}">
                             <!--Mood Log Button-->
                             <Button Command="{Binding NavigateCommand}" CommandParameter="{x:Static pages:PageNames.MoodEditor}" Text="Mood" 
                                     AutomationId="go_mood" Style="{StaticResource ButtonStyle}" ImageSource="twotone_psychology_black_48dp.png"/>

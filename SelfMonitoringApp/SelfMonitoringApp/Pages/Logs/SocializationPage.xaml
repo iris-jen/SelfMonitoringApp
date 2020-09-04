@@ -5,13 +5,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:services="clr-namespace:SelfMonitoringApp.Services"
              mc:Ignorable="d"
-             NavigationPage.HasNavigationBar="False"
-             Title="Social Log"
+             NavigationPage.HasNavigationBar="True"
+             Title="Loc socialization"
              Visual="Material"
              xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
              x:Class="SelfMonitoringApp.Pages.Logs.SocializationPage">
     <ContentPage.Content>
-        <controls:SaveCancelPage SaveCommand="{Binding SaveLogCommand}" CancelCommand="{Binding BackCommand}" PageName="Socialization">
+        <controls:SaveCancelPage SaveCommand="{Binding SaveLogCommand}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="{StaticResource RowHeightDateTime}"/>
@@ -54,7 +54,7 @@
                 <!--Total time box-->
                 <controls:HeaderBlock HeaderText="Total" Grid.Row="1">
                     <Frame Style="{StaticResource InnerFrameStyle}">
-                        <Label Text="{Binding Duration , StringFormat ='{0:0.0}'}" Style="{StaticResource InnerLabelStyle}"/>
+                        <Label Text="{Binding Duration , StringFormat ='{0:F2}'}" Style="{StaticResource InnerLabelStyle}"/>
                     </Frame>
                 </controls:HeaderBlock>
 
@@ -79,7 +79,7 @@
                                     <ColumnDefinition Width=".5*"/>
                                 </Grid.ColumnDefinitions>
                                 <Label Text="Did you want to do it?" Style="{StaticResource InnerLabelStyle}"/>
-                                <Frame Grid.Column="1" BackgroundColor="{StaticResource PrimaryLight}" Padding="0" Margin="3">
+                                <Frame Grid.Column="1" BackgroundColor="{StaticResource PrimaryLight}" Padding="0" Margin="3" BorderColor="Black">
                                     <Switch Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" ThumbColor="{StaticResource Secondary}" IsToggled="{Binding WantedToSocialize}"/>
                                 </Frame>
                             </Grid>

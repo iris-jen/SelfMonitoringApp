@@ -235,6 +235,7 @@ namespace SelfMonitoringApp.ViewModels
 
         public async Task SaveAndPop()
         {
+            _notification.Interval = new TimeSpan(Hour, Minute, 0);
             _notification.ReminderTimes = ReminderTimes.ToList();
             _notificationManager.AddOrUpdateNotification(_notification);
             await _navigator.NavigateBack();

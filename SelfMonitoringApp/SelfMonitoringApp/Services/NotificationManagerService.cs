@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using Plugin.LocalNotifications;
 using SelfMonitoringApp.Models;
 using System;
 using System.Collections.Generic;
@@ -16,13 +15,16 @@ namespace SelfMonitoringApp.Services
         /// <summary>
         /// contains all registered notification models
         /// </summary>
-        private List<NotificationHolder> _notifications;
- 
+        private Dictionary<int,NotificationHolder> _notifications;
+
+        private const int HolderGap = 200;
+        private const int DaysToGenerate = 3;
+
         public static string FilePath
         {
             get
             {
-                var basePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                string basePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
                 return Path.Combine(basePath, DatabaseFilename);
             }
         }
@@ -31,13 +33,19 @@ namespace SelfMonitoringApp.Services
         {
             if (File.Exists(FilePath))
             {
-                _notifications = JsonConvert.DeserializeObject<List<NotificationHolder>>(
-                        File.ReadAllText(FilePath));
+                string fileContents = File.ReadAllText(FilePath);
+
+                File.Delete(FilePath);
+
+                //if (!string.IsNullOrEmpty(fileContents))
+                //{
+                //    _notifications = JsonConvert.DeserializeObject<Dictionary<int, NotificationHolder>>(
+                //            File.ReadAllText(FilePath));
+                //    return;
+                //}
             }
-            else
-            {
-                Save();
-            }
+            _notifications = new Dictionary<int, NotificationHolder>();
+            Save();   
         }
         
         public void Save()
@@ -47,18 +55,42 @@ namespace SelfMonitoringApp.Services
 
         public void AddOrUpdateNotification(NotificationModel model)
         {
-            if(model.ID ==0)
+            if(model.ID == 0)
             {
-                // Determine how many notifications we need to schedule
-                if (model.IsPeriodic)
-                {
+                // if theres nothing in the dictionary just set first key to 100
+                int newKey = _notifications.Count > 0 ? _notifications.Keys.Max() + HolderGap : 100;
+                
+                model.ID = newKey;
 
-                        
-                }          
+                NotificationHolder holder = new NotificationHolder();
+                var keys = holder.CalculateNotificationTimes(newKey, model, DaysToGenerate);
+                _notifications.Add(newKey, holder);
+
+                foreach(KeyValuePair<int,DateTime> timeSets in keys)
+                {
+                    //Todo: create your own implementation of this.
+                    //CrossLocalNotifications.Current.Show($"Time to log your {model.LogType}!", model.Message,
+                    //    timeSets.Key, timeSets.Value);
+                }
             }
             else
             {
+                NotificationHolder holder = _notifications[model.ID];
 
+                foreach (int key in holder.SystemKeys.Keys)
+                {
+                    //Todo: create your own implementation of this.
+                    //CrossLocalNotifications.Current.Cancel(key);
+                }
+
+                foreach (KeyValuePair<int, DateTime> timeSets in holder.SystemKeys)
+                {
+
+                    //Todo: create your own implementation of this.
+                    //CrossLocalNotifications.Current.Show($"Time to log your {model.LogType}!",
+                    //    model.Message, timeSets.Key, timeSets.Value);
+                }
+        
             }
             Save();
         }

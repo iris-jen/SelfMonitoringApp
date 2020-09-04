@@ -30,7 +30,7 @@
                                         Style="{StaticResource EditorStyle}"/>
                             </Frame>
 
-                            <Frame Padding="2"  BorderColor="Black">
+                            <Frame Padding="2"  BorderColor="Black" IsVisible="false">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>

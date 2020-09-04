@@ -13,12 +13,11 @@ namespace SelfMonitoringApp.Models
 
         public Dictionary<int, DateTime> SystemKeys { get; private set; }
 
-        public NotificationHolder(int id, NotificationModel model, int totalDays)
+        public NotificationHolder()
         {
-            CalculateNotificationTimes(id, model, totalDays);
         }
 
-        public void CalculateNotificationTimes(int baseId, NotificationModel model, int totalDays)
+        public Dictionary<int,DateTime> CalculateNotificationTimes(int baseId, NotificationModel model, int totalDays)
         {
             SystemKeys = new Dictionary<int, DateTime>();
 
@@ -37,15 +36,14 @@ namespace SelfMonitoringApp.Models
                
                 for (int day = 0; day < totalDays; day++)
                 {
-                    for (int i = 0; i < occurances; i++)
-                    {
-                        //Add an the interval time to the base time
-                        DateTime notificationTime = i == 0 ? 
-                            baseTime.AddHours(model.Interval.TotalHours) : baseTime;
-
+                    DateTime notificationTime = baseTime;
+                    for (int i = 1; i <= occurances; i++)
+                    { 
                         //Designate the key for this time
                         SystemKeys.Add(baseId + i + keyRunner,
                             notificationTime);
+
+                        notificationTime = notificationTime.AddHours(model.Interval.TotalHours);
                     }
                     // increment key by day offset
                     keyRunner += keyOffset;
@@ -60,7 +58,7 @@ namespace SelfMonitoringApp.Models
                     {
                         TimeSpan time = model.ReminderTimes[i];
                         // create a new date time from the indicated time
-                        SystemKeys.Add(baseId + i + keyOffset, new DateTime(baseTime.Year, baseTime.Month, baseTime.Day,
+                        SystemKeys.Add(baseId + i + keyRunner, new DateTime(baseTime.Year, baseTime.Month, baseTime.Day,
                             time.Hours, time.Minutes, time.Seconds));
                     }
                     // increment key by day offset
@@ -68,6 +66,8 @@ namespace SelfMonitoringApp.Models
                     baseTime = baseTime.AddDays(1);
                 }
             }
+
+            return new Dictionary<int, DateTime>(SystemKeys);
         }
 
     }
