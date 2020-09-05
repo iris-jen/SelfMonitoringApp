@@ -50,6 +50,7 @@ namespace SelfMonitoringApp.Controls
             CanvasView = new SKCanvasView();
             CanvasView.PaintSurface += OnCanvasViewPaintSurface;
             Content = CanvasView;
+           
         }
 
         public void OnCanvasViewPaintSurface(object sender, SKPaintSurfaceEventArgs args)
@@ -57,12 +58,16 @@ namespace SelfMonitoringApp.Controls
             SKImageInfo info = args.Info;
             SKSurface surface = args.Surface;
             SKCanvas canvas = surface.Canvas;
-      
+
+            int occuranceStartHr = Occurances.Min(x => x.Time).Hour - 1;
+            int occuranceEndHr = Occurances.Max(x => x.Time).Hour + 1;
+            int deltaHours = occuranceEndHr - occuranceStartHr;
+
             int borderOffset = 60;
             int height = info.Height - borderOffset;
             int width = info.Width - borderOffset;
             int totalXSegments = 11;
-            int totalYSegments = 25;
+            int totalYSegments = deltaHours;
             float horizontalLineSpacing = height / totalXSegments;
             float verticalLineSpacing = width / totalYSegments;
 
@@ -75,17 +80,20 @@ namespace SelfMonitoringApp.Controls
             {
                 canvas.Clear();
                 linePaint.Style = SKPaintStyle.Stroke;
-                linePaint.StrokeWidth = 4;
+                linePaint.StrokeWidth = 1;
+                linePaint.StrokeCap = SKStrokeCap.Square;
+                linePaint.StrokeJoin = SKStrokeJoin.Miter;
                 linePaint.Color = SKColors.Black;
 
                 moodPointPaint.Style = SKPaintStyle.StrokeAndFill;
                 moodPointPaint.StrokeWidth = 4;
-                moodPointPaint.Color = SKColors.Purple;
+                moodPointPaint.Color = SKColors.Blue;
 
                 moodLinePaint.Style = SKPaintStyle.Stroke;
                 moodLinePaint.StrokeWidth = 4;
-                moodLinePaint.Color = SKColors.Blue;
-
+                moodLinePaint.Color = SKColors.Purple;
+                moodLinePaint.IsAntialias = true;
+                
                 borderPaint.Style = SKPaintStyle.Stroke;
                 borderPaint.StrokeWidth = 5;
                 borderPaint.Color = SKColors.Black;
@@ -118,7 +126,7 @@ namespace SelfMonitoringApp.Controls
                 {
                     if (!dontWriteText)
                     {
-                        canvas.DrawText($"{lineCount}", new SKPoint(x, info.Height - textOffset), textPaint);
+                        canvas.DrawText($"{occuranceStartHr + lineCount}:00", new SKPoint(x, info.Height - textOffset), textPaint);
                         dontWriteText = true;
                     }
                     else
@@ -132,7 +140,7 @@ namespace SelfMonitoringApp.Controls
                 SKPoint lastPoint = SKPoint.Empty;
                 foreach(OccuranceModel mood in Occurances)
                 {
-                    float pX = (float)(mood.Time.TimeOfDay.TotalHours * verticalLineSpacing + borderOffset);
+                    float pX = (float)((mood.Time.TimeOfDay.TotalHours-occuranceStartHr) * verticalLineSpacing + borderOffset);
                     float pY = (float)(height - mood.Ammount * horizontalLineSpacing);
 
                     SKPoint newPoint = new SKPoint(pX, pY);

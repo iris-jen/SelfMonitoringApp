@@ -11,15 +11,21 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
-                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="70"/>
                 </Grid.RowDefinitions>
 
 
-                <ScrollView  Margin="2,-6,2,1">
-                    <ContentPresenter HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="5"/>
+                <ScrollView  Margin="0,0,0,-5">
+                    <Frame BorderColor="Black" Padding="5" Margin="5">
+                        <ContentPresenter HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="3"/>
+                    </Frame>
                 </ScrollView>
 
-                <Button ImageSource="twotone_save_black_48dp.png" Command="{TemplateBinding SaveCommand}" Text="Save Log" TextColor="Black" BackgroundColor="LightGreen" Margin="7" BorderColor="Black" Grid.Row="1"/>
+                <Grid Grid.Row="1" Margin="0" BackgroundColor="{StaticResource Primary}">
+                    <Frame Padding="0" BorderColor="Black" Margin="5">
+                        <Button ImageSource="twotone_save_black_48dp.png" Command="{TemplateBinding SaveCommand}" Text="Save Log" TextColor="Black" BorderWidth="2" BackgroundColor="LightGreen" Margin="7" BorderColor="Black" Grid.Row="1"/>
+                    </Frame>
+                </Grid>
 
             </Grid>
         </ControlTemplate>

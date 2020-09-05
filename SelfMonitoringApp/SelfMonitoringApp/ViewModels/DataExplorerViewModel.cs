@@ -34,6 +34,22 @@ namespace SelfMonitoringApp.ViewModels
             }
         }
 
+        private bool _daySelect = false;
+
+        public bool DaySelect
+        {
+            get => _daySelect;
+            set
+            {
+                if (_daySelect == value)
+                    return;
+
+                _daySelect = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
         private bool _noData;
         public bool NoData
         {
@@ -63,6 +79,7 @@ namespace SelfMonitoringApp.ViewModels
         }
 
         public Command LoadDataCommand { get; private set; }
+        public Command DaySelectCommand { get; private set; }
         public DataExplorerViewModel()
         {
             LoadDataCommand = new Command(async () => await LoadData());

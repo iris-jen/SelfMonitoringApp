@@ -47,7 +47,7 @@
                 <!--Total sleep box-->
                 <controls:HeaderBlock HeaderText="Total Time" Grid.Row="1">
                     <Frame Style="{StaticResource InnerFrameStyle}">
-                        <Label Text="{Binding Duration , StringFormat ='{0:0.0} Hours'}" Style="{StaticResource  InnerLabelStyle}" TextColor="Black"/>
+                        <Label Text="{Binding Duration , StringFormat ='{0:N2} Hours'}" Style="{StaticResource  InnerLabelStyle}" TextColor="Black"/>
                     </Frame>
                 </controls:HeaderBlock>
 

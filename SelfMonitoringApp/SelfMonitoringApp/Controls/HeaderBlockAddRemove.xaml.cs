@@ -34,6 +34,9 @@ namespace SelfMonitoringApp.Controls
         private static void HandleSuggestionChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var block = (HeaderBlockAddRemove)bindable;
+            
+            if (newValue is null)
+                return;
 
             if (!block.InitialSet)
             {

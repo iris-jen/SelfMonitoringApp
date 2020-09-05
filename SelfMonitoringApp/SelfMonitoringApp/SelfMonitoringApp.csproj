@@ -18,8 +18,8 @@
         <PackageReference Include="Splat" Version="9.5.37" />
         <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
         <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
-        <PackageReference Include="Xamarin.Forms" Version="4.8.0.1364" />
-        <PackageReference Include="Xamarin.Forms.Visual.Material" Version="4.8.0.1364" />
+        <PackageReference Include="Xamarin.Forms" Version="4.8.0.1269" />
+        <PackageReference Include="Xamarin.Forms.Visual.Material" Version="4.8.0.1269" />
     </ItemGroup>
 
     <ItemGroup>
@@ -88,9 +88,6 @@
         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       </EmbeddedResource>
       <EmbeddedResource Update="Pages\DataExplorerPage.xaml">
-        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      </EmbeddedResource>
-      <EmbeddedResource Update="Pages\HelpPage.xaml">
         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       </EmbeddedResource>
       <EmbeddedResource Update="Pages\Logs\MealPage.xaml">

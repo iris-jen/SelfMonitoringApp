@@ -438,138 +438,31 @@
     <ContentPage.Content>
         <StackLayout Margin="0" BackgroundColor="White">
 
-            <!--Top filter and navigation bar-->
-            <Grid HeightRequest="80" BackgroundColor="{StaticResource Primary}">
-                <Grid.ColumnDefinitions>
-                <ColumnDefinition Width=".5*"/>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width=".5*"/>
-                <ColumnDefinition Width="70"/>
-
-                </Grid.ColumnDefinitions>
-
-                <ImageButton Grid.Column="0" Padding="0" Command="{Binding BackCommand}" Source="sharp_arrow_back_white_48dp.png" 
-                                Margin="5" CornerRadius="10" BorderColor="Black" BackgroundColor="Transparent"/>
-
-                <Frame Style="{StaticResource InnerFrameStyle}" Grid.Column="1" Margin="5" BackgroundColor="White">
-                     <Label Text="{Binding DateDisplay}" TextColor="Black" FontSize="16" Style="{StaticResource HeaderLabel}"/>
-                </Frame>
-
-                <ImageButton Grid.Column="2" Padding="0" Command="{Binding LoadDataCommand}" Source="baseline_filter_alt_black_48dp.png" 
-                            Margin="5" CornerRadius="10" BorderColor="Black" BackgroundColor="{StaticResource Secondary}" BorderWidth="1"/>
-
-                <ActivityIndicator Grid.Column="3" IsRunning="True" IsVisible="{Binding Loading}" Margin="5" BackgroundColor="White"/>
-            </Grid>
-
             <!--Item Carousel-->
             <CollectionView BackgroundColor="White" ItemsSource="{Binding DaySummaries}" Margin="5,0,5,5">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <!--Item-->
-                        <controls:HeaderBlock HorizontalOptions="CenterAndExpand" HeaderText="{Binding Date}">
-
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition Height="70"/>
-                                </Grid.RowDefinitions>
-
-                                <StackLayout Margin="0,0,0,-15">
-                                    <!--Sleep Box-->
-                                    <controls:LogView Title="Sleep" IsVisible="{Binding SleepsVisibility}" Margin="5,0,5,0" ModelType="{x:Static models:ModelType.Sleep}"
-                                                      EditCommand="{Binding EditSelectedCommand}" DeleteCommand="{Binding DeleteSelectedCommand}" AddCommand="{Binding AddSelectedCommand}" >
-                                        <!--Sleep Collection View-->
-                                        <CollectionView ItemsSource="{Binding Sleeps}" Grid.Row="1" SelectionMode="Single" SelectedItem="{Binding SelectedSleep}"
-                                                        ItemTemplate="{StaticResource SleepDataTemplate}"/>
-
-                                    </controls:LogView >
-
-                                    <!--Mood Box-->
-                                    <controls:LogView Title="Mood" IsVisible="{Binding MoodsVisibility}" Margin="5,0,5,0" AddCommand="{Binding AddSelectedCommand}" 
-                                                      ModelType="{x:Static models:ModelType.Mood}" EditCommand="{Binding EditSelectedCommand}" DeleteCommand="{Binding DeleteSelectedCommand}">
-                                        <!--Mood Items-->
-                                        <CollectionView ItemsSource="{Binding Moods}" SelectionMode="Single" SelectedItem="{Binding SelectedMood}" 
-                                                            Grid.Row="1" Background="White" ItemTemplate="{StaticResource MoodDataTemplate}"/>
-                                    </controls:LogView >
-
-                                    <!--Meal Box-->
-                                    <controls:LogView Title="Meal" IsVisible="{Binding MealsVisibility}" Margin="5,0,5,0" ModelType="{x:Static models:ModelType.Meal}"
-                                                      EditCommand="{Binding EditSelectedCommand}" DeleteCommand="{Binding DeleteSelectedCommand}" AddCommand="{Binding AddSelectedCommand}" >
-                                        <!--Meal Items-->
-                                        <CollectionView ItemsSource="{Binding Meals}" SelectionMode="Single" SelectedItem="{Binding SelectedMeal}" 
-                                                            Grid.Row="1" Background="White" ItemTemplate="{StaticResource MealDataTemplate}"/>
-                                    </controls:LogView >
-
-                                    <!--Activities Box-->
-                                    <controls:LogView Title="Activity" IsVisible="{Binding ActivitiesVisibility}" Margin="5,0,5,0" ModelType="{x:Static models:ModelType.Activity}"
-                                                      EditCommand="{Binding EditSelectedCommand}" DeleteCommand="{Binding DeleteSelectedCommand}" AddCommand="{Binding AddSelectedCommand}" >
-                                        <!--Activity Items-->
-                                        <CollectionView ItemsSource="{Binding Activities}" SelectionMode="Single" SelectedItem="{Binding SelectedActivity}"  ItemTemplate="{StaticResource ActivityDataTemplate}" 
-                                                            Grid.Row="1" Background="White"/>
-                                    </controls:LogView >
-
-                                    <!--Social Box-->
-                                    <controls:LogView Title="Socialization" IsVisible="{Binding SocialsVisibility}" Margin="5,0,5,0" ModelType="{x:Static models:ModelType.Socialization}"
-                                                      EditCommand="{Binding EditSelectedCommand}" DeleteCommand="{Binding DeleteSelectedCommand}" AddCommand="{Binding AddSelectedCommand}" >
-                                        <!--Substance Collection View-->
-                                        <CollectionView ItemsSource="{Binding Socials}" SelectionMode="Single" SelectedItem="{Binding SelectedSocial}" ItemTemplate="{StaticResource SocialDataTemplate}"/>
-                                    </controls:LogView >
-
-                                    <!--Substances Box-->
-                                    <controls:LogView Title="Substance" IsVisible="{Binding SubstanceVisibility}" Margin="5,0,5,0" ModelType="{x:Static models:ModelType.Substance}"
-                                                      EditCommand="{Binding EditSelectedCommand}" DeleteCommand="{Binding DeleteSelectedCommand}" AddCommand="{Binding AddSelectedCommand}" >
-
-                                        <!--Substance Collection View-->
-                                        <CollectionView ItemsSource="{Binding Substances}" SelectionMode="Single" SelectedItem="{Binding SelectedSubstance}" ItemTemplate="{StaticResource SubstanceDataTemplate}"/>
-                                    </controls:LogView >
-
-                                </StackLayout >
-                                <!--Log selection image Buttons-->
-                                <StackLayout  Margin="0" Padding="0" Orientation="Horizontal" Grid.Row="1" FlowDirection="LeftToRight" >
-                                    <ImageButton WidthRequest="40" BackgroundColor="{StaticResource Secondary}" HeightRequest="20"
-                                                 BorderColor="Black" BorderWidth="1" Padding="5"  Source="twotone_psychology_black_48dp.png" HorizontalOptions="CenterAndExpand"
-                                                 Command="{Binding SwitchViewCommand}" CommandParameter="{x:Static models:ModelType.Mood}" IsVisible="{Binding MoodsLogged}"/>
-
-                                    <ImageButton WidthRequest="40" BackgroundColor="{StaticResource Secondary}" 
-                                                 BorderColor="Black" BorderWidth="1" Padding="5"   Source="twotone_hotel_black_48dp.png" HorizontalOptions="CenterAndExpand"
-                                                 Command="{Binding SwitchViewCommand}" CommandParameter="{x:Static models:ModelType.Sleep}" IsVisible="{Binding SleepsLogged}"/>
-
-                                    <ImageButton WidthRequest="40" BackgroundColor="{StaticResource Secondary}" 
-                                                 BorderColor="Black" BorderWidth="1" Padding="5"  Source="twotone_local_bar_black_48dp.png" HorizontalOptions="CenterAndExpand"
-                                                 Command="{Binding SwitchViewCommand}" CommandParameter="{x:Static models:ModelType.Substance}" IsVisible="{Binding SubstancesLogged}"/>
-
-                                    <ImageButton WidthRequest="40" BackgroundColor="{StaticResource Secondary}" 
-                                                 BorderColor="Black" BorderWidth="1" Padding="5"  Source="baseline_groups_black_48dp.png" HorizontalOptions="CenterAndExpand"
-                                                 Command="{Binding SwitchViewCommand}" CommandParameter="{x:Static models:ModelType.Socialization}" IsVisible="{Binding SocialsLogged}"/>
-
-                                    <ImageButton WidthRequest="40" BackgroundColor="{StaticResource Secondary}" 
-                                                 BorderColor="Black" BorderWidth="1" Padding="5" 
-                                                 Source="twotone_nature_people_black_48dp.png"  HorizontalOptions="CenterAndExpand"
-                                                 Command="{Binding SwitchViewCommand}" CommandParameter="{x:Static models:ModelType.Activity}" IsVisible="{Binding ActivitiesLogged}"/>
-
-                                    <ImageButton WidthRequest="40" BackgroundColor="{StaticResource Secondary}"
-                                                 BorderColor="Black" BorderWidth="1" Padding="5" Source="twotone_restaurant_menu_black_48dp.png"
-                                                 HorizontalOptions="CenterAndExpand" Command="{Binding SwitchViewCommand}"
-                                                 CommandParameter="{x:Static models:ModelType.Meal}" IsVisible="{Binding MealsLogged}"/>
-                                </StackLayout>
-                            </Grid>
-                        </controls:HeaderBlock>
-                    </DataTemplate>
-               
-                </CollectionView.ItemTemplate>
             </CollectionView>
             
-            <IndicatorView x:Name="indicatorView" IndicatorColor="Black" IndicatorsShape="Circle"
-                   IndicatorSize="20" VerticalOptions="Center" SelectedIndicatorColor="{StaticResource Primary}" HorizontalOptions="Center" />
 
-            <!--Here to space the indicators away from the bottom-->
-            <BoxView HeightRequest="2"/>
 
             <Frame HeightRequest="50" IsVisible="{Binding NoData}">
                 <Label Text="Uh-oh, there are no logs here!" HorizontalTextAlignment="Center"
                        VerticalTextAlignment="Center" TextColor="Black" FontSize="18"/>
             </Frame>
-            
+
+            <!--Top filter and navigation bar-->
+            <StackLayout  BackgroundColor="{StaticResource Primary}" Grid.Row="1">
+                <Grid HeightRequest="80">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=".5*"/>
+                        <ColumnDefinition Width="70"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ImageButton Grid.Column="0" Padding="0" Command="{Binding LoadDataCommand}" Source="baseline_filter_alt_black_48dp.png" 
+                            Margin="5" CornerRadius="10" BorderColor="Black" BackgroundColor="{StaticResource Secondary}" BorderWidth="1"/>
+
+                    <ActivityIndicator Grid.Column="1" IsRunning="True" IsVisible="{Binding Loading}" Margin="5" BackgroundColor="White"/>
+                </Grid>
+            </StackLayout>
 
         </StackLayout>
         

@@ -3,39 +3,44 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:SelfMonitoringApp.Controls"
              mc:Ignorable="d"
              x:Class="SelfMonitoringApp.Controls.RatingSlider" >
     <ContentView.ControlTemplate>
         <ControlTemplate>
             <Frame Padding="5" HasShadow="True" BorderColor="Black" BackgroundColor="White">
-                <Grid >
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="80"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
+                <Grid>
+                    
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="80"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
 
-                    <!--Slider-->
-                    <Slider Grid.Row = "0" Grid.Column = "0" Grid.ColumnSpan = "3" Margin = "0" Minimum ="0" Maximum = "10" 
+                        <!--Slider-->
+                        <Slider Grid.Row = "0" Grid.Column = "0" Grid.ColumnSpan = "3" Margin = "0" Minimum ="0" Maximum = "10" 
                             x:Name = "Slider" ThumbColor="{StaticResource Secondary}" MinimumTrackColor="#15ff00" MaximumTrackColor="#ff1900"
                             Value="{TemplateBinding Rating}"  ValueChanged="Slider_ValueChanged"/>
 
-                    <!--Min Value Label-->
-                    <Label  Grid.Row = "1" Grid.Column = "0" FontSize = "Caption"  
+                        <!--Min Value Label-->
+                        <Label  Grid.Row = "1" Grid.Column = "0" FontSize = "Caption"  
                             Margin = "15,-5,0,0" Text = "0" TextColor="Black"/>
 
-                    <!--Max Value Label-->
-                    <Label  Grid.Row="1" Grid.Column ="2" FontSize = "Caption" 
+                        <!--Max Value Label-->
+                        <Label  Grid.Row="1" Grid.Column ="2" FontSize = "Caption" 
                             HorizontalTextAlignment ="End" Margin = "0,-5,15,0" Text = "10" TextColor="Black"/>
 
-                    <!--Bind text label to slider value-->
-                    <Label Grid.Row ="1" Grid.Column = "1" HorizontalTextAlignment ="Center"  TextColor="Black"
+                        <!--Bind text label to slider value-->
+                        <Label Grid.Row ="1" Grid.Column = "1" HorizontalTextAlignment ="Center"  TextColor="Black"
                            FontAttributes="Bold" Text = "{Binding Source = {x:Reference Slider}, Path = Value,
-                                                                             StringFormat ='{0:0.0}'}"/>
+                                                                             StringFormat ='{0:F2}'}"/>
+                    </Grid>
+              
                 </Grid>
             </Frame>
         </ControlTemplate>

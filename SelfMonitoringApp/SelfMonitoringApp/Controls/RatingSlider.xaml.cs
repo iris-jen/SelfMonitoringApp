@@ -30,6 +30,7 @@ namespace SelfMonitoringApp.Controls
         private void Slider_ValueChanged(object sender, ValueChangedEventArgs e)
         {
             Rating = (sender as Slider).Value;
+            
         }
     }
 }
