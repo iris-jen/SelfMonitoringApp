@@ -55,9 +55,19 @@ namespace SelfMonitoringApp.Controls
 
         public void OnCanvasViewPaintSurface(object sender, SKPaintSurfaceEventArgs args)
         {
+
+
             SKImageInfo info = args.Info;
             SKSurface surface = args.Surface;
             SKCanvas canvas = surface.Canvas;
+
+            if (Occurances.Count == 0)
+            {
+                canvas.Clear();
+                canvas.Save();
+                return;
+            }
+
 
             int occuranceStartHr = Occurances.Min(x => x.Time).Hour - 1;
             int occuranceEndHr = Occurances.Max(x => x.Time).Hour + 1;

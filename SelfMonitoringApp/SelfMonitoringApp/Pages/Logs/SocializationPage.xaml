@@ -6,7 +6,7 @@
              xmlns:services="clr-namespace:SelfMonitoringApp.Services"
              mc:Ignorable="d"
              NavigationPage.HasNavigationBar="True"
-             Title="Loc socialization"
+             Title="Log socialization"
              Visual="Material"
              xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
              x:Class="SelfMonitoringApp.Pages.Logs.SocializationPage">

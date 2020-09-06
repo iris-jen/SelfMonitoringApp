@@ -27,7 +27,7 @@
 
                 <Label x:Name="HeaderLabel" FontSize="18" FontAttributes="Bold" Grid.Column="1"
                            FontFamily="Roboto" Padding="0" Margin="0,4,0,0"
-                           TextColor="White" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                           TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
 
                 <ImageButton Source="twotone_delete_forever_black_48dp.png" Margin="0,4,0,0" Padding="0" Opacity="0.9"
                              Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="LightCoral" BorderColor="Black" BorderWidth="1" Pressed="RemoveButton_Pressed"/>

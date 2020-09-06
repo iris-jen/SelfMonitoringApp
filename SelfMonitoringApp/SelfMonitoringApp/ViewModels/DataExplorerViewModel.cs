@@ -13,12 +13,7 @@ namespace SelfMonitoringApp.ViewModels
 {
     public class DataExplorerViewModel : ViewModelBase, INavigationViewModel
     {
-        public const string NavigationNodeName = "data";
         public ObservableCollection<DaySummaryViewModel> DaySummaries { get; private set; }
-
-        private DateTime _startDate = DateTime.Now.AddDays(-1);
-        private DateTime _endDate = DateTime.Now.AddDays(1);
-        private bool _firstLoad = true;
 
         private bool _loading;
         public bool Loading
@@ -35,7 +30,6 @@ namespace SelfMonitoringApp.ViewModels
         }
 
         private bool _daySelect = false;
-
         public bool DaySelect
         {
             get => _daySelect;
@@ -78,14 +72,67 @@ namespace SelfMonitoringApp.ViewModels
             }
         }
 
+        private DaySummaryViewModel _selectedDay;
+        public DaySummaryViewModel SelectedDay
+        {
+            get => _selectedDay;
+            set
+            {
+                if (_selectedDay == value)
+                    return;
+
+                _selectedDay = value;
+                NotifyPropertyChanged();
+
+                ToggleDaySelect();
+            }
+        }
+
+        private string _selectedMonth = DateTime.Now.ToString("MMMM");
+        public string SelectedMonth
+        {
+            get => _selectedMonth;
+            set
+            {
+                if (_selectedMonth == value)
+                    return;
+
+                _selectedMonth = value;
+                NotifyPropertyChanged();
+                LoadData().SafeFireAndForget(false);
+            }
+        }
+
+        private string _selectedYear = DateTime.Now.ToString("yyyy");
+        public string SelectedYear
+        {
+            get => _selectedYear;
+            set
+            {
+                if (_selectedYear == value)
+                    return;
+
+                _selectedYear = value;
+                NotifyPropertyChanged();
+                LoadData().SafeFireAndForget(false);
+            }
+        }
+
+
         public Command LoadDataCommand { get; private set; }
         public Command DaySelectCommand { get; private set; }
         public DataExplorerViewModel()
         {
             LoadDataCommand = new Command(async () => await LoadData());
+            DaySelectCommand = new Command(ToggleDaySelect);
             LoadData().SafeFireAndForget(false);
         }
-         
+
+        private void ToggleDaySelect()
+        {
+            DaySelect = !DaySelect;
+        }
+
         private bool DateInRange(DateTime startDate, DateTime endDate, DateTime checkDate, DateTime filter) =>
             (checkDate >= startDate && checkDate <= endDate) && checkDate.Day == filter.Day &&
             checkDate.Month == filter.Month && checkDate.Year == filter.Year;
@@ -166,22 +213,10 @@ namespace SelfMonitoringApp.ViewModels
             Loading = true;
             try
             {
-                if (!_firstLoad)
-                {
-                    DatePromptResult fromResult = await UserDialogs.Instance.DatePromptAsync("Select From Date", _startDate);
-                    if (fromResult.Ok)
-                        _startDate = fromResult.SelectedDate;
-                    else
-                        return;
-
-                    DatePromptResult toResult = await UserDialogs.Instance.DatePromptAsync("Select To Date", _endDate);
-                    if (toResult.Ok)
-                        _endDate = toResult.SelectedDate;
-                    else
-                        return;
-                }
-                else
-                    _firstLoad = false;
+                DateTime _startDate = DateTime.Parse($"{SelectedMonth} {SelectedYear}");
+                int daysInMonth = DateTime.DaysInMonth(_startDate.Year, _startDate.Month);
+                DateTime _endDate = _startDate.AddDays(daysInMonth - 1);
+ 
 
                 ObservableCollection<DaySummaryViewModel> data = await GetDateFilteredData(_startDate, _endDate);
 

@@ -30,7 +30,7 @@
                             <RowDefinition Height="2"/>
                         </Grid.RowDefinitions>
 
-                        <Frame BackgroundColor="{StaticResource PrimaryLight}" HeightRequest="60" Padding="0" BorderColor="Black">
+                        <Frame BackgroundColor="{StaticResource PrimaryDark}" HeightRequest="60" Padding="0" BorderColor="Black">
                             <Label Text="{TemplateBinding Title}" HorizontalTextAlignment="Center" TextColor="White"
                                    VerticalTextAlignment="Center" FontSize="14" FontAttributes="Bold"/>
                         </Frame>

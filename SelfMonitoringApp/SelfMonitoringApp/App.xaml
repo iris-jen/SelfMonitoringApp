@@ -7,10 +7,11 @@
         
             <!--Application colors-->
             <!-- https://material.io/resources/color/#!/?view.left=1&view.right=0&primary.color=F44336&secondary.color=4DD0E -->
-            <Color x:Key="Primary" >#6a1b9a</Color>
-            <Color x:Key="PrimaryLight">#9c4dcc</Color>
-            <Color x:Key="PrimaryDark">#38006b</Color>
-            <Color x:Key="Secondary">#ffc107</Color>
+            <Color x:Key="Primary" >#25c6d8</Color>
+            <Color x:Key="PrimaryLight">#8bf6ff</Color>
+            <Color x:Key="PrimaryDark">#0093c4</Color>
+            <Color x:Key="Secondary">#546e7a</Color>
+            <Color x:Key="FrameBackground">#eeee</Color>
 
             <GridLength x:Key="RowHeightSingle">110</GridLength>
             <GridLength x:Key="RowHeightSlider">130</GridLength>
@@ -20,8 +21,8 @@
             <Style x:Key="ButtonStyle" TargetType="Button">
                 <Setter Property="BackgroundColor" Value="{StaticResource Secondary}"/>
                 <Setter Property="FontAttributes" Value="Bold"/>
-                <Setter Property="BorderColor" Value="Black"/>
-                <Setter Property="TextColor" Value="Black"/>        
+                <Setter Property="BorderColor" Value="{StaticResource PrimaryDark}"/>
+                <Setter Property="TextColor" Value="White"/>        
                 <Setter Property="BorderWidth" Value="2"/>
                 <Setter Property="Margin" Value="10,5,10,10"/>
             </Style>
@@ -33,6 +34,11 @@
                 <Setter Property="Margin" Value="5"/>
             </Style>
 
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor" Value="{StaticResource Primary}"/>
+                <Setter Property="BarTextColor" Value="Black"/>
+            </Style>
+ 
             <Style x:Key="ButtonStyleSmall" TargetType="Button">
                 <Setter Property="BackgroundColor" Value="{StaticResource Secondary}"/>
                 <Setter Property="FontAttributes" Value="Bold"/>
@@ -53,7 +59,7 @@
                 <Setter Property="VerticalTextAlignment" Value="Center"/>
                 <Setter Property="FontSize" Value="25"/>
                 <Setter Property="FontAttributes" Value="Bold"/>
-                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="TextColor" Value="Black"/>
                 <Setter Property="Margin" Value="0,-10,0,0"/>
             </Style>
 

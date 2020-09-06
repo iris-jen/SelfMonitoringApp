@@ -16,14 +16,11 @@ using Xamarin.Forms.Internals;
 
 namespace SelfMonitoringApp.ViewModels
 {
-
-
     public class DaySummaryViewModel : ViewModelBase, INavigationViewModel
     {
         [ModelType(ModelType.Meal)]
         public ObservableCollection<MealModel> Meals { get; private set; }
 
-       
         [ModelType(ModelType.Substance)]
         public ObservableCollection<SubstanceModel> Substances { get; private set; }
 
@@ -169,6 +166,7 @@ namespace SelfMonitoringApp.ViewModels
             }
         }
         private bool _sleepsLogged;
+
 
         /// <summary>
         /// True if the user has any meal logs for the day
@@ -350,8 +348,6 @@ namespace SelfMonitoringApp.ViewModels
                     return;
 
                 _selectedModel = value;
-
-                SetVisibility(value);
                 NotifyPropertyChanged();
             }
         }
@@ -377,12 +373,12 @@ namespace SelfMonitoringApp.ViewModels
             DeleteSelectedCommand = new Command<ModelType>(async(type) => await DeleteSelected(type));
             AddSelectedCommand    = new Command<ModelType>(async (type) => await AddSelected(type));
 
-            MoodsLogged      = moods.Count > 0;
+            MoodsLogged = moods.Count > 0;
             SubstancesLogged = substances.Count > 0;
-            MealsLogged      = meals.Count > 0;
-            SleepsLogged     = sleeps.Count > 0;
+            MealsLogged = meals.Count > 0;
+            SleepsLogged = sleeps.Count > 0;
             ActivitiesLogged = activities.Count > 0;
-            SocialsLogged    = socials.Count > 0; 
+            SocialsLogged = socials.Count > 0;
 
             if (MoodsLogged)
                 SelectedModel = ModelType.Mood;
@@ -399,6 +395,7 @@ namespace SelfMonitoringApp.ViewModels
 
             Date = $"{date.DayOfWeek}: {date.Year}-{date.Month}-{date.Day}";
             SwitchViewCommand = new Command<ModelType>((e) => SetVisibility(e));
+            SetVisibility(SelectedModel);
         }
 
         /// <summary>
@@ -424,7 +421,7 @@ namespace SelfMonitoringApp.ViewModels
                     ActivitiesVisibility = MealsVisibility = SocialsVisibility =
                     SleepsVisibility = SubstanceVisibility = false;
                     break;
-                case ModelType.Sleep: 
+                case ModelType.Sleep:
                     SleepsVisibility = true;
                     ActivitiesVisibility = MealsVisibility = SocialsVisibility =
                     MoodsVisibility = SubstanceVisibility = false;
@@ -437,10 +434,11 @@ namespace SelfMonitoringApp.ViewModels
                 case ModelType.Socialization:
                     SocialsVisibility = true;
                     ActivitiesVisibility = MealsVisibility = SubstanceVisibility =
-                    MoodsVisibility = SleepsVisibility  = false;
+                    MoodsVisibility = SleepsVisibility = false;
                     break;
             }
         }
+
 
         /// <summary>
         /// Pushes the editor page for the passed in type. Subscribes this object to wait for a new model
