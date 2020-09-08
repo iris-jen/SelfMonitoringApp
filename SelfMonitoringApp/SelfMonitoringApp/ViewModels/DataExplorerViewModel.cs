@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using Acr.UserDialogs;
 using Xamarin.Forms;
+using SelfMonitoringApp.Models.Base;
 
 namespace SelfMonitoringApp.ViewModels
 {
@@ -118,7 +119,6 @@ namespace SelfMonitoringApp.ViewModels
             }
         }
 
-
         public Command LoadDataCommand { get; private set; }
         public Command DaySelectCommand { get; private set; }
         public DataExplorerViewModel()
@@ -133,71 +133,39 @@ namespace SelfMonitoringApp.ViewModels
             DaySelect = !DaySelect;
         }
 
-        private bool DateInRange(DateTime startDate, DateTime endDate, DateTime checkDate, DateTime filter) =>
-            (checkDate >= startDate && checkDate <= endDate) && checkDate.Day == filter.Day &&
-            checkDate.Month == filter.Month && checkDate.Year == filter.Year;
-
         public async Task<ObservableCollection<DaySummaryViewModel>> GetDateFilteredData(DateTime startDate, DateTime endDate)
         {
-            DateDisplay = $"From: {startDate:ddd dd MMM}\nTo: {endDate:ddd dd MMM}";
-
             var filteredData = new ObservableCollection<DaySummaryViewModel>();
             if (startDate <= endDate)
             {
-                List<SleepModel> sleepData = null;
-                List<MoodModel> moodData = null;
-                List<MealModel> mealData = null; 
-                List<SubstanceModel> substanceData = null;
-                List<ActivityModel> activityData = null;
-                List<SocializationModel> socialData = null;
+                DateDisplay = $"From: {startDate:ddd dd MMM}\nTo: {endDate:ddd dd MMM}";
 
-                List<Task> loadingTasks = new List<Task>()
-                {
-                    Task.Run( async ()=> sleepData = await _database.GetSleepsAsync()),
-                    Task.Run( async ()=> moodData = await _database.GetMoodsAsync()),
-                    Task.Run( async ()=> mealData = await _database.GetMealsAsync()),
-                    Task.Run( async ()=> substanceData = await _database.GetSubstancesAsync()),
-                    Task.Run( async ()=> activityData = await _database.GetActivitiesAsync()),
-                    Task.Run( async ()=> socialData = await _database.GetSocialsAsync())
-                };
+                Dictionary<ModelType, List<IModel>> datesInRange = await _database.GetAllModelsInSpanAsync(startDate, endDate);
 
-                await Task.WhenAll(loadingTasks);
-                
-                //todo
-                //this method is kinda fucking gross, i should make it nicer-er at some point
                 await Task.Factory.StartNew(() =>
                 {
                     for (DateTime date = startDate; date.Date <= endDate.Date; date = date.AddDays(1))
                     {
+                        List<SleepModel> dailySleeps = datesInRange[ModelType.Sleep].
+                            Where(x => x.RegisteredTime.Date == date.Date).Cast<SleepModel>().ToList();
 
-                        List<SleepModel> sleeps 
-                            = (sleepData.Where(sleep => DateInRange(startDate, endDate, sleep.RegisteredTime, date))).ToList();
-                        List<MoodModel> moods 
-                            = (moodData.Where(mood => DateInRange(startDate, endDate, mood.RegisteredTime, date))).ToList();
-                        List<MealModel> meals 
-                            = (mealData.Where(meal => DateInRange(startDate, endDate, meal.RegisteredTime, date))).ToList();
-                        List<ActivityModel> activities  
-                            = (activityData.Where(activity => DateInRange(startDate, endDate, activity.RegisteredTime, date))).ToList();
-                        List<SubstanceModel> substances 
-                            = (substanceData.Where(substance => DateInRange(startDate, endDate, substance.RegisteredTime, date))).ToList();
-                        List<SocializationModel> socials
-                            = (socialData.Where(social => DateInRange(startDate, endDate, social.RegisteredTime, date))).ToList();
+                        List<MoodModel> dailyMoods = datesInRange[ModelType.Mood].
+                            Where(x => x.RegisteredTime.Date == date.Date).Cast<MoodModel>().ToList();
 
-                        if (sleeps.Count > 0)
-                            sleeps.Sort((t1, t2) => DateTime.Compare(t1.RegisteredTime, t2.RegisteredTime));
-                        if(moods.Count>0)
-                            moods.Sort((t1, t2) => DateTime.Compare(t1.RegisteredTime, t2.RegisteredTime));
-                        if(meals.Count>0)
-                            meals.Sort((t1, t2) => DateTime.Compare(t1.RegisteredTime, t2.RegisteredTime));
-                        if(activities.Count > 0)
-                            activities.Sort((t1, t2) => DateTime.Compare(t1.RegisteredTime, t2.RegisteredTime));
-                        if(substances.Count > 0)
-                            substances.Sort((t1, t2) => DateTime.Compare(t1.RegisteredTime, t2.RegisteredTime));
-                        if (socials.Count > 0)
-                            socials.Sort((t1, t2) => DateTime.Compare(t1.RegisteredTime, t2.RegisteredTime));
+                        List<SubstanceModel> dailySubstances = datesInRange[ModelType.Substance].
+                            Where(x => x.RegisteredTime.Date == date.Date).Cast<SubstanceModel>().ToList();
 
-                        if (sleeps.Count != 0 || activities.Count != 0 || moods.Count != 0 || meals.Count != 0 || substances.Count != 0)
-                            filteredData.Add(new DaySummaryViewModel(sleeps, activities, meals, moods, substances,socials, date));
+                        List<SocializationModel> dailySocials = datesInRange[ModelType.Socialization].
+                            Where(x => x.RegisteredTime.Date == date.Date).Cast<SocializationModel>().ToList();
+
+                        List<MealModel> dailyMeals = datesInRange[ModelType.Meal].
+                            Where(x => x.RegisteredTime.Date == date.Date).Cast<MealModel>().ToList();
+
+                        List<ActivityModel> dailyActivities = datesInRange[ModelType.Activity].
+                            Where(x => x.RegisteredTime.Date == date.Date).Cast<ActivityModel>().ToList();
+
+                        if (dailySleeps.Count != 0 || dailyMoods.Count != 0 || dailySubstances.Count != 0 || dailySocials.Count != 0 || dailyMeals.Count != 0 || dailyActivities.Count != 0)
+                            filteredData.Add(new DaySummaryViewModel(dailySleeps, dailyActivities, dailyMeals, dailyMoods, dailySubstances, dailySocials, date));
                     }
                 });
             }
@@ -217,15 +185,18 @@ namespace SelfMonitoringApp.ViewModels
                 int daysInMonth = DateTime.DaysInMonth(_startDate.Year, _startDate.Month);
                 DateTime _endDate = _startDate.AddDays(daysInMonth - 1);
  
-
                 ObservableCollection<DaySummaryViewModel> data = await GetDateFilteredData(_startDate, _endDate);
 
                 NoData = data.Count == 0;
+
                 //Let the render catch up after hiding / showing the warning
                 await Task.Delay(50);
 
                 DaySummaries = data;
                 NotifyPropertyChanged(nameof(DaySummaries));
+
+                SelectedDay = DaySummaries.Last();
+                ToggleDaySelect();
             }
             catch(Exception ex)
             {

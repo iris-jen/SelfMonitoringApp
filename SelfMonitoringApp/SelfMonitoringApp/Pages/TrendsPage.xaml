@@ -59,6 +59,9 @@
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="30"/>
                                                     <RowDefinition Height="45"/>
+                                                    <RowDefinition Height="45"/>
+                                                    <RowDefinition Height="45"/>
+                                                    <RowDefinition Height="45"/>
                                                     <RowDefinition Height="3"/>
                                                 </Grid.RowDefinitions>
                                                 <Label Text ="{Binding TrendName}" Grid.ColumnSpan="2" HorizontalTextAlignment="Center"
@@ -69,8 +72,32 @@
                                                 </Grid>
                                                 <Grid Grid.Column="1" Grid.Row="1">
                                                     <Label Text ="Total" Style="{StaticResource InnerLabelStyle}" Grid.ColumnSpan="2"/>
-                                                    <Label Text ="{Binding TrendContextTotal}" Grid.Row="1" HorizontalTextAlignment="End"/>
+                                                    <Label Text ="{Binding TrendContextTotal, StringFormat='{0:F2}'}" Grid.Row="1" HorizontalTextAlignment="End"/>
                                                     <Label Text ="{Binding TrendContextUnit}" Grid.Row="1" Grid.Column="1" HorizontalTextAlignment="Start"/>
+                                                </Grid>
+                                                
+                                                <Grid Grid.Column="0" Grid.Row="2">
+                                                    <Label Text ="Shortest time Δ" Style="{StaticResource InnerLabelStyle}"/>
+                                                    <Label Text ="{Binding ShortestTimeBetween, StringFormat='{0:F2}h'}" Grid.Row="1" HorizontalTextAlignment="Center"/>
+                                                </Grid>
+                                                
+                                                <Grid Grid.Column="1" Grid.Row="2">
+                                                    <Label Text ="Longest time Δ" Style="{StaticResource InnerLabelStyle}"/>
+                                                    <Label Text ="{Binding LongestTimeBetween, StringFormat='{0:F2}h'}" Grid.Row="1" HorizontalTextAlignment="Center"/>
+                                                </Grid>
+                                                
+                                                <Grid Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2">
+                                                    <Label Text ="Average Time Δ" Style="{StaticResource InnerLabelStyle}"/>
+                                                    <Label Text ="{Binding AverageTimeBetween, StringFormat='{0:F2}h'}" Grid.Row="1" HorizontalTextAlignment="Center"/>
+                                                </Grid>
+                                                
+                                                <Grid Grid.Column="0" Grid.Row="4">
+                                                    <Label Text ="First time" Style="{StaticResource InnerLabelStyle}"/>
+                                                    <Label Text ="{Binding FirstTime, StringFormat='{0:hh:mm tt}'}" Grid.Row="1" HorizontalTextAlignment="Center"/>
+                                                </Grid>
+                                                <Grid Grid.Column="1" Grid.Row="4">
+                                                    <Label Text ="Last time" Style="{StaticResource InnerLabelStyle}"/>
+                                                    <Label Text ="{Binding LastTime, StringFormat='{0:hh:mm tt}'}" Grid.Row="1" HorizontalTextAlignment="Center"/>
                                                 </Grid>
 
                                             </Grid>

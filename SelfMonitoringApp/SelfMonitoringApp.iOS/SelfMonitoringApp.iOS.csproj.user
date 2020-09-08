@@ -2,6 +2,6 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <SelectedDevice>Simulator</SelectedDevice>
-    <DefaultDevice>iPhone 8 iOS 13.6</DefaultDevice>
+    <DefaultDevice>iPhone 11 iOS 13.7</DefaultDevice>
   </PropertyGroup>
 </Project>

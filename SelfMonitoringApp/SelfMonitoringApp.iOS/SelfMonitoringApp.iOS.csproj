@@ -131,70 +131,140 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\baseline_create_black_48dp.png" />
+    <AndroidResource Include="Resources\baseline_create_black_48dp.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\baseline_filter_alt_black_48dp.png" />
+    <AndroidResource Include="Resources\baseline_filter_alt_black_48dp.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\baseline_groups_black_48dp.png" />
+    <AndroidResource Include="Resources\baseline_groups_black_48dp.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\sharp_arrow_back_white_18dp.png" />
+    <AndroidResource Include="Resources\sharp_arrow_back_white_18dp.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\sharp_arrow_back_white_48dp.png" />
+    <AndroidResource Include="Resources\sharp_arrow_back_white_48dp.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\splash_screen.xml" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\splash1.png" />
+    <AndroidResource Include="Resources\splash1.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\twotone_add_box_black_48dp.png" />
+    <AndroidResource Include="Resources\twotone_add_box_black_48dp.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\twotone_backspace_black_48dp.png" />
+    <AndroidResource Include="Resources\twotone_backspace_black_48dp.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\twotone_backspace_white_48dp.png" />
+    <AndroidResource Include="Resources\twotone_backspace_white_48dp.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\twotone_delete_forever_black_48dp.png" />
+    <AndroidResource Include="Resources\twotone_delete_forever_black_48dp.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\twotone_flag_black_48dp.png" />
+    <AndroidResource Include="Resources\twotone_flag_black_48dp.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\twotone_hotel_black_48dp.png" />
+    <AndroidResource Include="Resources\twotone_hotel_black_48dp.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\twotone_local_bar_black_48dp.png" />
+    <AndroidResource Include="Resources\twotone_local_bar_black_48dp.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\twotone_menu_book_black_48dp.png" />
+    <AndroidResource Include="Resources\twotone_menu_book_black_48dp.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\twotone_multiline_chart_black_48dp.png" />
+    <AndroidResource Include="Resources\twotone_multiline_chart_black_48dp.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\twotone_nature_people_black_48dp.png" />
+    <AndroidResource Include="Resources\twotone_nature_people_black_48dp.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\twotone_notifications_black_48dp.png" />
+    <AndroidResource Include="Resources\twotone_notifications_black_48dp.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\twotone_psychology_black_48dp.png" />
+    <AndroidResource Include="Resources\twotone_psychology_black_48dp.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\twotone_restaurant_menu_black_48dp.png" />
+    <AndroidResource Include="Resources\twotone_restaurant_menu_black_48dp.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\twotone_save_black_48dp.png" />
+    <AndroidResource Include="Resources\twotone_save_black_48dp.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\twotone_settings_black_48dp.png" />
+    <AndroidResource Include="Resources\twotone_settings_black_48dp.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\ico512.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

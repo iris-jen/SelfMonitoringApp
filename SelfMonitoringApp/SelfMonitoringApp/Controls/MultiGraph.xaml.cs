@@ -69,8 +69,8 @@ namespace SelfMonitoringApp.Controls
             }
 
 
-            int occuranceStartHr = Occurances.Min(x => x.Time).Hour - 1;
-            int occuranceEndHr = Occurances.Max(x => x.Time).Hour + 1;
+            int occuranceStartHr = Occurances.Min(x => x.Time).Hour - 2;
+            int occuranceEndHr = Occurances.Max(x => x.Time).Hour + 2;
             int deltaHours = occuranceEndHr - occuranceStartHr;
 
             int borderOffset = 60;
@@ -132,7 +132,7 @@ namespace SelfMonitoringApp.Controls
                 //Draw y axis lines
                 float x = borderOffset;
                 bool dontWriteText = false;
-                for (int lineCount = 0; lineCount < totalYSegments; lineCount++)
+                for (int lineCount = 0; lineCount <= totalYSegments; lineCount++)
                 {
                     if (!dontWriteText)
                     {
