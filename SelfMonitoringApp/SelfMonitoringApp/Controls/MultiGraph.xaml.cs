@@ -36,11 +36,7 @@ namespace SelfMonitoringApp.Controls
         private static void HandleOccurancesChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var block = (MultiGraph)bindable;
-
-            if (block.InitialSet)
-            {
-                block.CanvasView.InvalidateSurface();
-            }
+            block.CanvasView.InvalidateSurface();
         }
 
         SKCanvasView CanvasView { get; set; }
@@ -50,24 +46,20 @@ namespace SelfMonitoringApp.Controls
             CanvasView = new SKCanvasView();
             CanvasView.PaintSurface += OnCanvasViewPaintSurface;
             Content = CanvasView;
-           
         }
 
         public void OnCanvasViewPaintSurface(object sender, SKPaintSurfaceEventArgs args)
         {
-
-
             SKImageInfo info = args.Info;
             SKSurface surface = args.Surface;
             SKCanvas canvas = surface.Canvas;
 
-            if (Occurances.Count == 0)
+            if (Occurances == null || Occurances.Count == 0)
             {
                 canvas.Clear();
                 canvas.Save();
                 return;
             }
-
 
             int occuranceStartHr = Occurances.Min(x => x.Time).Hour - 2;
             int occuranceEndHr = Occurances.Max(x => x.Time).Hour + 2;

@@ -14,14 +14,13 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="80"/>
-                    <RowDefinition Height="350"/>
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
                 <Grid BackgroundColor="{StaticResource Primary}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
-  
+
                         <ColumnDefinition/>
                         <ColumnDefinition Width="150"/>
                         <ColumnDefinition/>
@@ -35,20 +34,7 @@
                     <Button Grid.Column="3" Style="{StaticResource ButtonStyle}" Text=">" FontSize="30" Margin="6" Command="{Binding DateForwardCommand}"/>
                 </Grid>
 
-                <Frame BorderColor="Black" Padding="5" Margin="5" Grid.Row="1">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="50"/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Frame Margin="5" Padding=" 0" BorderColor="Black">
-                            <Label Text="Mood Vs Time" HorizontalTextAlignment="Center" VerticalTextAlignment="center"/>
-                        </Frame>
-                        <controls:MultiGraph Grid.Row="1" Margin="5" Occurances="{Binding MoodOccurances}"/>
-                    </Grid>
-                </Frame>
-
-                <controls:HeaderBlock HeaderText="Summary" Margin="4" Grid.Row="2">
+                <controls:HeaderBlock HeaderText="Daily activiy and substance use" Margin="4" Grid.Row="1">
                     <Frame Style="{StaticResource InnerFrameStyle}">
                         <CollectionView ItemsSource="{Binding Trends}">
                             <CollectionView.ItemTemplate>
