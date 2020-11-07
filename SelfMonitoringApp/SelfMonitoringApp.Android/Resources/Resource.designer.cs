@@ -7332,7 +7332,6 @@ namespace SelfMonitoringApp.Android
 			global::Xamarin.Forms.Material.Android.Resource.Style.CardView = global::SelfMonitoringApp.Android.Resource.Style.CardView;
 			global::Xamarin.Forms.Material.Android.Resource.Style.CardView_Dark = global::SelfMonitoringApp.Android.Resource.Style.CardView_Dark;
 			global::Xamarin.Forms.Material.Android.Resource.Style.CardView_Light = global::SelfMonitoringApp.Android.Resource.Style.CardView_Light;
-			global::Xamarin.Forms.Material.Android.Resource.Style.collectionViewScrollBars = global::SelfMonitoringApp.Android.Resource.Style.collectionViewScrollBars;
 			global::Xamarin.Forms.Material.Android.Resource.Style.collectionViewTheme = global::SelfMonitoringApp.Android.Resource.Style.collectionViewTheme;
 			global::Xamarin.Forms.Material.Android.Resource.Style.MainTheme = global::SelfMonitoringApp.Android.Resource.Style.MainTheme;
 			global::Xamarin.Forms.Material.Android.Resource.Style.MainTheme_Base = global::SelfMonitoringApp.Android.Resource.Style.MainTheme_Base;
@@ -8818,6 +8817,7 @@ namespace SelfMonitoringApp.Android
 			global::Xamarin.Forms.Platform.Android.Resource.Attribute.scrimAnimationDuration = global::SelfMonitoringApp.Android.Resource.Attribute.scrimAnimationDuration;
 			global::Xamarin.Forms.Platform.Android.Resource.Attribute.scrimBackground = global::SelfMonitoringApp.Android.Resource.Attribute.scrimBackground;
 			global::Xamarin.Forms.Platform.Android.Resource.Attribute.scrimVisibleHeightTrigger = global::SelfMonitoringApp.Android.Resource.Attribute.scrimVisibleHeightTrigger;
+			global::Xamarin.Forms.Platform.Android.Resource.Attribute.scrollViewStyle = global::SelfMonitoringApp.Android.Resource.Attribute.scrollViewStyle;
 			global::Xamarin.Forms.Platform.Android.Resource.Attribute.searchHintIcon = global::SelfMonitoringApp.Android.Resource.Attribute.searchHintIcon;
 			global::Xamarin.Forms.Platform.Android.Resource.Attribute.searchIcon = global::SelfMonitoringApp.Android.Resource.Attribute.searchIcon;
 			global::Xamarin.Forms.Platform.Android.Resource.Attribute.searchViewStyle = global::SelfMonitoringApp.Android.Resource.Attribute.searchViewStyle;
@@ -10020,7 +10020,6 @@ namespace SelfMonitoringApp.Android
 			global::Xamarin.Forms.Platform.Android.Resource.Style.CardView = global::SelfMonitoringApp.Android.Resource.Style.CardView;
 			global::Xamarin.Forms.Platform.Android.Resource.Style.CardView_Dark = global::SelfMonitoringApp.Android.Resource.Style.CardView_Dark;
 			global::Xamarin.Forms.Platform.Android.Resource.Style.CardView_Light = global::SelfMonitoringApp.Android.Resource.Style.CardView_Light;
-			global::Xamarin.Forms.Platform.Android.Resource.Style.collectionViewScrollBars = global::SelfMonitoringApp.Android.Resource.Style.collectionViewScrollBars;
 			global::Xamarin.Forms.Platform.Android.Resource.Style.collectionViewTheme = global::SelfMonitoringApp.Android.Resource.Style.collectionViewTheme;
 			global::Xamarin.Forms.Platform.Android.Resource.Style.MainTheme = global::SelfMonitoringApp.Android.Resource.Style.MainTheme;
 			global::Xamarin.Forms.Platform.Android.Resource.Style.MainTheme_Base = global::SelfMonitoringApp.Android.Resource.Style.MainTheme_Base;
@@ -10055,6 +10054,8 @@ namespace SelfMonitoringApp.Android
 			global::Xamarin.Forms.Platform.Android.Resource.Style.RtlOverlay_Widget_AppCompat_Search_DropDown_Text = global::SelfMonitoringApp.Android.Resource.Style.RtlOverlay_Widget_AppCompat_Search_DropDown_Text;
 			global::Xamarin.Forms.Platform.Android.Resource.Style.RtlUnderlay_Widget_AppCompat_ActionButton = global::SelfMonitoringApp.Android.Resource.Style.RtlUnderlay_Widget_AppCompat_ActionButton;
 			global::Xamarin.Forms.Platform.Android.Resource.Style.RtlUnderlay_Widget_AppCompat_ActionButton_Overflow = global::SelfMonitoringApp.Android.Resource.Style.RtlUnderlay_Widget_AppCompat_ActionButton_Overflow;
+			global::Xamarin.Forms.Platform.Android.Resource.Style.scrollViewScrollBars = global::SelfMonitoringApp.Android.Resource.Style.scrollViewScrollBars;
+			global::Xamarin.Forms.Platform.Android.Resource.Style.scrollViewTheme = global::SelfMonitoringApp.Android.Resource.Style.scrollViewTheme;
 			global::Xamarin.Forms.Platform.Android.Resource.Style.TextAppearance_AppCompat = global::SelfMonitoringApp.Android.Resource.Style.TextAppearance_AppCompat;
 			global::Xamarin.Forms.Platform.Android.Resource.Style.TextAppearance_AppCompat_Body1 = global::SelfMonitoringApp.Android.Resource.Style.TextAppearance_AppCompat_Body1;
 			global::Xamarin.Forms.Platform.Android.Resource.Style.TextAppearance_AppCompat_Body2 = global::SelfMonitoringApp.Android.Resource.Style.TextAppearance_AppCompat_Body2;
@@ -10923,6 +10924,8 @@ namespace SelfMonitoringApp.Android
 			global::Xamarin.Forms.Platform.Android.Resource.Styleable.ScrimInsetsFrameLayout_insetForeground = global::SelfMonitoringApp.Android.Resource.Styleable.ScrimInsetsFrameLayout_insetForeground;
 			global::Xamarin.Forms.Platform.Android.Resource.Styleable.ScrollingViewBehavior_Layout = global::SelfMonitoringApp.Android.Resource.Styleable.ScrollingViewBehavior_Layout;
 			global::Xamarin.Forms.Platform.Android.Resource.Styleable.ScrollingViewBehavior_Layout_behavior_overlapTop = global::SelfMonitoringApp.Android.Resource.Styleable.ScrollingViewBehavior_Layout_behavior_overlapTop;
+			global::Xamarin.Forms.Platform.Android.Resource.Styleable.ScrollViewRendererTheme = global::SelfMonitoringApp.Android.Resource.Styleable.ScrollViewRendererTheme;
+			global::Xamarin.Forms.Platform.Android.Resource.Styleable.ScrollViewRendererTheme_scrollViewStyle = global::SelfMonitoringApp.Android.Resource.Styleable.ScrollViewRendererTheme_scrollViewStyle;
 			global::Xamarin.Forms.Platform.Android.Resource.Styleable.SearchView = global::SelfMonitoringApp.Android.Resource.Styleable.SearchView;
 			global::Xamarin.Forms.Platform.Android.Resource.Styleable.SearchView_android_focusable = global::SelfMonitoringApp.Android.Resource.Styleable.SearchView_android_focusable;
 			global::Xamarin.Forms.Platform.Android.Resource.Styleable.SearchView_android_imeOptions = global::SelfMonitoringApp.Android.Resource.Styleable.SearchView_android_imeOptions;
@@ -11497,6 +11500,7 @@ namespace SelfMonitoringApp.Android
 			global::Xamarin.Forms.Platform.Resource.Attribute.scrimAnimationDuration = global::SelfMonitoringApp.Android.Resource.Attribute.scrimAnimationDuration;
 			global::Xamarin.Forms.Platform.Resource.Attribute.scrimBackground = global::SelfMonitoringApp.Android.Resource.Attribute.scrimBackground;
 			global::Xamarin.Forms.Platform.Resource.Attribute.scrimVisibleHeightTrigger = global::SelfMonitoringApp.Android.Resource.Attribute.scrimVisibleHeightTrigger;
+			global::Xamarin.Forms.Platform.Resource.Attribute.scrollViewStyle = global::SelfMonitoringApp.Android.Resource.Attribute.scrollViewStyle;
 			global::Xamarin.Forms.Platform.Resource.Attribute.searchHintIcon = global::SelfMonitoringApp.Android.Resource.Attribute.searchHintIcon;
 			global::Xamarin.Forms.Platform.Resource.Attribute.searchIcon = global::SelfMonitoringApp.Android.Resource.Attribute.searchIcon;
 			global::Xamarin.Forms.Platform.Resource.Attribute.searchViewStyle = global::SelfMonitoringApp.Android.Resource.Attribute.searchViewStyle;
@@ -12699,7 +12703,6 @@ namespace SelfMonitoringApp.Android
 			global::Xamarin.Forms.Platform.Resource.Style.CardView = global::SelfMonitoringApp.Android.Resource.Style.CardView;
 			global::Xamarin.Forms.Platform.Resource.Style.CardView_Dark = global::SelfMonitoringApp.Android.Resource.Style.CardView_Dark;
 			global::Xamarin.Forms.Platform.Resource.Style.CardView_Light = global::SelfMonitoringApp.Android.Resource.Style.CardView_Light;
-			global::Xamarin.Forms.Platform.Resource.Style.collectionViewScrollBars = global::SelfMonitoringApp.Android.Resource.Style.collectionViewScrollBars;
 			global::Xamarin.Forms.Platform.Resource.Style.collectionViewTheme = global::SelfMonitoringApp.Android.Resource.Style.collectionViewTheme;
 			global::Xamarin.Forms.Platform.Resource.Style.MainTheme = global::SelfMonitoringApp.Android.Resource.Style.MainTheme;
 			global::Xamarin.Forms.Platform.Resource.Style.MainTheme_Base = global::SelfMonitoringApp.Android.Resource.Style.MainTheme_Base;
@@ -12734,6 +12737,8 @@ namespace SelfMonitoringApp.Android
 			global::Xamarin.Forms.Platform.Resource.Style.RtlOverlay_Widget_AppCompat_Search_DropDown_Text = global::SelfMonitoringApp.Android.Resource.Style.RtlOverlay_Widget_AppCompat_Search_DropDown_Text;
 			global::Xamarin.Forms.Platform.Resource.Style.RtlUnderlay_Widget_AppCompat_ActionButton = global::SelfMonitoringApp.Android.Resource.Style.RtlUnderlay_Widget_AppCompat_ActionButton;
 			global::Xamarin.Forms.Platform.Resource.Style.RtlUnderlay_Widget_AppCompat_ActionButton_Overflow = global::SelfMonitoringApp.Android.Resource.Style.RtlUnderlay_Widget_AppCompat_ActionButton_Overflow;
+			global::Xamarin.Forms.Platform.Resource.Style.scrollViewScrollBars = global::SelfMonitoringApp.Android.Resource.Style.scrollViewScrollBars;
+			global::Xamarin.Forms.Platform.Resource.Style.scrollViewTheme = global::SelfMonitoringApp.Android.Resource.Style.scrollViewTheme;
 			global::Xamarin.Forms.Platform.Resource.Style.TextAppearance_AppCompat = global::SelfMonitoringApp.Android.Resource.Style.TextAppearance_AppCompat;
 			global::Xamarin.Forms.Platform.Resource.Style.TextAppearance_AppCompat_Body1 = global::SelfMonitoringApp.Android.Resource.Style.TextAppearance_AppCompat_Body1;
 			global::Xamarin.Forms.Platform.Resource.Style.TextAppearance_AppCompat_Body2 = global::SelfMonitoringApp.Android.Resource.Style.TextAppearance_AppCompat_Body2;
@@ -13602,6 +13607,8 @@ namespace SelfMonitoringApp.Android
 			global::Xamarin.Forms.Platform.Resource.Styleable.ScrimInsetsFrameLayout_insetForeground = global::SelfMonitoringApp.Android.Resource.Styleable.ScrimInsetsFrameLayout_insetForeground;
 			global::Xamarin.Forms.Platform.Resource.Styleable.ScrollingViewBehavior_Layout = global::SelfMonitoringApp.Android.Resource.Styleable.ScrollingViewBehavior_Layout;
 			global::Xamarin.Forms.Platform.Resource.Styleable.ScrollingViewBehavior_Layout_behavior_overlapTop = global::SelfMonitoringApp.Android.Resource.Styleable.ScrollingViewBehavior_Layout_behavior_overlapTop;
+			global::Xamarin.Forms.Platform.Resource.Styleable.ScrollViewRendererTheme = global::SelfMonitoringApp.Android.Resource.Styleable.ScrollViewRendererTheme;
+			global::Xamarin.Forms.Platform.Resource.Styleable.ScrollViewRendererTheme_scrollViewStyle = global::SelfMonitoringApp.Android.Resource.Styleable.ScrollViewRendererTheme_scrollViewStyle;
 			global::Xamarin.Forms.Platform.Resource.Styleable.SearchView = global::SelfMonitoringApp.Android.Resource.Styleable.SearchView;
 			global::Xamarin.Forms.Platform.Resource.Styleable.SearchView_android_focusable = global::SelfMonitoringApp.Android.Resource.Styleable.SearchView_android_focusable;
 			global::Xamarin.Forms.Platform.Resource.Styleable.SearchView_android_imeOptions = global::SelfMonitoringApp.Android.Resource.Styleable.SearchView_android_imeOptions;
@@ -14062,41 +14069,41 @@ namespace SelfMonitoringApp.Android
 			// aapt resource value: 0x7f010147
 			public const int activityChooserViewStyle = 2130772295;
 			
-			// aapt resource value: 0x7f010207
-			public const int ahBarColor = 2130772487;
+			// aapt resource value: 0x7f010208
+			public const int ahBarColor = 2130772488;
+			
+			// aapt resource value: 0x7f010210
+			public const int ahBarLength = 2130772496;
 			
 			// aapt resource value: 0x7f01020f
-			public const int ahBarLength = 2130772495;
-			
-			// aapt resource value: 0x7f01020e
-			public const int ahBarWidth = 2130772494;
-			
-			// aapt resource value: 0x7f01020c
-			public const int ahCircleColor = 2130772492;
-			
-			// aapt resource value: 0x7f01020b
-			public const int ahDelayMillis = 2130772491;
+			public const int ahBarWidth = 2130772495;
 			
 			// aapt resource value: 0x7f01020d
-			public const int ahRadius = 2130772493;
+			public const int ahCircleColor = 2130772493;
 			
-			// aapt resource value: 0x7f010208
-			public const int ahRimColor = 2130772488;
+			// aapt resource value: 0x7f01020c
+			public const int ahDelayMillis = 2130772492;
+			
+			// aapt resource value: 0x7f01020e
+			public const int ahRadius = 2130772494;
 			
 			// aapt resource value: 0x7f010209
-			public const int ahRimWidth = 2130772489;
+			public const int ahRimColor = 2130772489;
 			
 			// aapt resource value: 0x7f01020a
-			public const int ahSpinSpeed = 2130772490;
+			public const int ahRimWidth = 2130772490;
 			
-			// aapt resource value: 0x7f010204
-			public const int ahText = 2130772484;
+			// aapt resource value: 0x7f01020b
+			public const int ahSpinSpeed = 2130772491;
 			
 			// aapt resource value: 0x7f010205
-			public const int ahTextColor = 2130772485;
+			public const int ahText = 2130772485;
 			
 			// aapt resource value: 0x7f010206
-			public const int ahTextSize = 2130772486;
+			public const int ahTextColor = 2130772486;
+			
+			// aapt resource value: 0x7f010207
+			public const int ahTextSize = 2130772487;
 			
 			// aapt resource value: 0x7f01016e
 			public const int alertDialogButtonGroupStyle = 2130772334;
@@ -14929,20 +14936,20 @@ namespace SelfMonitoringApp.Android
 			// aapt resource value: 0x7f01001d
 			public const int materialCardViewStyle = 2130771997;
 			
-			// aapt resource value: 0x7f010203
-			public const int materialCheckBoxStyle = 2130772483;
-			
-			// aapt resource value: 0x7f0101ff
-			public const int materialOutlinedButtonStyle = 2130772479;
-			
-			// aapt resource value: 0x7f010202
-			public const int materialProgressBarCircularStyle = 2130772482;
-			
-			// aapt resource value: 0x7f010201
-			public const int materialProgressBarHorizontalStyle = 2130772481;
+			// aapt resource value: 0x7f010204
+			public const int materialCheckBoxStyle = 2130772484;
 			
 			// aapt resource value: 0x7f010200
-			public const int materialSliderStyle = 2130772480;
+			public const int materialOutlinedButtonStyle = 2130772480;
+			
+			// aapt resource value: 0x7f010203
+			public const int materialProgressBarCircularStyle = 2130772483;
+			
+			// aapt resource value: 0x7f010202
+			public const int materialProgressBarHorizontalStyle = 2130772482;
+			
+			// aapt resource value: 0x7f010201
+			public const int materialSliderStyle = 2130772481;
 			
 			// aapt resource value: 0x7f010097
 			public const int maxActionInlineWidth = 2130772119;
@@ -15120,6 +15127,9 @@ namespace SelfMonitoringApp.Android
 			
 			// aapt resource value: 0x7f010073
 			public const int scrimVisibleHeightTrigger = 2130772083;
+			
+			// aapt resource value: 0x7f0101ff
+			public const int scrollViewStyle = 2130772479;
 			
 			// aapt resource value: 0x7f0101ad
 			public const int searchHintIcon = 2130772397;
@@ -19515,8 +19525,8 @@ namespace SelfMonitoringApp.Android
 			// aapt resource value: 0x7f0e001d
 			public const int Animation_Design_BottomSheetDialog = 2131623965;
 			
-			// aapt resource value: 0x7f0e020d
-			public const int AppCompatDialogStyle = 2131624461;
+			// aapt resource value: 0x7f0e020e
+			public const int AppCompatDialogStyle = 2131624462;
 			
 			// aapt resource value: 0x7f0e0137
 			public const int Base_AlertDialog_AppCompat = 2131624247;
@@ -20094,11 +20104,11 @@ namespace SelfMonitoringApp.Android
 			// aapt resource value: 0x7f0e0200
 			public const int CardView_Light = 2131624448;
 			
-			// aapt resource value: 0x7f0e020b
-			public const int MainTheme = 2131624459;
-			
 			// aapt resource value: 0x7f0e020c
-			public const int MainTheme_Base = 2131624460;
+			public const int MainTheme = 2131624460;
+			
+			// aapt resource value: 0x7f0e020d
+			public const int MainTheme_Base = 2131624461;
 			
 			// aapt resource value: 0x7f0e0118
 			public const int Platform_AppCompat = 2131624216;
@@ -21015,8 +21025,8 @@ namespace SelfMonitoringApp.Android
 			// aapt resource value: 0x7f0e0097
 			public const int Widget_MaterialComponents_ChipGroup = 2131624087;
 			
-			// aapt resource value: 0x7f0e0215
-			public const int Widget_MaterialComponents_CompoundButton_CheckBox = 2131624469;
+			// aapt resource value: 0x7f0e0216
+			public const int Widget_MaterialComponents_CompoundButton_CheckBox = 2131624470;
 			
 			// aapt resource value: 0x7f0e0098
 			public const int Widget_MaterialComponents_FloatingActionButton = 2131624088;
@@ -21072,35 +21082,38 @@ namespace SelfMonitoringApp.Android
 			// aapt resource value: 0x7f0e0201
 			public const int Widget_Support_CoordinatorLayout = 2131624449;
 			
-			// aapt resource value: 0x7f0e0212
-			public const int XamarinFormsMaterialButton = 2131624466;
-			
 			// aapt resource value: 0x7f0e0213
-			public const int XamarinFormsMaterialButtonOutlined = 2131624467;
-			
-			// aapt resource value: 0x7f0e0216
-			public const int XamarinFormsMaterialCheckBox = 2131624470;
+			public const int XamarinFormsMaterialButton = 2131624467;
 			
 			// aapt resource value: 0x7f0e0214
-			public const int XamarinFormsMaterialEntryFilled = 2131624468;
+			public const int XamarinFormsMaterialButtonOutlined = 2131624468;
+			
+			// aapt resource value: 0x7f0e0217
+			public const int XamarinFormsMaterialCheckBox = 2131624471;
+			
+			// aapt resource value: 0x7f0e0215
+			public const int XamarinFormsMaterialEntryFilled = 2131624469;
+			
+			// aapt resource value: 0x7f0e0212
+			public const int XamarinFormsMaterialProgressBarCircular = 2131624466;
 			
 			// aapt resource value: 0x7f0e0211
-			public const int XamarinFormsMaterialProgressBarCircular = 2131624465;
+			public const int XamarinFormsMaterialProgressBarHorizontal = 2131624465;
 			
 			// aapt resource value: 0x7f0e0210
-			public const int XamarinFormsMaterialProgressBarHorizontal = 2131624464;
+			public const int XamarinFormsMaterialSlider = 2131624464;
 			
 			// aapt resource value: 0x7f0e020f
-			public const int XamarinFormsMaterialSlider = 2131624463;
-			
-			// aapt resource value: 0x7f0e020e
-			public const int XamarinFormsMaterialTheme = 2131624462;
-			
-			// aapt resource value: 0x7f0e0209
-			public const int collectionViewScrollBars = 2131624457;
+			public const int XamarinFormsMaterialTheme = 2131624463;
 			
 			// aapt resource value: 0x7f0e020a
 			public const int collectionViewTheme = 2131624458;
+			
+			// aapt resource value: 0x7f0e0209
+			public const int scrollViewScrollBars = 2131624457;
+			
+			// aapt resource value: 0x7f0e020b
+			public const int scrollViewTheme = 2131624459;
 			
 			static Style()
 			{
@@ -23362,7 +23375,6 @@ namespace SelfMonitoringApp.Android
 			public const int PopupWindowBackgroundState_state_above_anchor = 0;
 			
 			public static int[] ProgressWheel = new int[] {
-					2130772484,
 					2130772485,
 					2130772486,
 					2130772487,
@@ -23373,7 +23385,8 @@ namespace SelfMonitoringApp.Android
 					2130772492,
 					2130772493,
 					2130772494,
-					2130772495};
+					2130772495,
+					2130772496};
 			
 			// aapt resource value: 3
 			public const int ProgressWheel_ahBarColor = 3;
@@ -23476,6 +23489,12 @@ namespace SelfMonitoringApp.Android
 			
 			// aapt resource value: 0
 			public const int ScrimInsetsFrameLayout_insetForeground = 0;
+			
+			public static int[] ScrollViewRendererTheme = new int[] {
+					2130772479};
+			
+			// aapt resource value: 0
+			public const int ScrollViewRendererTheme_scrollViewStyle = 0;
 			
 			public static int[] ScrollingViewBehavior_Layout = new int[] {
 					2130772116};
