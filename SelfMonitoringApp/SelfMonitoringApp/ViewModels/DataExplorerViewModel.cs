@@ -6,9 +6,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Linq;
-using Acr.UserDialogs;
+
 using Xamarin.Forms;
 using SelfMonitoringApp.Models.Base;
+using Acr.UserDialogs;
 
 namespace SelfMonitoringApp.ViewModels
 {

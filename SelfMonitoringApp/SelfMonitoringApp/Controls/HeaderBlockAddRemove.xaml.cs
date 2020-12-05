@@ -1,5 +1,4 @@
-﻿using Acr.UserDialogs;
-using SelfMonitoringApp.Services;
+﻿using SelfMonitoringApp.Services;
 using Splat;
 using System;
 using System.Collections.Generic;
@@ -130,14 +129,19 @@ namespace SelfMonitoringApp.Controls
                     break;
             }
 
-            var res = await UserDialogs.Instance.PromptAsync(new PromptConfig() { Message = promptStr });
+            //todo: need alternative
+            //var res = await UserDialogs.Instance.PromptAsync(new PromptConfig() { Message = promptStr });
+            await Task.CompletedTask;// yip :)
 
-            if (!res.Ok)
+            var userConfirmed = true;
+            var userInput = "fix me plz";
+
+            if (userConfirmed)
                 return;
 
-            SuggestionItems.Add(res.Text);
-            SuggestionService.AddSuggestion(BoxType, res.Text);
-            HeaderPicker.SelectedIndex = SuggestionItems.IndexOf(res.Text);
+            SuggestionItems.Add(userInput);
+            SuggestionService.AddSuggestion(BoxType, userInput);
+            HeaderPicker.SelectedIndex = SuggestionItems.IndexOf(userInput);
         }
 
         private void RemoveButton_Pressed(object sender, EventArgs e)

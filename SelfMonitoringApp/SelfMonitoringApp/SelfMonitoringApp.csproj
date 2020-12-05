@@ -12,10 +12,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Acr.UserDialogs" Version="7.1.0.466" />
+        <PackageReference Include="Acr.UserDialogs" Version="7.1.0.452" />
         <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-        <PackageReference Include="SkiaSharp.Views.Forms" Version="2.80.2" />
-        <PackageReference Include="Splat" Version="9.6.1" />
+        <PackageReference Include="Splat" Version="9.8.1" />
         <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
         <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
         <PackageReference Include="Xamarin.Forms" Version="5.0.0.1558-pre3" />
@@ -27,15 +26,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="Controls\MultiGraph.xaml.cs">
-        <DependentUpon>MultiGraph.xaml</DependentUpon>
-      </Compile>
-      <Compile Update="Controls\Spinamathing.xaml.cs">
-        <DependentUpon>Spinamathing.xaml</DependentUpon>
-      </Compile>
-      <Compile Update="Controls\PercentageCircle.xaml.cs">
-        <DependentUpon>PercentageCircle.xaml</DependentUpon>
-      </Compile>
       <Compile Update="Controls\HeaderBlockAddRemove.xaml.cs">
         <DependentUpon>HeaderBlockAddRemove.xaml</DependentUpon>
       </Compile>

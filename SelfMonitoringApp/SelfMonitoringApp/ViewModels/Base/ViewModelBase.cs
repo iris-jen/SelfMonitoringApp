@@ -1,7 +1,7 @@
 ﻿using SelfMonitoringApp.Services;
 using SelfMonitoringApp.Services.Navigation;
 using Splat;
-
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace SelfMonitoringApp.ViewModels.Base
@@ -24,5 +24,16 @@ namespace SelfMonitoringApp.ViewModels.Base
             BackCommand = new Command(async () => await _navigator.NavigateBack());
             HomeCommand = new Command(async () => await _navigator.NavigateBackToRoot());
         }
+
+        public Task BeforeFirstShown()
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task AfterDismissed()
+        {
+            return Task.CompletedTask;
+        }
+
     }
 }

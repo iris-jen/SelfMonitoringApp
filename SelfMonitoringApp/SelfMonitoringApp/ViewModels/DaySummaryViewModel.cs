@@ -1,5 +1,4 @@
-﻿using Acr.UserDialogs.Infrastructure;
-using SelfMonitoringApp.Models;
+﻿using SelfMonitoringApp.Models;
 using SelfMonitoringApp.Models.Base;
 using SelfMonitoringApp.ViewModels.Base;
 using SelfMonitoringApp.ViewModels.Logs;

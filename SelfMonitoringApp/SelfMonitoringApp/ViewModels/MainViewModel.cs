@@ -5,10 +5,10 @@ using System.Globalization;
 using System.IO;
 
 using Xamarin.Forms;
-using Acr.UserDialogs;
+
 using SelfMonitoringApp.Pages;
 using System.Threading.Tasks;
-
+using Acr.UserDialogs;
 
 namespace SelfMonitoringApp.ViewModels
 {

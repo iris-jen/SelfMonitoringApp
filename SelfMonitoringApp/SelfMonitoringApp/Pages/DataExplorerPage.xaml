@@ -78,7 +78,6 @@
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
                                 <Label Text="{Binding OverallMood, StringFormat='Overall: {0:F1} / 10'}"  Style="{StaticResource HeaderLabel}"/>
-                                <controls:PercentageCircle HasShadow="False" Ammount="{Binding OverallMood}" Grid.Row="1" Padding="4"/>
                             </Grid>
                         </Grid>
                         <Label Text="{Binding Description}" MinimumHeightRequest="100" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  Margin="5" TextColor="Black"/>
@@ -148,7 +147,6 @@
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
                                 <Label Text="{Binding Enjoyment, StringFormat='Enjoyment: {0:F1} / 10'}"  Style="{StaticResource HeaderLabel}"/>
-                                <controls:PercentageCircle HasShadow="False" Ammount="{Binding Enjoyment}" Grid.Row="1" Padding="4"/>
                             </Grid>
                         </Grid>
                         <Label Text="{Binding Comments}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  Margin="5" TextColor="Black"/>
@@ -227,7 +225,6 @@
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
                                 <Label Text="{Binding Enjoyment, StringFormat='Enjoyment: {0:F1} / 10'}"  Style="{StaticResource HeaderLabel}"/>
-                                <controls:PercentageCircle HasShadow="False" Ammount="{Binding Enjoyment}" Grid.Row="1" Padding="4"/>
                             </Grid>
                         </Grid>
                         <Label Text="{Binding Comments}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  Margin="5" TextColor="Black"/>
@@ -296,7 +293,6 @@
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
                                 <Label Text="{Binding Satisfaction, StringFormat='Enjoyment: {0:F1} / 10'}"  Style="{StaticResource HeaderLabel}"/>
-                                <controls:PercentageCircle HasShadow="False" Ammount="{Binding Satisfaction}" Grid.Row="1" Padding="4"/>
                             </Grid>
                         </Grid>
                     </StackLayout>
@@ -365,7 +361,6 @@
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
                                 <Label Text="{Binding RestRating, StringFormat='Rest Rating: {0:F1} / 10'}"  Style="{StaticResource HeaderLabel}"/>
-                                <controls:PercentageCircle HasShadow="False" Ammount="{Binding RestRating}" Grid.Row="1" Padding="4"/>
                             </Grid>
                         </Grid>
                         <Label Text="{Binding DreamLog}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  Margin="5" TextColor="Black"/>
@@ -426,7 +421,6 @@
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
                                 <Label Text="{Binding Satisfaction, StringFormat='Satisfaction: {0:F1} / 10'}"  Style="{StaticResource HeaderLabel}"/>
-                                <controls:PercentageCircle HasShadow="False" Ammount="{Binding Satisfaction}" Grid.Row="1" Padding="4"/>
                             </Grid>
                         </Grid>
 

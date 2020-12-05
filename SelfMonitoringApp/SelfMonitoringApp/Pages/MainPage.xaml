@@ -15,9 +15,8 @@
                 <Frame Padding="0" Margin="10,20,10,0" BorderColor="Black">
                     <Frame BackgroundColor="{StaticResource FrameBackground}" Padding="5">
                         <StackLayout>
-                            <ImageButton Margin="10" Source="ico512.png"  BorderColor="Black" BorderWidth="2" BackgroundColor="White" Padding="5" Command="{Binding ToggleLogVisibilityCommand}"/>
-
-                            <Grid Grid.Row="1" HeightRequest="500" IsVisible="{Binding LogVisibility}">
+                      
+                            <Grid Grid.Row="1" HeightRequest="500">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="10"/>
                                     <ColumnDefinition Width=".2*"/>
