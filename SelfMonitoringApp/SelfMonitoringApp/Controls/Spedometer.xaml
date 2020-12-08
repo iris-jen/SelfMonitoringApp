@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:SelfMonitoringApp.Controls"
+             mc:Ignorable="d"
+             x:Class="SelfMonitoringApp.Controls.Spedometer" >
+    <ContentView.ControlTemplate>
+        <ControlTemplate>
+            <Frame Padding="5" HasShadow="True" BorderColor="Black" BackgroundColor="White">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="80"/>
+                    </Grid.RowDefinitions>
+
+                    <Line X1="40"
+                            Y1="0"
+                            X2="0"
+                            Y2="120"
+                            Stroke="Red"
+                            StrokeThickness="1" />
+
+                    <Ellipse Stroke="Red"
+                                StrokeThickness="4"
+                                WidthRequest="150"
+                                HeightRequest="150"
+                                HorizontalOptions="Start" />
+
+                    <!--Bind text label to slider value-->
+                    <Label Grid.Row ="1" HorizontalTextAlignment ="Center"  TextColor="Black"
+                        FontAttributes="Bold" Text = "{Binding Rating,StringFormat ='{0:F2}'}"/>
+                </Grid>
+            </Frame>
+        </ControlTemplate>
+    </ContentView.ControlTemplate>
+</ContentView>
+ 

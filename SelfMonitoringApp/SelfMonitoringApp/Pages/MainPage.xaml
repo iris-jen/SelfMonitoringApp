@@ -74,33 +74,24 @@
                             <Button Grid.Row="0" Grid.Column="1" Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}" 
                                     CommandParameter="{x:Static pages:PageNames.RawLogViewer}" AutomationId="go_logs" Margin="3" Text="View Logs" />
 
-                            <!--View trends-->
                             <Image Grid.Row="1" Source="twotone_multiline_chart_black_48dp.png"/>
                             <Button Grid.Row="1" Grid.Column="1" Style="{StaticResource ButtonStyle}"   Command="{Binding NavigateCommand}"
                                 AutomationId="go_trends" CommandParameter="{x:Static pages:PageNames.TrendsViewer}" Margin="3" Text="Trends" HeightRequest="20"/>
 
-
-
-                            <!--View-->
                             <Image Source="twotone_settings_black_48dp.png" Grid.Row="2"/>
                             <Button Grid.Row="2" Grid.Column="1" AutomationId="go_settings" Text="Settings" Margin="3" 
                                     Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="{x:Static pages:PageNames.Settings}"/>
 
-                            <!--Might not this feature, come back at some point-->
-
-                            <!--View Goals-->
-                            <!--
                             <Image Grid.Row="2" Source="twotone_flag_black_48dp.png"/>
                             <Button Grid.Row="2" Grid.Column="1"  AutomationId="go_data" 
-                                Style="{StaticResource ButtonStyle}" Command="{Binding GoalsCommand}" CommandParameter="data" Margin="3" Text="Goals" MinimumHeightRequest="150"/>-->
+                                Style="{StaticResource ButtonStyle}" Command="{Binding GoalsCommand}" CommandParameter="data" Margin="3" Text="Goals" MinimumHeightRequest="150"/>
 
-                            <!--<Button Grid.Row="3" Style="{StaticResource ButtonStyle}" AutomationId="go_notifications" Command="{Binding NavigateCommand}" CommandParameter="{x:Static pages:PageNames.NotificationsViewer}"
-                                ImageSource="twotone_notifications_black_48dp.png" HeightRequest="20" Margin="3"  MinimumHeightRequest="150" IsEnabled="True" Text="Notifications"/>-->
+                            <Button Grid.Row="3" Style="{StaticResource ButtonStyle}" AutomationId="go_notifications" Command="{Binding NavigateCommand}" CommandParameter="{x:Static pages:PageNames.NotificationsViewer}"
+                                ImageSource="twotone_notifications_black_48dp.png" HeightRequest="20" Margin="3"  MinimumHeightRequest="150" IsEnabled="True" Text="Notifications"/>
                         </Grid>
                     </Frame>
                 </controls:HeaderBlock>
 
-       
 
             </StackLayout>
         </ScrollView>

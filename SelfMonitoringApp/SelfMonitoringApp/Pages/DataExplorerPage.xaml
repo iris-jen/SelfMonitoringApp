@@ -78,6 +78,7 @@
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
                                 <Label Text="{Binding OverallMood, StringFormat='Overall: {0:F1} / 10'}"  Style="{StaticResource HeaderLabel}"/>
+                                <controls:Spedometer Grid.Row="2" Rating="{Binding OverallMood}"/>
                             </Grid>
                         </Grid>
                         <Label Text="{Binding Description}" MinimumHeightRequest="100" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  Margin="5" TextColor="Black"/>

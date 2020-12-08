@@ -1,4 +1,5 @@
-﻿using SelfMonitoringApp.Services;
+﻿using Acr.UserDialogs;
+using SelfMonitoringApp.Services;
 using Splat;
 using System;
 using System.Collections.Generic;
@@ -129,14 +130,11 @@ namespace SelfMonitoringApp.Controls
                     break;
             }
 
-            //todo: need alternative
-            //var res = await UserDialogs.Instance.PromptAsync(new PromptConfig() { Message = promptStr });
-            await Task.CompletedTask;// yip :)
 
-            var userConfirmed = true;
-            var userInput = "fix me plz";
+            var res = await UserDialogs.Instance.PromptAsync(new PromptConfig() { Message = promptStr });
+            var userInput = res.Text;
 
-            if (userConfirmed)
+            if (!res.Ok)
                 return;
 
             SuggestionItems.Add(userInput);
