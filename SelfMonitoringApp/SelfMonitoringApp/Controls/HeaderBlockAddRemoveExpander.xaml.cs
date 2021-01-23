@@ -2,7 +2,6 @@
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
-using Splat;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -17,12 +16,11 @@ namespace SelfMonitoringApp.Controls
         {
             try
             {
-                suggestionService = Locator.Current.GetService<ISuggestionService>();
-                logger = Locator.Current.GetService<ILogger>();
+
             }
             catch(Exception e)
             {
-                logger.Write(e.ToString(), LogLevel.Error);
+
             }
             finally
             {
@@ -32,8 +30,7 @@ namespace SelfMonitoringApp.Controls
         }
 
         public ObservableCollection<string> SuggestionItems { get; private set; }
-        private readonly ISuggestionService suggestionService;
-        private readonly ILogger logger;
+        //private readonly ISuggestionService suggestionService;
         public bool InitialSet;
 
         public string Title
@@ -81,7 +78,6 @@ namespace SelfMonitoringApp.Controls
 
                     if (!block.SuggestionItems.Contains(type))
                     {
-                        block.suggestionService.AddSuggestion(block.BoxType, type);
                         block.SuggestionItems.Add(type);
                     }
 
@@ -104,7 +100,7 @@ namespace SelfMonitoringApp.Controls
                 var type = (SuggestionTypes)newValue;
                 block.BoxType = type;
 
-                block.SuggestionItems = block.suggestionService.GetSuggestionCollection(type);
+                block.SuggestionItems =new ObservableCollection<string>();
 
                 block.HeaderPicker.ItemsSource = block.SuggestionItems;
                 block.HeaderPicker.SelectedIndex = block.SuggestionItems.IndexOf(block.SelectedSuggestion);
@@ -155,7 +151,6 @@ namespace SelfMonitoringApp.Controls
 
             var userInput = "";
             SuggestionItems.Add(userInput);
-            suggestionService.AddSuggestion(BoxType, userInput);
             HeaderPicker.SelectedIndex = SuggestionItems.IndexOf(userInput);
         }
 
@@ -166,7 +161,6 @@ namespace SelfMonitoringApp.Controls
 
             var selectedItem = HeaderPicker.SelectedItem.ToString();
 
-            suggestionService.RemoveSuggestion(BoxType, selectedItem);
             SuggestionItems.Remove(selectedItem);
         }
 

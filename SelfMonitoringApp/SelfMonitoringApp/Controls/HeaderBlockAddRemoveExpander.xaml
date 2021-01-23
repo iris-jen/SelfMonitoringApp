@@ -23,8 +23,6 @@
                         <ColumnDefinition Width="30"/>
                     </Grid.ColumnDefinitions>
 
-
-
                     <Label x:Name="HeaderLabel" FontSize="18" FontAttributes="Bold" Grid.Column="1"
                            FontFamily="Roboto" Padding="0" Margin="0,4,0,0"
                            TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>

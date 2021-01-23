@@ -4,14 +4,14 @@
              xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
              xmlns:pages="clr-namespace:SelfMonitoringApp.Pages"
              x:Class="SelfMonitoringApp.Pages.MainPage"
-             Visual="Material" 
+
              NavigationPage.HasNavigationBar="True"
              NavigationPage.HasBackButton="False"
              Title="Log Yourself"
              BackgroundColor="White">
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout>
+            <StackLayout BackgroundColor="Brown">
                 <Frame Padding="0" Margin="10,20,10,0" BorderColor="Black">
                     <Frame BackgroundColor="{StaticResource FrameBackground}" Padding="5">
                         <StackLayout>

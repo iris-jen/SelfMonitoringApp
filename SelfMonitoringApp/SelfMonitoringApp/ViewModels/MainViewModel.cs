@@ -1,14 +1,14 @@
 ﻿using SelfMonitoringApp.ViewModels.Base;
 using SelfMonitoringApp.ViewModels.Logs;
 using System;
-using System.Globalization;
+
 using System.IO;
 
 using Xamarin.Forms;
 
 using SelfMonitoringApp.Pages;
 using System.Threading.Tasks;
-using Acr.UserDialogs;
+
 
 namespace SelfMonitoringApp.ViewModels
 {
@@ -85,7 +85,7 @@ namespace SelfMonitoringApp.ViewModels
             }
             catch(Exception ex)
             {
-                UserDialogs.Instance.Alert(ex.ToString(), "Oh no i could not navigate :(");
+                
             }
         }
     }

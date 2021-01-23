@@ -6,7 +6,6 @@
              xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
              mc:Ignorable="d"
              NavigationPage.HasNavigationBar="True"
-             Visual="Material"
              Title="Log Sleep"
              Background="White"
              x:Class="SelfMonitoringApp.Pages.Logs.SleepPage">
@@ -40,7 +39,6 @@
                         </Frame>
                     </controls:HeaderBlock>
 
-
                     <!--Wake up time box-->
                     <controls:HeaderBlock HeaderText="Wake" Grid.Column="1">
                         <Frame Style="{StaticResource InnerFrameStyle}">
@@ -55,7 +53,6 @@
                         </Frame>
                     </controls:HeaderBlock>
                 </Grid>
-
 
                 <!--Total sleep box-->
                 <controls:HeaderBlock HeaderText="Total" Grid.Row="1">

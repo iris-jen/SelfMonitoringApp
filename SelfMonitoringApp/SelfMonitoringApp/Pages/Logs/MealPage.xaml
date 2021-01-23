@@ -7,7 +7,6 @@
              xmlns:services="clr-namespace:SelfMonitoringApp.Services"
              mc:Ignorable="d"
              NavigationPage.HasNavigationBar="True"
-             Visual="Material"
              Title="Log a meal"
              x:Class="SelfMonitoringApp.Pages.Logs.MealPage">
     <ContentPage.Content>

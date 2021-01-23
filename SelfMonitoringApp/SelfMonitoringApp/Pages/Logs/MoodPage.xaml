@@ -6,7 +6,6 @@
              xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
              xmlns:services="clr-namespace:SelfMonitoringApp.Services"
              mc:Ignorable="d"
-             Visual="Material"
              NavigationPage.HasBackButton="true"
              BackgroundColor="White"
              NavigationPage.HasNavigationBar="True"         
@@ -14,13 +13,14 @@
              x:Class="SelfMonitoringApp.Pages.Logs.MoodPage">
     <ContentPage.Content>
         <controls:SaveCancelPage CancelCommand="{Binding BackCommand}" SaveCommand="{Binding SaveLogCommand}" PageName="Mood">
-            <Grid>
+            <Grid BackgroundColor="Black">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="{StaticResource RowHeightSingle}"/>
                     <RowDefinition Height="{StaticResource RowHeightSlider}"/>
                     <RowDefinition Height="{StaticResource RowHeightSingle}"/>
                     <RowDefinition Height="{StaticResource RowHeightSingle}"/>
-                    <RowDefinition />
+                    <RowDefinition Height="{StaticResource RowHeightSingle}"/>
+                    <RowDefinition Height="{StaticResource RowHeightSingle}"/>
                     <RowDefinition Height="{StaticResource RowHeightSingle}"/>
                 </Grid.RowDefinitions>
 
@@ -46,11 +46,11 @@
                     <controls:RatingSlider Rating="{Binding OverallMood}" />
                 </controls:HeaderBlock>
 
-                <!--Strongest Emotion picker-->
+                
                 <controls:HeaderBlockAddRemoveExpander Grid.Row="2" Title="Strongest Emotion" 
                                                SelectedSuggestion="{Binding StrongestEmotion}" BoxType="{x:Static services:SuggestionTypes.Emotions}"/>
                 
-                <!--Location picker-->
+                
                 <controls:HeaderBlockAddRemoveExpander Grid.Row="3" Title="Location" 
                                                SelectedSuggestion="{Binding Location}" BoxType="{x:Static services:SuggestionTypes.Locations}"/>
 

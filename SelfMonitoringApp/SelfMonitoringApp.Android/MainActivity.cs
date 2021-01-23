@@ -6,7 +6,7 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using SelfMonitoringApp.Services;
-using Acr.UserDialogs;
+
 
 namespace SelfMonitoringApp.Android
 {
@@ -21,10 +21,8 @@ namespace SelfMonitoringApp.Android
 
             base.OnCreate(savedInstanceState);
             Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            Xamarin.Forms.FormsMaterial.Init(this, savedInstanceState);
-            UserDialogs.Init(this);
+ 
             LoadApplication(new App());                                                                                                                               
         }
-
     }
 }

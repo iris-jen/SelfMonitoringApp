@@ -9,7 +9,6 @@ using System.Linq;
 
 using Xamarin.Forms;
 using SelfMonitoringApp.Models.Base;
-using Acr.UserDialogs;
 
 namespace SelfMonitoringApp.ViewModels
 {
@@ -201,7 +200,7 @@ namespace SelfMonitoringApp.ViewModels
             }
             catch(Exception ex)
             {
-                await UserDialogs.Instance.AlertAsync(ex.ToString(),  "Could not load data");
+
             }
             finally
             {

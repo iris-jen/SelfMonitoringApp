@@ -1,5 +1,4 @@
-﻿using Acr.UserDialogs;
-using SelfMonitoringApp.Models;
+﻿using SelfMonitoringApp.Models;
 using SelfMonitoringApp.Models.Base;
 using SelfMonitoringApp.ViewModels.Base;
 using SelfMonitoringApp.ViewModels.Logs;
@@ -192,7 +191,7 @@ namespace SelfMonitoringApp.ViewModels
             }
             catch (Exception e)
             {
-                await UserDialogs.Instance.AlertAsync(e.ToString(), "Could not load data");
+                
             }
             finally
             {

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using Xamarin.Forms;
 using System;
-using Acr.UserDialogs;
+
 
 namespace SelfMonitoringApp.Services.Navigation
 {
@@ -43,7 +43,7 @@ namespace SelfMonitoringApp.Services.Navigation
             }
             catch (Exception ex)
             {
-                UserDialogs.Instance.Alert(ex.ToString(), "Oh no i could not navigate :(");
+                
             }
         }
 

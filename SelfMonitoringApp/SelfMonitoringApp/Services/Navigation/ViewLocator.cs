@@ -1,5 +1,4 @@
-﻿using Acr.UserDialogs;
-using SelfMonitoringApp.ViewModels.Base;
+﻿using SelfMonitoringApp.ViewModels.Base;
 using System;
 using Xamarin.Forms;
 
@@ -21,7 +20,7 @@ namespace SelfMonitoringApp.Services.Navigation
             }
             catch (Exception ex)
             {
-                UserDialogs.Instance.Alert(ex.ToString(), "Oh no i could not navigate :(");
+
                 return null;
             }
         }

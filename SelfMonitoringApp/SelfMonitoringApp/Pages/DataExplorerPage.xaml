@@ -5,12 +5,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              NavigationPage.HasNavigationBar="True"
-
              Title="View Data"
-             Visual="Material"
              xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
              xmlns:models ="clr-namespace:SelfMonitoringApp.Models.Base"
-
              BackgroundColor="White"
              x:Class="SelfMonitoringApp.Pages.DataExplorerPage">
     <ContentPage.Resources>
