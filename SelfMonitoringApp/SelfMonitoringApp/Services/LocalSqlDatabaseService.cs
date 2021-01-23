@@ -79,11 +79,11 @@ namespace SelfMonitoringApp.Services
             };
         }
 
-        public Task<List<MoodModel>> GetMoodsAsync()           => _database.Table<MoodModel>().ToListAsync();
-        public Task<List<MealModel>> GetMealsAsync()           => _database.Table<MealModel>().ToListAsync();
-        public Task<List<SleepModel>> GetSleepsAsync()         => _database.Table<SleepModel>().ToListAsync();
-        public Task<List<SubstanceModel>> GetSubstancesAsync() => _database.Table<SubstanceModel>().ToListAsync();
-        public Task<List<ActivityModel>> GetActivitiesAsync()  => _database.Table<ActivityModel>().ToListAsync();
+        public Task<List<MoodModel>> GetMoodsAsync()            => _database.Table<MoodModel>().ToListAsync();
+        public Task<List<MealModel>> GetMealsAsync()            => _database.Table<MealModel>().ToListAsync();
+        public Task<List<SleepModel>> GetSleepsAsync()          => _database.Table<SleepModel>().ToListAsync();
+        public Task<List<SubstanceModel>> GetSubstancesAsync()  => _database.Table<SubstanceModel>().ToListAsync();
+        public Task<List<ActivityModel>> GetActivitiesAsync()   => _database.Table<ActivityModel>().ToListAsync();
         public Task<List<SocializationModel>> GetSocialsAsync() => _database.Table<SocializationModel>().ToListAsync();
 
         public async Task<Dictionary<ModelType, List<IModel>>> GetAllModelsInSpanAsync(DateTime startDay, DateTime endDate)

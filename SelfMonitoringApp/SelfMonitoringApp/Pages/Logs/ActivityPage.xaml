@@ -51,7 +51,7 @@
                     </Frame>
                 </controls:HeaderBlock>
 
-                <controls:HeaderBlockAddRemove Grid.Row="2" Title="Activity Name" SelectedSuggestion="{Binding ActivityName}" BoxType="{x:Static services:SuggestionTypes.ActivityNames}"/>
+                <controls:HeaderBlockAddRemoveExpander Grid.Row="2" Title="Activity Name" SelectedSuggestion="{Binding ActivityName}" BoxType="{x:Static services:SuggestionTypes.ActivityNames}"/>
 
                 <controls:HeaderBlock HeaderText="How much did you enjoy it?" Grid.Row="3">
                     <controls:RatingSlider Rating="{Binding Enjoyment}"/>

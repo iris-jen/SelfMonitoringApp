@@ -39,13 +39,13 @@
                     </controls:HeaderBlock>
                 </Grid>
 
-                <controls:HeaderBlockAddRemove Grid.Row="1" Title="Substance Name" SelectedSuggestion="{Binding SubstanceName}" 
+                <controls:HeaderBlockAddRemoveExpander Grid.Row="1" Title="Substance Name" SelectedSuggestion="{Binding SubstanceName}" 
                                                BoxType="{x:Static services:SuggestionTypes.SubstanceNames}"/>
-                
-                <controls:HeaderBlockAddRemove Grid.Row="2" Title="Consumed by" SelectedSuggestion="{Binding ConsumptionMethod}" 
+
+                <controls:HeaderBlockAddRemoveExpander Grid.Row="2" Title="Consumed by" SelectedSuggestion="{Binding ConsumptionMethod}" 
                                                BoxType="{x:Static services:SuggestionTypes.SubstanceConsumptionMethods}"/>
-                
-                <controls:HeaderBlockAddRemove Grid.Row="3" Title="Unit" SelectedSuggestion="{Binding Unit}" 
+
+                <controls:HeaderBlockAddRemoveExpander Grid.Row="3" Title="Unit" SelectedSuggestion="{Binding Unit}" 
                                                    BoxType="{x:Static services:SuggestionTypes.Units}"/>
                 
                 <!--Ammount of substance-->

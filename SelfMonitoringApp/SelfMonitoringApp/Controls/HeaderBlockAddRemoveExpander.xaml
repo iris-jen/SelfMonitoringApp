@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Frame xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             BackgroundColor="{StaticResource Primary}" 
+             Padding="8,1,8,10" CornerRadius="6" 
+             Margin="1" BorderColor="Black" HasShadow="True" 
+             x:Class="SelfMonitoringApp.Controls.HeaderBlockAddRemoveExpander">
+    <Frame.Content>
+        <StackLayout>
+            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="400">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="32"/>
+                    <RowDefinition Height="2"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="30"/>
+                    </Grid.ColumnDefinitions>
+
+
+
+                    <Label x:Name="HeaderLabel" FontSize="18" FontAttributes="Bold" Grid.Column="1"
+                           FontFamily="Roboto" Padding="0" Margin="0,4,0,0"
+                           TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+
+                    <ImageButton Source="twotone_delete_forever_black_48dp.png" Margin="0,4,0,0" Padding="0" Opacity="0.9"
+                             Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="LightCoral" BorderColor="Black" BorderWidth="1" Pressed="RemoveButton_Pressed"/>
+                </Grid>
+
+                <BoxView Grid.Row="1" BackgroundColor="{StaticResource Secondary}" />
+
+                <Frame Grid.Row="2" Style="{StaticResource InnerFrameStyle}">
+                    <Picker HorizontalTextAlignment="Center" x:Name="HeaderPicker" Margin="10,-10,10,0" FontSize="16" VerticalTextAlignment="Center" VerticalOptions="Center"
+                        SelectedIndexChanged="HeaderPicker_SelectedIndexChanged" BackgroundColor="White" TextColor="Black" />
+                </Frame>
+            </Grid>
+            <Grid HeightRequest="40" BackgroundColor="White">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <ImageButton Margin="0,4,0,0" Source="twotone_add_box_black_48dp.png" BackgroundColor="LightGreen" 
+                             Opacity=".9" x:Name="AddButton" HorizontalOptions="Center" Grid.Column="2" BorderColor="Black" BorderWidth="1" VerticalOptions="Center" />
+            </Grid>
+        </StackLayout>
+
+    </Frame.Content>
+</Frame>

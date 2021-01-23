@@ -9,7 +9,7 @@ namespace SelfMonitoringApp.Models
     {
         public string SocializationType { get; set; }
         public string Location          { get; set; }
-        public string Comments           { get; set; }
+        public string Comments          { get; set; }
         public double Enjoyment         { get; set; }
         public double Duration          { get; set; }
         public bool WantedToSocialize   { get; set; }

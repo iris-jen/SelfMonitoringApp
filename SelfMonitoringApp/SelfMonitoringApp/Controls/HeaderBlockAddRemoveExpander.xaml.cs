@@ -1,60 +1,40 @@
-﻿using Acr.UserDialogs;
-using SelfMonitoringApp.Services;
-using Splat;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
+using Splat;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+
+using SelfMonitoringApp.Services;
 
 namespace SelfMonitoringApp.Controls
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class HeaderBlockAddRemove : Frame
+    public partial class HeaderBlockAddRemoveExpander : Frame
     {
-        public ObservableCollection<string> SuggestionItems { get; private set; }
-        public ISuggestionService SuggestionService;
-
-        public string SelectedSuggestion
+        public HeaderBlockAddRemoveExpander()
         {
-            get { return (string)GetValue(SelectedSuggestionProperty); }
-            set { SetValue(SelectedSuggestionProperty, value); }
-        }
-
-        public static readonly BindableProperty SelectedSuggestionProperty =
-            BindableProperty.Create(nameof(SelectedSuggestion), typeof(string), typeof(HeaderBlockAddRemove), 
-                default(string), BindingMode.TwoWay, propertyChanged: HandleSuggestionChanged);
-
-        public bool InitialSet;
-
-        private static void HandleSuggestionChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            var block = (HeaderBlockAddRemove)bindable;
-            
-            if (newValue is null)
-                return;
-
-            if (!block.InitialSet)
+            try
             {
-                var type = newValue.ToString();
-
-                if (type == string.Empty)
-                    return;
-
-                if (!block.SuggestionItems.Contains(type))
-                {
-                    block.SuggestionService.AddSuggestion(block.BoxType, type);
-                    block.SuggestionItems.Add(type);
-                }
-
-                block.HeaderPicker.SelectedIndex = block.SuggestionItems.IndexOf(type);
-                block.InitialSet = true;
+                suggestionService = Locator.Current.GetService<ISuggestionService>();
+                logger = Locator.Current.GetService<ILogger>();
+            }
+            catch(Exception e)
+            {
+                logger.Write(e.ToString(), LogLevel.Error);
+            }
+            finally
+            {
+                InitializeComponent();
+                AddButton.Command = new Command(() => AddItem());
             }
         }
+
+        public ObservableCollection<string> SuggestionItems { get; private set; }
+        private readonly ISuggestionService suggestionService;
+        private readonly ILogger logger;
+        public bool InitialSet;
 
         public string Title
         {
@@ -62,39 +42,82 @@ namespace SelfMonitoringApp.Controls
             set { HeaderLabel.Text = value; }
         }
 
-        public static readonly BindableProperty BoxTypeProperty =
-            BindableProperty.Create(nameof(BoxType), typeof(SuggestionTypes), typeof(HeaderBlockAddRemove), 
-                SuggestionTypes.Invalid, BindingMode.TwoWay, propertyChanged: HandleBoxTypeChanged);
+        public string SelectedSuggestion
+        {
+            get { return (string)GetValue(SelectedSuggestionProperty); }
+            set { SetValue(SelectedSuggestionProperty, value); }
+        }
 
         public SuggestionTypes BoxType
         {
             get { return (SuggestionTypes)GetValue(BoxTypeProperty); }
-            set { SetValue(BoxTypeProperty,value); }
+            set { SetValue(BoxTypeProperty, value); }
+        }
+
+        public static readonly BindableProperty SelectedSuggestionProperty =
+            BindableProperty.Create(nameof(SelectedSuggestion), typeof(string), typeof(HeaderBlockAddRemoveExpander), 
+                default(string), BindingMode.TwoWay, propertyChanged: HandleSuggestionChanged);
+
+
+        public static readonly BindableProperty BoxTypeProperty =
+            BindableProperty.Create(nameof(BoxType), typeof(SuggestionTypes), typeof(HeaderBlockAddRemoveExpander),
+                SuggestionTypes.Invalid, BindingMode.TwoWay, propertyChanged: HandleBoxTypeChanged);
+
+        private static void HandleSuggestionChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            try
+            {
+                var block = (HeaderBlockAddRemoveExpander)bindable;
+
+                if (newValue is null)
+                    return;
+
+                if (!block.InitialSet)
+                {
+                    var type = newValue.ToString();
+
+                    if (type == string.Empty)
+                        return;
+
+                    if (!block.SuggestionItems.Contains(type))
+                    {
+                        block.suggestionService.AddSuggestion(block.BoxType, type);
+                        block.SuggestionItems.Add(type);
+                    }
+
+                    block.HeaderPicker.SelectedIndex = block.SuggestionItems.IndexOf(type);
+                    block.InitialSet = true;
+                }
+            }
+            catch (Exception e)
+            {
+
+
+            }
         }
 
         private static void HandleBoxTypeChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            var block = (HeaderBlockAddRemove)bindable;
-            var type = (SuggestionTypes)newValue;
-            block.BoxType = type;
+            try
+            {
+                var block = (HeaderBlockAddRemoveExpander)bindable;
+                var type = (SuggestionTypes)newValue;
+                block.BoxType = type;
 
-            block.SuggestionItems = block.SuggestionService.GetSuggestionCollection(type);
-            
-            block.HeaderPicker.ItemsSource = block.SuggestionItems;
-            block.HeaderPicker.SelectedIndex = block.SuggestionItems.IndexOf(block.SelectedSuggestion);
+                block.SuggestionItems = block.suggestionService.GetSuggestionCollection(type);
 
+                block.HeaderPicker.ItemsSource = block.SuggestionItems;
+                block.HeaderPicker.SelectedIndex = block.SuggestionItems.IndexOf(block.SelectedSuggestion);
+            }
+            catch (Exception e)
+            {
+
+            }
         }
 
-        public HeaderBlockAddRemove()
+        private void AddItem()
         {
-            SuggestionService = (ISuggestionService)Locator.Current.GetService(typeof(ISuggestionService));
-
-            InitializeComponent();
-            AddButton.Command = new Command(async () => await AddItem());
-        }
-
-        private async Task AddItem()
-        {
+      
             string promptStr = string.Empty;
             switch (BoxType)
             {
@@ -130,15 +153,9 @@ namespace SelfMonitoringApp.Controls
                     break;
             }
 
-
-            var res = await UserDialogs.Instance.PromptAsync(new PromptConfig() { Message = promptStr });
-            var userInput = res.Text;
-
-            if (!res.Ok)
-                return;
-
+            var userInput = "";
             SuggestionItems.Add(userInput);
-            SuggestionService.AddSuggestion(BoxType, userInput);
+            suggestionService.AddSuggestion(BoxType, userInput);
             HeaderPicker.SelectedIndex = SuggestionItems.IndexOf(userInput);
         }
 
@@ -149,7 +166,7 @@ namespace SelfMonitoringApp.Controls
 
             var selectedItem = HeaderPicker.SelectedItem.ToString();
 
-            SuggestionService.RemoveSuggestion(BoxType, selectedItem);
+            suggestionService.RemoveSuggestion(BoxType, selectedItem);
             SuggestionItems.Remove(selectedItem);
         }
 

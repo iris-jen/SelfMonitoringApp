@@ -21,6 +21,7 @@
                     <RowDefinition Height="{StaticResource RowHeightSingle}"/>
                     <RowDefinition Height="{StaticResource RowHeightSingle}"/>
                     <RowDefinition />
+                    <RowDefinition Height="{StaticResource RowHeightSingle}"/>
                 </Grid.RowDefinitions>
 
                 <!--Date / Time grid-->
@@ -46,11 +47,11 @@
                 </controls:HeaderBlock>
 
                 <!--Strongest Emotion picker-->
-                <controls:HeaderBlockAddRemove Grid.Row="2" Title="Strongest Emotion" 
+                <controls:HeaderBlockAddRemoveExpander Grid.Row="2" Title="Strongest Emotion" 
                                                SelectedSuggestion="{Binding StrongestEmotion}" BoxType="{x:Static services:SuggestionTypes.Emotions}"/>
                 
                 <!--Location picker-->
-                <controls:HeaderBlockAddRemove Grid.Row="3" Title="Location" 
+                <controls:HeaderBlockAddRemoveExpander Grid.Row="3" Title="Location" 
                                                SelectedSuggestion="{Binding Location}" BoxType="{x:Static services:SuggestionTypes.Locations}"/>
 
                 <!--Description Box-->

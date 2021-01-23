@@ -38,9 +38,9 @@
                     </controls:HeaderBlock>
                 </Grid>
 
-                <controls:HeaderBlockAddRemove Grid.Row="1" Title="Meal Name" SelectedSuggestion="{Binding MealName}" BoxType="{x:Static services:SuggestionTypes.MealNames}"/>
-                <controls:HeaderBlockAddRemove Grid.Row="2" Title="Meal Type" SelectedSuggestion="{Binding MealType}" BoxType="{x:Static services:SuggestionTypes.MealTypes}"/>
-                <controls:HeaderBlockAddRemove Grid.Row="3" Title="Meal Size" SelectedSuggestion="{Binding MealSize}" BoxType="{x:Static services:SuggestionTypes.MealSizes}"/>
+                <controls:HeaderBlockAddRemoveExpander Grid.Row="1" Title="Meal Name" SelectedSuggestion="{Binding MealName}" BoxType="{x:Static services:SuggestionTypes.MealNames}"/>
+                <controls:HeaderBlockAddRemoveExpander Grid.Row="2" Title="Meal Type" SelectedSuggestion="{Binding MealType}" BoxType="{x:Static services:SuggestionTypes.MealTypes}"/>
+                <controls:HeaderBlockAddRemoveExpander Grid.Row="3" Title="Meal Size" SelectedSuggestion="{Binding MealSize}" BoxType="{x:Static services:SuggestionTypes.MealSizes}"/>
 
                 <!--Rating slider-->
                 <controls:HeaderBlock HeaderText="How satisfied are you?" Grid.Row="4" >
