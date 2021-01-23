@@ -82,12 +82,13 @@
                             <Button Grid.Row="2" Grid.Column="1" AutomationId="go_settings" Text="Settings" Margin="3" 
                                     Style="{StaticResource ButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="{x:Static pages:PageNames.Settings}"/>
 
-                            <Image Grid.Row="2" Source="twotone_flag_black_48dp.png"/>
-                            <Button Grid.Row="2" Grid.Column="1"  AutomationId="go_data" 
+                            <Image Grid.Row="3" Source="twotone_flag_black_48dp.png"/>
+                            <Button Grid.Row="3" Grid.Column="1"  AutomationId="go_data" 
                                 Style="{StaticResource ButtonStyle}" Command="{Binding GoalsCommand}" CommandParameter="data" Margin="3" Text="Goals" MinimumHeightRequest="150"/>
 
-                            <Button Grid.Row="3" Style="{StaticResource ButtonStyle}" AutomationId="go_notifications" Command="{Binding NavigateCommand}" CommandParameter="{x:Static pages:PageNames.NotificationsViewer}"
-                                ImageSource="twotone_notifications_black_48dp.png" HeightRequest="20" Margin="3"  MinimumHeightRequest="150" IsEnabled="True" Text="Notifications"/>
+                            <Image Grid.Row="4" Source="twotone_notifications_black_48dp.png"/>
+                            <Button Grid.Row="4" Grid.Column="1" Style="{StaticResource ButtonStyle}" AutomationId="go_notifications" Command="{Binding NavigateCommand}" 
+                                    CommandParameter="{x:Static pages:PageNames.NotificationsViewer}" Margin="3"  MinimumHeightRequest="150" Text="Notifications"/>
                         </Grid>
                     </Frame>
                 </controls:HeaderBlock>

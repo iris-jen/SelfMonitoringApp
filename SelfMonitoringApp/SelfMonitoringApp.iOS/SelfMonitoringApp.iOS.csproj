@@ -111,17 +111,17 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Acr.UserDialogs">
-      <Version>7.1.0.452</Version>
+      <Version>7.1.0.475</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp.Views.Forms">
-      <Version>2.80.1</Version>
+      <Version>2.80.2</Version>
     </PackageReference>
     <PackageReference Include="sqlite-net-pcl">
       <Version>1.7.335</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1269" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.1905" />
     <PackageReference Include="Xamarin.Forms.Visual.Material">
-      <Version>4.8.0.1269</Version>
+      <Version>5.0.0.1905</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
