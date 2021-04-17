@@ -1,6 +1,3 @@
-# Self Monitoring App
-- Note, this is being migrated to https://github.com/ThomasJennison/LogYourself to make use of the new shell update to XamarinForms
-
 Create a variety of logs to keep track of your day to day life. This can be helpful for recognizing the associations between behavior and well being.
 
 The user fills out information on their day to day life through a series of text logs
@@ -20,14 +17,6 @@ Future improvements include
 - Reminders
 - Goal setting / user data analytics
 
-If your intrested in helping with this applications development shoot me a message, id love the help ^.^
-I plan on keeping this open source, free and free of adds so it remains accessible.
-
-Readme is a wip, just like the app!
-
-Download the beta on the google play store!
----------------------------------------------
-https://play.google.com/store/apps/details?id=com.companyname.SelfMonitoringApp
 
 Watch a beta demo here!
 ------------------------- 
